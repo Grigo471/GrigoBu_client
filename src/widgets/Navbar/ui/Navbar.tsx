@@ -8,20 +8,20 @@ interface NavbarProps {
 }
 
 export function Navbar(props: NavbarProps) {
-	const { className } = props;
+    const { className } = props;
 
-	const { t } = useTranslation();
+    const { t } = useTranslation();
 
-	return (
-		<div className={classNames(cls.Navbar, {}, [className])}>
-			<div className={cls.links}>
-				<AppLink theme={AppLinkTheme.SECONDARY} to="/">
-					{t('Главная')}
-				</AppLink>
-				<AppLink theme={AppLinkTheme.SECONDARY} to="/about">
-					{t('О нас')}
-				</AppLink>
-			</div>
-		</div>
-	);
+    return (
+        <div className={classNames(cls.Navbar, {}, [className])}>
+            <div className={cls.links}>
+                <AppLink theme={AppLinkTheme.SECONDARY} to="/">
+                    {t('Главная')}
+                </AppLink>
+                <AppLink theme={AppLinkTheme.SECONDARY} to="/about">
+                    {t('О нас')}
+                </AppLink>
+            </div>
+        </div>
+    );
 }

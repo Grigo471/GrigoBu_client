@@ -12,17 +12,17 @@ interface ThemeSwitcherProps {
 }
 
 export function ThemeSwitcher(props: PropsWithChildren<ThemeSwitcherProps>) {
-	const { className } = props;
+    const { className } = props;
 
-	const { theme, toggleTheme } = useTheme();
+    const { theme, toggleTheme } = useTheme();
 
-	return (
-		<Button
-			theme={ThemeButton.CLEAR}
-			className={classNames('', {}, [className])}
-			onClick={toggleTheme}
-		>
-			<Icon className={cls.icon} />
-		</Button>
-	);
+    return (
+        <Button
+            theme={ThemeButton.CLEAR}
+            className={classNames('', {}, [className])}
+            onClick={toggleTheme}
+        >
+            <Icon className={cls.icon} />
+        </Button>
+    );
 }
