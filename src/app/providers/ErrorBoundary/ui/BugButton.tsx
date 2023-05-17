@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import { Button } from 'shared/ui/Button/Button';
 
 export function BugButton() {
@@ -12,11 +13,13 @@ export function BugButton() {
         }
     }, [error]);
 
+    const { t } = useTranslation();
+
     return (
         <Button
             onClick={onThrow}
         >
-            throw error
+            {t('Создать ошибку')}
         </Button>
     );
 }

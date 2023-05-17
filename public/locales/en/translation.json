@@ -4,5 +4,7 @@
     "О нас": "About",
     "Страница не найдена": "Page not found",
     "Произошла непредвиденная ошибка": "Unexpected error",
-    "Обновить страницу": "Refresh page"
+    "Обновить страницу": "Refresh page",
+    "Меню": "Menu",
+    "Создать ошибку": "Throw error"
 }

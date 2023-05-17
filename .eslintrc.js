@@ -43,7 +43,10 @@ module.exports = {
         'no-underscore-dangle': 'off',
         'linebreak-style': 0,
         'no-tabs': 0,
-        'i18next/no-literal-string': ['warn', { markupOnly: true }],
+        'i18next/no-literal-string': [
+            'error',
+            { markupOnly: true, ignoreAttribute: ['to', 'data-testid'] },
+        ],
         'max-len': ['error', { code: 100, ignoreComments: true }],
     },
     globals: {
@@ -54,4 +57,12 @@ module.exports = {
             version: 'detect',
         },
     },
+    overrides: [
+        {
+            files: ['**/src/**/*.test.{ts,tsx}'],
+            rules: {
+                'i18next/no-literal-string': 'off',
+            },
+        },
+    ],
 };
