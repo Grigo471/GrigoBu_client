@@ -37,4 +37,6 @@ jobs:
         with:
           projectToken: ${{ secrets.CHROMATIC_PROJECT_TOKEN }}
           dryRun: true
+          traceChanged: true
           exitZeroOnChanges: false
+          
