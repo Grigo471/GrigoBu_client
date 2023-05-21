@@ -32,5 +32,5 @@ jobs:
         run: npm run test:unit
       - name: Publish to Chromatic
         uses: chromaui/action@v1
-         with:
+        with:
           projectToken: ${{ secrets.CHROMATIC_PROJECT_TOKEN }}
