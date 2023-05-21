@@ -12,7 +12,7 @@ describe('classNames', () => {
     });
 
     test('with mods', () => {
-        const expected = 'someClass class1 class2 mod1';
+        const expected = 'someClass class1 class2 mod1 mod2';
         expect(classNames(
             'someClass',
             { mod1: true, mod2: true },
