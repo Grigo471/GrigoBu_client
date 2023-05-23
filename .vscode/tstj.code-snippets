@@ -1,0 +1,14 @@
+{
+	"Create test": {
+		"scope": "typescript, typescriptreact",
+		"prefix": "tstj",
+		"body": [
+			"describe('$TM_FILENAME_BASE', () => {",
+			" test('$1', () => {",
+			" expect().toEqual()",
+			" })",
+			"})"
+		],
+		"description": "Create template test"
+	}
+}
