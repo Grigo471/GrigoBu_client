@@ -44,5 +44,4 @@ jobs:
           onlyChanged: true
           traceChanged: true
           exitZeroOnChanges: false
-          dryRun: true
           
