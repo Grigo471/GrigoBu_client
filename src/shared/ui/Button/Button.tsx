@@ -21,6 +21,7 @@ interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
 	theme?: ThemeButton;
     square?: boolean;
     size?: ButtonSize;
+    disabled?: boolean;
 }
 
 export function Button(props: PropsWithChildren<ButtonProps>) {

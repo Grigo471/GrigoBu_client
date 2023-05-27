@@ -3,6 +3,7 @@ import type { Meta, StoryObj } from '@storybook/react';
 import { ThemeDecorator } from 'shared/config/storybook/ThemeDecorator/ThemeDecorator';
 import { Theme } from 'app/providers/ThemeProvider';
 import { RouteDecorator } from 'shared/config/storybook/RouteDecorator/RouteDecorator';
+import { StoreDecorator } from 'shared/config/storybook/StoreDecorator/StoreDecorator';
 import { Navbar } from './Navbar';
 
 const meta: Meta<typeof Navbar> = {
@@ -11,7 +12,7 @@ const meta: Meta<typeof Navbar> = {
     tags: ['autodocs'],
     argTypes: {
     },
-    decorators: [RouteDecorator],
+    decorators: [RouteDecorator, StoreDecorator({})],
 };
 
 export default meta;
@@ -22,5 +23,13 @@ export const Light: Story = {};
 export const Dark: Story = {
     decorators: [
         ThemeDecorator(Theme.DARK),
+    ],
+};
+
+export const Auth: Story = {
+    decorators: [
+        StoreDecorator({
+            user: { authData: {} },
+        }),
     ],
 };
