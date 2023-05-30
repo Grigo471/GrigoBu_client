@@ -1,31 +1,39 @@
 import { classNames } from 'shared/lib/classNames/classNames';
 import { useTranslation } from 'react-i18next';
-import { PropsWithChildren, memo, useCallback } from 'react';
+import {
+    PropsWithChildren, memo, useCallback,
+} from 'react';
 import { Button, ThemeButton } from 'shared/ui/Button/Button';
 import { Input } from 'shared/ui/Input/Input';
 import { useDispatch, useSelector } from 'react-redux';
 import { Text, TextTheme } from 'shared/ui/Text/Text';
-import { loginByUsername } from '../../model/services/loginByUsername/loginByUserName';
-import { loginActions } from '../../model/slice/loginSlice';
+import { ReducerList, useDynamicModuleLoad } from 'shared/lib/hooks/useDynamicModuleLoad';
+import { getLoginUsername } from '../../model/selectors/getLoginUsername/getLoginUsername';
+import { getLoginPassword } from '../../model/selectors/getLoginPassword/getLoginPassword';
+import { getLoginIsLoading } from '../../model/selectors/getLoginIsLoading/getLoginIsLoading';
+import { getLoginError } from '../../model/selectors/getLoginError/getLoginError';
 import cls from './LoginForm.module.scss';
-import { getLoginState } from '../../model/selectors/getLoginState/getLoginState';
+import { loginActions, loginReducer } from '../../model/slice/loginSlice';
+import { loginByUsername } from '../../model/services/loginByUsername/loginByUserName';
 
-interface LoginFormProps {
+export interface LoginFormProps {
     className?: string;
     isOpen?: boolean;
 }
 
-export const LoginForm = memo((props: PropsWithChildren<LoginFormProps>) => {
+const reducers: ReducerList = {
+    loginForm: loginReducer,
+};
+
+const LoginForm = memo((props: PropsWithChildren<LoginFormProps>) => {
     const { className, isOpen } = props;
 
     const dispatch = useDispatch();
 
-    const {
-        username,
-        password,
-        isLoading,
-        error,
-    } = useSelector(getLoginState);
+    const username = useSelector(getLoginUsername);
+    const password = useSelector(getLoginPassword);
+    const isLoading = useSelector(getLoginIsLoading);
+    const error = useSelector(getLoginError);
 
     const onChangeUserName = useCallback((value: string) => {
         dispatch(loginActions.setUsername(value));
@@ -40,6 +48,9 @@ export const LoginForm = memo((props: PropsWithChildren<LoginFormProps>) => {
     }, [dispatch, password, username]);
 
     const { t } = useTranslation();
+
+    useDynamicModuleLoad({ reducers });
+
     return (
         <div className={classNames(cls.LoginForm, {}, [className])}>
             <Text title={t('Форма авторизации')} />
@@ -70,3 +81,5 @@ export const LoginForm = memo((props: PropsWithChildren<LoginFormProps>) => {
         </div>
     );
 });
+
+export default LoginForm;
