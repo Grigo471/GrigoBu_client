@@ -5,9 +5,10 @@ import {
 } from 'react';
 import { Button, ThemeButton } from 'shared/ui/Button/Button';
 import { Input } from 'shared/ui/Input/Input';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { Text, TextTheme } from 'shared/ui/Text/Text';
 import { ReducerList, useDynamicModuleLoad } from 'shared/lib/hooks/useDynamicModuleLoad';
+import { useAppDispatch } from 'shared/lib/hooks/useAppDispatch';
 import { getLoginUsername } from '../../model/selectors/getLoginUsername/getLoginUsername';
 import { getLoginPassword } from '../../model/selectors/getLoginPassword/getLoginPassword';
 import { getLoginIsLoading } from '../../model/selectors/getLoginIsLoading/getLoginIsLoading';
@@ -28,7 +29,7 @@ const reducers: ReducerList = {
 const LoginForm = memo((props: PropsWithChildren<LoginFormProps>) => {
     const { className, isOpen } = props;
 
-    const dispatch = useDispatch();
+    const dispatch = useAppDispatch();
 
     const username = useSelector(getLoginUsername);
     const password = useSelector(getLoginPassword);
