@@ -1,5 +1,6 @@
 import { classNames } from 'shared/lib/classNames/classNames';
 import React, {
+    MutableRefObject,
     PropsWithChildren, useCallback, useEffect, useRef, useState,
 } from 'react';
 
@@ -29,7 +30,7 @@ export function Modal(props: PropsWithChildren<ModalProps>) {
     const [isOpening, setIsOpening] = useState(false);
     const [isClosing, setIsClosing] = useState(false);
     const [isMounted, setIsMounted] = useState(false);
-    const timerRef = useRef<ReturnType<typeof setTimeout>>();
+    const timerRef = useRef() as MutableRefObject<ReturnType<typeof setTimeout>>;
 
     const closeHandler = useCallback(() => {
         if (onClose) {
