@@ -21,7 +21,7 @@ describe('loginByUsername.test', () => {
         const result = await thunk.callThunk({ username: 'Grigo', password: '123' });
 
         expect(thunk.dispatch).toHaveBeenCalledWith(userActions.setAuthData(userValue));
-        expect(thunk.api.post).toBeCalledWith('http://localhost:8000/login', { username: 'Grigo', password: '123' });
+        expect(thunk.api.post).toBeCalledWith('/login', { username: 'Grigo', password: '123' });
         expect(result.meta.requestStatus).toBe('fulfilled');
         expect(result.payload).toEqual(userValue);
     });
@@ -31,7 +31,7 @@ describe('loginByUsername.test', () => {
         thunk.api.post.mockReturnValue(Promise.resolve({ status: 403 }));
         const result = await thunk.callThunk({ username: 'Grigo', password: '123' });
 
-        expect(thunk.api.post).toBeCalledWith('http://localhost:8000/login', { username: 'Grigo', password: '123' });
+        expect(thunk.api.post).toBeCalledWith('/login', { username: 'Grigo', password: '123' });
         expect(result.meta.requestStatus).toBe('rejected');
         expect(result.payload).toBe('error');
     });
