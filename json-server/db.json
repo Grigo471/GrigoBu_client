@@ -1,41 +1,41 @@
 {
-    "posts": [
-        {
-            "id": "1",
-            "title": "json-server",
-            "author": "typicode"
-        },
-        {
-            "id": "2",
-            "title": "json-server 1",
-            "author": "typicode"
-        },
-        {
-            "id": "3",
-            "title": "json-server 2",
-            "author": "typicode"
-        },
-        {
-            "id": "4",
-            "title": "json-server 3",
-            "author": "Grigo"
-        }
-    ],
-    "users": [
-        {
-            "id": "1",
-            "username": "Grigo",
-            "password": "123"
-        }
-    ],
-    "profile": {
-        "first": "Sergey",
-        "last": "Grigo",
-        "age": 22,
-        "currency": "RUB",
-        "country": "Russia",
-        "city": "Moscow",
-        "username": "Grigo",
-        "avatar": "https://p.turbosquid.com/ts-thumb/Ax/XUKtDV/FxtkjVoD/homer1200/jpg/1590143115/600x600/fit_q87/c8d0e5a16813b132c3740438479c620649e28627/homer1200.jpg"
+  "posts": [
+    {
+      "id": "1",
+      "title": "json-server",
+      "author": "typicode"
+    },
+    {
+      "id": "2",
+      "title": "json-server 1",
+      "author": "typicode"
+    },
+    {
+      "id": "3",
+      "title": "json-server 2",
+      "author": "typicode"
+    },
+    {
+      "id": "4",
+      "title": "json-server 3",
+      "author": "Grigo"
     }
+  ],
+  "users": [
+    {
+      "id": "1",
+      "username": "Grigo",
+      "password": "123"
+    }
+  ],
+  "profile": {
+    "first": "Сергей",
+    "last": "Григорьев",
+    "age": 222,
+    "currency": "EUR",
+    "country": "Ukraine",
+    "city": "Москва",
+    "username": "Grigo",
+    "avatar": "https://p.turbosquid.com/ts-thumb/Ax/XUKtDV/FxtkjVoD/homer1200/jpg/1590143115/600x600/fit_q87/c8d0e5a16813b132c3740438479c620649e28627/homer1200.jpg"
+  }
 }
