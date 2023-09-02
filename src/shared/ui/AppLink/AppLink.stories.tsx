@@ -2,7 +2,6 @@ import type { Meta, StoryObj } from '@storybook/react';
 
 import { ThemeDecorator } from 'shared/config/storybook/ThemeDecorator/ThemeDecorator';
 import { Theme } from 'app/providers/ThemeProvider';
-import { RouteDecorator } from 'shared/config/storybook/RouteDecorator/RouteDecorator';
 import { AppLink } from './AppLink';
 
 const meta: Meta<typeof AppLink> = {
@@ -12,7 +11,6 @@ const meta: Meta<typeof AppLink> = {
     args: {
         to: '/',
     },
-    decorators: [RouteDecorator],
     parameters: {
         themes: [
             { name: 'primary', class: 'primary', color: 'grey' },

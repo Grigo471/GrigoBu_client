@@ -12,5 +12,10 @@
     "Произошла ошибка при загрузке профиля": "Error while loading profile",
     "Попробуйте обновить страницу": "Try to reload the page",
     "Никнейм": "Nickname",
-    "Ссылка на аватар": "Avatar URL"
+    "Ссылка на аватар": "Avatar URL",
+    "Серверная ошибка при сохранении": "Server error while saving profile",
+    "Имя и фамилия обязательны": "Frist and lastname required",
+    "Некорректный возраст": "Incorrect age",
+    "Некорректная страна": "Incorrect country",
+    "Данные не указаны": "No data"
 }

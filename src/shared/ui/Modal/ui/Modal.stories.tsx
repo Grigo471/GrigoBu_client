@@ -2,7 +2,6 @@ import type { Meta, StoryObj } from '@storybook/react';
 
 import { ThemeDecorator } from 'shared/config/storybook/ThemeDecorator/ThemeDecorator';
 import { Theme } from 'app/providers/ThemeProvider';
-import { RouteDecorator } from 'shared/config/storybook/RouteDecorator/RouteDecorator';
 import { Modal } from './Modal';
 
 const meta: Meta<typeof Modal> = {
@@ -11,7 +10,6 @@ const meta: Meta<typeof Modal> = {
     tags: ['autodocs'],
     argTypes: {
     },
-    decorators: [RouteDecorator],
 };
 
 export default meta;
