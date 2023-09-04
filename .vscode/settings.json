@@ -10,4 +10,7 @@
         "css",
         "scss"
     ],
+    "files.associations": {
+        "**/.fttemplates/**": "plaintext",
+    }
 }
