@@ -15,5 +15,6 @@
     "Введите пароль": "Enter password",
     "Форма авторизации": "Login form",
     "Неверный логин или пароль": "Wrong username or password",
-    "Профиль": "Profile"
+    "Профиль": "Profile",
+    "Копировать": "Copy"
 }
