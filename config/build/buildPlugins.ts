@@ -1,5 +1,5 @@
 import HtmlWebpackPlugin from 'html-webpack-plugin';
-import webpack, { HotModuleReplacementPlugin, WebpackPluginInstance } from 'webpack';
+import webpack, { WebpackPluginInstance } from 'webpack';
 import MiniCssExtractPlugin from 'mini-css-extract-plugin';
 import { BundleAnalyzerPlugin } from 'webpack-bundle-analyzer';
 import ReactRefreshWebpackPlugin from '@pmmmwh/react-refresh-webpack-plugin';
@@ -32,7 +32,7 @@ export function buildPlugins({
     ];
 
     if (isDev) {
-        plugins.push(new HotModuleReplacementPlugin());
+        plugins.push(new webpack.HotModuleReplacementPlugin());
         plugins.push(new ReactRefreshWebpackPlugin());
     }
 
