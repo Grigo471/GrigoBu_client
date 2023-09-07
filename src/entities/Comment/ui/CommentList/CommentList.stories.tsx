@@ -5,28 +5,27 @@ import { Theme } from 'app/providers/ThemeProvider';
 import { CommentList } from './CommentList';
 
 const meta: Meta<typeof CommentList> = {
-   title: 'shared/CommentList',
-   component: CommentList,
-   tags: ['autodocs'],
-   argTypes: {
-   },
+    title: 'shared/CommentList',
+    component: CommentList,
+    tags: ['autodocs'],
+    argTypes: {
+    },
 };
 
 export default meta;
 type Story = StoryObj<typeof CommentList>;
 
 export const Light: Story = {
-   args: {
-     
-   },
+    args: {
+
+    },
 };
 
 export const Dark: Story = {
-   args: {
-      
-   },
-   decorators: [
-      ThemeDecorator(Theme.DARK),
-   ],
-};
+    args: {
 
+    },
+    decorators: [
+        ThemeDecorator(Theme.DARK),
+    ],
+};

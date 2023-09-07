@@ -5,28 +5,27 @@ import { Theme } from 'app/providers/ThemeProvider';
 import { CommentCard } from './CommentCard';
 
 const meta: Meta<typeof CommentCard> = {
-   title: 'shared/CommentCard',
-   component: CommentCard,
-   tags: ['autodocs'],
-   argTypes: {
-   },
+    title: 'shared/CommentCard',
+    component: CommentCard,
+    tags: ['autodocs'],
+    argTypes: {
+    },
 };
 
 export default meta;
 type Story = StoryObj<typeof CommentCard>;
 
 export const Light: Story = {
-   args: {
-     
-   },
+    args: {
+
+    },
 };
 
 export const Dark: Story = {
-   args: {
-      
-   },
-   decorators: [
-      ThemeDecorator(Theme.DARK),
-   ],
-};
+    args: {
 
+    },
+    decorators: [
+        ThemeDecorator(Theme.DARK),
+    ],
+};
