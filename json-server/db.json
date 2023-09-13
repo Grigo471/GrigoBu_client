@@ -7,7 +7,9 @@
       "img": "https://upload.wikimedia.org/wikipedia/commons/thumb/9/99/Unofficial_JavaScript_logo_2.svg/1200px-Unofficial_JavaScript_logo_2.svg.png",
       "views": 1022,
       "createdAt": "04.09.2023",
-      "type": ["IT"],
+      "type": [
+        "IT"
+      ],
       "blocks": [
         {
           "id": "1",
@@ -88,6 +90,24 @@
       "text": "some comment 3",
       "articleId": "1",
       "userId": "2"
+    },
+    {
+      "articleId": "1",
+      "userId": "1",
+      "text": "u see",
+      "id": "FXQ9iNx"
+    },
+    {
+      "articleId": "1",
+      "userId": "2",
+      "text": "i do",
+      "id": "Opo9K2z"
+    },
+    {
+      "articleId": "1",
+      "userId": "2",
+      "text": "slave",
+      "id": "hb9mtC8"
     }
   ],
   "users": [
@@ -100,20 +120,34 @@
     },
     {
       "id": "2",
-      "username": "Bob",
+      "username": "BGDk22",
       "password": "321",
       "role": "USER",
-      "avatar0": "https: //p.turbosquid.com/ts-thumb/Ax/XUKtDV/FxtkjVoD/homer1200/jpg/1590143115/600x600/fit_q87/c8d0e5a16813b132c3740438479c620649e28627/homer1200.jpg"
+      "avatar": "https://steamuserimages-a.akamaihd.net/ugc/942838033007845279/DBC41CC3BB3FDCAF81267BD7A617A655AD73DF0E/?imw=5000&imh=5000&ima=fit&impolicy=Letterbox&imcolor=%23000000&letterbox=false"
     }
   ],
-  "profile": {
-    "first": "Serhio",
-    "last": "Григорьев",
-    "age": 22,
-    "currency": "EUR",
-    "country": "Russia",
-    "city": "Москва",
-    "username": "Grigo",
-    "avatar": "https://p.turbosquid.com/ts-thumb/Ax/XUKtDV/FxtkjVoD/homer1200/jpg/1590143115/600x600/fit_q87/c8d0e5a16813b132c3740438479c620649e28627/homer1200.jpg"
-  }
+  "profile": [
+    {
+      "id": "1",
+      "first": "Serhio",
+      "last": "Григорьев",
+      "age": 23,
+      "currency": "EUR",
+      "country": "Russia",
+      "city": "Москва",
+      "username": "Grigo",
+      "avatar": "https://p.turbosquid.com/ts-thumb/Ax/XUKtDV/FxtkjVoD/homer1200/jpg/1590143115/600x600/fit_q87/c8d0e5a16813b132c3740438479c620649e28627/homer1200.jpg"
+    },
+    {
+      "id": "2",
+      "first": "Biggus",
+      "last": "Dickus",
+      "age": 33,
+      "currency": "RUS",
+      "country": "Russia",
+      "city": "LA",
+      "username": "BGDk22",
+      "avatar": "https://steamuserimages-a.akamaihd.net/ugc/942838033007845279/DBC41CC3BB3FDCAF81267BD7A617A655AD73DF0E/?imw=5000&imh=5000&ima=fit&impolicy=Letterbox&imcolor=%23000000&letterbox=false"
+    }
+  ]
 }

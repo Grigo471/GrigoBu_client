@@ -1,6 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react';
 
 import { ArticleBlockType, ArticleType } from 'entities/Article/model/types/article';
+import { StoreDecorator } from 'shared/config/storybook/StoreDecorator/StoreDecorator';
 import ArticleDetailsPage from './ArticleDetailsPage';
 
 const article = {
@@ -85,4 +86,11 @@ export default meta;
 type Story = StoryObj<typeof ArticleDetailsPage>;
 
 export const Light: Story = {
+    decorators: [
+        StoreDecorator({
+            articleDetailsComments: {
+
+            },
+        }),
+    ],
 };
