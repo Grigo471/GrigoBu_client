@@ -7,7 +7,7 @@ import { ArticleBlockType, ArticleType } from 'entities/Article/model/types/arti
 import { ArticleDetails } from './ArticleDetails';
 
 const meta: Meta<typeof ArticleDetails> = {
-    title: 'entities/ArticleDetails',
+    title: 'entities/Article/ArticleDetails',
     component: ArticleDetails,
     tags: ['autodocs'],
     argTypes: {
@@ -22,6 +22,11 @@ const meta: Meta<typeof ArticleDetails> = {
                     img: 'https://upload.wikimedia.org/wikipedia/commons/thumb/9/99/Unofficial_JavaScript_logo_2.svg/1200px-Unofficial_JavaScript_logo_2.svg.png',
                     views: 1022,
                     createdAt: '04.09.2023',
+                    user: {
+                        id: '1',
+                        username: 'Grigo',
+                        avatar: 'https://p.turbosquid.com/ts-thumb/Ax/XUKtDV/FxtkjVoD/homer1200/jpg/1590143115/600x600/fit_q87/c8d0e5a16813b132c3740438479c620649e28627/homer1200.jpg',
+                    },
                     type: [ArticleType.IT],
                     blocks: [
                         {

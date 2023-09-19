@@ -7,5 +7,6 @@ export function buildDevServer(options: BuildOptions): DevServerConfiguration {
         open: true,
         historyApiFallback: true,
         hot: true,
+        allowedHosts: ['all'],
     };
 }

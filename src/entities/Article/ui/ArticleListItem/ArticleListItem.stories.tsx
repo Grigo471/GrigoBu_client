@@ -1,13 +1,15 @@
-/* eslint-disable max-len */
-import { memo, type PropsWithChildren } from 'react';
-import { useTranslation } from 'react-i18next';
-import { classNames } from 'shared/lib/classNames/classNames';
-import { Article, ArticleList, ArticleView } from 'entities/Article';
-import cls from './ArticlesPage.module.scss';
+import type { Meta, StoryObj } from '@storybook/react';
 
-interface ArticlesPageProps {
-   className?: string;
-}
+import { Article, ArticleView } from '../../model/types/article';
+import { ArticleListItem } from './ArticleListItem';
+
+const meta: Meta<typeof ArticleListItem> = {
+    title: 'entities/Article/ArticleListItem',
+    component: ArticleListItem,
+    tags: ['autodocs'],
+    argTypes: {
+    },
+};
 
 const article = {
     id: '1',
@@ -88,26 +90,19 @@ const article = {
     ],
 } as Article;
 
-const ArticlesPage = (props: PropsWithChildren<ArticlesPageProps>) => {
-    const { className } = props;
-    const { t } = useTranslation('articles');
+export default meta;
+type Story = StoryObj<typeof ArticleListItem>;
 
-    return (
-        <div className={classNames(cls.ArticlesPage, {}, [className])}>
-            <ArticleList
-                isLoading
-                view={ArticleView.BIG}
-                articles={
-                    new Array(16)
-                        .fill(0)
-                        .map((item, index) => ({
-                            ...article,
-                            id: String(index),
-                        }))
-                }
-            />
-        </div>
-    );
+export const SMALL: Story = {
+    args: {
+        article,
+        view: ArticleView.SMALL,
+    },
 };
 
-export default memo(ArticlesPage);
+export const BIG: Story = {
+    args: {
+        article,
+        view: ArticleView.BIG,
+    },
+};
