@@ -7,10 +7,15 @@ import { ReducerList, useDynamicModuleLoad } from 'shared/lib/hooks/useDynamicMo
 import { useInitialEffect } from 'shared/lib/hooks/useInitialEffect';
 import { useAppDispatch } from 'shared/lib/hooks/useAppDispatch';
 import { useSelector } from 'react-redux';
+import { Page } from 'shared/ui/Page/Page';
+import { Text, TextAlign, TextTheme } from 'shared/ui/Text/Text';
 import cls from './ArticlesPage.module.scss';
 import { articlesPageActions, articlesPageReducer, getArticles } from '../model/slice/articlePageSlice';
 import { fetchArticlesList } from '../model/services/fetchArticlesList/fetchArticlesList';
-import { getArticlesPageError, getArticlesPageIsLoading, getArticlesPageView } from '../model/selectors/articlesPageSelectors';
+import {
+    getArticlesPageError, getArticlesPageIsLoading, getArticlesPageView,
+} from '../model/selectors/articlesPageSelectors';
+import { fetchNextArticlesPage } from '../model/services/fetchNextArticlesPage/fetchNextArticlesPage';
 
 interface ArticlesPageProps {
    className?: string;
@@ -28,8 +33,10 @@ const ArticlesPage = (props: PropsWithChildren<ArticlesPageProps>) => {
     useDynamicModuleLoad({ reducers });
 
     useInitialEffect(() => {
-        dispatch(fetchArticlesList());
         dispatch(articlesPageActions.initState());
+        dispatch(fetchArticlesList({
+            page: 1,
+        }));
     });
 
     const articles = useSelector(getArticles.selectAll);
@@ -41,15 +48,36 @@ const ArticlesPage = (props: PropsWithChildren<ArticlesPageProps>) => {
         dispatch(articlesPageActions.setView(view));
     }, [dispatch]);
 
+    const onLoadNextPart = useCallback(() => {
+        dispatch(fetchNextArticlesPage());
+    }, [dispatch]);
+
+    if (error) {
+        return (
+            <Page
+                className={classNames(cls.ArticlesPage, {}, [className])}
+            >
+                <Text
+                    align={TextAlign.CENTER}
+                    theme={TextTheme.ERROR}
+                    title={t('Произошла ошибка при загрузке статьи')}
+                />
+            </Page>
+        );
+    }
+
     return (
-        <div className={classNames(cls.ArticlesPage, {}, [className])}>
+        <Page
+            onScrollEnd={onLoadNextPart}
+            className={classNames(cls.ArticlesPage, {}, [className])}
+        >
             <ArticleViewSelector view={view} onViewClick={onChangeView} />
             <ArticleList
                 view={view}
                 articles={articles}
                 isLoading={isLoading}
             />
-        </div>
+        </Page>
     );
 };
 

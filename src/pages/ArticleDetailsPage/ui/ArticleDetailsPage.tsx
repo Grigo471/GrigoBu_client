@@ -3,7 +3,7 @@ import { useTranslation } from 'react-i18next';
 import { classNames } from 'shared/lib/classNames/classNames';
 import { ArticleDetails } from 'entities/Article';
 import { useNavigate, useParams } from 'react-router-dom';
-import { Text } from 'shared/ui/Text/Text';
+import { Text, TextAlign, TextTheme } from 'shared/ui/Text/Text';
 import { CommentList } from 'entities/Comment';
 import { ReducerList, useDynamicModuleLoad } from 'shared/lib/hooks/useDynamicModuleLoad';
 import { useSelector } from 'react-redux';
@@ -12,6 +12,7 @@ import { useAppDispatch } from 'shared/lib/hooks/useAppDispatch';
 import { AddCommentForm } from 'features/AddCommentForm';
 import { Button, ThemeButton } from 'shared/ui/Button/Button';
 import { RoutePaths } from 'shared/config/routeConfig/routeConfig';
+import { Page } from 'shared/ui/Page/Page';
 import cls from './ArticleDetailsPage.module.scss';
 import {
     articleDetailsCommentsReducer,
@@ -61,25 +62,39 @@ const ArticleDetailsPage = (props: PropsWithChildren<ArticleDetailsPageProps>) =
 
     if (!id) {
         return (
-            <div className={classNames(cls.ArticleDetailsPage, {}, [className])}>
+            <Page className={classNames(cls.ArticleDetailsPage, {}, [className])}>
                 {t('Статья не найдена')}
-            </div>
+            </Page>
         );
     }
 
     return (
-        <div className={classNames(cls.ArticleDetailsPage, {}, [className])}>
+        <Page className={classNames(cls.ArticleDetailsPage, {}, [className])}>
             <Button theme={ThemeButton.OUTLINE} onClick={onBackToList}>
                 {t('Назад к списку')}
             </Button>
             <ArticleDetails articleId={id} />
             <Text title={t('Комментарии')} className={cls.commentTitle} />
             <AddCommentForm onSendComment={onSendComment} />
+            {error
+                ? (
+                    <Text
+                        align={TextAlign.CENTER}
+                        theme={TextTheme.ERROR}
+                        title={t('Произошла ошибка при загрузке комментариев')}
+                    />
+                )
+                : (
+                    <CommentList
+                        isLoading={isLoading}
+                        comments={comments}
+                    />
+                )}
             <CommentList
                 isLoading={isLoading}
                 comments={comments}
             />
-        </div>
+        </Page>
     );
 };
 

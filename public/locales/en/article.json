@@ -4,5 +4,7 @@
     "Введите текст комментария": "Write your comment",
     "Отправить": "Send",
     "Читать далее": "Read more...",
-    "Назад к списку": "Back to articles"
+    "Назад к списку": "Back to articles",
+    "Произошла ошибка при загрузке комментариев": "Error while loading comments",
+    "Произошла ошибка при загрузке статьи": "Error while loading article"
 }

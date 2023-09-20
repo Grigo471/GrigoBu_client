@@ -10,7 +10,7 @@ interface ArticleListProps {
    className?: string;
    articles: Article[];
    isLoading?: boolean;
-   view?: ArticleView;
+   view: ArticleView;
 }
 
 export const ArticleList = memo((props: PropsWithChildren<ArticleListProps>) => {
@@ -24,7 +24,7 @@ export const ArticleList = memo((props: PropsWithChildren<ArticleListProps>) => 
             article={article}
             view={view}
             className={cls.card}
-            key={article.title}
+            key={article.id}
         />
     );
 
@@ -34,19 +34,12 @@ export const ArticleList = memo((props: PropsWithChildren<ArticleListProps>) => 
             <ArticleListItemSkeleton className={cls.card} key={index} view={view} />
         ));
 
-    if (isLoading) {
-        return (
-            <div className={classNames(cls.ArticleList, {}, [className, cls[view]])}>
-                {getSkeletons(view)}
-            </div>
-        );
-    }
-
     return (
         <div className={classNames(cls.ArticleList, {}, [className, cls[view]])}>
             { articles.length > 0
                 ? articles.map(renderArticle)
                 : null}
+            {isLoading && getSkeletons(view)}
         </div>
     );
 });
