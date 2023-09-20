@@ -11,11 +11,11 @@ import { Page } from 'shared/ui/Page/Page';
 import { Text, TextAlign, TextTheme } from 'shared/ui/Text/Text';
 import cls from './ArticlesPage.module.scss';
 import { articlesPageActions, articlesPageReducer, getArticles } from '../model/slice/articlePageSlice';
-import { fetchArticlesList } from '../model/services/fetchArticlesList/fetchArticlesList';
 import {
     getArticlesPageError, getArticlesPageIsLoading, getArticlesPageView,
 } from '../model/selectors/articlesPageSelectors';
 import { fetchNextArticlesPage } from '../model/services/fetchNextArticlesPage/fetchNextArticlesPage';
+import { initArticlesPage } from '../model/services/initArticlesPage/initArticlesPage';
 
 interface ArticlesPageProps {
    className?: string;
@@ -30,19 +30,16 @@ const ArticlesPage = (props: PropsWithChildren<ArticlesPageProps>) => {
     const { t } = useTranslation('article');
     const dispatch = useAppDispatch();
 
-    useDynamicModuleLoad({ reducers });
-
-    useInitialEffect(() => {
-        dispatch(articlesPageActions.initState());
-        dispatch(fetchArticlesList({
-            page: 1,
-        }));
-    });
+    useDynamicModuleLoad({ reducers, removeAfterUnmount: false });
 
     const articles = useSelector(getArticles.selectAll);
     const view = useSelector(getArticlesPageView);
     const error = useSelector(getArticlesPageError);
     const isLoading = useSelector(getArticlesPageIsLoading);
+
+    useInitialEffect(() => {
+        dispatch(initArticlesPage());
+    });
 
     const onChangeView = useCallback((view: ArticleView) => {
         dispatch(articlesPageActions.setView(view));

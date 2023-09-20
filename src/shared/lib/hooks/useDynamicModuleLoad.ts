@@ -22,10 +22,15 @@ export function useDynamicModuleLoad(args: useDynamicModuleLoaderArgs) {
 
     const store = useStore() as ReduxStoreWithManager;
 
+    const mountedReducers = store.reducerManager.getReducerMap();
+
     useEffect(() => {
         Object.entries(reducers).forEach(([key, reducer]) => {
-            store.reducerManager.add(key as StateSchemaKey, reducer);
-            dispatch({ type: `@INIT ${key} reducer` });
+            const mounted = mountedReducers[key as StateSchemaKey];
+            if (!mounted) {
+                store.reducerManager.add(key as StateSchemaKey, reducer);
+                dispatch({ type: `@INIT ${key} reducer` });
+            }
         });
 
         return () => {

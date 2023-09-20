@@ -14,6 +14,7 @@ describe('fetchNextArticlesPage.test', () => {
                 limit: 5,
                 isLoading: false,
                 hasMore: true,
+                _inited: false,
             },
         });
 
@@ -26,6 +27,7 @@ describe('fetchNextArticlesPage.test', () => {
     test('fetchArticlesList not called', async () => {
         const thunk = new TestThunkAsync(fetchNextArticlesPage, {
             articlesPage: {
+                _inited: false,
                 page: 2,
                 ids: [],
                 entities: {},
