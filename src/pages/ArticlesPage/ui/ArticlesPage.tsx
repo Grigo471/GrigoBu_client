@@ -7,7 +7,7 @@ import { ReducerList, useDynamicModuleLoad } from 'shared/lib/hooks/useDynamicMo
 import { useInitialEffect } from 'shared/lib/hooks/useInitialEffect';
 import { useAppDispatch } from 'shared/lib/hooks/useAppDispatch';
 import { useSelector } from 'react-redux';
-import { Page } from 'shared/ui/Page/Page';
+import { Page } from 'widgets/Page/Page';
 import { Text, TextAlign, TextTheme } from 'shared/ui/Text/Text';
 import cls from './ArticlesPage.module.scss';
 import { articlesPageActions, articlesPageReducer, getArticles } from '../model/slice/articlePageSlice';
