@@ -33,7 +33,8 @@
       "createdAt": "01.09.2022",
       "userId": "2",
       "type": [
-        "ECONOMICS", "IT"
+        "ECONOMICS",
+        "IT"
       ],
       "blocks": [
         {
@@ -81,7 +82,8 @@
       "createdAt": "01.01.1995",
       "userId": "1",
       "type": [
-        "IT", "SCIENCE"
+        "IT",
+        "SCIENCE"
       ],
       "blocks": [
         {
@@ -399,6 +401,24 @@
       "userId": "2",
       "text": "slave",
       "id": "hb9mtC8"
+    },
+    {
+      "articleId": "1",
+      "userId": "2",
+      "text": "Oooo yeah",
+      "id": "nd4sXwm"
+    },
+    {
+      "articleId": "4",
+      "userId": "2",
+      "text": "Sample",
+      "id": "9fy5YRh"
+    },
+    {
+      "articleId": "4",
+      "userId": "2",
+      "text": "big",
+      "id": "BOSmjdQ"
     }
   ],
   "users": [

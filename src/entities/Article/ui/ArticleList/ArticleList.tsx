@@ -1,4 +1,4 @@
-import { type PropsWithChildren, memo } from 'react';
+import { type PropsWithChildren, memo, HTMLAttributeAnchorTarget } from 'react';
 import { useTranslation } from 'react-i18next';
 import { classNames } from 'shared/lib/classNames/classNames';
 import { Text, TextSize } from 'shared/ui/Text/Text';
@@ -11,12 +11,13 @@ interface ArticleListProps {
    className?: string;
    articles: Article[];
    isLoading?: boolean;
-   view: ArticleView;
+   view?: ArticleView;
+   target?: HTMLAttributeAnchorTarget;
 }
 
 export const ArticleList = memo((props: PropsWithChildren<ArticleListProps>) => {
     const {
-        className, articles, isLoading, view = ArticleView.SMALL,
+        className, articles, isLoading, view = ArticleView.SMALL, target,
     } = props;
     const { t } = useTranslation('article');
 
@@ -26,6 +27,7 @@ export const ArticleList = memo((props: PropsWithChildren<ArticleListProps>) => 
             view={view}
             className={cls.card}
             key={article.id}
+            target={target}
         />
     );
 

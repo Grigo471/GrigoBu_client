@@ -46,7 +46,7 @@ module.exports = {
         'no-tabs': 0,
         'i18next/no-literal-string': [
             'error',
-            { markupOnly: true, ignoreAttribute: ['to', 'data-testid'] },
+            { markupOnly: true, ignoreAttribute: ['to', 'data-testid', 'target'] },
         ],
         'max-len': ['error', { code: 100, ignoreComments: true }],
         'jsx-a11y/click-events-have-key-events': 'off',
