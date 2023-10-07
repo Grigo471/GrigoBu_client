@@ -6,5 +6,18 @@
     "Читать далее": "Read more...",
     "Назад к списку": "Back to articles",
     "Произошла ошибка при загрузке комментариев": "Error while loading comments",
-    "Произошла ошибка при загрузке статьи": "Error while loading article"
+    "Произошла ошибка при загрузке статьи": "Error while loading article",
+    "Сортировать по": "Sort by",
+    "возрастанию": "ascending",
+    "убыванию": "descending",
+    "по": "by",
+    "дате создания": "date",
+    "заголовку": "title",
+    "количеству просмотров": "views",
+    "Поиск": "Search",
+    "All": "All",
+    "IT": "IT",
+    "SCIENCE": "SCIENCE",
+    "ECONOMICS": "ECONOMICS",
+    "Статьи не найдины": "Articles not found"
 }

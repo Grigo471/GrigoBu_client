@@ -93,7 +93,7 @@ const article = {
 };
 
 const meta: Meta<typeof ArticlesPage> = {
-    title: 'pages/ArticlesPage',
+    title: 'pages/ArticlesPage/ArticlesPage',
     component: ArticlesPage,
     tags: ['autodocs'],
     argTypes: {

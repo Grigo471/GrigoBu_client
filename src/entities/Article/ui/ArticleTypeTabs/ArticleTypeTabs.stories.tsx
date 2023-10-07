@@ -2,24 +2,29 @@ import type { Meta, StoryObj } from '@storybook/react';
 
 import { ThemeDecorator } from 'shared/config/storybook/ThemeDecorator/ThemeDecorator';
 import { Theme } from 'app/providers/ThemeProvider';
-import { StoreDecorator } from 'shared/config/storybook/StoreDecorator/StoreDecorator';
-import MainPage from './MainPage';
+import { ArticleTypeTabs } from './ArticleTypeTabs';
 
-const meta: Meta<typeof MainPage> = {
-    title: 'pages/MainPage',
-    component: MainPage,
+const meta: Meta<typeof ArticleTypeTabs> = {
+    title: 'shared/ArticleTypeTabs',
+    component: ArticleTypeTabs,
     tags: ['autodocs'],
-    decorators: [
-        StoreDecorator({}),
-    ],
+    argTypes: {
+    },
 };
 
 export default meta;
-type Story = StoryObj<typeof MainPage>;
+type Story = StoryObj<typeof ArticleTypeTabs>;
 
-export const Light: Story = {};
+export const Light: Story = {
+    args: {
+
+    },
+};
 
 export const Dark: Story = {
+    args: {
+
+    },
     decorators: [
         ThemeDecorator(Theme.DARK),
     ],

@@ -2,20 +2,22 @@
 import { memo, useCallback, type PropsWithChildren } from 'react';
 import { useTranslation } from 'react-i18next';
 import { classNames } from 'shared/lib/classNames/classNames';
-import { ArticleList, ArticleView, ArticleViewSelector } from 'entities/Article';
+import { ArticleList } from 'entities/Article';
 import { ReducerList, useDynamicModuleLoad } from 'shared/lib/hooks/useDynamicModuleLoad';
 import { useInitialEffect } from 'shared/lib/hooks/useInitialEffect';
 import { useAppDispatch } from 'shared/lib/hooks/useAppDispatch';
 import { useSelector } from 'react-redux';
 import { Page } from 'widgets/Page/Page';
 import { Text, TextAlign, TextTheme } from 'shared/ui/Text/Text';
+import { useSearchParams } from 'react-router-dom';
 import cls from './ArticlesPage.module.scss';
-import { articlesPageActions, articlesPageReducer, getArticles } from '../model/slice/articlePageSlice';
+import { articlesPageReducer, getArticles } from '../../model/slice/articlePageSlice';
 import {
     getArticlesPageError, getArticlesPageIsLoading, getArticlesPageView,
-} from '../model/selectors/articlesPageSelectors';
-import { fetchNextArticlesPage } from '../model/services/fetchNextArticlesPage/fetchNextArticlesPage';
-import { initArticlesPage } from '../model/services/initArticlesPage/initArticlesPage';
+} from '../../model/selectors/articlesPageSelectors';
+import { fetchNextArticlesPage } from '../../model/services/fetchNextArticlesPage/fetchNextArticlesPage';
+import { initArticlesPage } from '../../model/services/initArticlesPage/initArticlesPage';
+import { ArticlesPageFilter } from '../ArticlesPageFilter/ArticlesPageFilter';
 
 interface ArticlesPageProps {
    className?: string;
@@ -29,21 +31,18 @@ const ArticlesPage = (props: PropsWithChildren<ArticlesPageProps>) => {
     const { className } = props;
     const { t } = useTranslation('article');
     const dispatch = useAppDispatch();
+    const [searchParams] = useSearchParams();
 
     useDynamicModuleLoad({ reducers, removeAfterUnmount: false });
 
     const articles = useSelector(getArticles.selectAll);
-    const view = useSelector(getArticlesPageView);
     const error = useSelector(getArticlesPageError);
     const isLoading = useSelector(getArticlesPageIsLoading);
+    const view = useSelector(getArticlesPageView);
 
     useInitialEffect(() => {
-        dispatch(initArticlesPage());
+        dispatch(initArticlesPage(searchParams));
     });
-
-    const onChangeView = useCallback((view: ArticleView) => {
-        dispatch(articlesPageActions.setView(view));
-    }, [dispatch]);
 
     const onLoadNextPart = useCallback(() => {
         dispatch(fetchNextArticlesPage());
@@ -68,11 +67,12 @@ const ArticlesPage = (props: PropsWithChildren<ArticlesPageProps>) => {
             onScrollEnd={onLoadNextPart}
             className={classNames(cls.ArticlesPage, {}, [className])}
         >
-            <ArticleViewSelector view={view} onViewClick={onChangeView} />
+            <ArticlesPageFilter />
             <ArticleList
                 view={view}
                 articles={articles}
                 isLoading={isLoading}
+                className={cls.list}
             />
         </Page>
     );

@@ -9,6 +9,7 @@ import { addCommentFormReducer } from 'features/AddCommentForm/model/slice/addCo
 import { articleDetailsCommentsReducer }
     from 'pages/ArticleDetailsPage/model/slice/articleDetailsCommentsSlice';
 import { articlesPageReducer } from 'pages/ArticlesPage/model/slice/articlePageSlice';
+import { UIReducer } from 'features/UI';
 
 const defaultAsyncReducers: ReducerList = {
     loginForm: loginReducer,
@@ -17,6 +18,7 @@ const defaultAsyncReducers: ReducerList = {
     addCommentForm: addCommentFormReducer,
     articleDetailsComments: articleDetailsCommentsReducer,
     articlesPage: articlesPageReducer,
+    UI: UIReducer,
 };
 
 export const StoreDecorator = (
