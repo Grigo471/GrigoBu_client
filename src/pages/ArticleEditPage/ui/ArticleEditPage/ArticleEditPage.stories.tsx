@@ -2,18 +2,18 @@ import type { Meta, StoryObj } from '@storybook/react';
 
 import { ThemeDecorator } from 'shared/config/storybook/ThemeDecorator/ThemeDecorator';
 import { Theme } from 'app/providers/ThemeProvider';
-import { ArticleTypeTabs } from './ArticleTypeTabs';
+import ArticleEditPage from './ArticleEditPage';
 
-const meta: Meta<typeof ArticleTypeTabs> = {
-    title: 'entities/Article/ArticleTypeTabs',
-    component: ArticleTypeTabs,
+const meta: Meta<typeof ArticleEditPage> = {
+    title: 'shared/ArticleEditPage',
+    component: ArticleEditPage,
     tags: ['autodocs'],
     argTypes: {
     },
 };
 
 export default meta;
-type Story = StoryObj<typeof ArticleTypeTabs>;
+type Story = StoryObj<typeof ArticleEditPage>;
 
 export const Light: Story = {
     args: {

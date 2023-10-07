@@ -1,5 +1,5 @@
 import {
-    type PropsWithChildren, memo, useCallback, HTMLAttributeAnchorTarget,
+    type PropsWithChildren, memo, HTMLAttributeAnchorTarget,
 } from 'react';
 import { useTranslation } from 'react-i18next';
 import { classNames } from 'shared/lib/classNames/classNames';
@@ -81,9 +81,8 @@ export const ArticleListItem = memo((props: PropsWithChildren<ArticleListItemPro
         <AppLink
             target={target}
             to={RoutePaths.article_details + article.id}
-            className={classNames(cls.ArticleListItem, {}, [className, cls[view]])}
         >
-            <Card>
+            <Card className={classNames(cls.ArticleListItem, {}, [className, cls[view]])}>
                 <div className={cls.imageWrapper}>
                     {image}
                     {createdAt}
