@@ -62,7 +62,7 @@ export const Navbar = memo((props: NavbarProps) => {
     }
 
     return (
-        <div className={classNames(cls.Navbar, {}, [className])}>
+        <header className={classNames(cls.Navbar, {}, [className])}>
             <Button
                 className={cls.links}
                 onClick={onShowModal}
@@ -76,6 +76,6 @@ export const Navbar = memo((props: NavbarProps) => {
                     onClose={onCloseModal}
                 />
             )}
-        </div>
+        </header>
     );
 });

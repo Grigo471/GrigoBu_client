@@ -49,6 +49,14 @@ export const Dark: Story = {
     decorators: [ThemeDecorator(Theme.DARK)],
 };
 
+export const SizeS: Story = {
+    args: {
+        size: TextSize.S,
+        title: 'Story title',
+        text: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy',
+    },
+};
+
 export const SizeM: Story = {
     args: {
         size: TextSize.M,
