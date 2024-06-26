@@ -1,5 +1,6 @@
 import {
     type PropsWithChildren, useRef, MutableRefObject,
+    memo,
 } from 'react';
 import { classNames } from 'shared/lib/classNames/classNames';
 import { useInfiniteScroll } from 'shared/lib/hooks/useInfiniteScroll';
@@ -17,7 +18,9 @@ interface PageProps {
    onScrollEnd?: () => void;
 }
 
-export const Page = (props: PropsWithChildren<PageProps>) => {
+export const PAGE_ID = 'PAIGE_ID';
+
+export const Page = memo((props: PropsWithChildren<PageProps>) => {
     const { className, children, onScrollEnd } = props;
 
     const dispatch = useAppDispatch();
@@ -49,9 +52,10 @@ export const Page = (props: PropsWithChildren<PageProps>) => {
             ref={wrapperRef}
             className={classNames(cls.Page, {}, [className])}
             onScroll={onScroll}
+            id={PAGE_ID}
         >
             {children}
             {onScrollEnd && <div className={cls.trigger} ref={triggerRef} />}
         </section>
     );
-};
+});
