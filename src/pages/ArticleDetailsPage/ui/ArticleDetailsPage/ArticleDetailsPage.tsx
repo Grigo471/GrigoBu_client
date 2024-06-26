@@ -13,6 +13,7 @@ import { useInitialEffect } from 'shared/lib/hooks/useInitialEffect';
 import { useAppDispatch } from 'shared/lib/hooks/useAppDispatch';
 import { AddCommentForm } from 'features/AddCommentForm';
 import { Page } from 'widgets/Page/Page';
+import { VStack } from 'shared/ui/Stack';
 import { getArticleComments } from '../../model/slice/articleDetailsCommentsSlice';
 import {
     getArticleRecommendations,
@@ -81,39 +82,42 @@ const ArticleDetailsPage = (props: PropsWithChildren<ArticleDetailsPageProps>) =
 
     return (
         <Page className={classNames(cls.ArticleDetailsPage, {}, [className])}>
-            <ArticleDetailsPageHeader />
-            <ArticleDetails articleId={id} />
-            <Text
-                title={t('Рекомендуем')}
-                className={cls.commentTitle}
-                size={TextSize.L}
-            />
-            <ArticleList
-                articles={recommendations}
-                isLoading={recommendationsIsLoading}
-                className={cls.recommendations}
-                target="_blank"
-            />
-            <Text
-                title={t('Комментарии')}
-                className={cls.commentTitle}
-                size={TextSize.L}
-            />
-            <AddCommentForm onSendComment={onSendComment} />
-            {error
-                ? (
-                    <Text
-                        align={TextAlign.CENTER}
-                        theme={TextTheme.ERROR}
-                        title={t('Произошла ошибка при загрузке комментариев')}
-                    />
-                )
-                : (
-                    <CommentList
-                        isLoading={isLoading}
-                        comments={comments}
-                    />
-                )}
+            <VStack gap="16" max>
+                <ArticleDetailsPageHeader />
+                <ArticleDetails articleId={id} />
+                <Text
+                    title={t('Рекомендуем')}
+                    className={cls.commentTitle}
+                    size={TextSize.L}
+                />
+                <ArticleList
+                    articles={recommendations}
+                    isLoading={recommendationsIsLoading}
+                    className={cls.recommendations}
+                    target="_blank"
+                />
+                <Text
+                    title={t('Комментарии')}
+                    className={cls.commentTitle}
+                    size={TextSize.L}
+                />
+                <AddCommentForm onSendComment={onSendComment} />
+                {error
+                    ? (
+                        <Text
+                            align={TextAlign.CENTER}
+                            theme={TextTheme.ERROR}
+                            title={t('Произошла ошибка при загрузке комментариев')}
+                        />
+                    )
+                    : (
+                        <CommentList
+                            isLoading={isLoading}
+                            comments={comments}
+                        />
+                    )}
+            </VStack>
+
         </Page>
     );
 };
