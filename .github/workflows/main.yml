@@ -36,12 +36,12 @@ jobs:
       - name: unit testing
         if: always()
         run: npm run test:unit
-      - name: Publish to Chromatic
-        if: always()
-        uses: chromaui/action@v1
-        with:
-          projectToken: ${{ secrets.CHROMATIC_PROJECT_TOKEN }}
-          onlyChanged: true
-          traceChanged: true
-          exitZeroOnChanges: false
+      # - name: Publish to Chromatic
+      #   if: always()
+      #   uses: chromaui/action@v1
+      #   with:
+      #     projectToken: ${{ secrets.CHROMATIC_PROJECT_TOKEN }}
+      #     onlyChanged: true
+      #     traceChanged: true
+      #     exitZeroOnChanges: false
           

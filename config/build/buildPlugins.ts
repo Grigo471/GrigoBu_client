@@ -3,6 +3,7 @@ import webpack, { WebpackPluginInstance } from 'webpack';
 import MiniCssExtractPlugin from 'mini-css-extract-plugin';
 import { BundleAnalyzerPlugin } from 'webpack-bundle-analyzer';
 import ReactRefreshWebpackPlugin from '@pmmmwh/react-refresh-webpack-plugin';
+import CopyPlugin from 'copy-webpack-plugin';
 import { BuildOptions } from './types/config';
 
 export function buildPlugins({
@@ -28,6 +29,11 @@ export function buildPlugins({
         }),
         new BundleAnalyzerPlugin({
             analyzerMode: analyze ? 'server' : 'disabled',
+        }),
+        new CopyPlugin({
+            patterns: [
+                { from: paths.locales, to: paths.buildLocales },
+            ],
         }),
     ];
 

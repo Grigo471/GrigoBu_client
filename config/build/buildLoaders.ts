@@ -29,10 +29,10 @@ export function buildLoaders(options: BuildOptions): RuleSetRule[] {
     };
 
     return [
-        babelLoader,
-        typescriptLoader,
-        cssLoader,
-        svgLoader,
         fileLoader,
+        svgLoader,
+        typescriptLoader,
+        babelLoader,
+        cssLoader,
     ];
 }
