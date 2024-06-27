@@ -18,6 +18,9 @@ const meta: Meta<typeof ListBox> = {
     tags: ['autodocs'],
     argTypes: {
     },
+    decorators: [
+        (Story) => <div style={{ padding: 100 }}><Story /></div>,
+    ],
 };
 
 export default meta;
@@ -57,16 +60,46 @@ export const Dark: Story = {
     ],
 };
 
-export const DarkTopDirection: Story = {
+export const TopRightDirection: Story = {
     args: {
         items: people,
-        value: people[0].content,
-        defaultValue: people[0].content,
+        value: '',
+        defaultValue: '',
         label: 'Выберите человека',
         onChange: (value: string) => { },
-        direction: 'top',
+        direction: 'topRight',
     },
-    decorators: [
-        ThemeDecorator(Theme.DARK),
-    ],
+};
+
+export const TopLeftDirection: Story = {
+    args: {
+        items: people,
+        value: '',
+        defaultValue: '',
+        label: 'Выберите человека',
+        onChange: (value: string) => { },
+        direction: 'topLeft',
+    },
+};
+
+export const BottomRightDirection: Story = {
+    args: {
+        items: people,
+        value: '',
+        defaultValue: '',
+        label: 'Выберите человека',
+        onChange: (value: string) => { },
+        direction: 'bottomRight',
+    },
+};
+
+export const BottomLeftDirection: Story = {
+    args: {
+        items: people,
+        value: '',
+        defaultValue: '',
+        label: 'Выберите человека',
+        onChange: (value: string) => { },
+        direction: 'bottomLeft',
+    },
 };

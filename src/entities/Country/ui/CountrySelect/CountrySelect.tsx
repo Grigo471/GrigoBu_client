@@ -40,7 +40,7 @@ export const CountrySelect = memo((props: PropsWithChildren<CountrySelectProps>)
             items={options}
             onChange={onChangeHandler}
             readonly={readonly}
-            direction="top"
+            direction="topRight"
         />
 
     // <Select
