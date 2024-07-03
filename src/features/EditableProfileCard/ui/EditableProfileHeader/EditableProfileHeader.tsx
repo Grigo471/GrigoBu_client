@@ -5,18 +5,19 @@ import { useCallback, type PropsWithChildren } from 'react';
 import { Button, ThemeButton } from 'shared/ui/Button/Button';
 import { Text } from 'shared/ui/Text/Text';
 import { useSelector } from 'react-redux';
-import {
-    getProfileData, getProfileReadOnly, profileActions, updateProfileData,
-} from 'entities/Profile';
 import { useAppDispatch } from 'shared/lib/hooks/useAppDispatch';
 import { getUserAuthData } from 'entities/User';
 import { HStack } from 'shared/ui/Stack/HStack/HStack';
+import { profileActions } from 'features/EditableProfileCard/model/slice/profileSlice';
+import { getProfileReadOnly } from '../../model/selectors/getProfileReadOnly/getProfileReadOnly';
+import { getProfileData } from '../../model/selectors/getProfileData/getProfileData';
+import { updateProfileData } from '../../model/services/updateProfileData/updateProfileData';
 
-interface ProfilePageHeaderProps {
-    className?: string;
+interface EditableProfileHeaderProps {
+   className?: string;
 }
 
-export const ProfilePageHeader = (props: PropsWithChildren<ProfilePageHeaderProps>) => {
+export const EditableProfileHeader = (props: PropsWithChildren<EditableProfileHeaderProps>) => {
     const { className } = props;
 
     const { t } = useTranslation('profile');
