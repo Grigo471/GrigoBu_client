@@ -17,7 +17,11 @@ interface ArticleListProps {
 
 export const ArticleList = memo((props: PropsWithChildren<ArticleListProps>) => {
     const {
-        className, articles, isLoading, view = ArticleView.SMALL, target,
+        className,
+        articles,
+        isLoading,
+        view = ArticleView.SMALL,
+        target,
     } = props;
     const { t } = useTranslation('article');
 

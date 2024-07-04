@@ -2,7 +2,7 @@ import { classNames } from 'shared/lib/classNames/classNames';
 import { type PropsWithChildren } from 'react';
 import { Page } from 'widgets/Page/Page';
 import { VStack } from 'shared/ui/Stack/VStack/VStack';
-import { EditableProfileCard, EditableProfileHeader } from 'features/EditableProfileCard';
+import { EditableProfileCard } from 'features/EditableProfileCard';
 import { useParams } from 'react-router-dom';
 import { Text, TextTheme } from 'shared/ui/Text/Text';
 import { useTranslation } from 'react-i18next';
@@ -28,7 +28,6 @@ function ProfilePage(props: PropsWithChildren<ProfilePageProps>) {
     return (
         <Page className={classNames('', {}, [className])}>
             <VStack max gap="16">
-                <EditableProfileHeader />
                 <EditableProfileCard id={id} />
             </VStack>
 

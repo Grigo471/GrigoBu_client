@@ -24,6 +24,7 @@ import { ValidateProfileError } from '../../model/types/EditableProfileCardSchem
 import {
     profileActions, profileReducer,
 } from '../../model/slice/profileSlice';
+import { EditableProfileHeader } from '../EditableProfileHeader/EditableProfileHeader';
 
 const reducers: ReducerList = {
     profile: profileReducer,
@@ -98,11 +99,13 @@ export const EditableProfileCard = memo((props: EditableProfileCardProps) => {
 
     return (
         <VStack gap="8" max className={classNames('', {}, [className])}>
+            <EditableProfileHeader />
             {validateErrors?.length && validateErrors?.map((err) => (
                 <Text
                     theme={TextTheme.ERROR}
                     text={validateErrorsTranslations[err]}
                     key={err}
+                    data-testid="EditableProfileCard.Error"
                 />
             ))}
             <ProfileCard
