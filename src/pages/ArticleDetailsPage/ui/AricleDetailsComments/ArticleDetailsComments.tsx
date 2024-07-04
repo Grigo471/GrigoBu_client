@@ -1,6 +1,8 @@
 import { CommentList } from 'entities/Comment';
 import { AddCommentForm } from 'features/AddCommentForm';
-import { type PropsWithChildren, memo, useCallback } from 'react';
+import {
+    type PropsWithChildren, Suspense, memo, useCallback,
+} from 'react';
 import { useTranslation } from 'react-i18next';
 import { classNames } from 'shared/lib/classNames/classNames';
 import {
@@ -51,7 +53,11 @@ export const ArticleDetailsComments = memo((
                 title={t('Комментарии')}
                 size={TextSize.L}
             />
-            <AddCommentForm onSendComment={onSendComment} />
+
+            <Suspense fallback={<div>...</div>}>
+                <AddCommentForm onSendComment={onSendComment} />
+            </Suspense>
+
             {error
                 ? (
                     <Text
