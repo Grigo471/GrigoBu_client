@@ -1,9 +1,10 @@
 import { Menu } from '@headlessui/react';
 import { classNames } from 'shared/lib/classNames/classNames';
 import { Fragment, ReactNode } from 'react';
-import { DropDownDirection } from 'shared/types/ui';
+import { AppLink } from 'shared/ui/AppLink/AppLink';
+import { DropDownDirection } from '../../styles/consts';
 import cls from './Dropdown.module.scss';
-import { AppLink } from '../AppLink/AppLink';
+import popupCls from '../../styles/popups.module.scss';
 
 export interface DropdownItem {
    disabled?: boolean;
@@ -24,11 +25,11 @@ export function Dropdown(props: DropdownProps) {
         className, trigger, items, direction = 'bottomRight',
     } = props;
 
-    const menuClasses = [cls[direction]];
+    const menuClasses = [popupCls[direction]];
 
     return (
-        <Menu as="div" className={classNames(cls.Dropdown, {}, [className])}>
-            <Menu.Button className={cls.btn}>
+        <Menu as="div" className={classNames(cls.Dropdown, {}, [className, popupCls.popup])}>
+            <Menu.Button className={popupCls.trigger}>
                 {trigger}
             </Menu.Button>
             <Menu.Items className={classNames(cls.menu, {}, menuClasses)}>

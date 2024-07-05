@@ -1,16 +1,3 @@
-.Dropdown {
-    position: relative;
-}
-
-.btn {
-    background: none;
-    outline: none;
-    margin: 0;
-    padding: 0;
-    border: none;
-    cursor: pointer;
-}
-
 .menu {
     background: var(--card-bg);
     position: absolute;
@@ -33,24 +20,4 @@
 
 .active {
     background: var(--inverted-primary-color);
-}
-
-.topRight {
-    bottom: 100%;
-    left: 0;
-}
-
-.topLeft {
-    bottom: 100%;
-    right: 0;
-}
-
-.bottomRight {
-    top: 100%;
-    left: 0;
-}
-
-.bottomLeft {
-    top: 100%;
-    right: 0;
 }
