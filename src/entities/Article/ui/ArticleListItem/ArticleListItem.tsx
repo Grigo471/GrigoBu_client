@@ -9,14 +9,14 @@ import EyeIcon from 'shared/assets/icons/eye.svg';
 import { Card } from 'shared/ui/Card/Card';
 import { Avatar } from 'shared/ui/Avatar/Avatar';
 import { Button, ThemeButton } from 'shared/ui/Button/Button';
-import { useNavigate } from 'react-router-dom';
 import { RoutePaths } from 'shared/config/routeConfig/routeConfig';
 import { AppLink } from 'shared/ui/AppLink/AppLink';
 import cls from './ArticleListItem.module.scss';
 import {
-    Article, ArticleBlockType, ArticleTextBlock, ArticleView,
+    Article, ArticleTextBlock,
 } from '../../model/types/article';
 import { ArticleTextBlockComponent } from '../ArticleTextBlockComponent/ArticleTextBlockComponent';
+import { ArticleBlockType, ArticleView } from '../../model/consts/consts';
 
 interface ArticleListItemProps {
    className?: string;
@@ -30,7 +30,6 @@ export const ArticleListItem = memo((props: PropsWithChildren<ArticleListItemPro
         className, article, view, target,
     } = props;
     const { t } = useTranslation('article');
-    const navigate = useNavigate();
 
     const createdAt = <Text text={article.createdAt} className={cls.date} />;
     const image = <img src={article.img} className={cls.img} alt={article.title} />;

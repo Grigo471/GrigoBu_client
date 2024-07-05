@@ -1,12 +1,5 @@
 import { Profile } from 'entities/Profile';
-
-export enum ValidateProfileError {
-    INCORRECT_USER_DATA = 'INCORRECT USER DATA',
-    INCORRECT_AGE = 'INCORRECT AGE',
-    INCORRECT_COUNTRY = 'INCORRECT COUNTRY',
-    NO_DATA = 'NO DATA',
-    SERVER_ERROR = 'SERVER ERROR',
-}
+import { ValidateProfileError } from '../consts/consts';
 
 export interface ProfileSchema {
     data?: Profile;

@@ -1,8 +1,11 @@
-export {
+export type {
     UserSchema,
     User,
-    UserRole,
 } from './model/types/user';
+
+export {
+    UserRole,
+} from './model/consts/consts';
 
 export {
     userActions,
