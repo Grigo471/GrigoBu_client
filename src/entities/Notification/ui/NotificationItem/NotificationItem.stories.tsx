@@ -5,28 +5,27 @@ import { Theme } from 'app/providers/ThemeProvider';
 import { NotificationItem } from './NotificationItem';
 
 const meta: Meta<typeof NotificationItem> = {
-   title: 'shared/NotificationItem',
-   component: NotificationItem,
-   tags: ['autodocs'],
-   argTypes: {
-   },
+    title: 'shared/NotificationItem',
+    component: NotificationItem,
+    tags: ['autodocs'],
+    argTypes: {
+    },
 };
 
 export default meta;
 type Story = StoryObj<typeof NotificationItem>;
 
 export const Light: Story = {
-   args: {
-     
-   },
+    args: {
+
+    },
 };
 
 export const Dark: Story = {
-   args: {
-      
-   },
-   decorators: [
-      ThemeDecorator(Theme.DARK),
-   ],
-};
+    args: {
 
+    },
+    decorators: [
+        ThemeDecorator(Theme.DARK),
+    ],
+};
