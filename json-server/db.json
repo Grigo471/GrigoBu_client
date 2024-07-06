@@ -11,21 +11,21 @@
       "title": "Уведомление 2",
       "description": "Это просто чума, читать далее",
       "userId": "1",
-      "href": "https://localhost:3000/admin"
+      "href": "http://localhost:3000/admin"
     },
     {
       "id": "3",
       "title": "Уведомление 3",
       "description": "Это просто чума, читать далее",
       "userId": "1",
-      "href": "https://localhost:3000/admin"
+      "href": "http://localhost:3000/admin"
     },
     {
       "id": "4",
       "title": "Уведомление 4",
       "description": "Это просто чума, читать далее",
       "userId": "1",
-      "href": "https://localhost:3000/admin"
+      "href": "http://localhost:3000/admin"
     }
   ],
   "articles": [
