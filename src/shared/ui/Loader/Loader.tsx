@@ -1,5 +1,5 @@
-import { classNames } from 'shared/lib/classNames/classNames';
 import type { PropsWithChildren } from 'react';
+import { classNames } from '@/shared/lib/classNames/classNames';
 import './Loader.scss';
 
 interface LoaderProps {

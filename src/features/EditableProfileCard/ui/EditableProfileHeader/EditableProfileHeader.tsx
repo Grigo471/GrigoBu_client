@@ -1,14 +1,14 @@
 /* eslint-disable react/jsx-no-useless-fragment */
-import { classNames } from 'shared/lib/classNames/classNames';
 import { useTranslation } from 'react-i18next';
 import { useCallback, type PropsWithChildren } from 'react';
-import { Button, ThemeButton } from 'shared/ui/Button/Button';
-import { Text } from 'shared/ui/Text/Text';
 import { useSelector } from 'react-redux';
-import { useAppDispatch } from 'shared/lib/hooks/useAppDispatch';
-import { getUserAuthData } from 'entities/User';
-import { HStack } from 'shared/ui/Stack/HStack/HStack';
-import { profileActions } from 'features/EditableProfileCard/model/slice/profileSlice';
+import { classNames } from '@/shared/lib/classNames/classNames';
+import { Button, ThemeButton } from '@/shared/ui/Button/Button';
+import { Text } from '@/shared/ui/Text/Text';
+import { useAppDispatch } from '@/shared/lib/hooks/useAppDispatch';
+import { getUserAuthData } from '@/entities/User';
+import { HStack } from '@/shared/ui/Stack/HStack/HStack';
+import { profileActions } from '@/features/EditableProfileCard/model/slice/profileSlice';
 import { getProfileReadOnly } from '../../model/selectors/getProfileReadOnly/getProfileReadOnly';
 import { getProfileData } from '../../model/selectors/getProfileData/getProfileData';
 import { updateProfileData } from '../../model/services/updateProfileData/updateProfileData';

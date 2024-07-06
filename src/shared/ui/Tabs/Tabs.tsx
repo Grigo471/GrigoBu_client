@@ -2,7 +2,7 @@ import {
     type PropsWithChildren, memo, ReactNode, useCallback,
 } from 'react';
 import { useTranslation } from 'react-i18next';
-import { classNames } from 'shared/lib/classNames/classNames';
+import { classNames } from '@/shared/lib/classNames/classNames';
 import cls from './Tabs.module.scss';
 import { Card, CardTheme } from '../Card/Card';
 

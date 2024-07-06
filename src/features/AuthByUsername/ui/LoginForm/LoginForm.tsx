@@ -1,14 +1,14 @@
-import { classNames } from 'shared/lib/classNames/classNames';
 import { useTranslation } from 'react-i18next';
 import {
     PropsWithChildren, memo, useCallback,
 } from 'react';
-import { Button, ThemeButton } from 'shared/ui/Button/Button';
-import { Input } from 'shared/ui/Input/Input';
 import { useSelector } from 'react-redux';
-import { Text, TextTheme } from 'shared/ui/Text/Text';
-import { ReducerList, useDynamicModuleLoad } from 'shared/lib/hooks/useDynamicModuleLoad';
-import { useAppDispatch } from 'shared/lib/hooks/useAppDispatch';
+import { classNames } from '@/shared/lib/classNames/classNames';
+import { Button, ThemeButton } from '@/shared/ui/Button/Button';
+import { Input } from '@/shared/ui/Input/Input';
+import { Text, TextTheme } from '@/shared/ui/Text/Text';
+import { ReducerList, useDynamicModuleLoad } from '@/shared/lib/hooks/useDynamicModuleLoad';
+import { useAppDispatch } from '@/shared/lib/hooks/useAppDispatch';
 import { getLoginUsername } from '../../model/selectors/getLoginUsername/getLoginUsername';
 import { getLoginPassword } from '../../model/selectors/getLoginPassword/getLoginPassword';
 import { getLoginIsLoading } from '../../model/selectors/getLoginIsLoading/getLoginIsLoading';

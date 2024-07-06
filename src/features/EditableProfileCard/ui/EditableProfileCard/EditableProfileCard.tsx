@@ -1,17 +1,17 @@
-import { classNames } from 'shared/lib/classNames/classNames';
 import { useTranslation } from 'react-i18next';
 import { memo, useCallback } from 'react';
-import { ReducerList, useDynamicModuleLoad } from 'shared/lib/hooks/useDynamicModuleLoad';
 import { useSelector } from 'react-redux';
+import { ReducerList, useDynamicModuleLoad } from '@/shared/lib/hooks/useDynamicModuleLoad';
+import { classNames } from '@/shared/lib/classNames/classNames';
 import {
     ProfileCard,
-} from 'entities/Profile';
-import { Country } from 'entities/Country';
-import { Currency } from 'entities/Currency';
-import { useInitialEffect } from 'shared/lib/hooks/useInitialEffect';
-import { useAppDispatch } from 'shared/lib/hooks/useAppDispatch';
-import { Text, TextTheme } from 'shared/ui/Text/Text';
-import { VStack } from 'shared/ui/Stack';
+} from '@/entities/Profile';
+import { Country } from '@/entities/Country';
+import { Currency } from '@/entities/Currency';
+import { useInitialEffect } from '@/shared/lib/hooks/useInitialEffect';
+import { useAppDispatch } from '@/shared/lib/hooks/useAppDispatch';
+import { Text, TextTheme } from '@/shared/ui/Text/Text';
+import { VStack } from '@/shared/ui/Stack';
 import { fetchProfileData } from '../../model/services/fetchProfileData/fetchProfileData';
 import { getProfileForm } from '../../model/selectors/getProfileForm/getProfileForm';
 import { getProfileIsLoading } from '../../model/selectors/getProfileIsLoading/getProfileIsLoading';

@@ -1,12 +1,12 @@
 import { type PropsWithChildren, memo } from 'react';
 import { useTranslation } from 'react-i18next';
-import { Text, TextAlign, TextTheme } from 'shared/ui/Text/Text';
 import { useSelector } from 'react-redux';
-import { ArticleList } from 'entities/Article';
-import { ReducerList, useDynamicModuleLoad } from 'shared/lib/hooks/useDynamicModuleLoad';
 import { useSearchParams } from 'react-router-dom';
-import { useInitialEffect } from 'shared/lib/hooks/useInitialEffect';
-import { useAppDispatch } from 'shared/lib/hooks/useAppDispatch';
+import { Text, TextAlign, TextTheme } from '@/shared/ui/Text/Text';
+import { ArticleList } from '@/entities/Article';
+import { ReducerList, useDynamicModuleLoad } from '@/shared/lib/hooks/useDynamicModuleLoad';
+import { useInitialEffect } from '@/shared/lib/hooks/useInitialEffect';
+import { useAppDispatch } from '@/shared/lib/hooks/useAppDispatch';
 import { articlesPageReducer, getArticles } from '../../model/slice/articlePageSlice';
 import { initArticlesPage } from '../../model/services/initArticlesPage/initArticlesPage';
 import {

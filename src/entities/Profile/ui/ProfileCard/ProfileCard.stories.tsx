@@ -1,8 +1,8 @@
 import type { Meta, StoryObj } from '@storybook/react';
-import { StoreDecorator } from 'shared/config/storybook/StoreDecorator/StoreDecorator';
-import { Country } from 'entities/Country';
-import { Currency } from 'entities/Currency';
-import AvatarImg from 'shared/assets/tests/homer1200.jpg';
+import { StoreDecorator } from '@/shared/config/storybook/StoreDecorator/StoreDecorator';
+import { Country } from '@/entities/Country';
+import { Currency } from '@/entities/Currency';
+import AvatarImg from '@/shared/assets/tests/homer1200.jpg';
 import { ProfileCard } from './ProfileCard';
 
 const meta: Meta<typeof ProfileCard> = {

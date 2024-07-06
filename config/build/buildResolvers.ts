@@ -10,6 +10,8 @@ export function buildResolvers(options: BuildOptions): ResolveOptions {
             'node_modules',
         ],
         mainFiles: ['index'],
-        alias: {},
+        alias: {
+            '@': options.paths.src,
+        },
     };
 }

@@ -2,9 +2,9 @@ import {
     type PropsWithChildren, ReactNode, memo, useCallback,
     useEffect,
 } from 'react';
-import { classNames } from 'shared/lib/classNames/classNames';
-import { useTheme } from 'app/providers/ThemeProvider';
-import { useAnimationLibs } from 'shared/components/AnimationProvider';
+import { classNames } from '@/shared/lib/classNames/classNames';
+import { useTheme } from '@/app/providers/ThemeProvider';
+import { useAnimationLibs } from '@/shared/components/AnimationProvider';
 import cls from './Drawer.module.scss';
 import { Portal } from '../Portal/Portal';
 import { Overlay } from '../Overlay/Overlay';

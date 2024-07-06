@@ -1,12 +1,12 @@
 import { type PropsWithChildren, memo, useCallback } from 'react';
 import { useTranslation } from 'react-i18next';
-import { classNames } from 'shared/lib/classNames/classNames';
-import { Input } from 'shared/ui/Input/Input';
-import { Button, ThemeButton } from 'shared/ui/Button/Button';
 import { useSelector } from 'react-redux';
-import { useAppDispatch } from 'shared/lib/hooks/useAppDispatch';
-import { ReducerList, useDynamicModuleLoad } from 'shared/lib/hooks/useDynamicModuleLoad';
-import { HStack } from 'shared/ui/Stack';
+import { classNames } from '@/shared/lib/classNames/classNames';
+import { Input } from '@/shared/ui/Input/Input';
+import { Button, ThemeButton } from '@/shared/ui/Button/Button';
+import { useAppDispatch } from '@/shared/lib/hooks/useAppDispatch';
+import { ReducerList, useDynamicModuleLoad } from '@/shared/lib/hooks/useDynamicModuleLoad';
+import { HStack } from '@/shared/ui/Stack';
 import {
     addCommentFormActions,
     addCommentFormReducer,

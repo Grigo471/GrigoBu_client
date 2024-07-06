@@ -1,5 +1,5 @@
-import { classNames } from 'shared/lib/classNames/classNames';
 import { memo, type PropsWithChildren } from 'react';
+import { classNames } from '@/shared/lib/classNames/classNames';
 import cls from './Text.module.scss';
 
 export enum TextTheme {

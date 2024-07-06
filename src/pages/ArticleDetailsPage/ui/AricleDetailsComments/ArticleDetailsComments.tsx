@@ -1,17 +1,17 @@
-import { CommentList } from 'entities/Comment';
-import { AddCommentForm } from 'features/AddCommentForm';
 import {
     type PropsWithChildren, Suspense, memo, useCallback,
 } from 'react';
 import { useTranslation } from 'react-i18next';
-import { classNames } from 'shared/lib/classNames/classNames';
+import { useSelector } from 'react-redux';
+import { CommentList } from '@/entities/Comment';
+import { AddCommentForm } from '@/features/AddCommentForm';
+import { classNames } from '@/shared/lib/classNames/classNames';
 import {
     Text, TextAlign, TextSize, TextTheme,
-} from 'shared/ui/Text/Text';
-import { useSelector } from 'react-redux';
-import { useAppDispatch } from 'shared/lib/hooks/useAppDispatch';
-import { useInitialEffect } from 'shared/lib/hooks/useInitialEffect';
-import { VStack } from 'shared/ui/Stack';
+} from '@/shared/ui/Text/Text';
+import { useAppDispatch } from '@/shared/lib/hooks/useAppDispatch';
+import { useInitialEffect } from '@/shared/lib/hooks/useInitialEffect';
+import { VStack } from '@/shared/ui/Stack';
 import {
     fetchCommentsByArticleId,
 } from '../../model/services/fetchCommentsByArticleId/fetchCommentsByArticleId';

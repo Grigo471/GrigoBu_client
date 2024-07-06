@@ -1,6 +1,6 @@
-import { classNames } from 'shared/lib/classNames/classNames';
 import type { PropsWithChildren } from 'react';
-import { Loader } from 'shared/ui/Loader/Loader';
+import { classNames } from '@/shared/lib/classNames/classNames';
+import { Loader } from '@/shared/ui/Loader/Loader';
 import cls from './PageLoader.module.scss';
 
 interface PageLoaderProps {

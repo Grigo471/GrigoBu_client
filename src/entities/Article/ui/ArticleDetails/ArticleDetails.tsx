@@ -2,19 +2,19 @@ import {
     useEffect, type PropsWithChildren, memo, useCallback,
 } from 'react';
 import { useTranslation } from 'react-i18next';
-import { classNames } from 'shared/lib/classNames/classNames';
-import { ReducerList, useDynamicModuleLoad } from 'shared/lib/hooks/useDynamicModuleLoad';
-import { useAppDispatch } from 'shared/lib/hooks/useAppDispatch';
 import { useSelector } from 'react-redux';
+import { classNames } from '@/shared/lib/classNames/classNames';
+import { ReducerList, useDynamicModuleLoad } from '@/shared/lib/hooks/useDynamicModuleLoad';
+import { useAppDispatch } from '@/shared/lib/hooks/useAppDispatch';
 import {
     Text, TextAlign, TextSize, TextTheme,
-} from 'shared/ui/Text/Text';
-import { Skeleton } from 'shared/ui/Sceleton/Skeleton';
-import { Avatar } from 'shared/ui/Avatar/Avatar';
-import EyeIcon from 'shared/assets/icons/eye.svg';
-import AgendaIcon from 'shared/assets/icons/agenda.svg';
-import { Icon } from 'shared/ui/Icon/Icon';
-import { HStack, VStack } from 'shared/ui/Stack';
+} from '@/shared/ui/Text/Text';
+import { Skeleton } from '@/shared/ui/Sceleton/Skeleton';
+import { Avatar } from '@/shared/ui/Avatar/Avatar';
+import EyeIcon from '@/shared/assets/icons/eye.svg';
+import AgendaIcon from '@/shared/assets/icons/agenda.svg';
+import { Icon } from '@/shared/ui/Icon/Icon';
+import { HStack, VStack } from '@/shared/ui/Stack';
 import { fetchArticleById } from '../../model/services/fetchArticleById/fetchArticleById';
 import { articleDetailsReducers } from '../../model/slice/articleDetailsSlice';
 import cls from './ArticleDetails.module.scss';

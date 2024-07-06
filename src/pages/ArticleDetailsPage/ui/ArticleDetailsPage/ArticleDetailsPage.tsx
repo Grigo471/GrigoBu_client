@@ -1,12 +1,12 @@
 import { memo, type PropsWithChildren } from 'react';
 import { useTranslation } from 'react-i18next';
-import { classNames } from 'shared/lib/classNames/classNames';
-import { ArticleDetails } from 'entities/Article';
 import { useParams } from 'react-router-dom';
-import { ReducerList, useDynamicModuleLoad } from 'shared/lib/hooks/useDynamicModuleLoad';
-import { Page } from 'widgets/Page/Page';
-import { VStack } from 'shared/ui/Stack';
-import { ArticleRecommendationsList } from 'features/ArticleRecommendationsList';
+import { classNames } from '@/shared/lib/classNames/classNames';
+import { ArticleDetails } from '@/entities/Article';
+import { ReducerList, useDynamicModuleLoad } from '@/shared/lib/hooks/useDynamicModuleLoad';
+import { Page } from '@/widgets/Page/Page';
+import { VStack } from '@/shared/ui/Stack';
+import { ArticleRecommendationsList } from '@/features/ArticleRecommendationsList';
 import { articleDetailsPageReducer } from '../../model/slice';
 import cls from './ArticleDetailsPage.module.scss';
 import { ArticleDetailsPageHeader } from '../ArticleDetailsPageHeader/ArticleDetailsPageHeader';
