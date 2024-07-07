@@ -455,14 +455,18 @@
       "id": "1",
       "username": "Grigo",
       "password": "123",
-      "roles": ["ADMIN"],
+      "roles": [
+        "ADMIN"
+      ],
       "avatar": "https://p.turbosquid.com/ts-thumb/Ax/XUKtDV/FxtkjVoD/homer1200/jpg/1590143115/600x600/fit_q87/c8d0e5a16813b132c3740438479c620649e28627/homer1200.jpg"
     },
     {
       "id": "2",
       "username": "BGDk22",
       "password": "321",
-      "roles": ["USER"],
+      "roles": [
+        "USER"
+      ],
       "avatar": "https://steamuserimages-a.akamaihd.net/ugc/942838033007845279/DBC41CC3BB3FDCAF81267BD7A617A655AD73DF0E/?imw=5000&imh=5000&ima=fit&impolicy=Letterbox&imcolor=%23000000&letterbox=false"
     }
   ],
@@ -488,6 +492,66 @@
       "city": "LA",
       "username": "BGDk22",
       "avatar": "https://steamuserimages-a.akamaihd.net/ugc/942838033007845279/DBC41CC3BB3FDCAF81267BD7A617A655AD73DF0E/?imw=5000&imh=5000&ima=fit&impolicy=Letterbox&imcolor=%23000000&letterbox=false"
+    }
+  ],
+  "article-ratings": [
+    {
+      "id": "1",
+      "rate": 4,
+      "feedback": "Nice",
+      "userId": "1",
+      "articleId": "1"
+    },
+    {
+      "id": "2",
+      "rate": 3,
+      "feedback": "Meh",
+      "userId": "1",
+      "articleId": "2"
+    },
+    {
+      "id": "3",
+      "rate": 5,
+      "feedback": "Perfect",
+      "userId": "1",
+      "articleId": "3"
+    },
+    {
+      "userId": "1",
+      "articleId": "4",
+      "rate": 3,
+      "feedback": "",
+      "id": "9mtJR-h"
+    },
+    {
+      "userId": "1",
+      "articleId": "5",
+      "rate": 5,
+      "feedback": "Incredible!",
+      "id": "sZhFIQY"
+    },
+    {
+      "userId": "1",
+      "articleId": "6",
+      "rate": 1,
+      "feedback": "Uzhas!",
+      "id": "RsR0yn1"
+    }
+  ],
+  "profile-ratings": [
+    {
+      "id": "1",
+      "rate": 4,
+      "feedback": "Nice",
+      "userId": "1",
+      "profileId": "1"
+    },
+    {
+      "id": "2",
+      "rate": 3,
+      "feedback": "Meh",
+      "userId": "1",
+      "profileId": "2"
     }
   ]
 }
