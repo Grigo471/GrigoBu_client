@@ -1,5 +1,5 @@
-import { type PropsWithChildren, memo, useState } from 'react';
-import { classNames, Mods } from '@/shared/lib/classNames/classNames';
+import { memo, useState } from 'react';
+import { classNames } from '@/shared/lib/classNames/classNames';
 import cls from './StartRating.module.scss';
 import { Icon } from '../Icon/Icon';
 import StarIcon from '@/shared/assets/icons/star.svg';
@@ -13,7 +13,7 @@ interface StartRatingProps {
 
 const stars = [1, 2, 3, 4, 5];
 
-export const StartRating = memo((props: PropsWithChildren<StartRatingProps>) => {
+export const StartRating = memo((props: StartRatingProps) => {
     const {
         className, size = 30, selectedStars = 0, onSelect,
     } = props;
@@ -42,7 +42,7 @@ export const StartRating = memo((props: PropsWithChildren<StartRatingProps>) => 
     };
 
     return (
-        <div className={classNames(cls.StartRating, {}, [className])}>
+        <div className={classNames('', {}, [className])}>
             {stars.map((starNum) => (
                 <Icon
                     className={classNames(

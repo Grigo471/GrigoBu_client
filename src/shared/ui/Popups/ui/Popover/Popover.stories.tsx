@@ -4,11 +4,20 @@ import { ThemeDecorator } from '@/shared/config/storybook/ThemeDecorator/ThemeDe
 import { Theme } from '@/app/providers/ThemeProvider';
 import { Popover } from './Popover';
 
+const child = (<div>Hello there</div>);
+
 const meta: Meta<typeof Popover> = {
     title: 'shared/Popover',
     component: Popover,
     tags: ['autodocs'],
-    argTypes: {
+    args: {
+        children: [
+            child,
+            child,
+            child,
+        ],
+        trigger: (<div>Press me</div>),
+        direction: 'bottomRight',
     },
 };
 

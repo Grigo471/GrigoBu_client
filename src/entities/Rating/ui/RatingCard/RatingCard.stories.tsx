@@ -5,7 +5,7 @@ import { Theme } from '@/app/providers/ThemeProvider';
 import { RatingCard } from './RatingCard';
 
 const meta: Meta<typeof RatingCard> = {
-    title: 'shared/RatingCard',
+    title: 'entities/Rating/RatingCard',
     component: RatingCard,
     tags: ['autodocs'],
     argTypes: {

@@ -14,6 +14,7 @@ const MainPage = () => {
                 // eslint-disable-next-line i18next/no-literal-string
                 feedbackTitle="Оставьте отзыв"
                 hasFeedback
+                rate={1}
             />
         </Page>
     );

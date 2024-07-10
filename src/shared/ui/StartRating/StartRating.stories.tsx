@@ -8,8 +8,6 @@ const meta: Meta<typeof StartRating> = {
     title: 'shared/StartRating',
     component: StartRating,
     tags: ['autodocs'],
-    argTypes: {
-    },
 };
 
 export default meta;
@@ -17,7 +15,12 @@ type Story = StoryObj<typeof StartRating>;
 
 export const Light: Story = {
     args: {
+    },
+};
 
+export const LightSelected: Story = {
+    args: {
+        selectedStars: 3,
     },
 };
 

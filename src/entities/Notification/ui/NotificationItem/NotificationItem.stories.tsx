@@ -3,12 +3,20 @@ import type { Meta, StoryObj } from '@storybook/react';
 import { ThemeDecorator } from '@/shared/config/storybook/ThemeDecorator/ThemeDecorator';
 import { Theme } from '@/app/providers/ThemeProvider';
 import { NotificationItem } from './NotificationItem';
+import { Notification } from '../../model/types/notification';
+
+const notification: Notification = {
+    id: '1',
+    title: 'Notification',
+    description: 'This is notification',
+};
 
 const meta: Meta<typeof NotificationItem> = {
-    title: 'shared/NotificationItem',
+    title: 'entities/Notification/NotificationItem',
     component: NotificationItem,
     tags: ['autodocs'],
-    argTypes: {
+    args: {
+        item: notification,
     },
 };
 

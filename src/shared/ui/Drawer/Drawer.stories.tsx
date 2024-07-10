@@ -4,11 +4,19 @@ import { ThemeDecorator } from '@/shared/config/storybook/ThemeDecorator/ThemeDe
 import { Theme } from '@/app/providers/ThemeProvider';
 import { Drawer } from './Drawer';
 
+const child = (<div>Hello there</div>);
+
 const meta: Meta<typeof Drawer> = {
     title: 'shared/Drawer',
     component: Drawer,
     tags: ['autodocs'],
-    argTypes: {
+    args: {
+        children: [
+            child,
+            child,
+            child,
+        ],
+        isOpen: true,
     },
 };
 
