@@ -1,12 +1,11 @@
 import { StoryFn } from '@storybook/react';
 import { StateSchema, StoreProvider } from '@/app/providers/StoreProvider';
-import '@/app/styles/index.scss';
 import { loginReducer } from '@/features/AuthByUsername/testing';
 import { ReducerList } from '@/shared/lib/hooks/useDynamicModuleLoad';
 import { articleDetailsReducers } from '@/entities/Article/testing';
 import { addCommentFormReducer } from '@/features/AddCommentForm/testing';
 import { articlesPageReducer } from '@/pages/ArticlesPage/testing';
-import { UIReducer } from '@/features/UI';
+import { UIReducer } from '@/features/UI/testing';
 import { articleDetailsPageReducer } from '@/pages/ArticleDetailsPage/testing';
 import { profileReducer } from '@/features/EditableProfileCard/testing';
 

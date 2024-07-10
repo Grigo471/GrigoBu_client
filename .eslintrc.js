@@ -78,6 +78,12 @@ module.exports = {
                 testFilesPatterns: ['**/*.test.*', '**/*.stories.*', '**/StoreDecorator.tsx'],
             },
         ],
+        'grigo-eslint-plugin/layers-hierarchy-imports': ['error',
+            {
+                alias: '@',
+                ignoreImportPatterns: ['**/StoreProvider', '**/testing'],
+            },
+        ],
     },
     globals: {
         __IS_DEV__: true,

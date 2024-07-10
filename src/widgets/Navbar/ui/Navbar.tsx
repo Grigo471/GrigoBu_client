@@ -7,11 +7,11 @@ import { LoginModal } from '@/features/AuthByUsername';
 import { getUserAuthData } from '@/entities/User';
 import { Text, TextTheme } from '@/shared/ui/Text/Text';
 import { AppLink, AppLinkTheme } from '@/shared/ui/AppLink/AppLink';
-import { RoutePaths } from '@/shared/config/routeConfig/routeConfig';
 import { HStack } from '@/shared/ui/Stack';
 import { NotificationsButton } from '@/features/NotificationsButton';
 import { AvatarDropdown } from '@/features/AvatarDropdown';
 import cls from './Navbar.module.scss';
+import { RoutePaths } from '@/shared/const/router';
 
 interface NavbarProps {
  className?: string;

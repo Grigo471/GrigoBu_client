@@ -1,5 +1,4 @@
 import { type PropsWithChildren, ReactNode, memo } from 'react';
-import { useTranslation } from 'react-i18next';
 import { Popover as HPopover } from '@headlessui/react';
 import { classNames } from '@/shared/lib/classNames/classNames';
 import cls from './Popover.module.scss';
@@ -17,7 +16,6 @@ export const Popover = memo((props: PropsWithChildren<PopoverProps>) => {
     const {
         className, trigger, direction = 'bottomLeft', children,
     } = props;
-    const { t } = useTranslation();
 
     const menuClasses = [popupCls[direction]];
 

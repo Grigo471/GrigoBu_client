@@ -1,6 +1,7 @@
 import { StoryFn } from '@storybook/react';
-import { Theme, ThemeProvider } from '@/app/providers/ThemeProvider';
-import '@/app/styles/index.scss';
+// eslint-disable-next-line grigo-eslint-plugin/layers-hierarchy-imports
+import { ThemeProvider } from '@/app/providers/ThemeProvider';
+import { Theme } from '@/shared/const/theme';
 
 export const ThemeDecorator = (theme: Theme) => (Story: StoryFn) => (
     <ThemeProvider initialTheme={theme}>

@@ -1,9 +1,9 @@
 import type { Meta, StoryObj } from '@storybook/react';
 
 import { ThemeDecorator } from '@/shared/config/storybook/ThemeDecorator/ThemeDecorator';
-import { Theme } from '@/app/providers/ThemeProvider';
 import { NotificationItem } from './NotificationItem';
 import { Notification } from '../../model/types/notification';
+import { Theme } from '@/shared/const/theme';
 
 const notification: Notification = {
     id: '1',

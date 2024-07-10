@@ -2,10 +2,10 @@ import { PropsWithChildren } from 'react';
 import { classNames } from '@/shared/lib/classNames/classNames';
 
 import { Portal } from '../../Portal/Portal';
-import { useTheme } from '@/app/providers/ThemeProvider';
 import { Overlay } from '../../Overlay/Overlay';
 import { useModal } from '@/shared/lib/hooks/useModal';
 import cls from './Modal.module.scss';
+import { useTheme } from '@/shared/lib/hooks/useTheme';
 
 interface ModalProps {
     className?: string;
