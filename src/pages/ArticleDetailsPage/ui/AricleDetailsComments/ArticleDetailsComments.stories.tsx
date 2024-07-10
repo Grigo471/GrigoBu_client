@@ -3,7 +3,7 @@ import type { Meta, StoryObj } from '@storybook/react';
 import { ThemeDecorator } from '@/shared/config/storybook/ThemeDecorator/ThemeDecorator';
 import { Theme } from '@/app/providers/ThemeProvider';
 import { StoreDecorator } from '@/shared/config/storybook/StoreDecorator/StoreDecorator';
-import { ArticleDetailsCommentsSchema } from '@/pages/ArticleDetailsPage/model/types/ArticleDetailsCommentsSchema';
+import { ArticleDetailsCommentsSchema } from '../../model/types/ArticleDetailsCommentsSchema';
 import { ArticleDetailsComments } from './ArticleDetailsComments';
 
 const comments: ArticleDetailsCommentsSchema = {
