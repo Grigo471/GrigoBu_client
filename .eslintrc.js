@@ -72,6 +72,7 @@ module.exports = {
         'no-undef': 'off',
         'react/no-array-index-key': 'off',
         'grigo-eslint-plugin/path-checker': ['error', { alias: '@' }],
+        'grigo-eslint-plugin/public-api-imports': ['error', { alias: '@' }],
     },
     globals: {
         __IS_DEV__: true,

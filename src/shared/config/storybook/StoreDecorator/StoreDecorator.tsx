@@ -1,3 +1,5 @@
+/* eslint-disable grigo-eslint-plugin/public-api-imports */
+// TODO
 import { StoryFn } from '@storybook/react';
 import { StateSchema, StoreProvider } from '@/app/providers/StoreProvider';
 import '@/app/styles/index.scss';
