@@ -1,16 +1,14 @@
-/* eslint-disable grigo-eslint-plugin/public-api-imports */
-// TODO
 import { StoryFn } from '@storybook/react';
 import { StateSchema, StoreProvider } from '@/app/providers/StoreProvider';
 import '@/app/styles/index.scss';
-import { loginReducer } from '@/features/AuthByUsername/model/slice/loginSlice';
+import { loginReducer } from '@/features/AuthByUsername/testing';
 import { ReducerList } from '@/shared/lib/hooks/useDynamicModuleLoad';
-import { articleDetailsReducers } from '@/entities/Article/model/slice/articleDetailsSlice';
-import { addCommentFormReducer } from '@/features/AddCommentForm/model/slice/addCommentFormSlice';
-import { articlesPageReducer } from '@/pages/ArticlesPage/model/slice/articlePageSlice';
+import { articleDetailsReducers } from '@/entities/Article/testing';
+import { addCommentFormReducer } from '@/features/AddCommentForm/testing';
+import { articlesPageReducer } from '@/pages/ArticlesPage/testing';
 import { UIReducer } from '@/features/UI';
-import { articleDetailsPageReducer } from '@/pages/ArticleDetailsPage/model/slice';
-import { profileReducer } from '@/features/EditableProfileCard/model/slice/profileSlice';
+import { articleDetailsPageReducer } from '@/pages/ArticleDetailsPage/testing';
+import { profileReducer } from '@/features/EditableProfileCard/testing';
 
 const defaultAsyncReducers: ReducerList = {
     loginForm: loginReducer,
