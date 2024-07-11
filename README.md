@@ -22,7 +22,7 @@ npm run start:dev или npm run start:dev:vite - запуск сервера + 
 - `npm run lint:scss:fix` - Исправление scss файлов style линтером
 - `npm run test:unit` - Запуск unit тестов с jest
 - `npm run storybook` - запуск Storybook
-- `npm run storybook:build` - Сборка storybook билда
+- `npm run build-storybook` - Сборка storybook билда
 - `chromatic` - Публикация в Chromatic
 - `npm run generate:slice` - Скрипт для генерации FSD слайсов
 

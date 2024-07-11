@@ -1,4 +1,4 @@
-import { type PropsWithChildren, memo, useMemo } from 'react';
+import { memo, useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
 import { classNames } from '@/shared/lib/classNames/classNames';
 import { Select, SelectOptions } from '@/shared/ui/Select';
@@ -14,7 +14,7 @@ interface ArticleSortSelectorProps {
    onChangeSort: (newSort: ArticleSortField) => void;
 }
 
-export const ArticleSortSelector = memo((props: PropsWithChildren<ArticleSortSelectorProps>) => {
+export const ArticleSortSelector = memo((props: ArticleSortSelectorProps) => {
     const {
         className, sort, order, onChangeOrder, onChangeSort,
     } = props;
