@@ -17,6 +17,8 @@ import {
 import { ArticleTextBlockComponent } from '../ArticleTextBlockComponent/ArticleTextBlockComponent';
 import { ArticleBlockType, ArticleView } from '../../model/consts/consts';
 import { getRouteArticleDetails } from '@/shared/const/router';
+import { AppImage } from '@/shared/ui/AppImage';
+import { Skeleton } from '@/shared/ui/Skeleton';
 
 interface ArticleListItemProps {
    className?: string;
@@ -32,7 +34,6 @@ export const ArticleListItem = memo((props: PropsWithChildren<ArticleListItemPro
     const { t } = useTranslation('article');
 
     const createdAt = <Text text={article.createdAt} className={cls.date} />;
-    const image = <img src={article.img} className={cls.img} alt={article.title} />;
     const types = <Text text={article.type.join(', ')} className={cls.types} />;
     const views = (
         <>
@@ -56,7 +57,12 @@ export const ArticleListItem = memo((props: PropsWithChildren<ArticleListItemPro
                     </div>
                     <Text title={article.title} className={cls.title} />
                     {types}
-                    {image}
+                    <AppImage
+                        src={article.img}
+                        alt={article.title}
+                        className={cls.img}
+                        fallback={<Skeleton width="100%" height={250} />}
+                    />
                     {textBlock && (
                         <ArticleTextBlockComponent block={textBlock} className={cls.textBlock} />
                     )}
@@ -83,7 +89,12 @@ export const ArticleListItem = memo((props: PropsWithChildren<ArticleListItemPro
         >
             <Card className={classNames(cls.ArticleListItem, {}, [className, cls[view]])}>
                 <div className={cls.imageWrapper}>
-                    {image}
+                    <AppImage
+                        src={article.img}
+                        alt={article.title}
+                        className={cls.img}
+                        fallback={<Skeleton width={200} height={200} />}
+                    />
                     {createdAt}
                 </div>
                 <div className={cls.infoWrapper}>
