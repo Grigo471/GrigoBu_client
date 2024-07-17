@@ -1,0 +1,11 @@
+{
+        "id": "1",
+        "first": "Testus",
+        "last": "Testoff",
+        "age": 21,
+        "currency": "RUS",
+        "country": "Russia",
+        "city": "LA",
+        "username": "test-user",
+        "avatar": "https: //steamuserimages-a.akamaihd.net/ugc/942838033007845279/DBC41CC3BB3FDCAF81267BD7A617A655AD73DF0E/?imw=5000&imh=5000&ima=fit&impolicy=Letterbox&imcolor=%23000000&letterbox=false"
+}
