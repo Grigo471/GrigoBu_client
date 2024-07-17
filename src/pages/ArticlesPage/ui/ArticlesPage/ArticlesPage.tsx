@@ -22,6 +22,7 @@ const ArticlesPage = (props: PropsWithChildren<ArticlesPageProps>) => {
 
     return (
         <Page
+            data-testid="ArticlesPage"
             onScrollEnd={onLoadNextPart}
             className={classNames(cls.ArticlesPage, {}, [className])}
         >
