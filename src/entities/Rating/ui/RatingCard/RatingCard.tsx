@@ -62,12 +62,17 @@ export const RatingCard = memo((props: RatingCardProps) => {
     const modalContent = (
         <>
             <Text title={feedbackTitle} />
-            <Input value={feedback} onChange={setFeedback} placeholder={t('Ваш отзыв')} />
+            <Input
+                data-testid="RatingCard.input"
+                value={feedback}
+                onChange={setFeedback}
+                placeholder={t('Ваш отзыв')}
+            />
         </>
     );
 
     return (
-        <Card max className={classNames('', {}, [className])}>
+        <Card data-testid="RatingCard" max className={classNames('', {}, [className])}>
             <VStack align="center" gap="8">
                 <Text title={starsCount ? t('Спасибо за отзыв!') : title} />
                 <StartRating selectedStars={starsCount} size={40} onSelect={onSelectStars} />
@@ -77,7 +82,12 @@ export const RatingCard = memo((props: RatingCardProps) => {
                             <Drawer isOpen={isModalOpen} lazy onClose={cancelHandler}>
                                 <VStack gap="32">
                                     {modalContent}
-                                    <Button onClick={acceptHandler} size={ButtonSize.L} fullWidth>
+                                    <Button
+                                        data-testid="RatingCard.send"
+                                        onClick={acceptHandler}
+                                        size={ButtonSize.L}
+                                        fullWidth
+                                    >
                                         {t('Отправить')}
                                     </Button>
                                 </VStack>
@@ -89,12 +99,16 @@ export const RatingCard = memo((props: RatingCardProps) => {
                                     {modalContent}
                                     <HStack max gap="16" justify="end">
                                         <Button
+                                            data-testid="RatingCard.close"
                                             onClick={cancelHandler}
                                             theme={ThemeButton.OUTLINE_RED}
                                         >
                                             {t('Закрыть')}
                                         </Button>
-                                        <Button onClick={acceptHandler}>
+                                        <Button
+                                            data-testid="RatingCard.send"
+                                            onClick={acceptHandler}
+                                        >
                                             {t('Отправить')}
                                         </Button>
                                     </HStack>

@@ -22,7 +22,10 @@ export const CommentCard = memo((props: PropsWithChildren<CommentCardProps>) => 
 
     if (isLoading) {
         return (
-            <div className={classNames(cls.CommentCard, {}, [className, cls.loading])}>
+            <div
+                data-testid="CommentCard.loading"
+                className={classNames(cls.CommentCard, {}, [className, cls.loading])}
+            >
                 <div className={cls.header}>
                     <Skeleton width={30} height={30} border="50%" />
                     <Skeleton height={16} width={100} className={cls.username} />
@@ -37,7 +40,12 @@ export const CommentCard = memo((props: PropsWithChildren<CommentCardProps>) => 
     }
 
     return (
-        <VStack gap="8" max className={classNames(cls.CommentCard, {}, [className])}>
+        <VStack
+            data-testid="CommentCard.content"
+            gap="8"
+            max
+            className={classNames(cls.CommentCard, {}, [className])}
+        >
             <AppLink to={getRouteProfile(comment.user.id)} className={cls.header}>
                 <Avatar size={30} src={comment.user.avatar} />
                 <Text title={comment.user.username} className={cls.username} />
