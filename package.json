@@ -22,7 +22,11 @@
     "build-storybook": "storybook build -c ./config/storybook",
     "chromatic": "npx chromatic --project-token=chpt_d639e591e07d7fe --force-rebuild",
     "generate:slice": "node ./scripts/createSlice/index.js",
-    "postinstall": "node ./scripts/clear-cache.js"
+    "postinstall": "node ./scripts/clear-cache.js",
+    "prepare": "husky install"
+  },
+  "lint-staged": {
+    "**/*.{ts,tsx}": "eslint"
   },
   "keywords": [],
   "author": "",
@@ -76,9 +80,11 @@
     "file-loader": "^6.2.0",
     "fork-ts-checker-webpack-plugin": "^7.2.13",
     "html-webpack-plugin": "^5.5.0",
+    "husky": "^8.0.0",
     "identity-obj-proxy": "^3.0.0",
     "jest": "^27.5.1",
     "json-server": "^0.17.0",
+    "lint-staged": "^13.0.3",
     "mini-css-extract-plugin": "^2.5.3",
     "react-refresh": "^0.12.0",
     "regenerator-runtime": "^0.13.9",
