@@ -12,6 +12,8 @@ import cls from './ArticleDetailsPage.module.scss';
 import { ArticleDetailsPageHeader } from '../ArticleDetailsPageHeader/ArticleDetailsPageHeader';
 import { ArticleDetailsComments } from '../AricleDetailsComments/ArticleDetailsComments';
 import { ArticleRating } from '@/features/ArticleRating';
+import { getFeatureFlags } from '@/shared/lib/features';
+import { Counter } from '@/entities/Counter';
 
 interface ArticleDetailsPageProps {
    className?: string;
@@ -25,6 +27,8 @@ const ArticleDetailsPage = (props: PropsWithChildren<ArticleDetailsPageProps>) =
     const { className } = props;
     const { t } = useTranslation('article');
     const { id } = useParams< string >();
+    const isArticleRatingEnabled = getFeatureFlags('isArticleRatingEnabled');
+    const isCounterEnabled = getFeatureFlags('isCounterEnabled');
 
     useDynamicModuleLoad({ reducers });
 
@@ -41,7 +45,8 @@ const ArticleDetailsPage = (props: PropsWithChildren<ArticleDetailsPageProps>) =
             <VStack gap="16" max>
                 <ArticleDetailsPageHeader />
                 <ArticleDetails articleId={id} />
-                <ArticleRating articleId={id} />
+                {isCounterEnabled && <Counter />}
+                { isArticleRatingEnabled && <ArticleRating articleId={id} /> }
                 <ArticleRecommendationsList />
                 <ArticleDetailsComments id={id} />
             </VStack>
