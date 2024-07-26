@@ -73,6 +73,7 @@ module.exports = {
         'no-param-reassign': 'off',
         'no-undef': 'off',
         'react/no-array-index-key': 'off',
+        'react/no-unstable-nested-components': 'warn',
         'grigo-eslint-plugin/path-checker': ['error', { alias: '@' }],
         'grigo-eslint-plugin/public-api-imports': ['error',
             {
