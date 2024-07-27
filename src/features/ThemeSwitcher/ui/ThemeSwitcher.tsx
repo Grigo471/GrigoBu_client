@@ -1,13 +1,13 @@
 import { memo, useCallback, type PropsWithChildren } from 'react';
 import { classNames } from '@/shared/lib/classNames/classNames';
 
-import Icon from '@/shared/assets/icons/theme.svg';
+import ThemeIcon from '@/shared/assets/icons/theme.svg';
 import { Button, ThemeButton } from '@/shared/ui/Button';
-import cls from './ThemeSwitcher.module.scss';
 import { useTheme } from '@/shared/lib/hooks/useTheme';
 import { Theme } from '@/shared/const/theme';
 import { saveJsonSettings } from '@/entities/User';
 import { useAppDispatch } from '@/shared/lib/hooks/useAppDispatch';
+import { Icon } from '@/shared/ui/Icon';
 
 interface ThemeSwitcherProps {
    className?: string;
@@ -26,11 +26,11 @@ export const ThemeSwitcher = memo((props: PropsWithChildren<ThemeSwitcherProps>)
 
     return (
         <Button
-            theme={ThemeButton.CLEAR}
+            theme={ThemeButton.CLEAR_INVERTED}
             className={classNames('', {}, [className])}
             onClick={onToggleHandler}
         >
-            <Icon className={cls.icon} />
+            <Icon Svg={ThemeIcon} width={40} height={40} inverted />
         </Button>
     );
 });
