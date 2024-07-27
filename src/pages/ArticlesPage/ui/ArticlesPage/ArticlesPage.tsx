@@ -7,6 +7,7 @@ import cls from './ArticlesPage.module.scss';
 import { fetchNextArticlesPage } from '../../model/services/fetchNextArticlesPage/fetchNextArticlesPage';
 import { ArticlesPageFilter } from '../ArticlesPageFilter/ArticlesPageFilter';
 import { ArticlesInfiniteList } from '../ArticlesInfiniteList/ArticlesInfiniteList';
+import { ArticlesPageGreeting } from '@/features/ArticlesPageGreeting';
 
 interface ArticlesPageProps {
    className?: string;
@@ -28,6 +29,7 @@ const ArticlesPage = (props: PropsWithChildren<ArticlesPageProps>) => {
         >
             <ArticlesPageFilter />
             <ArticlesInfiniteList className={cls.list} />
+            <ArticlesPageGreeting />
         </Page>
     );
 };
