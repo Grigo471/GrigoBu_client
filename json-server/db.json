@@ -460,10 +460,11 @@
       ],
       "features": {
         "isArticleRatingEnabled": true,
-        "isCounterEnabled": true
+        "isCounterEnabled": true,
+        "isAppRedesigned": true
       },
       "jsonSettings": {
-        "theme": "app_brown_theme",
+        "theme": "app_dark_theme",
         "isFirstVisit": true,
         "settingsPageHasBeenOpened": false,
         "isArticlesPageOpened": true
@@ -482,7 +483,7 @@
         "isCounterEnabled": false
       },
       "jsonSettings": {
-        "theme": "app_dark_theme",
+        "theme": "app_ligth_theme",
         "isFirstVisit": true,
         "settingsPageHasBeenOpened": false,
         "isArticlesPageOpened": true

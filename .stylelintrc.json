@@ -5,6 +5,7 @@
         "selector-class-pattern": null,
         "custom-property-empty-line-before": ["never", {
             "except": ["after-comment"]
-        }]
+        }],
+        "color-hex-case": null
     }
 }

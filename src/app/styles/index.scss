@@ -16,12 +16,19 @@
     min-height: 100vh;
 }
 
+.app_redesigned {
+    background: var(--bg-redesigned);
+    min-height: 100vh;
+    font: var(--font-m-redesigned);
+    color: var(--text-redesigned);
+}
+
 .content-page {
     display: flex;
 }
 
 *::-webkit-scrollbar {
-    width: 10px;
+    width: 12px;
     height: 8px;
 }
 
