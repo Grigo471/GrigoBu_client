@@ -11,15 +11,11 @@ interface AvatarProps {
   src?: string;
   size?: number;
   alt?: string;
-  fallbackInverted?: boolean;
 }
-/**
- * Устарел, используем новые компоненты из папки redesigned
- * @deprecated
- */
+
 export const Avatar = (props: PropsWithChildren<AvatarProps>) => {
     const {
-        className, src, size = 100, alt, fallbackInverted = false,
+        className, src, size = 100, alt,
     } = props;
 
     const styles = useMemo<CSSProperties>(() => ({
@@ -30,7 +26,6 @@ export const Avatar = (props: PropsWithChildren<AvatarProps>) => {
     const fallback = <Skeleton width={size} height={size} border="50%" />;
     const errorFallback = (
         <Icon
-            inverted={fallbackInverted}
             width={size}
             height={size}
             Svg={DefaultAvatar}

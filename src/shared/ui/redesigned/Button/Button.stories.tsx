@@ -5,7 +5,7 @@ import { Theme } from '@/shared/const/theme';
 import { Button } from './Button';
 
 const meta: Meta<typeof Button> = {
-    title: 'shared/Button',
+    title: 'shared/redesigned/Button',
     component: Button,
     decorators: [ThemeDecorator(Theme.LIGHT)],
     tags: ['autodocs'],

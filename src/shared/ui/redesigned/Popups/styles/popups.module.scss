@@ -1,0 +1,46 @@
+.popup {
+    position: relative;
+}
+
+.active {
+    background: var(--light-bg-redesigned);
+}
+
+.disabled {
+    opacity: 0.7;
+}
+
+.menu {
+    border-radius: 18px;
+    border: 1px solid var(--accent-color);
+    overflow: hidden;
+}
+
+.trigger {
+    background: none;
+    border: none;
+    outline: none;
+    padding: 0;
+    margin: 0;
+    cursor: pointer;
+}
+
+.topRight {
+    bottom: 100%;
+    left: 0;
+}
+
+.topLeft {
+    bottom: 100%;
+    right: 0;
+}
+
+.bottomRight {
+    top: 100%;
+    left: 0;
+}
+
+.bottomLeft {
+    top: 100%;
+    right: 0;
+}
