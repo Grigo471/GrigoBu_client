@@ -1,7 +1,9 @@
 import { memo, type PropsWithChildren } from 'react';
 import { useTranslation } from 'react-i18next';
 import { classNames } from '@/shared/lib/classNames/classNames';
-import { Button, ThemeButton } from '@/shared/ui/deprecated/Button';
+import { Button as ButtonDeprecated, ThemeButton } from '@/shared/ui/deprecated/Button';
+import { ToggleFeatures } from '@/shared/lib/features';
+import { Button } from '@/shared/ui/redesigned/Button';
 
 interface LangSwitcherProps {
  className?: string;
@@ -18,12 +20,25 @@ export const LangSwitcher = memo((props: PropsWithChildren<LangSwitcherProps>) =
     };
 
     return (
-        <Button
-            className={classNames('', {}, [className])}
-            theme={ThemeButton.CLEAR_INVERTED}
-            onClick={toggle}
-        >
-            {t(short ? 'Короткий язык' : 'Язык')}
-        </Button>
+        <ToggleFeatures
+            feature="isAppRedesigned"
+            on={(
+                <Button
+                    variant="clear"
+                    onClick={toggle}
+                >
+                    {t(short ? 'Короткий язык' : 'Язык')}
+                </Button>
+            )}
+            off={(
+                <ButtonDeprecated
+                    className={classNames('', {}, [className])}
+                    theme={ThemeButton.CLEAR_INVERTED}
+                    onClick={toggle}
+                >
+                    {t(short ? 'Короткий язык' : 'Язык')}
+                </ButtonDeprecated>
+            )}
+        />
     );
 });
