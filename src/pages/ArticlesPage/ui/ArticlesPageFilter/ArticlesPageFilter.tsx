@@ -10,11 +10,11 @@ import {
     ArticleView,
 } from '@/entities/Article';
 import { useAppDispatch } from '@/shared/lib/hooks/useAppDispatch';
-import { Card } from '@/shared/ui/Card';
-import { Input } from '@/shared/ui/Input';
+import { Card } from '@/shared/ui/deprecated/Card';
+import { Input } from '@/shared/ui/deprecated/Input';
 import { SortOrder } from '@/shared/types';
 import { useDebounce } from '@/shared/lib/hooks/useDebounce';
-import { TabItem } from '@/shared/ui/Tabs';
+import { TabItem } from '@/shared/ui/deprecated/Tabs';
 import { fetchArticlesList } from '../../model/services/fetchArticlesList/fetchArticlesList';
 import {
     getArticlesPageOrder,

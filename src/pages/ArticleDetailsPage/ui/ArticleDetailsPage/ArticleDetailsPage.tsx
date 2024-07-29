@@ -13,7 +13,7 @@ import { ArticleDetailsPageHeader } from '../ArticleDetailsPageHeader/ArticleDet
 import { ArticleDetailsComments } from '../AricleDetailsComments/ArticleDetailsComments';
 import { ArticleRating } from '@/features/ArticleRating';
 import { ToggleFeatures } from '@/shared/lib/features';
-import { Card } from '@/shared/ui/Card';
+import { Card } from '@/shared/ui/deprecated/Card';
 
 interface ArticleDetailsPageProps {
    className?: string;

@@ -8,12 +8,12 @@ import { ReducerList, useDynamicModuleLoad } from '@/shared/lib/hooks/useDynamic
 import { useAppDispatch } from '@/shared/lib/hooks/useAppDispatch';
 import {
     Text, TextAlign, TextSize, TextTheme,
-} from '@/shared/ui/Text';
-import { Skeleton } from '@/shared/ui/Skeleton';
-import { Avatar } from '@/shared/ui/Avatar';
+} from '@/shared/ui/deprecated/Text';
+import { Skeleton } from '@/shared/ui/deprecated/Skeleton';
+import { Avatar } from '@/shared/ui/deprecated/Avatar';
 import EyeIcon from '@/shared/assets/icons/eye.svg';
 import AgendaIcon from '@/shared/assets/icons/agenda.svg';
-import { Icon } from '@/shared/ui/Icon';
+import { Icon } from '@/shared/ui/deprecated/Icon';
 import { HStack, VStack } from '@/shared/ui/Stack';
 import { fetchArticleById } from '../../model/services/fetchArticleById/fetchArticleById';
 import { articleDetailsReducers } from '../../model/slice/articleDetailsSlice';

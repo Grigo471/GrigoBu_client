@@ -2,12 +2,12 @@ import {
     type PropsWithChildren, memo, useCallback, useState,
 } from 'react';
 import { classNames } from '@/shared/lib/classNames/classNames';
-import { Popover } from '@/shared/ui/Popups';
-import { Button, ThemeButton } from '@/shared/ui/Button';
-import { Icon } from '@/shared/ui/Icon';
+import { Popover } from '@/shared/ui/deprecated/Popups';
+import { Button, ThemeButton } from '@/shared/ui/deprecated/Button';
+import { Icon } from '@/shared/ui/deprecated/Icon';
 import { NotificationsList } from '@/entities/Notification';
-import NotificationsSVG from '@/shared/assets/icons/notifications.svg';
-import { Drawer } from '@/shared/ui/Drawer';
+import NotificationsSVG from '@/shared/assets/icons/notifications-old.svg';
+import { Drawer } from '@/shared/ui/deprecated/Drawer';
 import { useDevice } from '@/shared/lib/hooks/useDevice';
 import cls from './NotificationsButton.module.scss';
 
