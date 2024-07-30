@@ -101,3 +101,14 @@
         text-overflow: ellipsis;
     }
 }
+
+.ArticleListRedesigned {
+    &.BIG {
+        width: 100%;
+    }
+
+    &.SMALL {
+        width: 240px;
+        height: 350px;
+    }
+}

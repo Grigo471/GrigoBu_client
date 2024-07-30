@@ -25,7 +25,6 @@ export const ArticleListItemRedesigned = memo((props: ArticleListItemProps) => {
     const { t } = useTranslation('article');
 
     const createdAt = <Text text={article.createdAt} className={cls.date} />;
-    const types = <Text text={article.type.join(', ')} className={cls.types} />;
     const views = (
         <HStack gap="8">
             <Icon Svg={EyeIcon} />
@@ -84,22 +83,28 @@ export const ArticleListItemRedesigned = memo((props: ArticleListItemProps) => {
             data-testid="ArticleListItem"
             target={target}
             to={getRouteArticleDetails(article.id)}
+            className={classNames(cls.ArticleListItem, {}, [className, cls[view]])}
         >
-            <Card className={classNames(cls.ArticleListItemDeprecated, {}, [className, cls[view]])}>
-                <div className={cls.imageWrapper}>
-                    <AppImage
-                        src={article.img}
-                        alt={article.title}
-                        className={cls.img}
-                        fallback={<Skeleton width={200} height={200} />}
-                    />
-                    {createdAt}
-                </div>
-                <div className={cls.infoWrapper}>
-                    {types}
-                    {views}
-                </div>
-                <Text text={article.title} className={cls.title} />
+            <Card className={cls.card} border="round">
+                <AppImage
+                    src={article.img}
+                    alt={article.title}
+                    className={cls.img}
+                    fallback={<Skeleton width={200} height={200} />}
+                />
+                <VStack className={cls.info} gap="4">
+                    <Text title={article.title} className={cls.title} />
+                    <VStack gap="4" className={cls.footer} max>
+                        <HStack justify="between" max>
+                            {createdAt}
+                            {views}
+                        </HStack>
+                        <HStack gap="4">
+                            <Avatar size={32} src={article.user.avatar} />
+                            <Text bold text={article.user.username} />
+                        </HStack>
+                    </VStack>
+                </VStack>
             </Card>
         </AppLink>
     );
