@@ -38,6 +38,7 @@ export const ArticlesFilters = memo((props: ArticleFiltersProps) => {
         <Card padding="24" className={classNames(cls.ArticleFilters, {}, [className])}>
             <VStack gap="32">
                 <Input
+                    size="s"
                     addonLeft={<Icon Svg={SearchIcon} />}
                     value={search}
                     onChange={onChangeSearch}

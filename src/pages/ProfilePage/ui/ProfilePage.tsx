@@ -1,4 +1,3 @@
-import { type PropsWithChildren } from 'react';
 import { useParams } from 'react-router-dom';
 import { classNames } from '@/shared/lib/classNames/classNames';
 import { Page } from '@/widgets/Page';
@@ -9,7 +8,7 @@ interface ProfilePageProps {
  className?: string;
 }
 
-function ProfilePage(props: PropsWithChildren<ProfilePageProps>) {
+function ProfilePage(props: ProfilePageProps) {
     const { className } = props;
     const { id } = useParams<string>();
 
@@ -18,7 +17,6 @@ function ProfilePage(props: PropsWithChildren<ProfilePageProps>) {
             <VStack max gap="16">
                 <EditableProfileCard id={id} />
             </VStack>
-
         </Page>
     );
 }
