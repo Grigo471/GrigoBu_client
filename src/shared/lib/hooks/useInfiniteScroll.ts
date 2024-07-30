@@ -3,7 +3,7 @@ import { MutableRefObject, useEffect } from 'react';
 export interface useInfiniteScrollOptions {
     callback?: () => void;
     triggerRef: MutableRefObject<HTMLElement>;
-    wrapperRef: MutableRefObject<HTMLElement>;
+    wrapperRef?: MutableRefObject<HTMLElement>;
 }
 
 export function useInfiniteScroll({ callback, triggerRef, wrapperRef }: useInfiniteScrollOptions) {
@@ -11,7 +11,7 @@ export function useInfiniteScroll({ callback, triggerRef, wrapperRef }: useInfin
         let observer: IntersectionObserver | null = null;
         if (callback) {
             const options = {
-                root: wrapperRef.current,
+                root: wrapperRef?.current || null,
                 rootMargin: '20px 20px 20px 45px',
                 treshold: 1.0,
             };
