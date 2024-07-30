@@ -6,6 +6,11 @@
     position: relative;
 }
 
+.appLogo {
+    position: relative;
+    z-index: 10;
+}
+
 .gradientBig {
     pointer-events: none;
     position: absolute;
