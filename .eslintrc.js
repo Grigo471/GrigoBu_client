@@ -47,6 +47,7 @@ module.exports = {
         'no-underscore-dangle': 'off',
         'linebreak-style': 0,
         'no-tabs': 0,
+        'consistent-return': 'off',
         'i18next/no-literal-string': [
             'error',
             {

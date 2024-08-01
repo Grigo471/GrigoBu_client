@@ -7,7 +7,7 @@ import {
 } from '@/entities/User';
 import { Dropdown as DropdownDeprecated } from '@/shared/ui/deprecated/Popups';
 import { Avatar as AvatarDeprecated } from '@/shared/ui/deprecated/Avatar';
-import { getRouteAdmin, getRouteProfile } from '@/shared/const/router';
+import { getRouteProfile, getRouteSettings } from '@/shared/const/router';
 import { ToggleFeatures } from '@/shared/lib/features';
 import { Dropdown } from '@/shared/ui/redesigned/Popups';
 import { Avatar } from '@/shared/ui/redesigned/Avatar';
@@ -39,8 +39,8 @@ export const AvatarDropdown = memo((props: PropsWithChildren<AvatarDropdownProps
 
     const items = [
         ...(isAdminPanelAvailable ? [{
-            content: t('Админка'),
-            href: getRouteAdmin(),
+            content: t('Настройки'),
+            href: getRouteSettings(),
         }] : []),
         {
             content: t('Профиль'),
