@@ -8,7 +8,7 @@ import { Icon as IconDeprecated } from '@/shared/ui/deprecated/Icon';
 import { NotificationsList } from '@/entities/Notification';
 import NotificationsDeprecated from '@/shared/assets/icons/notifications-old.svg';
 import Notifications from '@/shared/assets/icons/notifications.svg';
-import { Drawer as DrawerDeprecated } from '@/shared/ui/deprecated/Drawer';
+import { Drawer as DrawerDeprecated } from '@/shared/ui/Drawer';
 import { useDevice } from '@/shared/lib/hooks/useDevice';
 import cls from './NotificationsButton.module.scss';
 import { ToggleFeatures } from '@/shared/lib/features';
