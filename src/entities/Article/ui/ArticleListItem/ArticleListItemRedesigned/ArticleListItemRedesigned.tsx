@@ -45,7 +45,7 @@ export const ArticleListItemRedesigned = memo((props: ArticleListItemProps) => {
             >
                 <VStack max gap="16">
                     <HStack gap="8">
-                        <Avatar size={32} src={article.user.avatar} />
+                        <Avatar className={cls.avatar} size={32} src={article.user.avatar} />
                         <Text bold text={article.user.username} />
                         {createdAt}
                     </HStack>
@@ -85,12 +85,12 @@ export const ArticleListItemRedesigned = memo((props: ArticleListItemProps) => {
             to={getRouteArticleDetails(article.id)}
             className={classNames(cls.ArticleListItem, {}, [className, cls[view]])}
         >
-            <Card className={cls.card} border="round">
+            <Card className={cls.card} border="round" padding="0">
                 <AppImage
                     src={article.img}
                     alt={article.title}
                     className={cls.img}
-                    fallback={<Skeleton width={200} height={200} />}
+                    fallback={<Skeleton width="100%" height={200} />}
                 />
                 <VStack className={cls.info} gap="4">
                     <Text title={article.title} className={cls.title} />
@@ -100,7 +100,7 @@ export const ArticleListItemRedesigned = memo((props: ArticleListItemProps) => {
                             {views}
                         </HStack>
                         <HStack gap="4">
-                            <Avatar size={32} src={article.user.avatar} />
+                            <Avatar className={cls.avatar} size={32} src={article.user.avatar} />
                             <Text bold text={article.user.username} />
                         </HStack>
                     </VStack>

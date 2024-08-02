@@ -1,17 +1,14 @@
 import { type PropsWithChildren, memo, useCallback } from 'react';
 import { classNames } from '@/shared/lib/classNames/classNames';
 import cls from './Code.module.scss';
-import { Button, ThemeButton } from '../Button/Button';
-import CopyIcon from '../../../assets/icons/copy-old.svg';
+import CopyIcon from '../../../assets/icons/copy.svg';
+import { Icon } from '../Icon';
 
 interface CodeProps {
    className?: string;
    text: string;
 }
-/**
- * Устарел, используем новые компоненты из папки redesigned
- * @deprecated
- */
+
 export const Code = memo((props: PropsWithChildren<CodeProps>) => {
     const { className, text } = props;
 
@@ -21,9 +18,12 @@ export const Code = memo((props: PropsWithChildren<CodeProps>) => {
 
     return (
         <pre className={classNames(cls.Code, {}, [className])}>
-            <Button onClick={onCopy} className={cls.copyBtn} theme={ThemeButton.CLEAR}>
-                <CopyIcon className={cls.CopyIcon} />
-            </Button>
+            <Icon
+                clickable
+                onClick={onCopy}
+                className={cls.copyBtn}
+                Svg={CopyIcon}
+            />
             <code>
                 {text}
             </code>
