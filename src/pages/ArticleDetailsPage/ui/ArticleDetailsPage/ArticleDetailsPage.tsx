@@ -1,4 +1,4 @@
-import { memo, type PropsWithChildren } from 'react';
+import { memo } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useParams } from 'react-router-dom';
 import { classNames } from '@/shared/lib/classNames/classNames';
@@ -14,6 +14,9 @@ import { ArticleDetailsComments } from '../AricleDetailsComments/ArticleDetailsC
 import { ArticleRating } from '@/features/ArticleRating';
 import { ToggleFeatures } from '@/shared/lib/features';
 import { Card } from '@/shared/ui/deprecated/Card';
+import { StickyContentLayout } from '@/shared/layouts/StickyContentLayout';
+import { DetailsContainer } from '../DetailsContainer/DetailsContainer';
+import { AdditionalInfoContainer } from '../AdditionalInfoContainer/AdditionalInfoContainer';
 
 interface ArticleDetailsPageProps {
    className?: string;
@@ -23,7 +26,7 @@ const reducers: ReducerList = {
     articleDetailsPage: articleDetailsPageReducer,
 };
 
-const ArticleDetailsPage = (props: PropsWithChildren<ArticleDetailsPageProps>) => {
+const ArticleDetailsPage = (props: ArticleDetailsPageProps) => {
     const { className } = props;
     const { t } = useTranslation('article');
     const { id } = useParams< string >();
@@ -39,20 +42,40 @@ const ArticleDetailsPage = (props: PropsWithChildren<ArticleDetailsPageProps>) =
     }
 
     return (
-        <Page className={classNames(cls.ArticleDetailsPage, {}, [className])}>
-            <VStack gap="16" max>
-                <ArticleDetailsPageHeader />
-                <ArticleDetails articleId={id} />
-                <ToggleFeatures
-                    feature="isArticleRatingEnabled"
-                    on={(<ArticleRating articleId={id} />)}
-                    off={<Card>{t('Рейнтиг скоро появится!')}</Card>}
+        <ToggleFeatures
+            feature="isAppRedesigned"
+            on={(
+                <StickyContentLayout
+                    content={(
+                        <Page className={classNames(cls.ArticleDetailsPage, {}, [className])}>
+                            <VStack gap="16" max>
+                                <DetailsContainer />
+                                <ArticleRating articleId={id} />
+                                <ArticleRecommendationsList />
+                                <ArticleDetailsComments id={id} />
+                            </VStack>
+                        </Page>
+                    )}
+                    right={<AdditionalInfoContainer />}
                 />
-                <ArticleRecommendationsList />
-                <ArticleDetailsComments id={id} />
-            </VStack>
 
-        </Page>
+            )}
+            off={(
+                <Page className={classNames(cls.ArticleDetailsPage, {}, [className])}>
+                    <VStack gap="16" max>
+                        <ArticleDetailsPageHeader />
+                        <ArticleDetails articleId={id} />
+                        <ToggleFeatures
+                            feature="isArticleRatingEnabled"
+                            on={(<ArticleRating articleId={id} />)}
+                            off={<Card>{t('Рейнтиг скоро появится!')}</Card>}
+                        />
+                        <ArticleRecommendationsList />
+                        <ArticleDetailsComments id={id} />
+                    </VStack>
+                </Page>
+            )}
+        />
     );
 };
 

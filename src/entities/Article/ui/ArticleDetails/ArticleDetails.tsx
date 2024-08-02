@@ -32,7 +32,7 @@ import { ArticleBlockType } from '../../model/consts/consts';
 
 interface ArticleDetailsProps {
    className?: string;
-   articleId: string;
+   articleId?: string;
 }
 
 export const ArticleDetails = memo((props: PropsWithChildren<ArticleDetailsProps>) => {

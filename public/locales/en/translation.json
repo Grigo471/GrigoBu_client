@@ -16,5 +16,8 @@
     "Форма авторизации": "Login form",
     "Неверный логин или пароль": "Wrong username or password",
     "Профиль": "Profile",
-    "Комментарии отсутствуют": "No comments"
+    "Комментарии отсутствуют": "No comments",
+    "{{count}} просмотров_zero": "{{count}} views",
+    "{{count}} просмотров_one": "{{count}} view",
+    "{{count}} просмотров_other": "{{count}} views"
 }
