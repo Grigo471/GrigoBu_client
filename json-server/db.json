@@ -464,6 +464,36 @@
       "userId": "2",
       "text": "big",
       "id": "BOSmjdQ"
+    },
+    {
+      "articleId": "4",
+      "userId": "1",
+      "text": "Wazzap",
+      "id": "17n7ovA"
+    },
+    {
+      "articleId": "4",
+      "userId": "1",
+      "text": "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Debitis aliquid accusantium obcaecati. Nostrum, dicta eos molestias eaque vitae consequatur velit eum perspiciatis similique! Voluptate eligendi ea, voluptas molestiae quis architecto?",
+      "id": "YuhLsKV"
+    },
+    {
+      "articleId": "4",
+      "userId": "1",
+      "text": "hi",
+      "id": "linczLD"
+    },
+    {
+      "articleId": "4",
+      "userId": "1",
+      "text": "why",
+      "id": "8u4DER6"
+    },
+    {
+      "articleId": "4",
+      "userId": "1",
+      "text": "check",
+      "id": "MS53cIX"
     }
   ],
   "users": [
@@ -632,6 +662,13 @@
       "rate": 1,
       "feedback": "Uzhas!",
       "id": "RsR0yn1"
+    },
+    {
+      "userId": "1",
+      "articleId": "8",
+      "rate": 3,
+      "feedback": "Veru cool",
+      "id": "F7-D-oE"
     }
   ],
   "profile-ratings": [
