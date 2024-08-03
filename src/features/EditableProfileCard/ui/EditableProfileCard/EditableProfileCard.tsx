@@ -98,7 +98,7 @@ export const EditableProfileCard = memo((props: EditableProfileCardProps) => {
     };
 
     return (
-        <VStack gap="8" max className={classNames('', {}, [className])}>
+        <VStack gap="16" max className={classNames('', {}, [className])}>
             <EditableProfileHeader />
             {validateErrors?.length && validateErrors?.map((err) => (
                 <Text

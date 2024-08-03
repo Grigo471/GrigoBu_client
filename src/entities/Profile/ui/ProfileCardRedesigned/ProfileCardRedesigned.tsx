@@ -75,6 +75,7 @@ export const ProfileCardRedesigned = memo((props: ProfileCardProps) => {
             padding="24"
             max
             className={className}
+            border="partial"
         >
             <VStack gap="32">
                 {data?.avatar && (
