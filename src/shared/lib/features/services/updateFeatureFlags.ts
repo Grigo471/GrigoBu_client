@@ -3,6 +3,7 @@ import { ThunkConfig } from '@/app/providers/StoreProvider';
 import { FeatureFlags } from '@/shared/types/featureFlags';
 import { updateFeatureFlagsMutation } from '../api/featureFlagsApi';
 import { getAllFeatureFlags } from '../lib/setGetFeatures';
+import { LOCAL_STORAGE_LAST_DESIGN_KEY } from '@/shared/const/localStorage';
 
 interface UpdateFeatureFlagsProps {
     userId: string;
@@ -27,6 +28,11 @@ export const updateFeatureFlags = createAsyncThunk<
                         ...newFeatures,
                     },
                 }),
+            );
+
+            localStorage.setItem(
+                LOCAL_STORAGE_LAST_DESIGN_KEY,
+                newFeatures?.isAppRedesigned ? 'new' : 'old',
             );
 
             window.location.reload();
