@@ -4,6 +4,7 @@ import { Country } from '@/entities/Country';
 import { Currency } from '@/entities/Currency';
 import AvatarImg from '@/shared/assets/tests/homer1200.jpg';
 import { ProfileCard } from './ProfileCard';
+import { NewDesignDecorator } from '@/shared/config/storybook/NewDesignDecorator/NewDesignDecorator';
 
 const meta: Meta<typeof ProfileCard> = {
     title: 'entities/ProfileCard',
@@ -32,6 +33,24 @@ export const Primary: Story = {
             avatar: AvatarImg,
         },
     },
+};
+
+export const PrimaryRedesigned: Story = {
+    args: {
+        data: {
+            username: 'admin',
+            age: 23,
+            country: Country.Russia,
+            last: 'Fisher',
+            first: 'Bob',
+            city: 'LA',
+            currency: Currency.USD,
+            avatar: AvatarImg,
+        },
+    },
+    decorators: [
+        NewDesignDecorator,
+    ],
 };
 
 export const withError: Story = {

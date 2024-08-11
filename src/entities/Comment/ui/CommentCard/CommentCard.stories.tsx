@@ -2,6 +2,7 @@ import type { Meta, StoryObj } from '@storybook/react';
 
 import { CommentCard } from './CommentCard';
 import { Comment } from '../../model/types/comment';
+import { NewDesignDecorator } from '@/shared/config/storybook/NewDesignDecorator/NewDesignDecorator';
 
 const comment: Comment = {
     id: '1',
@@ -27,6 +28,16 @@ export const Normal: Story = {
     args: {
         comment,
     },
+};
+
+export const NormalRedesigned: Story = {
+    args: {
+        comment,
+    },
+    decorators:
+        [
+            NewDesignDecorator,
+        ],
 };
 
 export const Loading: Story = {

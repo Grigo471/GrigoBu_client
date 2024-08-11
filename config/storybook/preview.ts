@@ -2,6 +2,9 @@ import type { Preview } from '@storybook/react';
 import { StyleDecorator } from '../../src/shared/config/storybook/StyleDecorator/StyleDecorator';
 import { RouteDecorator } from '../../src/shared/config/storybook/RouteDecorator/RouteDecorator';
 import {
+    FeatureFlagsDecorator,
+} from '../../src/shared/config/storybook/FeatureFlagsDecorator/FeatureFlagsDecorator';
+import {
     SuspenseDecorator,
 } from '../../src/shared/config/storybook/SuspenseDecorator/SuspenseDecorator';
 import { Theme } from '../../src/shared/const/theme';
@@ -11,6 +14,7 @@ const preview: Preview = {
         StyleDecorator,
         RouteDecorator,
         SuspenseDecorator,
+        FeatureFlagsDecorator({}),
     ],
     parameters: {
         actions: { argTypesRegex: '^on[A-Z].*' },

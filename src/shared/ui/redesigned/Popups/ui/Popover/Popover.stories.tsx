@@ -7,7 +7,7 @@ import { Popover } from './Popover';
 const child = (<div>Hello there</div>);
 
 const meta: Meta<typeof Popover> = {
-    title: 'shared/Popover',
+    title: 'shared/redesigned/Popover',
     component: Popover,
     tags: ['autodocs'],
     args: {

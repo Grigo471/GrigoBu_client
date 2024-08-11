@@ -1,9 +1,9 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import { Avatar } from './Avatar';
-import AvatarImg from '../../assets/tests/homer1200.jpg';
+import AvatarImg from '../../../assets/tests/homer1200.jpg';
 
 const meta: Meta<typeof Avatar> = {
-    title: 'shared/Avatar',
+    title: 'shared/redesigned/Avatar',
     component: Avatar,
     tags: ['autodocs'],
 };

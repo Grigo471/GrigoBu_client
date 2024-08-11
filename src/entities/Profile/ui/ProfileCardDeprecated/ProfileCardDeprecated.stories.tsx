@@ -6,7 +6,7 @@ import AvatarImg from '@/shared/assets/tests/homer1200.jpg';
 import { ProfileCardDeprecated as ProfileCard } from './ProfileCardDeprecated';
 
 const meta: Meta<typeof ProfileCard> = {
-    title: 'entities/ProfileCard',
+    title: 'entities/ProfileCardDeprecated',
     component: ProfileCard,
     tags: ['autodocs'],
     decorators: [
