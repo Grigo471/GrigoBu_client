@@ -61,6 +61,7 @@ export const ArticleViewSelector = memo((props: PropsWithChildren<ArticleViewSel
                                 clickable
                                 onClick={onClick(viewType.view)}
                                 Svg={viewType.icon}
+                                key={viewType.view}
                                 className={
                                     classNames(
                                         '',

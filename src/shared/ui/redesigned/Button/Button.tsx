@@ -1,5 +1,6 @@
 import {
-    memo, ReactNode, type ButtonHTMLAttributes, type PropsWithChildren,
+    ForwardedRef,
+    forwardRef, ReactNode, type ButtonHTMLAttributes, type PropsWithChildren,
 } from 'react';
 import { classNames, Mods } from '@/shared/lib/classNames/classNames';
 import cls from './Button.module.scss';
@@ -22,7 +23,10 @@ interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
     addonRight?: ReactNode;
 }
 
-export const Button = memo((props: PropsWithChildren<ButtonProps>) => {
+export const Button = forwardRef((
+    props: PropsWithChildren<ButtonProps>,
+    ref: ForwardedRef<HTMLButtonElement>,
+) => {
     const {
         className,
         children,
@@ -51,6 +55,7 @@ export const Button = memo((props: PropsWithChildren<ButtonProps>) => {
                 [className, cls[variant], cls[size], cls[color]],
             )}
             {...otherProps}
+            ref={ref}
         >
             <div className={cls.addonLeft}>{addonLeft}</div>
             {children}
