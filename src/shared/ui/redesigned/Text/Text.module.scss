@@ -6,6 +6,18 @@
     color: var(--text-redesigned);
 }
 
+.preWrap {
+    white-space: pre-wrap;
+}
+
+.normalWrap {
+    white-space: normal;
+}
+
+.noWrap {
+    white-space: nowrap;
+}
+
 .error {
     .title {
         color: var(--red-light);

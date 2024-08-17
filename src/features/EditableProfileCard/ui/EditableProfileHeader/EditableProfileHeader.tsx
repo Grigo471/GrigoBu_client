@@ -1,6 +1,6 @@
 /* eslint-disable react/jsx-no-useless-fragment */
 import { useTranslation } from 'react-i18next';
-import { useCallback, type PropsWithChildren } from 'react';
+import { useCallback } from 'react';
 import { useSelector } from 'react-redux';
 import { classNames } from '@/shared/lib/classNames/classNames';
 import { Button as ButtonDeprecated, ThemeButton } from '@/shared/ui/deprecated/Button';
@@ -21,7 +21,7 @@ interface EditableProfileHeaderProps {
    className?: string;
 }
 
-export const EditableProfileHeader = (props: PropsWithChildren<EditableProfileHeaderProps>) => {
+export const EditableProfileHeader = (props: EditableProfileHeaderProps) => {
     const { className } = props;
 
     const { t } = useTranslation('profile');

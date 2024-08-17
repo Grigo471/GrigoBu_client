@@ -12,6 +12,7 @@ import { UISchema } from '@/features/UI';
 import { ArticleDetailsPageSchema } from '@/pages/ArticleDetailsPage';
 import { ArticlesPageSchema } from '@/pages/ArticlesPage';
 import { rtkApi } from '@/shared/api/rtkApi';
+import { ArticleEditPageSchema } from '@/pages/ArticleEditPage';
 
 export interface StateSchema {
     counter: CounterSchema;
@@ -25,6 +26,7 @@ export interface StateSchema {
     addCommentForm?: AddCommentFormSchema;
     articlesPage?: ArticlesPageSchema;
     articleDetailsPage?: ArticleDetailsPageSchema;
+    articleEditPage?: ArticleEditPageSchema;
 }
 
 export type StateSchemaKey = keyof StateSchema;

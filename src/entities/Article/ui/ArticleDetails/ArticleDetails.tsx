@@ -102,7 +102,6 @@ export const ArticleDetails = memo((props: ArticleDetailsProps) => {
     const dispatch = useAppDispatch();
 
     const isLoading = useSelector(getArticleDetailsIsLoading);
-
     const error = useSelector(getArticleDetailsError);
 
     const reducers: ReducerList = {

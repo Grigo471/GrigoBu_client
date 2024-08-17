@@ -1,4 +1,4 @@
-import { type PropsWithChildren, memo, useCallback } from 'react';
+import { memo, useCallback } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useSelector } from 'react-redux';
 import { classNames } from '@/shared/lib/classNames/classNames';
@@ -25,7 +25,7 @@ export interface addCommentFormProps {
    onSendComment: (text: string) => void;
 }
 
-const AddCommentForm = memo((props: PropsWithChildren<addCommentFormProps>) => {
+const AddCommentForm = memo((props: addCommentFormProps) => {
     const { className, onSendComment } = props;
     const { t } = useTranslation('article');
 

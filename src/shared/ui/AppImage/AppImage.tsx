@@ -21,10 +21,12 @@ export const AppImage = memo((props: AppImageProps) => {
         img.src = src ?? '';
         img.onload = () => {
             setIsLoading(false);
+            setHasError(false);
         };
         img.onerror = () => {
             setIsLoading(false);
             setHasError(true);
+            console.log('error');
         };
     }, [src]);
 

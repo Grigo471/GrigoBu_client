@@ -1,7 +1,9 @@
 export { ArticleDetails } from './ui/ArticleDetails/ArticleDetails';
 
+export { renderArticleBlock } from './ui/ArticleDetails/rednerArticleBlock';
+
 export type {
-    Article,
+    Article, ArticleBlock, ArticleTextBlock, ArticleCodeBlock, ArticleImageBlock,
 } from './model/types/article';
 
 export {
@@ -17,3 +19,5 @@ export {
     getArticleDetailsIsLoading,
     getArticleDetailsError,
 } from './model/selectors/articleDetailsSelectors';
+
+export { fetchArticleById } from './model/services/fetchArticleById/fetchArticleById';

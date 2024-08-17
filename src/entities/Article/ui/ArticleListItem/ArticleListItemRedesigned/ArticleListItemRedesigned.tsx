@@ -60,7 +60,7 @@ export const ArticleListItemRedesigned = memo((props: ArticleListItemProps) => {
                     {textBlock?.paragraphs && (
                         <Text
                             className={cls.textBlock}
-                            text={textBlock.paragraphs.slice(0, 2).join(' ')}
+                            text={textBlock.paragraphs}
                         />
                     )}
                     <HStack max justify="between">

@@ -8,6 +8,8 @@ export type TextAlign = 'right' | 'center' | 'left';
 
 export type TextSize = 's' | 'm' | 'l';
 
+export type TextWhiteSpace = 'preWrap' | 'normalWrap' | 'noWrap';
+
 interface TextProps {
     className?: string;
     title?: string;
@@ -16,6 +18,7 @@ interface TextProps {
     align?: TextAlign;
     size?: TextSize;
     bold?: boolean;
+    whiteSpace?: TextWhiteSpace;
 
     'data-testid'?: string;
 }
@@ -37,6 +40,7 @@ export const Text = memo((props: PropsWithChildren<TextProps>) => {
         align = 'left',
         size = 'm',
         bold = false,
+        whiteSpace = 'normalWrap',
 
         'data-testid': dataTestId = 'Text',
     } = props;
@@ -47,7 +51,7 @@ export const Text = memo((props: PropsWithChildren<TextProps>) => {
         <div className={classNames(
             cls.Text,
             { [cls.bold]: bold },
-            [className, cls[variant], cls[align], cls[size]],
+            [className, cls[variant], cls[align], cls[size], cls[whiteSpace]],
         )}
         >
             {title && (

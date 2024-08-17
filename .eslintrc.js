@@ -68,6 +68,7 @@ module.exports = {
                     'variant',
                     'size',
                     'wrap',
+                    'whiteSpace',
                 ],
             },
         ],

@@ -20,7 +20,7 @@ const data: Article = {
         id: '1',
         title: 'subtitle',
         type: ArticleBlockType.TEXT,
-        paragraphs: ['1'],
+        paragraphs: '1',
     }],
 };
 

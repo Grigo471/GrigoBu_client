@@ -23,20 +23,16 @@ export const ArticleTextBlockComponent = memo((props: ArticleTextBlockComponentP
                     off={<TextDeprecated title={block.title} className={cls.title} />}
                 />
             )}
-            {block.paragraphs.map((paragraph) => (
-                <ToggleFeatures
-                    key={paragraph}
-                    feature="isAppRedesigned"
-                    on={<Text key={paragraph} text={paragraph} className={cls.paragraph} />}
-                    off={(
-                        <TextDeprecated
-                            key={paragraph}
-                            text={paragraph}
-                            className={cls.paragraph}
-                        />
-                    )}
-                />
-            ))}
+            <ToggleFeatures
+                feature="isAppRedesigned"
+                on={<Text whiteSpace="preWrap" text={block.paragraphs} className={cls.paragraph} />}
+                off={(
+                    <TextDeprecated
+                        text={block.paragraphs}
+                        className={cls.paragraph}
+                    />
+                )}
+            />
         </div>
     );
 });
