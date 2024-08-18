@@ -38,43 +38,46 @@ export const ArticleListItemRedesigned = memo((props: ArticleListItemProps) => {
         ) as ArticleTextBlock;
 
         return (
-            <Card
-                padding="24"
-                data-testid="ArticleListItem"
-                className={classNames(cls.ArticleListItemRedesigned, {}, [className, cls[view]])}
-            >
-                <VStack max gap="16">
-                    <HStack gap="8">
-                        <Avatar className={cls.avatar} size={32} src={article.user.avatar} />
-                        <Text bold text={article.user.username} />
-                        {createdAt}
-                    </HStack>
-                    <Text title={article.title} bold className={cls.title} />
-                    <Text title={article.subtitle} size="s" />
-                    <AppImage
-                        src={article.img}
-                        alt={article.title}
-                        className={cls.img}
-                        fallback={<Skeleton width="100%" height={250} />}
-                    />
-                    {textBlock?.paragraphs && (
-                        <Text
-                            className={cls.textBlock}
-                            text={textBlock.paragraphs}
+            <div className={classNames(cls.ArticleListItemRedesigned, {}, [className])}>
+                <Card
+                    max
+                    padding="24"
+                    data-testid="ArticleListItem"
+                    className={classNames('', {}, [cls[view]])}
+                >
+                    <VStack max gap="16">
+                        <HStack gap="8">
+                            <Avatar className={cls.avatar} size={32} src={article.user.avatar} />
+                            <Text bold text={article.user.username} />
+                            {createdAt}
+                        </HStack>
+                        <Text title={article.title} bold className={cls.title} />
+                        <Text title={article.subtitle} size="s" />
+                        <AppImage
+                            src={article.img}
+                            alt={article.title}
+                            className={cls.img}
+                            fallback={<Skeleton width="100%" height={250} />}
                         />
-                    )}
-                    <HStack max justify="between">
-                        <AppLink target={target} to={getRouteArticleDetails(article.id)}>
-                            <Button
-                                variant="outline"
-                            >
-                                {t('Читать далее')}
-                            </Button>
-                        </AppLink>
-                        {views}
-                    </HStack>
-                </VStack>
-            </Card>
+                        {textBlock?.paragraphs && (
+                            <Text
+                                className={cls.textBlock}
+                                text={textBlock.paragraphs}
+                            />
+                        )}
+                        <HStack max justify="between">
+                            <AppLink target={target} to={getRouteArticleDetails(article.id)}>
+                                <Button
+                                    variant="outline"
+                                >
+                                    {t('Читать далее')}
+                                </Button>
+                            </AppLink>
+                            {views}
+                        </HStack>
+                    </VStack>
+                </Card>
+            </div>
         );
     }
 

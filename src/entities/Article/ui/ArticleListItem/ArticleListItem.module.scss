@@ -40,7 +40,7 @@
 }
 
 .SMALL {
-    width: 230px;
+    width: 200px;
     transition: 0.2s;
     cursor: pointer;
 
@@ -109,8 +109,8 @@
 
     &.SMALL {
         .card {
-            width: 240px;
-            height: 350px;
+            width: 200px;
+            height: 300px;
         }
     }
 }

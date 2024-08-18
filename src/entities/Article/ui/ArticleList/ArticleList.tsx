@@ -1,5 +1,6 @@
-import { type PropsWithChildren, memo, HTMLAttributeAnchorTarget } from 'react';
+import { memo, HTMLAttributeAnchorTarget } from 'react';
 import { useTranslation } from 'react-i18next';
+import { Virtuoso } from 'react-virtuoso';
 import { classNames } from '@/shared/lib/classNames/classNames';
 import { Text, TextSize } from '@/shared/ui/deprecated/Text';
 import cls from './ArticleList.module.scss';
@@ -18,7 +19,7 @@ interface ArticleListProps {
    target?: HTMLAttributeAnchorTarget;
 }
 
-export const ArticleList = memo((props: PropsWithChildren<ArticleListProps>) => {
+export const ArticleList = memo((props: ArticleListProps) => {
     const {
         className,
         articles,
@@ -32,8 +33,8 @@ export const ArticleList = memo((props: PropsWithChildren<ArticleListProps>) => 
         <ArticleListItem
             article={article}
             view={view}
-            className={cls.card}
             key={article.id}
+            className={cls.card}
             target={target}
         />
     );
@@ -65,9 +66,23 @@ export const ArticleList = memo((props: PropsWithChildren<ArticleListProps>) => 
                     data-testid="ArticleList"
                     className={classNames(cls.ArticleListRedesigned, {}, [])}
                 >
-                    {articles.length > 0
-                        ? articles.map(renderArticle)
-                        : null}
+                    {view === ArticleView.BIG ? (
+                        <Virtuoso
+                            data={articles}
+                            useWindowScroll
+                            itemContent={(_, article) => renderArticle(article)}
+                            style={{ width: '100%' }}
+                        />
+                    ) : (
+                        articles.map(renderArticle)
+                    // <VirtuosoGrid
+                    //     style={{ width: '100%' }}
+                    //     totalCount={articles.length}
+                    //     useWindowScroll
+                    //     listClassName={cls.SMALL}
+                    //     itemContent={(index) => renderArticle(articles[index])}
+                    // />
+                    )}
                     {isLoading && getSkeletons(view)}
                 </HStack>
             )}

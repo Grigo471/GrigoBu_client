@@ -1,4 +1,4 @@
-import { type PropsWithChildren, memo } from 'react';
+import { memo } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useSelector } from 'react-redux';
 import { useSearchParams } from 'react-router-dom';
@@ -21,7 +21,7 @@ interface ArticlesInfiniteListProps {
    className?: string;
 }
 
-export const ArticlesInfiniteList = memo((props: PropsWithChildren<ArticlesInfiniteListProps>) => {
+export const ArticlesInfiniteList = memo((props: ArticlesInfiniteListProps) => {
     const { className } = props;
     const { t } = useTranslation();
     const articles = useSelector(getArticles.selectAll);

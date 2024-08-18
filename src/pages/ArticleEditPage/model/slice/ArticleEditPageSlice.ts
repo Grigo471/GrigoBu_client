@@ -104,7 +104,7 @@ export const articleEditPageSlice = createSlice({
                 type: ArticleBlockType.TEXT,
                 title: '',
                 paragraphs: '',
-                id: state.form.blocks.length.toString(),
+                id: Date.now().toString(),
             });
         },
         addArticleImageBlock: (state) => {
@@ -112,7 +112,7 @@ export const articleEditPageSlice = createSlice({
                 type: ArticleBlockType.IMAGE,
                 title: '',
                 src: '',
-                id: state.form.blocks.length.toString(),
+                id: Date.now().toString(),
             });
         },
         addArticleCodeBlock: (state) => {
@@ -120,7 +120,7 @@ export const articleEditPageSlice = createSlice({
                 type: ArticleBlockType.CODE,
                 title: '',
                 code: '',
-                id: state.form.blocks.length.toString(),
+                id: Date.now().toString(),
             });
         },
         deleteBlock: (state, action: PayloadAction<number>) => {

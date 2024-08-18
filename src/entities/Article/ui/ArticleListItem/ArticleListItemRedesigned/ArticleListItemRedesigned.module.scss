@@ -1,3 +1,7 @@
+.ArticleListItemRedesigned {
+    padding-bottom: 30px;
+}
+
 .BIG {
     .img {
         width: 100%;
@@ -13,8 +17,8 @@
 
 .SMALL {
     .card {
-        width: 240px;
-        height: 350px;
+        width: 200px;
+        height: 300px;
         overflow: hidden;
         display: flex;
         flex-direction: column;
@@ -31,6 +35,16 @@
     .info {
         padding: 8px 8px 16px;
         height: 100%;
+
+        .title {
+            width: 180px;
+        }
+
+        .title h2 {
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
     }
 
     .footer {

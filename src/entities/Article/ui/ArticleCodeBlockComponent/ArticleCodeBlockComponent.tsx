@@ -22,7 +22,7 @@ export const ArticleCodeBlockComponent = memo(
                 {block.title && (
                     <ToggleFeatures
                         feature="isAppRedesigned"
-                        on={<Text text={block.title} align="center" />}
+                        on={<Text text={block.title} align="center" bold />}
                         off={<TextDeprecated text={block.title} align={TextAlign.CENTER} />}
                     />
                 )}
