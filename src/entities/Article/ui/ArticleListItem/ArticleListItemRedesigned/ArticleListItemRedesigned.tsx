@@ -63,6 +63,7 @@ export const ArticleListItemRedesigned = memo((props: ArticleListItemProps) => {
                             <Text
                                 className={cls.textBlock}
                                 text={textBlock.paragraphs}
+                                whiteSpace="preWrap"
                             />
                         )}
                         <HStack max justify="between">

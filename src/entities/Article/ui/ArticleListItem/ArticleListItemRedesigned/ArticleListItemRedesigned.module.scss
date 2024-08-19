@@ -16,8 +16,12 @@
 }
 
 .SMALL {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 30px;
+
     .card {
-        width: 200px;
+        width: 230px;
         height: 300px;
         overflow: hidden;
         display: flex;
