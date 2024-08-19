@@ -1,9 +1,9 @@
 import { memo } from 'react';
 import { useTranslation } from 'react-i18next';
 import { classNames } from '@/shared/lib/classNames/classNames';
-import { Dropdown } from '@/shared/ui/redesigned/Popups';
+import { Dropdown } from '@/shared/ui/Popups';
 import PlusIcon from '@/shared/assets/icons/plus.svg';
-import { Icon } from '@/shared/ui/redesigned/Icon';
+import { Icon } from '@/shared/ui/Icon';
 import cls from './AddArticleBlockDropdown.module.scss';
 
 interface AddArticleBlockDropdownProps {

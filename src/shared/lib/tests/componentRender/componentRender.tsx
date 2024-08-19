@@ -28,7 +28,7 @@ export function TestProvider(props: TestProviderProps) {
     const { children, options = {} } = props;
     const {
         route = '/',
-        initialState = { counter: { value: 0 } },
+        initialState = { },
         asyncReducers,
         theme = Theme.LIGHT,
     } = options;

@@ -19,7 +19,7 @@ import {
     getArticleCommentsError, getArticleCommentsIsLoading,
 } from '../../model/selectors/commentsSelectors';
 import { getArticleComments } from '../../model/slice/articleDetailsCommentsSlice';
-import { Text } from '@/shared/ui/redesigned/Text';
+import { Text } from '@/shared/ui/Text';
 
 interface ArticleDetailsCommentsProps {
    className?: string;

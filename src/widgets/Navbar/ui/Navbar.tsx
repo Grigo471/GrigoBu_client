@@ -8,7 +8,7 @@ import { HStack } from '@/shared/ui/Stack';
 import { NotificationsButton } from '@/features/NotificationsButton';
 import { AvatarDropdown } from '@/features/AvatarDropdown';
 import cls from './Navbar.module.scss';
-import { Button } from '@/shared/ui/redesigned/Button';
+import { Button } from '@/shared/ui/Button';
 
 interface NavbarProps {
  className?: string;
@@ -29,12 +29,10 @@ export const Navbar = memo((props: NavbarProps) => {
         setIsAuthModal(true);
     }, []);
 
-    const mainClass = cls.NavbarRedesigned;
-
     if (authData) {
         return (
 
-            <div className={classNames(mainClass, {}, [className])}>
+            <div className={classNames(cls.Navbar, {}, [className])}>
                 <HStack gap="16" className={cls.actions}>
                     <NotificationsButton />
                     <AvatarDropdown onCloseModal={onCloseModal} />
@@ -45,7 +43,7 @@ export const Navbar = memo((props: NavbarProps) => {
     }
 
     return (
-        <header className={classNames(mainClass, {}, [className])}>
+        <header className={classNames(cls.Navbar, {}, [className])}>
 
             <Button
                 className={cls.links}

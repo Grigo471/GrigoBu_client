@@ -1,14 +1,14 @@
 import { memo } from 'react';
 import { useTranslation } from 'react-i18next';
 import cls from './ArticleEditForm.module.scss';
-import { Card } from '@/shared/ui/redesigned/Card';
-import { Input } from '@/shared/ui/redesigned/Input';
+import { Card } from '@/shared/ui/Card';
+import { Input } from '@/shared/ui/Input';
 
 import { renderEditableArticleBlock } from './renderEditableArticleBlock';
 import { VStack } from '@/shared/ui/Stack';
 import { AppImage } from '@/shared/ui/AppImage';
 import { Article, ArticleType } from '@/entities/Article';
-import { Text } from '@/shared/ui/redesigned/Text';
+import { Text } from '@/shared/ui/Text';
 
 interface ArticleEditFormProps {
     className?: string;

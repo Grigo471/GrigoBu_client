@@ -2,7 +2,6 @@ import { memo } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useSelector } from 'react-redux';
 import { useSearchParams } from 'react-router-dom';
-import { Text, TextAlign, TextTheme } from '@/shared/ui/deprecated/Text';
 import { ArticleList } from '@/entities/Article';
 import { ReducerList, useDynamicModuleLoad } from '@/shared/lib/hooks/useDynamicModuleLoad';
 import { useInitialEffect } from '@/shared/lib/hooks/useInitialEffect';
@@ -12,6 +11,7 @@ import { initArticlesPage } from '../../model/services/initArticlesPage/initArti
 import {
     getArticlesPageError, getArticlesPageIsLoading, getArticlesPageView,
 } from '../../model/selectors/articlesPageSelectors';
+import { Text } from '@/shared/ui/Text';
 
 const reducers: ReducerList = {
     articlesPage: articlesPageReducer,
@@ -42,8 +42,8 @@ export const ArticlesInfiniteList = memo((props: ArticlesInfiniteListProps) => {
     if (error) {
         return (
             <Text
-                align={TextAlign.CENTER}
-                theme={TextTheme.ERROR}
+                align="center"
+                variant="error"
                 title={t('Произошла ошибка при загрузке статьи')}
             />
         );

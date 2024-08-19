@@ -4,8 +4,8 @@ import cls from './ArticleListItem.module.scss';
 import {
     ArticleView,
 } from '../../model/consts/consts';
-import { Skeleton as SkeletonRedesigned } from '@/shared/ui/redesigned/Skeleton';
-import { Card as CardRedesigned } from '@/shared/ui/redesigned/Card';
+import { Skeleton as SkeletonRedesigned } from '@/shared/ui/Skeleton';
+import { Card as CardRedesigned } from '@/shared/ui/Card';
 
 interface ArticleListItemSkeletonProps {
     className?: string;

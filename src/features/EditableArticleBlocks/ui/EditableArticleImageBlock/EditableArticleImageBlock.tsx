@@ -2,13 +2,13 @@ import { memo } from 'react';
 import { useTranslation } from 'react-i18next';
 import { classNames } from '@/shared/lib/classNames/classNames';
 import cls from './EditableArticleImageBlock.module.scss';
-import { Card } from '@/shared/ui/redesigned/Card';
-import { Input } from '@/shared/ui/redesigned/Input';
+import { Card } from '@/shared/ui/Card';
+import { Input } from '@/shared/ui/Input';
 import { ArticleImageBlock } from '@/entities/Article';
 import { AppImage } from '@/shared/ui/AppImage';
 import { HStack, VStack } from '@/shared/ui/Stack';
-import { Text } from '@/shared/ui/redesigned/Text';
-import { Icon } from '@/shared/ui/redesigned/Icon';
+import { Text } from '@/shared/ui/Text';
+import { Icon } from '@/shared/ui/Icon';
 import CrossIcon from '@/shared/assets/icons/cross-delete.svg';
 
 interface EditableArticleImageBlockProps {

@@ -1,5 +1,5 @@
 import { useTranslation } from 'react-i18next';
-import { Text } from '@/shared/ui/redesigned/Text';
+import { Text } from '@/shared/ui/Text';
 import { Page } from '@/widgets/Page';
 import { VStack } from '@/shared/ui/Stack';
 import { UIDesignSwitcher } from '@/features/UIDesignSwitcher';

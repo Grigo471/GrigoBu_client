@@ -7,8 +7,8 @@ import Notifications from '@/shared/assets/icons/notifications.svg';
 import { Drawer as DrawerDeprecated } from '@/shared/ui/Drawer';
 import { useDevice } from '@/shared/lib/hooks/useDevice';
 import cls from './NotificationsButton.module.scss';
-import { Icon } from '@/shared/ui/redesigned/Icon';
-import { Popover } from '@/shared/ui/redesigned/Popups';
+import { Icon } from '@/shared/ui/Icon';
+import { Popover } from '@/shared/ui/Popups';
 
 interface NotificationsButtonProps {
    className?: string;

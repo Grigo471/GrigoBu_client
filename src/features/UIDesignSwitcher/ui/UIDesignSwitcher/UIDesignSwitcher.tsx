@@ -1,13 +1,13 @@
 import { useTranslation } from 'react-i18next';
 import { memo, useState } from 'react';
 import { useSelector } from 'react-redux';
-import { ListBox } from '@/shared/ui/redesigned/Popups';
+import { ListBox } from '@/shared/ui/Popups';
 import { getFeatureFlags, updateFeatureFlags } from '@/shared/lib/features';
 import { useAppDispatch } from '@/shared/lib/hooks/useAppDispatch';
 import { getUserAuthData } from '@/entities/User';
 import { HStack } from '@/shared/ui/Stack';
-import { Text } from '@/shared/ui/redesigned/Text';
-import { Skeleton } from '@/shared/ui/redesigned/Skeleton';
+import { Text } from '@/shared/ui/Text';
+import { Skeleton } from '@/shared/ui/Skeleton';
 
 interface UIDesignSwitcherProps {
     className?: string;

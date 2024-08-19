@@ -30,7 +30,7 @@ const App = memo(() => {
     if (!_inited) {
         return (
 
-            <div id="app" className={classNames('app_redesigned', {}, [theme])}>
+            <div id="app" className={classNames('app', {}, [theme])}>
                 <AppLoaderLayout />
             </div>
 
@@ -39,7 +39,7 @@ const App = memo(() => {
 
     return (
 
-        <div id="app" className={classNames('app_redesigned', {}, [theme])}>
+        <div id="app" className={classNames('app', {}, [theme])}>
             <Suspense fallback="">
                 <MainLayout
                     header={<Navbar />}

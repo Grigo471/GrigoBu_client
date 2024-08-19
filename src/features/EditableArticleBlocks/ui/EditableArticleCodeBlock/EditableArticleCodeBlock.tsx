@@ -2,14 +2,14 @@ import { memo } from 'react';
 import { useTranslation } from 'react-i18next';
 import { classNames } from '@/shared/lib/classNames/classNames';
 import cls from './EditableArticleCodeBlock.module.scss';
-import { Card } from '@/shared/ui/redesigned/Card';
-import { Input } from '@/shared/ui/redesigned/Input';
+import { Card } from '@/shared/ui/Card';
+import { Input } from '@/shared/ui/Input';
 import { ArticleCodeBlock } from '@/entities/Article';
 import { TextArea } from '@/shared/ui/TextArea';
-import { Text } from '@/shared/ui/redesigned/Text';
+import { Text } from '@/shared/ui/Text';
 import { HStack, VStack } from '@/shared/ui/Stack';
 import CrossIcon from '@/shared/assets/icons/cross-delete.svg';
-import { Icon } from '@/shared/ui/redesigned/Icon';
+import { Icon } from '@/shared/ui/Icon';
 
 interface EditableArticleCodeBlockProps {
    className?: string;

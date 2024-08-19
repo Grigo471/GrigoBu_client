@@ -10,7 +10,6 @@ import { Country } from '@/entities/Country';
 import { Currency } from '@/entities/Currency';
 import { useInitialEffect } from '@/shared/lib/hooks/useInitialEffect';
 import { useAppDispatch } from '@/shared/lib/hooks/useAppDispatch';
-import { Text, TextTheme } from '@/shared/ui/deprecated/Text';
 import { VStack } from '@/shared/ui/Stack';
 import { fetchProfileData } from '../../model/services/fetchProfileData/fetchProfileData';
 import { getProfileForm } from '../../model/selectors/getProfileForm/getProfileForm';
@@ -25,6 +24,7 @@ import {
     profileActions, profileReducer,
 } from '../../model/slice/profileSlice';
 import { EditableProfileHeader } from '../EditableProfileHeader/EditableProfileHeader';
+import { Text } from '@/shared/ui/Text';
 
 const reducers: ReducerList = {
     profile: profileReducer,
@@ -102,7 +102,7 @@ export const EditableProfileCard = memo((props: EditableProfileCardProps) => {
             <EditableProfileHeader />
             {validateErrors?.length && validateErrors?.map((err) => (
                 <Text
-                    theme={TextTheme.ERROR}
+                    variant="error"
                     text={validateErrorsTranslations[err]}
                     key={err}
                     data-testid="EditableProfileCard.Error"

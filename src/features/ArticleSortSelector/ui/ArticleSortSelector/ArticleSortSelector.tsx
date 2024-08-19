@@ -1,13 +1,13 @@
 import { memo, useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
 import { classNames } from '@/shared/lib/classNames/classNames';
-import { SelectOptions } from '@/shared/ui/deprecated/Select';
 import { SortOrder } from '@/shared/types';
 import cls from './ArticleSortSelector.module.scss';
 import { ArticleSortField } from '@/entities/Article';
-import { ListBox } from '@/shared/ui/redesigned/Popups';
+import { ListBox } from '@/shared/ui/Popups';
 import { VStack } from '@/shared/ui/Stack';
-import { Text } from '@/shared/ui/redesigned/Text';
+import { Text } from '@/shared/ui/Text';
+import { ListBoxItem } from '@/shared/ui/Popups/ui/ListBox/ListBox';
 
 interface ArticleSortSelectorProps {
     className?: string;
@@ -23,7 +23,7 @@ export const ArticleSortSelector = memo((props: ArticleSortSelectorProps) => {
     } = props;
     const { t } = useTranslation('article');
 
-    const orderOptions = useMemo<SelectOptions<SortOrder>[]>(() => [
+    const orderOptions = useMemo<ListBoxItem<SortOrder>[]>(() => [
         {
             value: 'asc',
             content: t('возрастанию'),
@@ -33,7 +33,7 @@ export const ArticleSortSelector = memo((props: ArticleSortSelectorProps) => {
             content: t('убыванию'),
         },
     ], [t]);
-    const sortFieldOptions = useMemo<SelectOptions<ArticleSortField>[]>(() => [
+    const sortFieldOptions = useMemo<ListBoxItem<ArticleSortField>[]>(() => [
         {
             value: ArticleSortField.CREATED,
             content: t('дате создания'),

@@ -1,5 +1,5 @@
 import { memo } from 'react';
-import { Icon } from '@/shared/ui/redesigned/Icon';
+import { Icon } from '@/shared/ui/Icon';
 import CircleUpIcon from '@/shared/assets/icons/circle-up.svg';
 
 interface ScrollToTopButtonProps {

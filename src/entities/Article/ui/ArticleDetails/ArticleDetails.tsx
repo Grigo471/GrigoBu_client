@@ -6,15 +6,8 @@ import { useSelector } from 'react-redux';
 import { classNames } from '@/shared/lib/classNames/classNames';
 import { ReducerList, useDynamicModuleLoad } from '@/shared/lib/hooks/useDynamicModuleLoad';
 import { useAppDispatch } from '@/shared/lib/hooks/useAppDispatch';
-import {
-    Text as TextDeprecated, TextAlign, TextSize, TextTheme,
-} from '@/shared/ui/deprecated/Text';
-import { Skeleton as SkeletonRedesigned } from '@/shared/ui/redesigned/Skeleton';
-import { Avatar } from '@/shared/ui/deprecated/Avatar';
-import EyeIcon from '@/shared/assets/icons/eye.svg';
-import AgendaIcon from '@/shared/assets/icons/agenda.svg';
-import { Icon } from '@/shared/ui/deprecated/Icon';
-import { HStack, VStack } from '@/shared/ui/Stack';
+import { Skeleton } from '@/shared/ui/Skeleton';
+import { VStack } from '@/shared/ui/Stack';
 import { fetchArticleById } from '../../model/services/fetchArticleById/fetchArticleById';
 import { articleDetailsReducers } from '../../model/slice/articleDetailsSlice';
 import cls from './ArticleDetails.module.scss';
@@ -25,74 +18,13 @@ import {
 } from '../../model/selectors/articleDetailsSelectors';
 
 import { renderArticleBlock } from './rednerArticleBlock';
-import { Text } from '@/shared/ui/redesigned/Text';
+import { Text } from '@/shared/ui/Text';
 import { AppImage } from '@/shared/ui/AppImage';
 
 interface ArticleDetailsProps {
    className?: string;
    articleId?: string;
 }
-
-const Deprecated = () => {
-    const article = useSelector(getArticleDetailsData);
-    return (
-        <>
-            <HStack justify="center" max className={cls.avatarWrapper}>
-                <Avatar
-                    size={200}
-                    src={article?.img}
-                    className={cls.avatar}
-                />
-            </HStack>
-            <VStack gap="4" max data-testid="ArticleDetails.info">
-                <TextDeprecated
-                    className={cls.title}
-                    title={article?.title}
-                    text={article?.subtitle}
-                    size={TextSize.L}
-                />
-                <HStack gap="8" className={cls.articleInfo}>
-                    <Icon Svg={EyeIcon} className={cls.icon} />
-                    <TextDeprecated text={String(article?.views)} />
-                </HStack>
-                <HStack gap="8" className={cls.articleInfo}>
-                    <Icon Svg={AgendaIcon} className={cls.icon} />
-                    <TextDeprecated text={article?.createdAt} />
-                </HStack>
-            </VStack>
-
-            {article?.blocks.map(renderArticleBlock)}
-        </>
-    );
-};
-
-const Redesigned = () => {
-    const article = useSelector(getArticleDetailsData);
-    return (
-        <>
-            <Text
-                title={article?.title}
-                size="l"
-                bold
-            />
-            <Text
-                title={article?.subtitle}
-            />
-            <AppImage
-                className={cls.img}
-                src={article?.img}
-                fallback={(
-                    <SkeletonRedesigned
-                        width="100%"
-                        height={420}
-                        border="16"
-                    />
-                )}
-            />
-            {article?.blocks.map(renderArticleBlock)}
-        </>
-    );
-};
 
 export const ArticleDetails = memo((props: ArticleDetailsProps) => {
     const { className, articleId } = props;
@@ -101,6 +33,7 @@ export const ArticleDetails = memo((props: ArticleDetailsProps) => {
 
     const isLoading = useSelector(getArticleDetailsIsLoading);
     const error = useSelector(getArticleDetailsError);
+    const article = useSelector(getArticleDetailsData);
 
     const reducers: ReducerList = {
         articleDetails: articleDetailsReducers,
@@ -116,8 +49,6 @@ export const ArticleDetails = memo((props: ArticleDetailsProps) => {
 
     let content;
 
-    const Skeleton = SkeletonRedesigned;
-
     if (isLoading) {
         content = (
             <VStack gap="16" max>
@@ -130,15 +61,36 @@ export const ArticleDetails = memo((props: ArticleDetailsProps) => {
         );
     } else if (error) {
         content = (
-            <TextDeprecated
-                align={TextAlign.CENTER}
-                theme={TextTheme.ERROR}
+            <Text
+                align="center"
+                variant="error"
                 title={t('Произошла ошибка при загрузке статьи')}
             />
         );
     } else {
         content = (
-            <Redesigned />
+            <>
+                <Text
+                    title={article?.title}
+                    size="l"
+                    bold
+                />
+                <Text
+                    title={article?.subtitle}
+                />
+                <AppImage
+                    className={cls.img}
+                    src={article?.img}
+                    fallback={(
+                        <Skeleton
+                            width="100%"
+                            height={420}
+                            border="16"
+                        />
+                    )}
+                />
+                {article?.blocks.map(renderArticleBlock)}
+            </>
         );
     }
 

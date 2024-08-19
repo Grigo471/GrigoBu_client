@@ -6,7 +6,7 @@ import { VStack } from '@/shared/ui/Stack';
 import {
     useAricleRecommendationsList,
 } from '../../api/articleRecommendationsApi';
-import { Text } from '@/shared/ui/redesigned/Text';
+import { Text } from '@/shared/ui/Text';
 
 interface ArticleRecommendationsListProps {
     className?: string;

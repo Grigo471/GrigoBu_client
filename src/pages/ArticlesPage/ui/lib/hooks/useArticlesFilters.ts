@@ -10,7 +10,7 @@ import { ArticleSortField, ArticleType, ArticleView } from '@/entities/Article';
 import { SortOrder } from '@/shared/types';
 import { fetchArticlesList } from '../../../model/services/fetchArticlesList/fetchArticlesList';
 import { useDebounce } from '@/shared/lib/hooks/useDebounce';
-import { TabItem } from '@/shared/ui/deprecated/Tabs';
+import { TabItem } from '@/shared/ui/Tabs';
 
 export function useArticlesFilters() {
     const dispatch = useAppDispatch();

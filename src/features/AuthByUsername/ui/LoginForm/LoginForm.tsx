@@ -13,9 +13,9 @@ import { getLoginError } from '../../model/selectors/getLoginError/getLoginError
 import cls from './LoginForm.module.scss';
 import { loginActions, loginReducer } from '../../model/slice/loginSlice';
 import { loginByUsername } from '../../model/services/loginByUsername/loginByUserName';
-import { Input } from '@/shared/ui/redesigned/Input';
-import { Text } from '@/shared/ui/redesigned/Text';
-import { Button } from '@/shared/ui/redesigned/Button';
+import { Input } from '@/shared/ui/Input';
+import { Text } from '@/shared/ui/Text';
+import { Button } from '@/shared/ui/Button';
 import { VStack } from '@/shared/ui/Stack';
 
 export interface LoginFormProps {

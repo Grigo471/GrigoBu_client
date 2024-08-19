@@ -4,11 +4,11 @@ import { classNames } from '@/shared/lib/classNames/classNames';
 import cls from './EditableArticleTextBlock.module.scss';
 import { ArticleTextBlock } from '@/entities/Article';
 import { TextArea } from '@/shared/ui/TextArea';
-import { Card } from '@/shared/ui/redesigned/Card';
-import { Input } from '@/shared/ui/redesigned/Input';
+import { Card } from '@/shared/ui/Card';
+import { Input } from '@/shared/ui/Input';
 import { HStack, VStack } from '@/shared/ui/Stack';
-import { Text } from '@/shared/ui/redesigned/Text';
-import { Icon } from '@/shared/ui/redesigned/Icon';
+import { Text } from '@/shared/ui/Text';
+import { Icon } from '@/shared/ui/Icon';
 import CrossIcon from '@/shared/assets/icons/cross-delete.svg';
 
 interface EditableArticleTextBlockProps {

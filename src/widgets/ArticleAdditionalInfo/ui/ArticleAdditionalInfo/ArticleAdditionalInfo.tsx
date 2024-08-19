@@ -2,9 +2,9 @@ import { memo } from 'react';
 import { useTranslation } from 'react-i18next';
 import { User } from '@/entities/User';
 import { HStack, VStack } from '@/shared/ui/Stack';
-import { Avatar } from '@/shared/ui/redesigned/Avatar';
-import { Text } from '@/shared/ui/redesigned/Text';
-import { Button } from '@/shared/ui/redesigned/Button';
+import { Avatar } from '@/shared/ui/Avatar';
+import { Text } from '@/shared/ui/Text';
+import { Button } from '@/shared/ui/Button';
 
 interface ArticleAdditionalInfoProps {
    className?: string;

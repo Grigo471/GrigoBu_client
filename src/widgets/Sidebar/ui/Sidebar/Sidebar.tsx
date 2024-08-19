@@ -1,6 +1,4 @@
-import {
-    PropsWithChildren, memo, useMemo, useState,
-} from 'react';
+import { memo, useMemo, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { classNames } from '@/shared/lib/classNames/classNames';
 import { ThemeSwitcher } from '@/features/ThemeSwitcher';
@@ -9,15 +7,15 @@ import { VStack } from '@/shared/ui/Stack';
 import { getSidebarItems } from '../../model/selectors/getSidebarItems';
 import cls from './Sidebar.module.scss';
 import { SidebarItem } from '../SidebarItem/SidebarItem';
-import { AppLogo } from '@/shared/ui/redesigned/AppLogo';
-import { Icon } from '@/shared/ui/redesigned/Icon';
+import { AppLogo } from '@/shared/ui/AppLogo';
+import { Icon } from '@/shared/ui/Icon';
 import ArrowIcon from '@/shared/assets/icons/arrow-bottom.svg';
 
 interface SidebarProps {
     className?: string;
 }
 
-export const Sidebar = memo((props: PropsWithChildren<SidebarProps>) => {
+export const Sidebar = memo((props: SidebarProps) => {
     const { className } = props;
 
     const [collapsed, setCollapsed] = useState(false);
@@ -41,8 +39,8 @@ export const Sidebar = memo((props: PropsWithChildren<SidebarProps>) => {
         <aside
             data-testid="sidebar"
             className={classNames(
-                cls.SidebarRedesigned,
-                { [cls.collapsedRedesigned]: collapsed },
+                cls.Sidebar,
+                { [cls.collapsed]: collapsed },
                 [className],
             )}
         >

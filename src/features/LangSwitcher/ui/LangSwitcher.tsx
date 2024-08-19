@@ -1,6 +1,6 @@
 import { memo, type PropsWithChildren } from 'react';
 import { useTranslation } from 'react-i18next';
-import { Button } from '@/shared/ui/redesigned/Button';
+import { Button } from '@/shared/ui/Button';
 
 interface LangSwitcherProps {
  className?: string;

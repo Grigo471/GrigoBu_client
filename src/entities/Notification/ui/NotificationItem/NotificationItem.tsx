@@ -2,8 +2,8 @@ import { type PropsWithChildren, memo } from 'react';
 import { classNames } from '@/shared/lib/classNames/classNames';
 import cls from './NotificationItem.module.scss';
 import { Notification } from '../../model/types/notification';
-import { Card } from '@/shared/ui/redesigned/Card';
-import { Text } from '@/shared/ui/redesigned/Text';
+import { Card } from '@/shared/ui/Card';
+import { Text } from '@/shared/ui/Text';
 
 interface NotificationItemProps {
    className?: string;

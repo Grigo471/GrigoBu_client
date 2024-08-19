@@ -4,7 +4,7 @@ import {
 } from 'react';
 import { Mods, classNames } from '@/shared/lib/classNames/classNames';
 import cls from './TextArea.module.scss';
-import { Text } from '../redesigned/Text';
+import { Text } from '../Text';
 import { VStack } from '../Stack';
 
 type HTMLTextAreaProps = Omit<TextareaHTMLAttributes<HTMLTextAreaElement>,

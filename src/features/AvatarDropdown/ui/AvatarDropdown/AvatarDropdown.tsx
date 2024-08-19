@@ -6,8 +6,8 @@ import {
     getUserAuthData, isUserAdmin, isUserManager, userActions,
 } from '@/entities/User';
 import { getRouteProfile, getRouteSettings } from '@/shared/const/router';
-import { Dropdown } from '@/shared/ui/redesigned/Popups';
-import { Avatar } from '@/shared/ui/redesigned/Avatar';
+import { Dropdown } from '@/shared/ui/Popups';
+import { Avatar } from '@/shared/ui/Avatar';
 
 interface AvatarDropdownProps {
    className?: string;

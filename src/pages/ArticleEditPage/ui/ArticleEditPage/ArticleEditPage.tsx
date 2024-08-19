@@ -22,13 +22,13 @@ import {
 import { ReducerList, useDynamicModuleLoad } from '@/shared/lib/hooks/useDynamicModuleLoad';
 import { StickyContentLayout } from '@/shared/layouts/StickyContentLayout';
 import { AddArticleBlockDropdown } from '@/features/AddArticleBlockDropdown';
-import { Text } from '@/shared/ui/redesigned/Text';
+import { Text } from '@/shared/ui/Text';
 import { AppImage } from '@/shared/ui/AppImage';
 import cls from './ArticleEditPage.module.scss';
-import { Card } from '@/shared/ui/redesigned/Card';
-import { Button } from '@/shared/ui/redesigned/Button';
+import { Card } from '@/shared/ui/Card';
+import { Button } from '@/shared/ui/Button';
 import { HStack, VStack } from '@/shared/ui/Stack';
-import { Skeleton } from '@/shared/ui/redesigned/Skeleton';
+import { Skeleton } from '@/shared/ui/Skeleton';
 import { ValidateArticleError } from '../../model/consts/consts';
 import { saveArticle } from '../../model/services/saveArticle/saveArticle';
 
