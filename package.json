@@ -1,5 +1,5 @@
 {
-  "name": "production-project",
+  "name": "grigobu-client",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
@@ -129,5 +129,5 @@
     "react-virtuoso": "^2.4.1"
   },
   "readme": "ERROR: No README data found!",
-  "_id": "production-project@1.0.0"
+  "_id": "GrigoBu_client@1.0.0"
 }
