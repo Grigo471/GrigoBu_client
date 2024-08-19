@@ -9,7 +9,6 @@ import { useAppDispatch } from '@/shared/lib/hooks/useAppDispatch';
 import {
     Text as TextDeprecated, TextAlign, TextSize, TextTheme,
 } from '@/shared/ui/deprecated/Text';
-import { Skeleton as SkeletonDeprecated } from '@/shared/ui/deprecated/Skeleton';
 import { Skeleton as SkeletonRedesigned } from '@/shared/ui/redesigned/Skeleton';
 import { Avatar } from '@/shared/ui/deprecated/Avatar';
 import EyeIcon from '@/shared/assets/icons/eye.svg';
@@ -26,7 +25,6 @@ import {
 } from '../../model/selectors/articleDetailsSelectors';
 
 import { renderArticleBlock } from './rednerArticleBlock';
-import { toggleFeatures, ToggleFeatures } from '@/shared/lib/features';
 import { Text } from '@/shared/ui/redesigned/Text';
 import { AppImage } from '@/shared/ui/AppImage';
 
@@ -118,11 +116,7 @@ export const ArticleDetails = memo((props: ArticleDetailsProps) => {
 
     let content;
 
-    const Skeleton = toggleFeatures({
-        name: 'isAppRedesigned',
-        on: () => SkeletonRedesigned,
-        off: () => SkeletonDeprecated,
-    });
+    const Skeleton = SkeletonRedesigned;
 
     if (isLoading) {
         content = (
@@ -144,11 +138,7 @@ export const ArticleDetails = memo((props: ArticleDetailsProps) => {
         );
     } else {
         content = (
-            <ToggleFeatures
-                feature="isAppRedesigned"
-                on={<Redesigned />}
-                off={<Deprecated />}
-            />
+            <Redesigned />
         );
     }
 

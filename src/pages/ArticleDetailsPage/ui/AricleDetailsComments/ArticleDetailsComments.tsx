@@ -6,9 +6,6 @@ import { useSelector } from 'react-redux';
 import { CommentList } from '@/entities/Comment';
 import { AddCommentForm } from '@/features/AddCommentForm';
 import { classNames } from '@/shared/lib/classNames/classNames';
-import {
-    Text as TextDeprecated, TextAlign, TextSize, TextTheme,
-} from '@/shared/ui/deprecated/Text';
 import { useAppDispatch } from '@/shared/lib/hooks/useAppDispatch';
 import { useInitialEffect } from '@/shared/lib/hooks/useInitialEffect';
 import { VStack } from '@/shared/ui/Stack';
@@ -22,7 +19,6 @@ import {
     getArticleCommentsError, getArticleCommentsIsLoading,
 } from '../../model/selectors/commentsSelectors';
 import { getArticleComments } from '../../model/slice/articleDetailsCommentsSlice';
-import { ToggleFeatures } from '@/shared/lib/features';
 import { Text } from '@/shared/ui/redesigned/Text';
 
 interface ArticleDetailsCommentsProps {
@@ -51,20 +47,10 @@ export const ArticleDetailsComments = memo((
 
     return (
         <VStack gap="8" max className={classNames('', {}, [className])}>
-            <ToggleFeatures
-                feature="isAppRedesigned"
-                on={(
-                    <Text
-                        title={t('Комментарии')}
-                        size="l"
-                    />
-                )}
-                off={(
-                    <TextDeprecated
-                        title={t('Комментарии')}
-                        size={TextSize.L}
-                    />
-                )}
+
+            <Text
+                title={t('Комментарии')}
+                size="l"
             />
 
             <Suspense fallback={<div>...</div>}>
@@ -73,23 +59,13 @@ export const ArticleDetailsComments = memo((
 
             {error
                 ? (
-                    <ToggleFeatures
-                        feature="isAppRedesigned"
-                        on={(
-                            <Text
-                                align="center"
-                                variant="error"
-                                title={t('Произошла ошибка при загрузке комментариев')}
-                            />
-                        )}
-                        off={(
-                            <TextDeprecated
-                                align={TextAlign.CENTER}
-                                theme={TextTheme.ERROR}
-                                title={t('Произошла ошибка при загрузке комментариев')}
-                            />
-                        )}
+
+                    <Text
+                        align="center"
+                        variant="error"
+                        title={t('Произошла ошибка при загрузке комментариев')}
                     />
+
                 )
                 : (
                     <CommentList

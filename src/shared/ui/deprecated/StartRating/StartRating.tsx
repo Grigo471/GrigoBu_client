@@ -1,9 +1,7 @@
 import { memo, useState } from 'react';
 import { classNames } from '@/shared/lib/classNames/classNames';
 import cls from './StartRating.module.scss';
-import { Icon as IconDeprecated } from '../Icon/Icon';
 import StarIcon from '@/shared/assets/icons/star.svg';
-import { toggleFeatures, ToggleFeatures } from '@/shared/lib/features';
 import { Icon } from '../../redesigned/Icon';
 
 interface StartRatingProps {
@@ -44,12 +42,7 @@ export const StartRating = memo((props: StartRatingProps) => {
     };
 
     return (
-        <div className={classNames(toggleFeatures({
-            name: 'isAppRedesigned',
-            on: () => cls.StarRatingRedesigned,
-            off: () => cls.StarRating,
-        }), {}, [className])}
-        >
+        <div className={classNames(cls.StarRatingRedesigned, {}, [className])}>
             {stars.map((starNum) => {
                 const commonProps = {
                     className: classNames(
@@ -70,12 +63,7 @@ export const StartRating = memo((props: StartRatingProps) => {
                     'data-selected': currStarCounts >= starNum,
                 };
                 return (
-                    <ToggleFeatures
-                        key={starNum}
-                        feature="isAppRedesigned"
-                        on={<Icon clickable={!isSelected} {...commonProps} />}
-                        off={<IconDeprecated {...commonProps} />}
-                    />
+                    <Icon clickable={!isSelected} {...commonProps} />
                 );
             })}
         </div>

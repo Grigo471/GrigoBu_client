@@ -1,14 +1,11 @@
 import { memo } from 'react';
 import { classNames } from '@/shared/lib/classNames/classNames';
-import { Card as CardDeprecated } from '@/shared/ui/deprecated/Card';
-import { Skeleton as SkeletonDeprecated } from '@/shared/ui/deprecated/Skeleton';
 import cls from './ArticleListItem.module.scss';
 import {
     ArticleView,
 } from '../../model/consts/consts';
 import { Skeleton as SkeletonRedesigned } from '@/shared/ui/redesigned/Skeleton';
 import { Card as CardRedesigned } from '@/shared/ui/redesigned/Card';
-import { ToggleFeatures, toggleFeatures } from '@/shared/lib/features';
 
 interface ArticleListItemSkeletonProps {
     className?: string;
@@ -18,23 +15,11 @@ interface ArticleListItemSkeletonProps {
 export const ArticleListItemSkeleton = memo((props: ArticleListItemSkeletonProps) => {
     const { className, view } = props;
 
-    const Skeleton = toggleFeatures({
-        name: 'isAppRedesigned',
-        on: () => SkeletonRedesigned,
-        off: () => SkeletonDeprecated,
-    });
+    const Skeleton = SkeletonRedesigned;
 
-    const mainClass = toggleFeatures({
-        name: 'isAppRedesigned',
-        on: () => cls.ArticleListRedesigned,
-        off: () => cls.ArticleListItem,
-    });
+    const mainClass = cls.ArticleListRedesigned;
 
-    const Card = toggleFeatures({
-        name: 'isAppRedesigned',
-        on: () => CardRedesigned,
-        off: () => CardDeprecated,
-    });
+    const Card = CardRedesigned;
 
     if (view === ArticleView.BIG) {
         return (
@@ -57,26 +42,14 @@ export const ArticleListItemSkeleton = memo((props: ArticleListItemSkeletonProps
 
     const cardContent = (
         <>
-            <ToggleFeatures
-                feature="isAppRedesigned"
-                on={(
-                    <Skeleton
-                        width="100%"
-                        height={150}
-                        border="32px"
-                        className={cls.img}
-                    />
-                )}
-                off={(
-                    <div className={cls.imageWrapper}>
-                        <Skeleton
-                            width={200}
-                            height={200}
-                            className={cls.img}
-                        />
-                    </div>
-                )}
+
+            <Skeleton
+                width="100%"
+                height={150}
+                border="32px"
+                className={cls.img}
             />
+
             <div className={cls.infoWrapper}>
                 <Skeleton width={130} height={16} />
             </div>
@@ -86,19 +59,11 @@ export const ArticleListItemSkeleton = memo((props: ArticleListItemSkeletonProps
 
     return (
         <div className={classNames(mainClass, {}, [className, cls[view]])}>
-            <ToggleFeatures
-                feature="isAppRedesigned"
-                on={(
-                    <CardRedesigned border="round" className={cls.card}>
-                        {cardContent}
-                    </CardRedesigned>
-                )}
-                off={(
-                    <CardDeprecated className={cls.card}>
-                        {cardContent}
-                    </CardDeprecated>
-                )}
-            />
+
+            <CardRedesigned border="round" className={cls.card}>
+                {cardContent}
+            </CardRedesigned>
+
         </div>
     );
 });

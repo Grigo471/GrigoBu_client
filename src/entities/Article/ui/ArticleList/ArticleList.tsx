@@ -2,14 +2,13 @@ import { memo, HTMLAttributeAnchorTarget } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Virtuoso } from 'react-virtuoso';
 import { classNames } from '@/shared/lib/classNames/classNames';
-import { Text, TextSize } from '@/shared/ui/deprecated/Text';
 import cls from './ArticleList.module.scss';
 import { Article } from '../../model/types/article';
 import { ArticleListItem } from '../ArticleListItem/ArticleListItem';
 import { ArticleListItemSkeleton } from '../ArticleListItem/ArticleListItemSkeleton';
 import { ArticleView } from '../../model/consts/consts';
-import { ToggleFeatures } from '@/shared/lib/features';
 import { HStack } from '@/shared/ui/Stack';
+import { Text } from '@/shared/ui/redesigned/Text';
 
 interface ArticleListProps {
    className?: string;
@@ -49,7 +48,7 @@ export const ArticleList = memo((props: ArticleListProps) => {
         return (
             <div className={classNames(cls.ArticleList, {}, [className, cls[view]])}>
                 <Text
-                    size={TextSize.L}
+                    size="l"
                     title={t('Статьи не найдены')}
                 />
             </div>
@@ -57,46 +56,32 @@ export const ArticleList = memo((props: ArticleListProps) => {
     }
 
     return (
-        <ToggleFeatures
-            feature="isAppRedesigned"
-            on={(
-                <HStack
-                    wrap="wrap"
-                    gap="16"
-                    data-testid="ArticleList"
-                    className={classNames(cls.ArticleListRedesigned, {}, [])}
-                >
-                    {view === ArticleView.BIG ? (
-                        <Virtuoso
-                            data={articles}
-                            useWindowScroll
-                            itemContent={(_, article) => renderArticle(article)}
-                            style={{ width: '100%' }}
-                        />
-                    ) : (
-                        articles.map(renderArticle)
-                    // <VirtuosoGrid
-                    //     style={{ width: '100%' }}
-                    //     totalCount={articles.length}
-                    //     useWindowScroll
-                    //     listClassName={cls.SMALL}
-                    //     itemContent={(index) => renderArticle(articles[index])}
-                    // />
-                    )}
-                    {isLoading && getSkeletons(view)}
-                </HStack>
+
+        <HStack
+            wrap="wrap"
+            gap="16"
+            data-testid="ArticleList"
+            className={classNames(cls.ArticleListRedesigned, {}, [])}
+        >
+            {view === ArticleView.BIG ? (
+                <Virtuoso
+                    data={articles}
+                    useWindowScroll
+                    itemContent={(_, article) => renderArticle(article)}
+                    style={{ width: '100%' }}
+                />
+            ) : (
+                articles.map(renderArticle)
+            // <VirtuosoGrid
+            //     style={{ width: '100%' }}
+            //     totalCount={articles.length}
+            //     useWindowScroll
+            //     listClassName={cls.SMALL}
+            //     itemContent={(index) => renderArticle(articles[index])}
+            // />
             )}
-            off={(
-                <div
-                    data-testid="ArticleList"
-                    className={classNames(cls.ArticleList, {}, [className, cls[view]])}
-                >
-                    {articles.length > 0
-                        ? articles.map(renderArticle)
-                        : null}
-                    {isLoading && getSkeletons(view)}
-                </div>
-            )}
-        />
+            {isLoading && getSkeletons(view)}
+        </HStack>
+
     );
 });

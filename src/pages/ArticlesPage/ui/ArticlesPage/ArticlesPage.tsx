@@ -6,10 +6,8 @@ import cls from './ArticlesPage.module.scss';
 import {
     fetchNextArticlesPage,
 } from '../../model/services/fetchNextArticlesPage/fetchNextArticlesPage';
-import { ArticlesPageFilter } from '../ArticlesPageFilter/ArticlesPageFilter';
 import { ArticlesInfiniteList } from '../ArticlesInfiniteList/ArticlesInfiniteList';
 import { ArticlesPageGreeting } from '@/features/ArticlesPageGreeting';
-import { ToggleFeatures } from '@/shared/lib/features';
 import { StickyContentLayout } from '@/shared/layouts/StickyContentLayout';
 import { ViewSelectorContainer } from '../ViewSelectorContainer/ViewSelectorContainer';
 import { FiltersContainer } from '../FiltersContainer/FiltersContainer';
@@ -27,36 +25,22 @@ const ArticlesPage = (props: ArticlesPageProps) => {
     }, [dispatch]);
 
     return (
-        <ToggleFeatures
-            feature="isAppRedesigned"
-            on={(
-                <StickyContentLayout
-                    left={<ViewSelectorContainer />}
-                    right={<FiltersContainer />}
-                    content={(
-                        <Page
-                            data-testid="ArticlesPage"
-                            onScrollEnd={onLoadNextPart}
-                            className={classNames(cls.ArticlesPageRedesigned, {}, [className])}
-                        >
-                            <ArticlesInfiniteList className={cls.list} />
-                            <ArticlesPageGreeting />
-                        </Page>
-                    )}
-                />
-            )}
-            off={(
+
+        <StickyContentLayout
+            left={<ViewSelectorContainer />}
+            right={<FiltersContainer />}
+            content={(
                 <Page
                     data-testid="ArticlesPage"
                     onScrollEnd={onLoadNextPart}
-                    className={classNames(cls.ArticlesPage, {}, [className])}
+                    className={classNames(cls.ArticlesPageRedesigned, {}, [className])}
                 >
-                    <ArticlesPageFilter />
                     <ArticlesInfiniteList className={cls.list} />
                     <ArticlesPageGreeting />
                 </Page>
             )}
         />
+
     );
 };
 

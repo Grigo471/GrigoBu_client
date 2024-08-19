@@ -6,7 +6,6 @@ import { Overlay } from '../Overlay/Overlay';
 import { useModal } from '@/shared/lib/hooks/useModal';
 import cls from './Modal.module.scss';
 import { useTheme } from '@/shared/lib/hooks/useTheme';
-import { toggleFeatures } from '@/shared/lib/features';
 
 interface ModalProps {
     className?: string;
@@ -53,11 +52,7 @@ export function Modal(props: PropsWithChildren<ModalProps>) {
             <div className={classNames(cls.Modal, mods, [
                 className,
                 theme,
-                toggleFeatures({
-                    name: 'isAppRedesigned',
-                    on: () => cls.modalNew,
-                    off: () => cls.modalOld,
-                }),
+                cls.modalNew,
             ])}
             >
                 <Overlay onClick={close} />

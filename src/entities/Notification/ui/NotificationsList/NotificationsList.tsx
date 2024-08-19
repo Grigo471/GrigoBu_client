@@ -2,12 +2,10 @@ import { type PropsWithChildren, memo } from 'react';
 import { useTranslation } from 'react-i18next';
 import { classNames } from '@/shared/lib/classNames/classNames';
 import { VStack } from '@/shared/ui/Stack';
-import { Skeleton as SkeletonDeprecated } from '@/shared/ui/deprecated/Skeleton';
 import { Skeleton as SkeletonRedesigned } from '@/shared/ui/redesigned/Skeleton';
 import { useGetNotificationsList } from '../../api/notificationApi';
 import cls from './NotificationsList.module.scss';
 import { NotificationItem } from '../NotificationItem/NotificationItem';
-import { toggleFeatures } from '@/shared/lib/features';
 
 interface NotificationsListProps {
    className?: string;
@@ -21,11 +19,7 @@ export const NotificationsList = memo((props: PropsWithChildren<NotificationsLis
         pollingInterval: 10000,
     });
 
-    const Skeleton = toggleFeatures({
-        name: 'isAppRedesigned',
-        on: () => SkeletonRedesigned,
-        off: () => SkeletonDeprecated,
-    });
+    const Skeleton = SkeletonRedesigned;
 
     if (isLoading) {
         return (
