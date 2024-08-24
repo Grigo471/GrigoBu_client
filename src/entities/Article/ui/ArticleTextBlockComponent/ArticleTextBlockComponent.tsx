@@ -17,7 +17,7 @@ export const ArticleTextBlockComponent = memo((props: ArticleTextBlockComponentP
             {block.title && (
                 <Text title={block.title} className={cls.title} />
             )}
-            <Text whiteSpace="preWrap" text={block.paragraphs} className={cls.paragraph} />
+            <div dangerouslySetInnerHTML={{ __html: block.paragraphs }} className={cls.paragraph} />
         </div>
     );
 });

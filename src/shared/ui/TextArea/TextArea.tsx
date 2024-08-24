@@ -8,14 +8,14 @@ import { Text } from '../Text';
 import { VStack } from '../Stack';
 
 type HTMLTextAreaProps = Omit<TextareaHTMLAttributes<HTMLTextAreaElement>,
-   'value' | 'onChange' | 'readOnly'>;
+    'value' | 'onChange' | 'readOnly'>;
 
 interface TextAreaProps extends HTMLTextAreaProps {
-   className?: string;
-   value?: string;
-   label?: string;
-   onChange: (value: string) => void;
-   readOnly?: boolean;
+    className?: string;
+    value?: string;
+    label?: string;
+    onChange: (value: string) => void;
+    readOnly?: boolean;
 }
 
 export const TextArea = memo((props: TextAreaProps) => {

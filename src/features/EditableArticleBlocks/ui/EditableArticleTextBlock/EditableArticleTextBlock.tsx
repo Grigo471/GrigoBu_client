@@ -3,13 +3,13 @@ import { useTranslation } from 'react-i18next';
 import { classNames } from '@/shared/lib/classNames/classNames';
 import cls from './EditableArticleTextBlock.module.scss';
 import { ArticleTextBlock } from '@/entities/Article';
-import { TextArea } from '@/shared/ui/TextArea';
 import { Card } from '@/shared/ui/Card';
 import { Input } from '@/shared/ui/Input';
 import { HStack, VStack } from '@/shared/ui/Stack';
 import { Text } from '@/shared/ui/Text';
 import { Icon } from '@/shared/ui/Icon';
 import CrossIcon from '@/shared/assets/icons/cross-delete.svg';
+import { RichTextEditor } from '@/shared/ui/RichTextEditor';
 
 interface EditableArticleTextBlockProps {
    block: ArticleTextBlock;
@@ -45,7 +45,7 @@ export const EditableArticleTextBlock = memo((props: EditableArticleTextBlockPro
                     onChange={(title) => onChangeTitle(title, index)}
                     placeholder={t('Подзаголовок текстового блока (необязательно)')}
                 />
-                <TextArea
+                <RichTextEditor
                     value={block.paragraphs}
                     onChange={(value) => onChangeText(value, index)}
                 />
