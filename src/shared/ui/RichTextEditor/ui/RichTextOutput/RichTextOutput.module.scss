@@ -1,0 +1,9 @@
+.RichTextOutput {
+    a {
+        color: var(--accent-redesigned);
+
+        &:hover {
+            color: var(--icon-redesigned);
+        }
+    }
+}

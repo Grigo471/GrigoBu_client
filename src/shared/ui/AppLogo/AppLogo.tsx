@@ -1,8 +1,10 @@
 import { memo } from 'react';
 import cls from './AppLogo.module.scss';
 import { HStack } from '../Stack';
-import AppSvg from '@/shared/assets/icons/default-avatar.svg';
+import AppSvg from '@/shared/assets/icons/igloo.svg';
 import { classNames } from '@/shared/lib/classNames/classNames';
+import { Text } from '../Text';
+import { APP_NAME } from '@/shared/const/consts';
 
 interface AppLogoProps {
    className?: string;
@@ -12,6 +14,7 @@ interface AppLogoProps {
 export const AppLogo = memo(({ className, size = 50 }: AppLogoProps) => (
     <HStack
         max
+        gap="16"
         justify="center"
         className={classNames(cls.appLogoWrapper, {}, [className])}
     >
@@ -21,7 +24,6 @@ export const AppLogo = memo(({ className, size = 50 }: AppLogoProps) => (
             width={size}
             color="black"
         />
-        <div className={cls.gradientBig} />
-        <div className={cls.gradientSmall} />
+        <Text title={APP_NAME} bold />
     </HStack>
 ));

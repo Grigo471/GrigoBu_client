@@ -9,7 +9,6 @@ import {
 import { ArticlesInfiniteList } from '../ArticlesInfiniteList/ArticlesInfiniteList';
 import { ArticlesPageGreeting } from '@/features/ArticlesPageGreeting';
 import { StickyContentLayout } from '@/shared/layouts/StickyContentLayout';
-import { ViewSelectorContainer } from '../ViewSelectorContainer/ViewSelectorContainer';
 import { FiltersContainer } from '../FiltersContainer/FiltersContainer';
 
 interface ArticlesPageProps {
@@ -27,7 +26,6 @@ const ArticlesPage = (props: ArticlesPageProps) => {
     return (
 
         <StickyContentLayout
-            left={<ViewSelectorContainer />}
             right={<FiltersContainer />}
             content={(
                 <Page

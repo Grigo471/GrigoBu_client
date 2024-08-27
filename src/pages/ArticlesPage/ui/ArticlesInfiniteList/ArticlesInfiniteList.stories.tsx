@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from '@storybook/react';
 
 import { ThemeDecorator } from '@/shared/config/storybook/ThemeDecorator/ThemeDecorator';
 import { StoreDecorator } from '@/shared/config/storybook/StoreDecorator/StoreDecorator';
-import { ArticleType, ArticleView, ArticleBlockType } from '@/entities/Article';
+import { ArticleType, ArticleBlockType } from '@/entities/Article';
 
 import { ArticlesInfiniteList } from './ArticlesInfiniteList';
 import { Theme } from '@/shared/const/theme';
@@ -92,7 +92,6 @@ const meta: Meta<typeof ArticlesInfiniteList> = {
         StoreDecorator({
             articlesPage: {
                 isLoading: false,
-                view: ArticleView.SMALL,
                 page: 1,
                 hasMore: false,
                 ids: ['1', '2', '3'],

@@ -1,6 +1,4 @@
-import {
-    memo, useCallback, useRef, useState,
-} from 'react';
+import { useCallback, useRef, useState } from 'react';
 import { VStack } from '../../../Stack';
 import { useInitialEffect } from '@/shared/lib/hooks/useInitialEffect';
 import { RichEditorContent } from '../RichEditorContent/RichEditorContent';
@@ -14,7 +12,7 @@ interface RichTextEditorProps {
    placeholder?: string;
 }
 
-export const RichTextEditor = memo((props: RichTextEditorProps) => {
+export const RichTextEditor = (props: RichTextEditorProps) => {
     const {
         className,
         value,
@@ -47,11 +45,10 @@ export const RichTextEditor = memo((props: RichTextEditorProps) => {
 
     const onTextSelect = useCallback(() => {
         setSelection(getSelectedNode());
-        console.log(getSelectedNode()?.nodeName);
     }, []);
 
-    function setContentEditableRef($el: HTMLDivElement) {
-        contentRef.current = $el;
+    function setContentEditableRef(el: HTMLDivElement) {
+        contentRef.current = el;
     }
 
     useInitialEffect(() => {
@@ -60,7 +57,7 @@ export const RichTextEditor = memo((props: RichTextEditorProps) => {
     });
 
     return (
-        <VStack max className={className}>
+        <VStack max className={className} gap="4">
             <RichEditorToolbar selection={selection} />
             <RichEditorContent
                 ref={setContentEditableRef}
@@ -72,4 +69,4 @@ export const RichTextEditor = memo((props: RichTextEditorProps) => {
             />
         </VStack>
     );
-});
+};

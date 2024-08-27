@@ -2,7 +2,6 @@ import type { Meta, StoryObj } from '@storybook/react';
 
 import { Article } from '../../model/types/article';
 import { ArticleListItem } from './ArticleListItem';
-import { ArticleView } from '../../model/consts/consts';
 
 const meta: Meta<typeof ArticleListItem> = {
     title: 'entities/Article/ArticleListItem',
@@ -94,16 +93,8 @@ const article = {
 export default meta;
 type Story = StoryObj<typeof ArticleListItem>;
 
-export const SMALL: Story = {
+export const Normal: Story = {
     args: {
         article,
-        view: ArticleView.SMALL,
-    },
-};
-
-export const BIG: Story = {
-    args: {
-        article,
-        view: ArticleView.BIG,
     },
 };

@@ -2,7 +2,6 @@ import type { Meta, StoryObj } from '@storybook/react';
 
 import { Article } from '../../model/types/article';
 import { ArticleList } from './ArticleList';
-import { ArticleView } from '../../model/consts/consts';
 
 const article = {
     id: '1',
@@ -97,23 +96,13 @@ type Story = StoryObj<typeof ArticleList>;
 export const isLoading: Story = {
     args: {
         isLoading: true,
-        view: ArticleView.SMALL,
         articles: [],
     },
 };
 
-export const isLoadingBig: Story = {
-    args: {
-        isLoading: true,
-        view: ArticleView.BIG,
-        articles: [],
-    },
-};
-
-export const NormalBig: Story = {
+export const Normal: Story = {
     args: {
         isLoading: false,
-        view: ArticleView.BIG,
         articles:
            new Array(16)
                .fill(0)
@@ -121,19 +110,5 @@ export const NormalBig: Story = {
                    ...article,
                    id: String(index),
                })),
-    },
-};
-
-export const NormalSmall: Story = {
-    args: {
-        isLoading: false,
-        view: ArticleView.SMALL,
-        articles:
-         new Array(6)
-             .fill(0)
-             .map((item, index) => ({
-                 ...article,
-                 id: String(index),
-             })),
     },
 };

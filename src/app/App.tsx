@@ -2,7 +2,6 @@ import { memo, Suspense, useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import { classNames } from '@/shared/lib/classNames/classNames';
 import { Navbar } from '@/widgets/Navbar';
-import { Sidebar } from '@/widgets/Sidebar';
 import {
     getUserAuthData, getUserInited, initAuthData,
 } from '@/entities/User';
@@ -42,10 +41,9 @@ const App = memo(() => {
         <div id="app" className={classNames('app', {}, [theme])}>
             <Suspense fallback="">
                 <MainLayout
-                    header={<Navbar />}
+                    navbar={<Navbar />}
                     content={<AppRouter />}
-                    sidebar={<Sidebar />}
-                    toolbar={toolbar}
+                    leftbar={toolbar}
                 />
             </Suspense>
         </div>

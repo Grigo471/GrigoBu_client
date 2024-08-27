@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react';
 
 import { StoreDecorator } from '@/shared/config/storybook/StoreDecorator/StoreDecorator';
-import { ArticleView, ArticleBlockType, ArticleType } from '@/entities/Article';
+import { ArticleBlockType, ArticleType } from '@/entities/Article';
 
 import ArticlesPage from './ArticlesPage';
 
@@ -91,25 +91,6 @@ const meta: Meta<typeof ArticlesPage> = {
 export default meta;
 type Story = StoryObj<typeof ArticlesPage>;
 
-export const Tiled: Story = {
-    args: {
-
-    },
-    decorators: [
-        StoreDecorator({
-            articlesPage: {
-                isLoading: false,
-                view: ArticleView.SMALL,
-                page: 1,
-                hasMore: false,
-                ids: ['1', '2', '3'],
-                entities: article,
-                error: undefined,
-            },
-        }),
-    ],
-};
-
 export const List: Story = {
     args: {
 
@@ -118,7 +99,6 @@ export const List: Story = {
         StoreDecorator({
             articlesPage: {
                 isLoading: false,
-                view: ArticleView.BIG,
                 page: 1,
                 hasMore: false,
                 ids: ['1', '2', '3'],
@@ -136,7 +116,6 @@ export const Error: Story = {
         StoreDecorator({
             articlesPage: {
                 isLoading: false,
-                view: ArticleView.BIG,
                 page: 1,
                 hasMore: false,
                 ids: ['1', '2', '3'],

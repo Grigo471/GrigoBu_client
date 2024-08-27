@@ -1,0 +1,28 @@
+.Navbar {
+    padding: 0 64px;
+    display: grid;
+    grid-template-areas: "appLogo items actions";
+    grid-template-columns: min-content 1fr min-content;
+    background: var(--dark-bg-redesigned);
+    margin-bottom: 16px;
+}
+
+.actions {
+    grid-area: actions;
+}
+
+.appLogo {
+    grid-area: appLogo;
+}
+
+.items {
+    justify-self: center;
+}
+
+.links,
+.actions {
+    padding: 8px 0;
+    margin-left: auto;
+    display: flex;
+    gap: 15px;
+}

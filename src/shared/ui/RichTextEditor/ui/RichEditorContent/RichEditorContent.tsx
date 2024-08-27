@@ -12,8 +12,7 @@ import { classNames } from '@/shared/lib/classNames/classNames';
 import { RichTextSanitizer } from '../../helpers/RichTextSanitizer';
 import { useInitialEffect } from '@/shared/lib/hooks/useInitialEffect';
 
-type HTMLDivProps = Omit<HTMLAttributes<HTMLDivElement>,
-   'onChange' | 'disabled'>;
+type HTMLDivProps = Omit<HTMLAttributes<HTMLDivElement>, 'onChange' | 'disabled'>;
 
 export interface RichEditorContentProps extends HTMLDivProps {
    disabled?: boolean;

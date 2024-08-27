@@ -6,7 +6,7 @@ import cls from './AppLoaderLayout.module.scss';
 
 export const AppLoaderLayout = memo(() => (
     <MainLayout
-        header={(
+        navbar={(
             <HStack className={cls.header}>
                 <Skeleton width={40} height={40} border="50%" />
             </HStack>
@@ -21,6 +21,6 @@ export const AppLoaderLayout = memo(() => (
                 <Skeleton width="80%" height="40%" border="16px" />
             </VStack>
         )}
-        sidebar={<Skeleton border="32px" width={220} height="100%" />}
+        leftbar={<Skeleton border="32px" width={220} height="100%" />}
     />
 ));

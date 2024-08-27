@@ -1,0 +1,20 @@
+/* stylelint-disable alpha-value-notation */
+/* stylelint-disable color-function-notation */
+.link {
+    opacity: 1;
+    font: var(--font-m);
+    font-weight: 700;
+}
+
+.NavigationItem {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+}
+
+.active {
+    color: var(--accent-redesigned);
+    border-bottom: 2px var(--accent-redesigned) solid;
+}

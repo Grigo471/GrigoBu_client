@@ -3,6 +3,7 @@ import { classNames } from '@/shared/lib/classNames/classNames';
 import cls from './ScrollToolbar.module.scss';
 import { VStack } from '@/shared/ui/Stack';
 import { ScrollToTopButton } from '@/features/ScrollToTopButton';
+import { ThemeSwitcher } from '@/features/ThemeSwitcher';
 
 interface ScrollToolbarProps {
    className?: string;
@@ -19,6 +20,7 @@ export const ScrollToolbar = memo((props: PropsWithChildren<ScrollToolbarProps>)
             className={classNames(cls.ScrollToolbar, {}, [className])}
         >
             <ScrollToTopButton />
+            <ThemeSwitcher />
         </VStack>
     );
 });

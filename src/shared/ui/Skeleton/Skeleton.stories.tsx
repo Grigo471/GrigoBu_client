@@ -39,14 +39,3 @@ export const Dark: Story = {
         ThemeDecorator(Theme.DARK),
     ],
 };
-
-export const Brown: Story = {
-    args: {
-        border: '50%',
-        width: 100,
-        height: 100,
-    },
-    decorators: [
-        ThemeDecorator(Theme.BROWN),
-    ],
-};

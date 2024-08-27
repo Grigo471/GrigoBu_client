@@ -5,14 +5,13 @@ import { classNames } from '@/shared/lib/classNames/classNames';
 import { ReducerList, useDynamicModuleLoad } from '@/shared/lib/hooks/useDynamicModuleLoad';
 import { Page } from '@/widgets/Page';
 import { VStack } from '@/shared/ui/Stack';
-import { ArticleRecommendationsList } from '@/features/ArticleRecommendationsList';
 import { articleDetailsPageReducer } from '../../model/slice';
 import cls from './ArticleDetailsPage.module.scss';
 import { ArticleDetailsComments } from '../AricleDetailsComments/ArticleDetailsComments';
-import { ArticleRating } from '@/features/ArticleRating';
 import { StickyContentLayout } from '@/shared/layouts/StickyContentLayout';
-import { DetailsContainer } from '../DetailsContainer/DetailsContainer';
 import { AdditionalInfoContainer } from '../AdditionalInfoContainer/AdditionalInfoContainer';
+import { Card } from '@/shared/ui/Card';
+import { ArticleDetails } from '@/entities/Article';
 
 interface ArticleDetailsPageProps {
    className?: string;
@@ -43,9 +42,9 @@ const ArticleDetailsPage = (props: ArticleDetailsPageProps) => {
             content={(
                 <Page className={classNames(cls.ArticleDetailsPage, {}, [className])}>
                     <VStack gap="16" max>
-                        <DetailsContainer />
-                        <ArticleRating articleId={id} />
-                        <ArticleRecommendationsList />
+                        <Card max border="round" className={className} padding="24">
+                            <ArticleDetails articleId={id} />
+                        </Card>
                         <ArticleDetailsComments id={id} />
                     </VStack>
                 </Page>

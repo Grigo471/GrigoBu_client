@@ -1,29 +1,25 @@
 import { ReactElement } from 'react';
-import { useTranslation } from 'react-i18next';
 import { classNames } from '@/shared/lib/classNames/classNames';
 import cls from './MainLayout.module.scss';
 
 interface MainLayoutProps {
    className?: string;
-   header: ReactElement;
+   navbar: ReactElement;
    content: ReactElement;
-   sidebar: ReactElement;
-   toolbar?: ReactElement;
+   leftbar?: ReactElement;
 }
 
 export const MainLayout = (props: MainLayoutProps) => {
     const {
-        className, header, content, sidebar, toolbar,
+        className, navbar, content, leftbar,
     } = props;
-    const { t } = useTranslation();
 
     return (
         <div className={classNames(cls.MainLayout, {}, [className])}>
-            <div className={cls.content}>{content}</div>
-            <div className={cls.sidebar}>{sidebar}</div>
-            <div className={cls.rightbar}>
-                <div className={cls.header}>{header}</div>
-                <div className={cls.toolbar}>{toolbar}</div>
+            <div className={cls.navbar}>{navbar}</div>
+            <div className={cls.contentWrapper}>
+                <div className={cls.content}>{content}</div>
+                <div className={cls.leftbar}>{leftbar}</div>
             </div>
         </div>
     );

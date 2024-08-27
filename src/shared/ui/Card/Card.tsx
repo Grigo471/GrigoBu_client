@@ -1,5 +1,4 @@
-import { type PropsWithChildren, memo, HTMLAttributes } from 'react';
-import { useTranslation } from 'react-i18next';
+import { memo, HTMLAttributes } from 'react';
 import { classNames } from '@/shared/lib/classNames/classNames';
 import cls from './Card.module.scss';
 
@@ -22,7 +21,7 @@ const mapPaddingToClass: Record<CardPadding, string> = {
     24: 'gap_24',
 };
 
-export const Card = memo((props: PropsWithChildren<CardProps>) => {
+export const Card = memo((props: CardProps) => {
     const {
         className,
         children,
@@ -32,7 +31,6 @@ export const Card = memo((props: PropsWithChildren<CardProps>) => {
         border = 'normal',
         ...otherProps
     } = props;
-    const { t } = useTranslation();
 
     const paddingClass = mapPaddingToClass[padding];
 

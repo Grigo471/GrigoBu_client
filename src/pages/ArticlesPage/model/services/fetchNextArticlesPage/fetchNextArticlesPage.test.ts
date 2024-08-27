@@ -1,5 +1,5 @@
 import { TestThunkAsync } from '@/shared/lib/tests/TestAsyncThunk/TestAsyncThunk';
-import { ArticleView, ArticleSortField, ArticleType } from '@/entities/Article';
+import { ArticleSortField, ArticleType } from '@/entities/Article';
 
 import { fetchNextArticlesPage } from './fetchNextArticlesPage';
 import { fetchArticlesList } from '../fetchArticlesList/fetchArticlesList';
@@ -20,7 +20,6 @@ describe('fetchNextArticlesPage.test', () => {
                 sort: ArticleSortField.CREATED,
                 order: 'asc',
                 search: '',
-                view: ArticleView.BIG,
                 type: ArticleType.ALL,
             },
         });
@@ -44,7 +43,6 @@ describe('fetchNextArticlesPage.test', () => {
                 sort: ArticleSortField.CREATED,
                 order: 'asc',
                 search: '',
-                view: ArticleView.BIG,
                 type: ArticleType.ALL,
             },
         });

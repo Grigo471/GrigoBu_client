@@ -7,7 +7,7 @@ export type {
 } from './model/types/article';
 
 export {
-    ArticleView, ArticleSortField, ArticleType, ArticleBlockType,
+    ArticleSortField, ArticleType, ArticleBlockType,
 } from './model/consts/consts';
 
 export type { ArticleDetailsSchema } from './model/types/ArticleDetailsSchema';

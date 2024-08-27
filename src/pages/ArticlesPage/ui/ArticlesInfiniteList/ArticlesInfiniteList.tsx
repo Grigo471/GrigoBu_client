@@ -9,7 +9,7 @@ import { useAppDispatch } from '@/shared/lib/hooks/useAppDispatch';
 import { articlesPageReducer, getArticles } from '../../model/slice/articlePageSlice';
 import { initArticlesPage } from '../../model/services/initArticlesPage/initArticlesPage';
 import {
-    getArticlesPageError, getArticlesPageIsLoading, getArticlesPageView,
+    getArticlesPageError, getArticlesPageIsLoading,
 } from '../../model/selectors/articlesPageSelectors';
 import { Text } from '@/shared/ui/Text';
 
@@ -27,7 +27,6 @@ export const ArticlesInfiniteList = memo((props: ArticlesInfiniteListProps) => {
     const articles = useSelector(getArticles.selectAll);
     const error = useSelector(getArticlesPageError);
     const isLoading = useSelector(getArticlesPageIsLoading);
-    const view = useSelector(getArticlesPageView);
 
     const dispatch = useAppDispatch();
 
@@ -51,7 +50,6 @@ export const ArticlesInfiniteList = memo((props: ArticlesInfiniteListProps) => {
 
     return (
         <ArticleList
-            view={view}
             articles={articles}
             isLoading={isLoading}
             className={className}

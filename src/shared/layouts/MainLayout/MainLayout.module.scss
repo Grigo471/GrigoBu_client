@@ -1,39 +1,30 @@
 .MainLayout {
     min-height: 100vh;
-    display: grid;
-    grid-template-areas: "sidebar content rightbar";
-    grid-template-columns: min-content 1fr 100px;
 }
 
-.sidebar {
-    grid-area: sidebar;
-    padding: 32px 0 32px 32px;
-    max-width: 284px;
+.navbar {
+    width: 100%;
+}
+
+.contentWrapper {
+    display: grid;
+    grid-template-areas: "leftbar content";
+    grid-template-columns: min-content 1fr;
+}
+
+.leftbar {
+    height: 100vh;
+    width: 100%;
+    grid-area: leftbar;
+    padding: 20px;
+    position: sticky;
+    top: 16px;
 }
 
 .content {
     grid-area: content;
     max-width: 1200px;
     justify-self: center;
-    padding: 32px;
-    width: 100%;
-}
-
-.rightbar {
-    grid-area: rightbar;
-    display: flex;
-    flex-direction: column;
-    align-items: flex-end;
-}
-
-.rightbar,
-.sidebar {
-    position: sticky;
-    top: 0;
-    height: 100vh;
-}
-
-.toolbar {
-    height: 100%;
+    padding: 0 32px;
     width: 100%;
 }

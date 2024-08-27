@@ -3,6 +3,7 @@ import { classNames } from '@/shared/lib/classNames/classNames';
 import { ArticleTextBlock } from '../../model/types/article';
 import cls from './ArticleTextBlockComponent.module.scss';
 import { Text } from '@/shared/ui/Text';
+import { RichTextOutput, RichTextSanitizer } from '@/shared/ui/RichTextEditor';
 
 interface ArticleTextBlockComponentProps {
    className?: string;
@@ -17,7 +18,7 @@ export const ArticleTextBlockComponent = memo((props: ArticleTextBlockComponentP
             {block.title && (
                 <Text title={block.title} className={cls.title} />
             )}
-            <div dangerouslySetInnerHTML={{ __html: block.paragraphs }} className={cls.paragraph} />
+            <RichTextOutput value={RichTextSanitizer(block.paragraphs)} />
         </div>
     );
 });
