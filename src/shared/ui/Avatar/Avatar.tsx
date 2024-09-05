@@ -1,4 +1,6 @@
-import { useMemo, type PropsWithChildren, CSSProperties } from 'react';
+import {
+    useMemo, type PropsWithChildren, CSSProperties,
+} from 'react';
 import { classNames } from '@/shared/lib/classNames/classNames';
 import cls from './Avatar.module.scss';
 import { AppImage } from '../AppImage';
@@ -13,7 +15,9 @@ interface AvatarProps {
   alt?: string;
 }
 
-export const Avatar = (props: PropsWithChildren<AvatarProps>) => {
+export const Avatar = (
+    props: PropsWithChildren<AvatarProps>,
+) => {
     const {
         className, src, size = 100, alt,
     } = props;

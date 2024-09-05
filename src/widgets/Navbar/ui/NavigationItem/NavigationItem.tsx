@@ -1,9 +1,7 @@
 import { useTranslation } from 'react-i18next';
-import { useSelector } from 'react-redux';
-import { getUserAuthData } from '@/entities/User';
 import cls from './NavigationItem.module.scss';
 import { AppLink } from '@/shared/ui/AppLink';
-import { NavigationItemType } from '../../model/types/NavigationItem';
+import { NavigationItemType } from '../../model/types/NavigationItemsList';
 
 interface SidebarItemProps {
     item: NavigationItemType,
@@ -11,12 +9,6 @@ interface SidebarItemProps {
 
 export function NavigationItem({ item }: SidebarItemProps) {
     const { t } = useTranslation();
-
-    const isAuth = useSelector(getUserAuthData);
-
-    if (item.authOnly && !isAuth) {
-        return null;
-    }
 
     return (
 

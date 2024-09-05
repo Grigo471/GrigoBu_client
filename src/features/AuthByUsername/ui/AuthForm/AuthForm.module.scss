@@ -1,0 +1,15 @@
+.AuthForm {
+    display: flex;
+    flex-direction: column;
+    width: 400px;
+}
+
+.input {
+    margin-top: 10px;
+}
+
+.submitBtn,
+.toggleBtn {
+    margin-top: 15px;
+    margin-left: auto;
+}

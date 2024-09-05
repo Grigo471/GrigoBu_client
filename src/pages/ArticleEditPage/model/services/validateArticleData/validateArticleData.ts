@@ -1,4 +1,4 @@
-import { Article, ArticleBlockType } from '@/entities/Article';
+import { Article } from '@/entities/Article';
 import { ValidateArticleError } from '../../consts/consts';
 
 export const validateArticleData = (article?: Article) => {
@@ -7,17 +7,13 @@ export const validateArticleData = (article?: Article) => {
     }
 
     const {
-        title, subtitle, img, type, blocks,
+        title, blocks,
     } = article;
 
     const errors: ValidateArticleError[] = [];
 
-    if (!title || !subtitle || !img) {
-        errors.push(ValidateArticleError.EMPTY_MAIN);
-    }
-
-    if (!type) {
-        errors.push(ValidateArticleError.INCORRECT_ARTICLE_TYPE);
+    if (!title) {
+        errors.push(ValidateArticleError.EMPTY_TITLE);
     }
 
     if (blocks.length === 0) {
@@ -26,11 +22,11 @@ export const validateArticleData = (article?: Article) => {
 
     if (blocks.some((block) => {
         switch (block.type) {
-        case ArticleBlockType.TEXT:
+        case 'text':
             return block.paragraphs.length === 0;
-        case ArticleBlockType.IMAGE:
+        case 'image':
             return block.src.length === 0;
-        case ArticleBlockType.CODE:
+        case 'code':
             return block.code.length === 0;
         default: return false;
         }

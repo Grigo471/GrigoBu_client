@@ -1,0 +1,17 @@
+.img {
+    max-height: 520px;
+    max-width: 100%;
+}
+
+.imageWrapper {
+    position: relative;
+}
+
+.deleteBtn {
+    position: absolute;
+    right: 20px;
+    top: 20px;
+    background-color: var(--dark-bg-redesigned);
+    border-radius: 8px;
+    padding: 8px;
+}

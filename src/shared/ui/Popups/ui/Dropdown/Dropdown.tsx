@@ -18,18 +18,19 @@ interface DropdownProps {
    items: DropdownItem[];
    trigger: ReactNode;
    direction?: DropDownDirection;
+   disabled?: boolean;
 }
 
 export function Dropdown(props: DropdownProps) {
     const {
-        className, trigger, items, direction = 'bottomRight',
+        className, trigger, items, direction = 'bottomRight', disabled = false,
     } = props;
 
     const menuClasses = [popupCls[direction], popupCls.menu];
 
     return (
         <Menu as="div" className={classNames(cls.Dropdown, {}, [className, popupCls.popup])}>
-            <Menu.Button className={popupCls.trigger}>
+            <Menu.Button disabled={disabled} className={popupCls.trigger}>
                 {trigger}
             </Menu.Button>
             <Menu.Items className={classNames(cls.menu, {}, menuClasses)}>

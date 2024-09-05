@@ -4,7 +4,7 @@ import {
 import { classNames } from '@/shared/lib/classNames/classNames';
 import { NotificationsList } from '@/entities/Notification';
 import Notifications from '@/shared/assets/icons/notifications.svg';
-import { Drawer as DrawerDeprecated } from '@/shared/ui/Drawer';
+import { Drawer } from '@/shared/ui/Drawer';
 import { useDevice } from '@/shared/lib/hooks/useDevice';
 import cls from './NotificationsButton.module.scss';
 import { Icon } from '@/shared/ui/Icon';
@@ -30,9 +30,7 @@ export const NotificationsButton = memo((props: PropsWithChildren<NotificationsB
     }, []);
 
     const trigger = (
-
         <Icon Svg={Notifications} clickable onClick={onDrawerOpen} />
-
     );
 
     return (
@@ -41,9 +39,9 @@ export const NotificationsButton = memo((props: PropsWithChildren<NotificationsB
             { isMobile ? (
                 <>
                     {trigger}
-                    <DrawerDeprecated isOpen={isDrawerOpen} onClose={onDrawerClose} lazy>
+                    <Drawer isOpen={isDrawerOpen} onClose={onDrawerClose} lazy>
                         <NotificationsList />
-                    </DrawerDeprecated>
+                    </Drawer>
 
                 </>
             ) : (

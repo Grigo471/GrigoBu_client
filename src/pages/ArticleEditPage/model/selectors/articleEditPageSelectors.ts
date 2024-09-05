@@ -11,3 +11,7 @@ export const getArticleEditPageIsPreview = (state: StateSchema) => state.article
 export const getArticleEditPageValidateErrors = (
     state: StateSchema,
 ) => state.articleEditPage?.validateErrors;
+
+export const getArticleEditPageBlocksLength = (
+    state: StateSchema,
+) => state.articleEditPage?.form.blocks.length;

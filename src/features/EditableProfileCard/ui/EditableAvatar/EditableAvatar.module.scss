@@ -1,0 +1,24 @@
+.EditableAvatar {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.overlay {
+    cursor: pointer;
+    position: absolute;
+    z-index: 1000;
+    opacity: 0;
+    background: rgba(16 13 13 / 50%);
+    border-radius: 100%;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.overlay:hover {
+    opacity: 1;
+}

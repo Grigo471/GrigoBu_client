@@ -7,15 +7,12 @@ import { Text } from '@/shared/ui/Text';
 import EyeIcon from '@/shared/assets/icons/eye.svg';
 import { Card } from '@/shared/ui/Card';
 import { Avatar } from '@/shared/ui/Avatar';
-import { AppImage } from '@/shared/ui/AppImage';
-import { Skeleton } from '@/shared/ui/Skeleton';
 
 import { getRouteArticleDetails } from '@/shared/const/router';
 import { Button } from '@/shared/ui/Button';
 import { AppLink } from '@/shared/ui/AppLink';
 import { HStack, VStack } from '@/shared/ui/Stack';
 import { Article, ArticleTextBlock } from '../../model/types/article';
-import { ArticleBlockType } from '../../model/consts/consts';
 
 export interface ArticleListItemProps {
     className?: string;
@@ -38,7 +35,7 @@ export const ArticleListItem = memo((props: ArticleListItemProps) => {
     );
 
     const textBlock = article.blocks.find(
-        (block) => block.type === ArticleBlockType.TEXT,
+        (block) => block.type === 'text',
     ) as ArticleTextBlock;
 
     return (
@@ -50,18 +47,12 @@ export const ArticleListItem = memo((props: ArticleListItemProps) => {
             >
                 <VStack max gap="16">
                     <HStack gap="8">
-                        <Avatar className={cls.avatar} size={32} src={article.user.avatar} />
+                        <Avatar className={cls.avatar} size={32} src={article.user.avatar ?? ''} />
                         <Text bold text={article.user.username} />
                         {createdAt}
                     </HStack>
                     <Text title={article.title} bold className={cls.title} />
-                    <Text title={article.subtitle} size="s" />
-                    <AppImage
-                        src={article.img}
-                        alt={article.title}
-                        className={cls.img}
-                        fallback={<Skeleton width="100%" height={250} />}
-                    />
+                    {article.subtitle && <Text title={article.subtitle} size="s" />}
                     {textBlock?.paragraphs && (
                         <Text
                             className={cls.textBlock}

@@ -4,11 +4,6 @@
     grid-template-areas: "appLogo items actions";
     grid-template-columns: min-content 1fr min-content;
     background: var(--dark-bg-redesigned);
-    margin-bottom: 16px;
-}
-
-.actions {
-    grid-area: actions;
 }
 
 .appLogo {
@@ -19,10 +14,19 @@
     justify-self: center;
 }
 
-.links,
+.login,
 .actions {
-    padding: 8px 0;
+    margin-left: auto;
+}
+
+.actions {
+    padding: 8px 0 0;
+    grid-area: actions;
     margin-left: auto;
     display: flex;
     gap: 15px;
+}
+
+.login {
+    padding: 16px 0;
 }

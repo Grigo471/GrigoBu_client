@@ -35,15 +35,15 @@ export const ArticleSortSelector = memo((props: ArticleSortSelectorProps) => {
     ], [t]);
     const sortFieldOptions = useMemo<ListBoxItem<ArticleSortField>[]>(() => [
         {
-            value: ArticleSortField.CREATED,
+            value: 'createdAt',
             content: t('дате создания'),
         },
         {
-            value: ArticleSortField.TITLE,
+            value: 'title',
             content: t('заголовку'),
         },
         {
-            value: ArticleSortField.VIEWS,
+            value: 'views',
             content: t('количеству просмотров'),
         },
     ], [t]);

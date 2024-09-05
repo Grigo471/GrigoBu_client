@@ -1,4 +1,6 @@
-import { memo, type PropsWithChildren } from 'react';
+import {
+    ForwardedRef, forwardRef, type PropsWithChildren,
+} from 'react';
 import { LinkProps, NavLink } from 'react-router-dom';
 import { classNames } from '@/shared/lib/classNames/classNames';
 import cls from './AppLink.module.scss';
@@ -11,7 +13,10 @@ interface AppLinkProps extends LinkProps {
     activeClassname?: string;
 }
 
-export const AppLink = memo((props: PropsWithChildren<AppLinkProps>) => {
+export const AppLink = forwardRef((
+    props: PropsWithChildren<AppLinkProps>,
+    ref: ForwardedRef<HTMLAnchorElement>,
+) => {
     const {
         to,
         className,
@@ -23,6 +28,7 @@ export const AppLink = memo((props: PropsWithChildren<AppLinkProps>) => {
 
     return (
         <NavLink
+            ref={ref}
             to={to}
             className={({ isActive }) => classNames(
                 cls.AppLink,

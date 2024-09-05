@@ -4,33 +4,29 @@ import { classNames } from '@/shared/lib/classNames/classNames';
 import cls from './ArticlesFilters.module.scss';
 import { Card } from '@/shared/ui/Card';
 import { ArticleSortSelector } from '@/features/ArticleSortSelector';
-import { ArticleTypeTabs } from '@/features/ArticleTypeTabs';
 import { VStack } from '@/shared/ui/Stack';
 import { SortOrder } from '@/shared/types';
-import { ArticleSortField, ArticleType } from '@/entities/Article';
+import { ArticleSortField } from '@/entities/Article';
 import { Input } from '@/shared/ui/Input';
 import SearchIcon from '@/shared/assets/icons/search.svg';
 import { Icon } from '@/shared/ui/Icon';
-import { TabItem } from '@/shared/ui/Tabs';
 
 interface ArticleFiltersProps {
    className?: string;
    order: SortOrder;
    sort: ArticleSortField;
    search: string;
-   type: ArticleType;
    onChangeOrder: (order: SortOrder) => void;
    onChangeSort: (sort: ArticleSortField) => void;
    onChangeSearch: (search: string) => void;
-   onChangeType: (type: TabItem<ArticleType>) => void;
 }
 
 export const ArticlesFilters = memo((props: ArticleFiltersProps) => {
     const {
         className, order,
-        sort, search, type,
+        sort, search,
         onChangeOrder, onChangeSearch,
-        onChangeSort, onChangeType,
+        onChangeSort,
     } = props;
     const { t } = useTranslation();
 
@@ -44,11 +40,11 @@ export const ArticlesFilters = memo((props: ArticleFiltersProps) => {
                     onChange={onChangeSearch}
                     placeholder={t('Поиск')}
                 />
-                <ArticleTypeTabs
+                {/* <ArticleTypeTabs
                     value={type}
                     onChangeType={onChangeType}
                     className={cls.tabs}
-                />
+                /> */}
                 <ArticleSortSelector
                     order={order}
                     sort={sort}

@@ -1,18 +1,3 @@
-export enum ArticleBlockType {
-    CODE = 'CODE',
-    IMAGE = 'IMAGE',
-    TEXT = 'TEXT',
-}
+export type ArticleBlockType = 'code' | 'text' | 'image';
 
-export enum ArticleType {
-    ALL = 'All',
-    IT = 'IT',
-    SCIENCE = 'SCIENCE',
-    ECONOMICS = 'ECONOMICS',
-}
-
-export enum ArticleSortField {
-    VIEWS = 'views',
-    TITLE = 'title',
-    CREATED = 'createdAt'
-}
+export type ArticleSortField = 'views' | 'title' | 'createdAt';

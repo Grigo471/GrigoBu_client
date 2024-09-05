@@ -1,10 +1,7 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { LOCAL_STORAGE_LAST_DESIGN_KEY, USER_LOCALSTORAGE_KEY } from '@/shared/const/localStorage';
 import { User, UserSchema } from '../types/user';
-import { setFeatureFlags } from '@/shared/lib/features';
-import { saveJsonSettings } from '../services/saveJsonSettings';
-import { JsonSettings } from '../types/jsonSettings';
-import { initAuthData } from '../services/initAuthData';
+import { checkAuth } from '../services/checkAuth';
+import { logout } from '../services/logout';
 
 const initialState: UserSchema = {
     _inited: false,
@@ -16,43 +13,37 @@ export const userSlice = createSlice({
     reducers: {
         setAuthData: (state, { payload }: PayloadAction<User>) => {
             state.authData = payload;
-            setFeatureFlags(payload.features);
-            localStorage.setItem(
-                USER_LOCALSTORAGE_KEY,
-                payload.id,
-            );
-            localStorage.setItem(
-                LOCAL_STORAGE_LAST_DESIGN_KEY,
-                payload.features?.isAppRedesigned ? 'new' : 'old',
-            );
+            state._inited = true;
+        },
+        setInited: (state) => {
+            state._inited = true;
+        },
+        setAvatar: (state, { payload }: PayloadAction<string>) => {
+            if (state.authData) state.authData.avatar = payload;
         },
         logout: (state) => {
             state.authData = undefined;
-            localStorage.removeItem(USER_LOCALSTORAGE_KEY);
         },
     },
     extraReducers: (builder) => {
         builder
             .addCase(
-                saveJsonSettings.fulfilled,
-                (state, { payload }: PayloadAction<JsonSettings>) => {
-                    if (state.authData) {
-                        state.authData.jsonSettings = payload;
-                    }
-                },
-            )
-            .addCase(
-                initAuthData.fulfilled,
+                checkAuth.fulfilled,
                 (state, { payload }: PayloadAction<User>) => {
                     state.authData = payload;
-                    setFeatureFlags(payload.features);
                     state._inited = true;
                 },
             )
             .addCase(
-                initAuthData.rejected,
+                checkAuth.rejected,
                 (state) => {
                     state._inited = true;
+                },
+            )
+            .addCase(
+                logout.fulfilled,
+                (state) => {
+                    state.authData = undefined;
                 },
             );
     },

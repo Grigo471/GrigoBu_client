@@ -3,7 +3,9 @@ import { useSelector } from 'react-redux';
 import { classNames } from '@/shared/lib/classNames/classNames';
 import { Navbar } from '@/widgets/Navbar';
 import {
-    getUserAuthData, getUserInited, initAuthData,
+    checkAuth,
+    getUserAuthData, getUserInited,
+    userActions,
 } from '@/entities/User';
 import { AppRouter } from './providers/routes';
 import { useTheme } from '@/shared/lib/hooks/useTheme';
@@ -12,6 +14,7 @@ import { MainLayout } from '@/shared/layouts/MainLayout';
 import { AppLoaderLayout } from '@/shared/layouts/AppLoaderLayout';
 import { useAppToolbar } from './lib/useAppToolbar';
 import { withTheme } from './providers/ThemeProvider/ui/withTheme';
+import { LOCAL_STORAGE_TOKEN_KEY } from '@/shared/const/localStorage';
 
 const App = memo(() => {
     const { theme } = useTheme();
@@ -23,7 +26,11 @@ const App = memo(() => {
     const toolbar = useAppToolbar();
 
     useEffect(() => {
-        dispatch(initAuthData());
+        if (localStorage.getItem(LOCAL_STORAGE_TOKEN_KEY)) {
+            dispatch(checkAuth());
+        } else {
+            dispatch(userActions.setInited());
+        }
     }, [dispatch]);
 
     if (!_inited) {

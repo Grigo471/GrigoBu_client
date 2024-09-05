@@ -2,7 +2,6 @@ import { screen } from '@testing-library/react';
 import { componentRender } from '@/shared/lib/tests/componentRender/componentRender';
 import { AppRouter } from './AppRouter';
 import { getRouteAbout, getRouteAdmin, getRouteProfile } from '@/shared/const/router';
-import { UserRole } from '@/entities/User';
 
 describe('app/router/AppRouter', () => {
     beforeAll(() => {
@@ -54,7 +53,7 @@ describe('app/router/AppRouter', () => {
             initialState: {
                 user: {
                     _inited: true,
-                    authData: { id: '1' },
+                    authData: { id: 1 },
                 },
             },
         });
@@ -69,7 +68,7 @@ describe('app/router/AppRouter', () => {
             initialState: {
                 user: {
                     _inited: true,
-                    authData: { id: '1' },
+                    authData: { id: 1 },
                 },
             },
         });
@@ -84,7 +83,7 @@ describe('app/router/AppRouter', () => {
             initialState: {
                 user: {
                     _inited: true,
-                    authData: { id: '1', roles: [UserRole.ADMIN] },
+                    authData: { id: 1, role: 'admin' },
                 },
             },
         });

@@ -5,6 +5,8 @@
     background: var(--light-redesigned);
     overflow: auto;
     border-radius: 16px;
+    max-width: 660px;
+    overflow-x: scroll;
 }
 
 .copyBtn {

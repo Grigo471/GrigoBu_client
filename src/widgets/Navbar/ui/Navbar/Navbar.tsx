@@ -4,16 +4,20 @@ import {
 } from 'react';
 import { useSelector } from 'react-redux';
 import { classNames } from '@/shared/lib/classNames/classNames';
-import { LoginModal } from '@/features/AuthByUsername';
 import { getUserAuthData } from '@/entities/User';
 import { HStack } from '@/shared/ui/Stack';
 import { NotificationsButton } from '@/features/NotificationsButton';
 import { AvatarDropdown } from '@/features/AvatarDropdown';
 import cls from './Navbar.module.scss';
 import { Button } from '@/shared/ui/Button';
-import { getNavigationItems } from '../../model/selectors/getNavigationItems';
+import { NavigationItemsList } from '../../model/types/NavigationItemsList';
 import { NavigationItem } from '../NavigationItem/NavigationItem';
 import { AppLogo } from '@/shared/ui/AppLogo';
+import { AppLink } from '@/shared/ui/AppLink';
+import { Icon } from '@/shared/ui/Icon';
+import PlusIcon from '@/shared/assets/icons/plus.svg';
+import { getRouteArticleCreate } from '@/shared/const/router';
+import { AuthModal } from '@/features/AuthByUsername';
 
 interface NavbarProps {
  className?: string;
@@ -25,14 +29,13 @@ export const Navbar = memo((props: NavbarProps) => {
     const [isAuthModal, setIsAuthModal] = useState(false);
 
     const authData = useSelector(getUserAuthData);
-    const SidebarItemsList = useSelector(getNavigationItems);
 
-    const ItemsList = useMemo(() => SidebarItemsList.map((item) => (
+    const ItemsList = useMemo(() => NavigationItemsList.map((item) => (
         <NavigationItem
             item={item}
             key={item.path}
         />
-    )), [SidebarItemsList]);
+    )), []);
 
     const onCloseModal = useCallback(() => {
         setIsAuthModal(false);
@@ -44,20 +47,23 @@ export const Navbar = memo((props: NavbarProps) => {
 
     const actionsToolbar = authData ? (
         <HStack gap="16" className={cls.actions} justify="center" align="center">
+            <AppLink to={getRouteArticleCreate()}>
+                <Icon clickable Svg={PlusIcon} />
+            </AppLink>
             <NotificationsButton />
             <AvatarDropdown onCloseModal={onCloseModal} />
         </HStack>
     ) : (
         <>
             <Button
-                className={cls.links}
+                className={cls.login}
                 onClick={onShowModal}
                 variant="clear"
             >
                 {t('Войти')}
             </Button>
             {isAuthModal && (
-                <LoginModal
+                <AuthModal
                     isOpen={isAuthModal}
                     onClose={onCloseModal}
                 />

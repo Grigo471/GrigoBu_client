@@ -12,24 +12,20 @@ export const FiltersContainer = memo((props: FiltersContainerProps) => {
     const {
         sort,
         search,
-        type,
         order,
         onChangeOrder,
         onChangeSearch,
         onChangeSort,
-        onChangeType,
     } = useArticlesFilters();
 
     return (
         <ArticlesFilters
             order={order}
-            type={type}
             search={search}
             sort={sort}
             onChangeOrder={onChangeOrder}
             onChangeSearch={onChangeSearch}
             onChangeSort={onChangeSort}
-            onChangeType={onChangeType}
             className={className}
         />
     );

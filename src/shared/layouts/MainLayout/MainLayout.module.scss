@@ -4,6 +4,8 @@
 
 .navbar {
     width: 100%;
+    position: fixed;
+    z-index: 10000;
 }
 
 .contentWrapper {
@@ -22,8 +24,9 @@
 }
 
 .content {
+    margin-top: 72px;
     grid-area: content;
-    max-width: 1200px;
+    max-width: 1100px;
     justify-self: center;
     padding: 0 32px;
     width: 100%;

@@ -11,7 +11,6 @@ import { ArticleDetailsComments } from '../AricleDetailsComments/ArticleDetailsC
 import { StickyContentLayout } from '@/shared/layouts/StickyContentLayout';
 import { AdditionalInfoContainer } from '../AdditionalInfoContainer/AdditionalInfoContainer';
 import { Card } from '@/shared/ui/Card';
-import { ArticleDetails } from '@/entities/Article';
 
 interface ArticleDetailsPageProps {
    className?: string;
@@ -43,7 +42,7 @@ const ArticleDetailsPage = (props: ArticleDetailsPageProps) => {
                 <Page className={classNames(cls.ArticleDetailsPage, {}, [className])}>
                     <VStack gap="16" max>
                         <Card max border="round" className={className} padding="24">
-                            <ArticleDetails articleId={id} />
+                            {/* <ArticleDetails articleId={id} /> */}
                         </Card>
                         <ArticleDetailsComments id={id} />
                     </VStack>

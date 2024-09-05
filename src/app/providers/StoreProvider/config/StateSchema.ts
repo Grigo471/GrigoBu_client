@@ -5,21 +5,23 @@ import { AxiosInstance } from 'axios';
 import { ArticleDetailsSchema } from '@/entities/Article';
 import { UserSchema } from '@/entities/User';
 import { AddCommentFormSchema } from '@/features/AddCommentForm';
-import { LoginSchema } from '@/features/AuthByUsername';
-import { ProfileSchema } from '@/features/EditableProfileCard';
+import { AuthSchema } from '@/features/AuthByUsername';
 import { UISchema } from '@/features/UI';
 import { ArticleDetailsPageSchema } from '@/pages/ArticleDetailsPage';
 import { ArticlesPageSchema } from '@/pages/ArticlesPage';
 import { rtkApi } from '@/shared/api/rtkApi';
 import { ArticleEditPageSchema } from '@/pages/ArticleEditPage';
+import { EditableProfileSchema } from '@/features/EditableProfileCard';
+import { ProfileCardSchema } from '@/features/ProfileCard';
 
 export interface StateSchema {
     user: UserSchema;
     UI: UISchema;
     [rtkApi.reducerPath]: ReturnType<typeof rtkApi.reducer>;
 
-    loginForm?: LoginSchema;
-    profile?: ProfileSchema;
+    authForm?: AuthSchema;
+    editableProfileCard?: EditableProfileSchema;
+    profileCard?: ProfileCardSchema;
     articleDetails?: ArticleDetailsSchema;
     addCommentForm?: AddCommentFormSchema;
     articlesPage?: ArticlesPageSchema;

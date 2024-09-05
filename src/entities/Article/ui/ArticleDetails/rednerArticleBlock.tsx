@@ -1,4 +1,3 @@
-import { ArticleBlockType } from '../../model/consts/consts';
 import { ArticleBlock } from '../../model/types/article';
 import { ArticleCodeBlockComponent } from '../ArticleCodeBlockComponent/ArticleCodeBlockComponent';
 import {
@@ -9,7 +8,7 @@ import cls from './ArticleDetails.module.scss';
 
 export const renderArticleBlock = (block: ArticleBlock) => {
     switch (block.type) {
-    case ArticleBlockType.CODE:
+    case 'code':
         return (
             <ArticleCodeBlockComponent
                 className={cls.block}
@@ -17,7 +16,7 @@ export const renderArticleBlock = (block: ArticleBlock) => {
                 key={block.id}
             />
         );
-    case ArticleBlockType.TEXT:
+    case 'text':
         return (
             <ArticleTextBlockComponent
                 className={cls.block}
@@ -25,7 +24,7 @@ export const renderArticleBlock = (block: ArticleBlock) => {
                 key={block.id}
             />
         );
-    case ArticleBlockType.IMAGE:
+    case 'image':
         return (
             <ArticleImageBlockComponent
                 className={cls.block}

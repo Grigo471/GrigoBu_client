@@ -5,7 +5,7 @@ import {
 } from '@reduxjs/toolkit';
 import { StateSchema } from '@/app/providers/StoreProvider';
 import {
-    Article, ArticleSortField, ArticleType,
+    Article, ArticleSortField,
 } from '@/entities/Article';
 import { SortOrder } from '@/shared/types';
 import { ArticlesPageSchema } from '../types/articlesPageSchema';
@@ -29,10 +29,9 @@ const articlesPageSlice = createSlice({
         page: 1,
         hasMore: true,
         limit: 5,
-        sort: ArticleSortField.CREATED,
+        sort: 'createdAt',
         search: '',
         order: 'asc',
-        type: ArticleType.ALL,
         _inited: false,
     }),
     reducers: {
@@ -47,9 +46,6 @@ const articlesPageSlice = createSlice({
         },
         setSearch: (state, action: PayloadAction<string>) => {
             state.search = action.payload;
-        },
-        setType: (state, action: PayloadAction<ArticleType>) => {
-            state.type = action.payload;
         },
         initState: (state) => {
             state._inited = true;

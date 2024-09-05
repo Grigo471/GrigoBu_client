@@ -21,6 +21,5 @@ export const AppLoaderLayout = memo(() => (
                 <Skeleton width="80%" height="40%" border="16px" />
             </VStack>
         )}
-        leftbar={<Skeleton border="32px" width={220} height="100%" />}
     />
 ));

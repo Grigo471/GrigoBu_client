@@ -33,7 +33,6 @@
       "userId": "1",
       "title": "JavaScript",
       "subtitle": "Что нового в JS за 2023-й год?",
-      "img": "https://upload.wikimedia.org/wikipedia/commons/thumb/9/99/Unofficial_JavaScript_logo_2.svg/1200px-Unofficial_JavaScript_logo_2.svg.png",
       "views": 1022,
       "createdAt": "04.09.2023",
       "type": [
@@ -678,93 +677,6 @@
       "city": "Москва",
       "username": "User",
       "avatar": "https://p.turbosquid.com/ts-thumb/Ax/XUKtDV/FxtkjVoD/homer1200/jpg/1590143115/600x600/fit_q87/c8d0e5a16813b132c3740438479c620649e28627/homer1211.jpg"
-    }
-  ],
-  "article-ratings": [
-    {
-      "id": "1",
-      "rate": 4,
-      "feedback": "Nice",
-      "userId": "1",
-      "articleId": "1"
-    },
-    {
-      "id": "2",
-      "rate": 3,
-      "feedback": "Meh",
-      "userId": "1",
-      "articleId": "2"
-    },
-    {
-      "id": "3",
-      "rate": 5,
-      "feedback": "Perfect",
-      "userId": "1",
-      "articleId": "3"
-    },
-    {
-      "userId": "1",
-      "articleId": "4",
-      "rate": 3,
-      "feedback": "",
-      "id": "9mtJR-h"
-    },
-    {
-      "userId": "1",
-      "articleId": "5",
-      "rate": 5,
-      "feedback": "Incredible!",
-      "id": "sZhFIQY"
-    },
-    {
-      "userId": "1",
-      "articleId": "6",
-      "rate": 1,
-      "feedback": "Uzhas!",
-      "id": "RsR0yn1"
-    },
-    {
-      "userId": "1",
-      "articleId": "8",
-      "rate": 3,
-      "feedback": "Veru cool",
-      "id": "F7-D-oE"
-    },
-    {
-      "userId": "1",
-      "articleId": "1723867514786",
-      "rate": 3,
-      "feedback": "Замечательно!",
-      "id": "DUXrZyA"
-    },
-    {
-      "userId": "1",
-      "articleId": "-iv4tcr",
-      "rate": 5,
-      "feedback": "+",
-      "id": "JSYU3Tk"
-    },
-    {
-      "userId": "1",
-      "articleId": "In-u8rE",
-      "rate": 5,
-      "id": "45V_JTX"
-    }
-  ],
-  "profile-ratings": [
-    {
-      "id": "1",
-      "rate": 4,
-      "feedback": "Nice",
-      "userId": "1",
-      "profileId": "1"
-    },
-    {
-      "id": "2",
-      "rate": 3,
-      "feedback": "Meh",
-      "userId": "1",
-      "profileId": "2"
     }
   ]
 }

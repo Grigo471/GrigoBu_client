@@ -20,7 +20,7 @@ export const InsertLinkButton = memo(({ selection }: {selection?: Node}) => {
                 />
                 <Button
                     square
-                    disabled={!selection}
+                    disabled={!selection || !url}
                     onClick={() => {
                         document.execCommand(
                             'createLink',

@@ -1,7 +1,7 @@
 import { memo } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useSelector } from 'react-redux';
-import { useSearchParams } from 'react-router-dom';
+import { useLocation, useSearchParams } from 'react-router-dom';
 import { ArticleList } from '@/entities/Article';
 import { ReducerList, useDynamicModuleLoad } from '@/shared/lib/hooks/useDynamicModuleLoad';
 import { useInitialEffect } from '@/shared/lib/hooks/useInitialEffect';
@@ -27,6 +27,7 @@ export const ArticlesInfiniteList = memo((props: ArticlesInfiniteListProps) => {
     const articles = useSelector(getArticles.selectAll);
     const error = useSelector(getArticlesPageError);
     const isLoading = useSelector(getArticlesPageIsLoading);
+    const location = useLocation();
 
     const dispatch = useAppDispatch();
 

@@ -6,8 +6,8 @@ export type {
     Article, ArticleBlock, ArticleTextBlock, ArticleCodeBlock, ArticleImageBlock,
 } from './model/types/article';
 
-export {
-    ArticleSortField, ArticleType, ArticleBlockType,
+export type {
+    ArticleSortField, ArticleBlockType,
 } from './model/consts/consts';
 
 export type { ArticleDetailsSchema } from './model/types/ArticleDetailsSchema';

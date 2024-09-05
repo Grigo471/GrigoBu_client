@@ -51,7 +51,7 @@ export const CommentCard = memo((props: CommentCardProps) => {
                 max
                 className={classNames(cls.CommentCardRedesigned, {}, [className])}
             >
-                <AppLink to={getRouteProfile(comment.user.id)}>
+                <AppLink to={getRouteProfile(comment.user.username)}>
                     <HStack gap="8">
                         <Avatar size={30} src={comment.user.avatar} />
                         <Text text={comment.user.username} bold />
