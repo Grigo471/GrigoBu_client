@@ -6,10 +6,11 @@ import { HStack } from '../../../Stack';
 import LinkSvg from '@/shared/assets/icons/link.svg';
 import { Icon } from '../../../Icon';
 
-export const InsertLinkButton = memo(({ selection }: {selection?: Node}) => {
+export const InsertLinkButton = memo(({ selection }: {selection?: Selection}) => {
     const [isLink, setIsLink] = useState(false);
     const [url, setUrl] = useState('');
     const { t } = useTranslation();
+
     return isLink
         ? (
             <HStack gap="4">
@@ -27,6 +28,7 @@ export const InsertLinkButton = memo(({ selection }: {selection?: Node}) => {
                             false,
                             url,
                         );
+                        setUrl('');
                         setIsLink(false);
                     }}
                 >
@@ -38,7 +40,7 @@ export const InsertLinkButton = memo(({ selection }: {selection?: Node}) => {
             <Button
                 square
                 onMouseDown={() => {
-                    if (selection?.nodeName === 'A') {
+                    if (selection?.getRangeAt(0).startContainer.parentNode?.nodeName === 'A') {
                         document.execCommand('unlink');
                     } else {
                         setIsLink(true);

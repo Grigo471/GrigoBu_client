@@ -2,6 +2,8 @@ import { StateSchema } from '@/app/providers/StoreProvider';
 
 export const getArticleEditPageForm = (state: StateSchema) => state.articleEditPage?.form;
 
+export const getArticleEditPageTags = (state: StateSchema) => state.articleEditPage?.form.tags;
+
 export const getArticleEditPageIsLoading = (state: StateSchema) => state.articleEditPage?.isLoading;
 
 export const getArticleEditPageError = (state: StateSchema) => state.articleEditPage?.error;

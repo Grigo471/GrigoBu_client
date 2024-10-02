@@ -1,7 +1,7 @@
 .Button {
     cursor: pointer;
     color: var(--text-redesigned);
-    padding: 6px 15px;
+    padding: 4px 12px;
     display: flex;
     align-items: center;
 
@@ -70,10 +70,18 @@
     border: none;
     outline: none;
     border-radius: 34px;
+
+    &.success {
+        background: var(--save-redesigned);
+    }
+
+    &.error {
+        background: var(--cancel-redesigned);
+    }
 }
 
 .square {
-    border-radius: 16px;
+    border-radius: 12px;
 }
 
 .m {

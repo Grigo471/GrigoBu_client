@@ -3,7 +3,7 @@ import { useTranslation } from 'react-i18next';
 import { useSelector } from 'react-redux';
 import { classNames } from '@/shared/lib/classNames/classNames';
 import {
-    getUserAuthData, isUserAdmin, isUserModerator,
+    getUserAuthData, getUserAvatar, isUserAdmin, isUserModerator,
     logout,
 } from '@/entities/User';
 import { getRouteAdmin, getRouteProfile } from '@/shared/const/router';
@@ -21,7 +21,7 @@ export const AvatarDropdown = memo((props: AvatarDropdownProps) => {
     const { t } = useTranslation();
 
     const authData = useSelector(getUserAuthData);
-    const avatarSrc = authData?.avatar ? __API__ + authData.avatar : '';
+    const avatar = useSelector(getUserAvatar);
 
     const isAdmin = useSelector(isUserAdmin);
     const isModerator = useSelector(isUserModerator);
@@ -58,7 +58,7 @@ export const AvatarDropdown = memo((props: AvatarDropdownProps) => {
             className={classNames('', {}, [className])}
             direction="bottomLeft"
             items={items}
-            trigger={<Avatar size={40} src={avatarSrc} />}
+            trigger={<Avatar size={40} src={avatar} />}
         />
 
     );

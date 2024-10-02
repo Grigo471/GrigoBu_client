@@ -20,6 +20,7 @@ import { ReducerList, useDynamicModuleLoad } from '@/shared/lib/hooks/useDynamic
 import { profileCardReducers } from '../../testing';
 import { unsubscribeToUser } from '../../model/services/unsubscribeToUser';
 import { getUserAuthData } from '@/entities/User';
+import { srcWithApi } from '@/shared/lib/url/srcWithApi/srcWithApi';
 
 interface ProfileCardProps {
    className?: string;
@@ -66,7 +67,7 @@ export const ProfileCard = memo((props: ProfileCardProps) => {
         </Button>
     );
 
-    const avatar = userData?.avatar ? __API__ + userData.avatar : '';
+    const avatar = srcWithApi(userData?.avatar);
 
     if (!userData) return null;
 

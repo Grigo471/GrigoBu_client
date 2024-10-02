@@ -1,13 +1,4 @@
-.Page {
-    padding: 20px 20px 20px 45px;
-    flex-grow: 1;
-    height: calc(100vh - var(--navbar-height));
-    overflow-y: auto;
-    flex-shrink: 100;
-}
-
 .PageRedesigned {
-    overflow-y: hidden;
     height: 100%;
 }
 

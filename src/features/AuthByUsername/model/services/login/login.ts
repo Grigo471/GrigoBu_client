@@ -34,7 +34,11 @@ export const login = createAsyncThunk<
 
             return response.data;
         } catch (error) {
-            return rejectWithValue('error');
+            const message = extra.errorMessage(error);
+            if (message) {
+                return rejectWithValue(message);
+            }
+            return rejectWithValue('unforseen error');
         }
     },
 );

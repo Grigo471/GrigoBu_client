@@ -2,17 +2,17 @@ import {
     AnyAction, CombinedState, EnhancedStore, Reducer, ReducersMapObject,
 } from '@reduxjs/toolkit';
 import { AxiosInstance } from 'axios';
-import { ArticleDetailsSchema } from '@/entities/Article';
 import { UserSchema } from '@/entities/User';
 import { AddCommentFormSchema } from '@/features/AddCommentForm';
 import { AuthSchema } from '@/features/AuthByUsername';
 import { UISchema } from '@/features/UI';
 import { ArticleDetailsPageSchema } from '@/pages/ArticleDetailsPage';
-import { ArticlesPageSchema } from '@/pages/ArticlesPage';
 import { rtkApi } from '@/shared/api/rtkApi';
 import { ArticleEditPageSchema } from '@/pages/ArticleEditPage';
 import { EditableProfileSchema } from '@/features/EditableProfileCard';
 import { ProfileCardSchema } from '@/features/ProfileCard';
+import { ArticleTagsSelectorSchema } from '@/features/ArticleTagsSelector';
+import { ArticlesListSchema } from '@/widgets/ArticlesList';
 
 export interface StateSchema {
     user: UserSchema;
@@ -22,11 +22,11 @@ export interface StateSchema {
     authForm?: AuthSchema;
     editableProfileCard?: EditableProfileSchema;
     profileCard?: ProfileCardSchema;
-    articleDetails?: ArticleDetailsSchema;
+    articlesList?: ArticlesListSchema;
     addCommentForm?: AddCommentFormSchema;
-    articlesPage?: ArticlesPageSchema;
     articleDetailsPage?: ArticleDetailsPageSchema;
     articleEditPage?: ArticleEditPageSchema;
+    articleTagsSelector?: ArticleTagsSelectorSchema;
 }
 
 export type StateSchemaKey = keyof StateSchema;
@@ -46,6 +46,7 @@ export interface ReduxStoreWithManager extends EnhancedStore<StateSchema> {
 
 export interface ThunkExtraArg {
     api: AxiosInstance;
+    errorMessage: (error: unknown) => string | undefined;
 }
 
 export interface ThunkConfig<T>{

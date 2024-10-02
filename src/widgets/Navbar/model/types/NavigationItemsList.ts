@@ -1,5 +1,6 @@
 import {
     getRouteAbout, getRouteArticles,
+    getRouteSubscriptions,
     getRouteUsers,
 } from '@/shared/const/router';
 
@@ -18,7 +19,11 @@ export const NavigationItemsList: NavigationItemType[] = [
         text: 'Пользователи',
     },
     {
-        path: getRouteAbout(),
+        path: getRouteSubscriptions(),
         text: 'Подписки',
+    },
+    {
+        path: getRouteAbout(),
+        text: 'О нас',
     },
 ];

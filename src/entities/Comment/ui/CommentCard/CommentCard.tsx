@@ -9,6 +9,7 @@ import { AppLink } from '@/shared/ui/AppLink';
 import { Avatar } from '@/shared/ui/Avatar';
 import { Text } from '@/shared/ui/Text';
 import { Card } from '@/shared/ui/Card';
+import { srcWithApi } from '@/shared/lib/url/srcWithApi/srcWithApi';
 
 interface CommentCardProps {
    className?: string;
@@ -42,6 +43,8 @@ export const CommentCard = memo((props: CommentCardProps) => {
         return null;
     }
 
+    const avatar = srcWithApi(comment.user.avatar);
+
     return (
 
         <Card padding="24" border="round" max>
@@ -53,7 +56,7 @@ export const CommentCard = memo((props: CommentCardProps) => {
             >
                 <AppLink to={getRouteProfile(comment.user.username)}>
                     <HStack gap="8">
-                        <Avatar size={30} src={comment.user.avatar} />
+                        <Avatar size={30} src={avatar} />
                         <Text text={comment.user.username} bold />
                     </HStack>
                 </AppLink>

@@ -12,15 +12,18 @@ export const fetchArticleById = createAsyncThunk<Article, string | undefined, Th
         }
 
         try {
-            const response = await extra.api.get<Article>(`/articles/${articleId}`, {
-                params: {
-                    _expand: 'user',
-                },
-            });
+            const response = await extra.api.get<Article>(`/articles/${articleId}`);
 
             if (!response.data) {
                 throw new Error();
             }
+
+            const article = response.data;
+            article.blocks.forEach((block) => {
+                if (block.type === 'image') {
+                    block.src = `${__API__}/${block.src}`;
+                }
+            });
 
             return response.data;
         } catch (error) {

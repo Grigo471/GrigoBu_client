@@ -1,11 +1,10 @@
-import { memo } from 'react';
+import { memo, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { useSelector } from 'react-redux';
 import { Page } from '@/widgets/Page';
 import { useAppDispatch } from '@/shared/lib/hooks/useAppDispatch';
 import { getUserAuthData } from '@/entities/User';
-import { useInitialEffect } from '@/shared/lib/hooks/useInitialEffect';
 import { ArticleDetails, fetchArticleById } from '@/entities/Article';
 import {
     articleEditPageActions, articleEditPageReducers,
@@ -14,7 +13,6 @@ import {
 import { ReducerList, useDynamicModuleLoad } from '@/shared/lib/hooks/useDynamicModuleLoad';
 import { StickyContentLayout } from '@/shared/layouts/StickyContentLayout';
 import { Text } from '@/shared/ui/Text';
-import { Card } from '@/shared/ui/Card';
 import { HStack } from '@/shared/ui/Stack';
 import { ArticleEditPageSkeletons } from './ArticleEditPageSkeletons';
 import { ArticleEditForm } from '../ArticleEditForm/ArticleEditForm';
@@ -45,13 +43,16 @@ const ArticleEditPage = () => {
 
     useDynamicModuleLoad({ reducers });
 
-    useInitialEffect(() => {
+    useEffect(() => {
         if (isEdit) {
             dispatch(fetchArticleById(id));
-        } else if (authData) {
-            dispatch(articleEditPageActions.setUser(authData));
+        } else {
+            dispatch(articleEditPageActions.clearState());
+            if (authData) {
+                dispatch(articleEditPageActions.setUser(authData));
+            }
         }
-    });
+    }, [isEdit, dispatch, authData, id]);
 
     const canEdit = !isEdit || formData?.user.username === authData?.username;
 
@@ -79,9 +80,7 @@ const ArticleEditPage = () => {
     }
 
     const content = isPreview ? (
-        <Card max border="round" padding="24">
-            <ArticleDetails article={formData} />
-        </Card>
+        <ArticleDetails article={formData} />
     ) : (
         <ArticleEditForm />
     );

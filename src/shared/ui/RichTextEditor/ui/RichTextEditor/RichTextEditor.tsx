@@ -22,7 +22,7 @@ export const RichTextEditor = (props: RichTextEditorProps) => {
     } = props;
 
     const contentRef = useRef<HTMLDivElement>();
-    const [selection, setSelection] = useState<Node>();
+    const [selection, setSelection] = useState<Selection>();
 
     function onClickOutside(event: MouseEvent) {
         if (event.target === contentRef.current) {
@@ -34,10 +34,10 @@ export const RichTextEditor = (props: RichTextEditorProps) => {
         setSelection(undefined);
     }
 
-    function getSelectedNode(): Node | undefined {
+    function getSelectedNode(): Selection | undefined {
         const selection = window.getSelection();
         if (selection && selection.rangeCount > 0) {
-            return selection.getRangeAt(0).startContainer.parentNode || undefined;
+            return selection || undefined;
         }
 
         return undefined;

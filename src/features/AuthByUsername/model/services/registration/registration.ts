@@ -30,8 +30,11 @@ export const registration = createAsyncThunk<
 
             return response.data;
         } catch (error) {
-            console.log(error);
-            return rejectWithValue('error');
+            const message = extra.errorMessage(error);
+            if (message) {
+                return rejectWithValue(message);
+            }
+            return rejectWithValue('unforseen error');
         }
     },
 );

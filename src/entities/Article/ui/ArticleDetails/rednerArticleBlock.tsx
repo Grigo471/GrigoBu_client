@@ -6,14 +6,14 @@ import {
 import { ArticleTextBlockComponent } from '../ArticleTextBlockComponent/ArticleTextBlockComponent';
 import cls from './ArticleDetails.module.scss';
 
-export const renderArticleBlock = (block: ArticleBlock) => {
+export const renderArticleBlock = (block: ArticleBlock, index: number) => {
     switch (block.type) {
     case 'code':
         return (
             <ArticleCodeBlockComponent
                 className={cls.block}
                 block={block}
-                key={block.id}
+                key={index}
             />
         );
     case 'text':
@@ -21,7 +21,7 @@ export const renderArticleBlock = (block: ArticleBlock) => {
             <ArticleTextBlockComponent
                 className={cls.block}
                 block={block}
-                key={block.id}
+                key={index}
             />
         );
     case 'image':
@@ -29,7 +29,7 @@ export const renderArticleBlock = (block: ArticleBlock) => {
             <ArticleImageBlockComponent
                 className={cls.block}
                 block={block}
-                key={block.id}
+                key={index}
             />
         );
     default:

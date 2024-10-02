@@ -27,25 +27,15 @@ export const ArticleEditForm = memo((props: ArticleEditFormProps) => {
         dispatch(articleEditPageActions.updateArticleTitle(value ?? ''));
     }, [dispatch]);
 
-    const onChangeSubtitle = useCallback((value?: string) => {
-        dispatch(articleEditPageActions.updateArticleSubtitle(value ?? ''));
-    }, [dispatch]);
-
     return (
         <VStack max gap="16" className={className}>
-            <Card max padding="24">
-                <VStack max gap="8">
-                    <Input
-                        value={formData?.title || ''}
-                        label={t('Заголовок статьи')}
-                        onChange={onChangeTitle}
-                    />
-                    <Input
-                        value={formData?.subtitle || ''}
-                        label={t('Подзаголовок (необязательно)')}
-                        onChange={onChangeSubtitle}
-                    />
-                </VStack>
+            <Card max padding="16">
+                <Input
+                    size="s"
+                    value={formData?.title || ''}
+                    label={t('Заголовок статьи')}
+                    onChange={onChangeTitle}
+                />
             </Card>
             {formData?.blocks.map((block, index) => renderEditableArticleBlock(
                 { block, index },

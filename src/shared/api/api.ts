@@ -6,6 +6,13 @@ interface RefreshResponse {
     refreshToken: string,
 }
 
+export const apiErrorMessage = (error: unknown) => {
+    if (axios.isAxiosError(error) && error.response?.data.message) {
+        return error.response?.data.message;
+    }
+    return undefined;
+};
+
 const $api = axios.create({
     baseURL: __API__,
     withCredentials: true,

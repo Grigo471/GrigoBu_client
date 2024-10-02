@@ -20,8 +20,6 @@ export const subscribeToUser = createAsyncThunk<
                 throw new Error();
             }
 
-            console.log(response);
-
             return response.data;
         } catch (error) {
             return rejectWithValue('error');

@@ -21,7 +21,6 @@ export const EditableAvatar = memo((props: EditableAvatarProps) => {
     const { className } = props;
     const dispatch = useAppDispatch();
     const avatar = useSelector(getUserAvatar);
-    const avatarSrc = avatar ? __API__ + avatar : '';
     const isLoading = useSelector(getEditableProfileIsAvatarLoading);
     const error = useSelector(getEditableProfileAvatarError);
 
@@ -38,7 +37,7 @@ export const EditableAvatar = memo((props: EditableAvatarProps) => {
             <div className={cls.overlay}>
                 <Icon Svg={PhotoIcon} />
             </div>
-            <Avatar className={className} src={avatarSrc} />
+            <Avatar className={className} src={avatar} />
         </FileUpload>
     );
 });

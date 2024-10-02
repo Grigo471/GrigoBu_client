@@ -4,7 +4,7 @@ import cls from './Card.module.scss';
 
 export type CardVariant = 'normal' | 'outlined' | 'light';
 export type CardPadding = '0' | '8' | '16' | '24';
-export type CardBorder = 'round' | 'normal' | 'partial';
+export type CardBorder = 'round' | 'square' | 'partial' | 'minimum';
 
 interface CardProps extends HTMLAttributes<HTMLDivElement> {
    className?: string;
@@ -28,7 +28,7 @@ export const Card = memo((props: CardProps) => {
         variant = 'normal',
         max,
         padding = '8',
-        border = 'normal',
+        border = 'minimum',
         ...otherProps
     } = props;
 

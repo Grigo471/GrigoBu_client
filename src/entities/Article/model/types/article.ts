@@ -26,12 +26,22 @@ export interface ArticleTextBlock extends ArticleBlockBase {
 
 export type ArticleBlock = ArticleTextBlock | ArticleCodeBlock | ArticleImageBlock;
 
+export type Rate = -1 | null | 1;
+
 export interface Article {
     id: string;
     user: User;
     title: string;
-    subtitle?: string;
-    views: number;
+    tags: string[];
+    rating: number;
     createdAt: string;
     blocks: ArticleBlock[];
+    myRate?: Rate;
+    commentsCount?: number;
+}
+
+export interface RateArticleResult {
+    myRate: Rate;
+    articleId: string;
+    rating: number;
 }

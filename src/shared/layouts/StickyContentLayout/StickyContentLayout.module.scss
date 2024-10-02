@@ -6,6 +6,9 @@
 
 .left {
     grid-area: left;
+    position: sticky;
+    top: 72px;
+    height: fit-content;
 }
 
 .content {
@@ -18,10 +21,6 @@
 
 .right {
     grid-area: right;
-}
-
-.left,
-.right {
     position: sticky;
     top: 72px;
     height: fit-content;

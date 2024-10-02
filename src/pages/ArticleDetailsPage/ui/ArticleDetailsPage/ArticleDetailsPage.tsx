@@ -1,6 +1,7 @@
 import { memo } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useParams } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 import { classNames } from '@/shared/lib/classNames/classNames';
 import { ReducerList, useDynamicModuleLoad } from '@/shared/lib/hooks/useDynamicModuleLoad';
 import { Page } from '@/widgets/Page';
@@ -10,7 +11,10 @@ import cls from './ArticleDetailsPage.module.scss';
 import { ArticleDetailsComments } from '../AricleDetailsComments/ArticleDetailsComments';
 import { StickyContentLayout } from '@/shared/layouts/StickyContentLayout';
 import { AdditionalInfoContainer } from '../AdditionalInfoContainer/AdditionalInfoContainer';
-import { Card } from '@/shared/ui/Card';
+import { ArticleDetails, fetchArticleById } from '@/entities/Article';
+import { useInitialEffect } from '@/shared/lib/hooks/useInitialEffect';
+import { getArticleDetailsData } from '../../model/selectors/articleSelector';
+import { useAppDispatch } from '@/shared/lib/hooks/useAppDispatch';
 
 interface ArticleDetailsPageProps {
    className?: string;
@@ -24,8 +28,15 @@ const ArticleDetailsPage = (props: ArticleDetailsPageProps) => {
     const { className } = props;
     const { t } = useTranslation('article');
     const { id } = useParams< string >();
+    const dispatch = useAppDispatch();
 
     useDynamicModuleLoad({ reducers });
+
+    useInitialEffect(() => {
+        dispatch(fetchArticleById(id));
+    });
+
+    const article = useSelector(getArticleDetailsData);
 
     if (!id) {
         return (
@@ -41,9 +52,7 @@ const ArticleDetailsPage = (props: ArticleDetailsPageProps) => {
             content={(
                 <Page className={classNames(cls.ArticleDetailsPage, {}, [className])}>
                     <VStack gap="16" max>
-                        <Card max border="round" className={className} padding="24">
-                            {/* <ArticleDetails articleId={id} /> */}
-                        </Card>
+                        <ArticleDetails detailed article={article} />
                         <ArticleDetailsComments id={id} />
                     </VStack>
                 </Page>

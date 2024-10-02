@@ -24,6 +24,6 @@ export const AppLogo = memo(({ className, size = 50 }: AppLogoProps) => (
             width={size}
             color="black"
         />
-        <Text title={APP_NAME} bold />
+        <Text title={APP_NAME} size="l" bold />
     </HStack>
 ));

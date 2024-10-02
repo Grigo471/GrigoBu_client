@@ -6,6 +6,8 @@ import { ArticlesPage } from '@/pages/ArticlesPage';
 
 import { ForbiddenPage } from '@/pages/ForbiddenPage';
 import { NotFoundPage } from '@/pages/NotFoundPage';
+import { ProfilePage } from '@/pages/ProfilePage';
+import { SubscriptionsPage } from '@/pages/SubscriptionsPage';
 import { UsersPage } from '@/pages/UsersPage';
 import {
     AppRoutes, getRouteAbout, getRouteAdmin, getRouteArticleCreate,
@@ -31,11 +33,11 @@ export const routeConfig: Record<AppRoutes, AppRoutesProps> = {
     },
     [AppRoutes.SUBSCRIPTIONS]: {
         path: getRouteSubscriptions(),
-        element: <ArticlesPage />,
+        element: <SubscriptionsPage />,
     },
     [AppRoutes.PROFILE]: {
         path: getRouteProfile(':username'),
-        element: <ArticlesPage />,
+        element: <ProfilePage />,
     },
     [AppRoutes.ARTICLE_DETAILS]: {
         path: getRouteArticleDetails(':id'),

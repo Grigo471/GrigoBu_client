@@ -9,9 +9,9 @@ import { saveArticle } from '../services/saveArticle/saveArticle';
 const initialForm: Article = {
     id: '',
     title: '',
-    subtitle: '',
-    createdAt: Date.now().toString(),
-    views: 0,
+    createdAt: '',
+    rating: 0,
+    tags: [],
     user: {
         username: '',
     },
@@ -41,11 +41,11 @@ export const articleEditPageSlice = createSlice({
         setIsPreview: (state, action: PayloadAction<boolean>) => {
             state.isPreview = action.payload;
         },
+        setTags: (state, action: PayloadAction<string[]>) => {
+            state.form.tags = action.payload;
+        },
         updateArticleTitle: (state, action: PayloadAction<string>) => {
             state.form.title = action.payload;
-        },
-        updateArticleSubtitle: (state, action: PayloadAction<string>) => {
-            state.form.subtitle = action.payload;
         },
         updateArticleBlockTitle: {
             reducer: (state, action: PayloadAction<EditBlockPayload>) => {
@@ -129,6 +129,9 @@ export const articleEditPageSlice = createSlice({
             state.form.blocks = state.form?.blocks.filter(
                 (block, index) => index !== action.payload,
             );
+        },
+        clearState: (state) => {
+            state.form = initialForm;
         },
     },
     extraReducers: (builder) => {

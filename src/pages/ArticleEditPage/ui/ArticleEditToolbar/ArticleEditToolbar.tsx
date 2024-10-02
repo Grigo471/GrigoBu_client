@@ -9,6 +9,7 @@ import { Text } from '@/shared/ui/Text';
 import { Button } from '@/shared/ui/Button';
 import {
     getArticleEditPageIsPreview,
+    getArticleEditPageTags,
     getArticleEditPageValidateErrors,
 } from '../../model/selectors/articleEditPageSelectors';
 import { useAppDispatch } from '@/shared/lib/hooks/useAppDispatch';
@@ -16,6 +17,7 @@ import { articleEditPageActions } from '../../model/slice/ArticleEditPageSlice';
 import { saveArticle } from '../../model/services/saveArticle/saveArticle';
 import { validateErrorsTranslations } from '../../model/consts/consts';
 import { useArticleFiles } from '../ArticleFilesProvider/ArticleFilesProvider';
+import { ArticleTagsSelector } from '@/features/ArticleTagsSelector';
 
 export const ArticleEditToolbar = memo(() => {
     const { t } = useTranslation();
@@ -29,6 +31,11 @@ export const ArticleEditToolbar = memo(() => {
 
     const isPreview = useSelector(getArticleEditPageIsPreview);
     const validateErrors = useSelector(getArticleEditPageValidateErrors);
+    const tags = useSelector(getArticleEditPageTags);
+
+    const setTags = useCallback((tags: string[]) => {
+        dispatch(articleEditPageActions.setTags(tags));
+    }, [dispatch]);
 
     const onChangeIsPreview = useCallback(() => {
         dispatch(articleEditPageActions.setIsPreview(!isPreview));
@@ -40,7 +47,7 @@ export const ArticleEditToolbar = memo(() => {
 
     return (
         <Card className={cls.menu} padding="16">
-            <VStack max gap="16">
+            <VStack max gap="12">
                 <Text
                     size="m"
                     text={title}
@@ -63,6 +70,7 @@ export const ArticleEditToolbar = memo(() => {
                         key={err}
                     />
                 ))}
+                <ArticleTagsSelector chosenTags={tags} setChosenTags={setTags} withCreate />
             </VStack>
         </Card>
     );

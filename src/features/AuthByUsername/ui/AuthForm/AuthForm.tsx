@@ -15,6 +15,7 @@ import { getAuthIsLoading } from '../../model/selectors/getAuthIsLoading/getAuth
 import { getAuthError } from '../../model/selectors/getAuthError/getAuthError';
 import { authActions, authReducer } from '../../model/slice/authSlice';
 import { login } from '../../model/services/login/login';
+import { registration } from '../../model/services/registration/registration';
 
 export interface AuthFormProps {
     className?: string;
@@ -45,9 +46,13 @@ const AuthForm = memo((props: AuthFormProps) => {
         dispatch(authActions.setPassword(value));
     }, [dispatch]);
 
-    const onLoginClick = useCallback(() => {
-        dispatch(login({ username, password }));
-    }, [dispatch, password, username]);
+    const onSubmit = useCallback(() => {
+        if (isLogin) {
+            dispatch(login({ username, password }));
+        } else {
+            dispatch(registration({ username, password }));
+        }
+    }, [dispatch, password, username, isLogin]);
 
     const onToggle = useCallback(() => {
         setIsLogin((prev) => !prev);
@@ -63,7 +68,7 @@ const AuthForm = memo((props: AuthFormProps) => {
             <Text title={isLogin ? t('Войти') : t('Создать аккаунт')} />
             {error && (
                 <Text
-                    text={t('Неверный логин или пароль')}
+                    text={error}
                     variant="error"
                 />
             )}
@@ -84,7 +89,7 @@ const AuthForm = memo((props: AuthFormProps) => {
             />
             <Button
                 className={cls.submitBtn}
-                onClick={onLoginClick}
+                onClick={onSubmit}
                 disabled={isLoading}
             >
                 {isLogin ? t('Войти') : t('Создать аккаунт')}

@@ -11,16 +11,24 @@ import { EditableAvatar } from '../EditableAvatar/EditableAvatar';
 import { Button } from '@/shared/ui/Button';
 import { Icon } from '@/shared/ui/Icon';
 import SettingsIcon from '@/shared/assets/icons/settings.svg';
+import { ReducerList, useDynamicModuleLoad } from '@/shared/lib/hooks/useDynamicModuleLoad';
+import { editableProfileReducers } from '../../testing';
 
 interface EditableProfileCardProps {
    className?: string;
 }
+
+const reducers: ReducerList = {
+    editableProfileCard: editableProfileReducers,
+};
 
 export const EditableProfileCard = memo((props: EditableProfileCardProps) => {
     const { className } = props;
     const { t } = useTranslation();
     const userData = useSelector(getUserAuthData);
     const [isEdit, setIsEdit] = useState(false);
+
+    useDynamicModuleLoad({ reducers });
 
     const editToolbar = isEdit
         ? (

@@ -35,8 +35,12 @@ export const saveArticle = createAsyncThunk<
             });
         });
 
+        form.tags.forEach((tag, i) => {
+            formData.append(`tags[${i}]`, tag);
+        });
+
         Object.entries(form).forEach(([key, value]) => {
-            if (key !== 'block' && key !== 'user') {
+            if (key !== 'block' && key !== 'user' && key !== 'tags') {
                 formData.append(key, value);
             }
         });

@@ -3,21 +3,17 @@ export { ArticleDetails } from './ui/ArticleDetails/ArticleDetails';
 export { renderArticleBlock } from './ui/ArticleDetails/rednerArticleBlock';
 
 export type {
-    Article, ArticleBlock, ArticleTextBlock, ArticleCodeBlock, ArticleImageBlock,
+    Article, ArticleBlock, ArticleTextBlock,
+    ArticleCodeBlock, ArticleImageBlock,
+    Rate, RateArticleResult,
 } from './model/types/article';
 
 export type {
     ArticleSortField, ArticleBlockType,
 } from './model/consts/consts';
 
-export type { ArticleDetailsSchema } from './model/types/ArticleDetailsSchema';
-
-export { ArticleList } from './ui/ArticleList/ArticleList';
-
-export {
-    getArticleDetailsData,
-    getArticleDetailsIsLoading,
-    getArticleDetailsError,
-} from './model/selectors/articleDetailsSelectors';
-
 export { fetchArticleById } from './model/services/fetchArticleById/fetchArticleById';
+
+export { likeArticle } from './model/services/likeArticle/likeArticle';
+
+export { dislikeArticle } from './model/services/dislikeArticle/dislikeArticle';

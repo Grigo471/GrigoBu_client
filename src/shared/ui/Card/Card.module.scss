@@ -11,6 +11,14 @@
     border: 1px solid var(--accent-redesigned);
 }
 
+.square {
+    border-radius: 0;
+}
+
+.minimum {
+    border-radius: 12px;
+}
+
 .light {
     background: var(--light-bg-redesigned);
 }

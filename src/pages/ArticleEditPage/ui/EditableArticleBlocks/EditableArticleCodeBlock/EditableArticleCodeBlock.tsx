@@ -39,7 +39,7 @@ export const EditableArticleCodeBlock = memo((props: EditableArticleCodeBlockPro
         >
             <Input
                 value={block.title}
-                size="m"
+                size="s"
                 label={t('Подзаголовок')}
                 onChange={(title) => onChangeTitle(title, index)}
                 placeholder={t('Подзаголовок блока с кодом (необязательно)')}

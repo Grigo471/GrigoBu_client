@@ -1,7 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react';
 
-import { StoreDecorator } from '@/shared/config/storybook/StoreDecorator/StoreDecorator';
-
 import ArticlesPage from './ArticlesPage';
 import { ArticleBlockType } from '@/entities/Article';
 
@@ -86,33 +84,10 @@ export const List: Story = {
     args: {
 
     },
-    decorators: [
-        StoreDecorator({
-            articlesPage: {
-                isLoading: false,
-                page: 1,
-                hasMore: false,
-                ids: ['1', '2', '3'],
-                entities: article,
-            },
-        }),
-    ],
 };
 
 export const Error: Story = {
     args: {
 
     },
-    decorators: [
-        StoreDecorator({
-            articlesPage: {
-                isLoading: false,
-                page: 1,
-                hasMore: false,
-                ids: ['1', '2', '3'],
-                entities: article,
-                error: 'error',
-            },
-        }),
-    ],
 };

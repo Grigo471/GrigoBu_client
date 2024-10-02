@@ -5,7 +5,7 @@
     // s - font
 
     --font-size-s: 12px;
-    --font-line-s: 20px;
+    --font-line-s: 16px;
     --font-s: var(--font-size-s) / var(--font-line-s) var(--font-family-text);
 
     // m - font
@@ -16,20 +16,15 @@
 
     // l - font
 
-    --font-size-l: 24px;
-    --font-line-l: 32px;
+    --font-size-l: 20px;
+    --font-line-l: 24px;
     --font-l: var(--font-size-l) / var(--font-line-l) var(--font-family-title);
 
     // xl - font
 
-    --font-size-xl: 32px;
-    --font-line-xl: 40px;
+    --font-size-xl: 24px;
+    --font-line-xl: 28px;
     --font-xl: var(--font-size-xl) / var(--font-line-xl) var(--font-family-title);
-
-    // sizes
-
-    --sidebar-width: 300px;
-    --sidebar-width-collapsed: 80px;
 
     // z - indexes
 

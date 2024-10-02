@@ -55,10 +55,10 @@ export const EditableArticleBlockWrapper = memo((props: EditableArticleBlockWrap
     return (
         <Card
             max
-            padding="24"
+            padding="16"
             className={className}
         >
-            <VStack max gap="24">
+            <VStack max gap="12">
                 <HStack max justify="between">
                     <Text title={title} size="m" />
                     <HStack>
