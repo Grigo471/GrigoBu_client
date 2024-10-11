@@ -12,17 +12,23 @@ import { ArticleEditPageSchema } from '@/pages/ArticleEditPage';
 import { EditableProfileSchema } from '@/features/EditableProfileCard';
 import { ProfileCardSchema } from '@/features/ProfileCard';
 import { ArticleTagsSelectorSchema } from '@/features/ArticleTagsSelector';
-import { ArticlesListSchema } from '@/widgets/ArticlesList';
+import { UsersPageSchema } from '@/pages/UsersPage';
+import { ArticlesPageSchema } from '@/pages/ArticlesPage';
+import { SubscriptionsPageSchema } from '@/pages/SubscriptionsPage';
+import { ProfilePageSchema } from '@/pages/ProfilePage';
 
 export interface StateSchema {
     user: UserSchema;
     UI: UISchema;
     [rtkApi.reducerPath]: ReturnType<typeof rtkApi.reducer>;
 
+    usersPage?: UsersPageSchema;
     authForm?: AuthSchema;
     editableProfileCard?: EditableProfileSchema;
     profileCard?: ProfileCardSchema;
-    articlesList?: ArticlesListSchema;
+    articlesPage?: ArticlesPageSchema;
+    subscriptionsPage?: SubscriptionsPageSchema;
+    profilePage?: ProfilePageSchema;
     addCommentForm?: AddCommentFormSchema;
     articleDetailsPage?: ArticleDetailsPageSchema;
     articleEditPage?: ArticleEditPageSchema;

@@ -44,6 +44,7 @@ export const EditableArticleCodeBlock = memo((props: EditableArticleCodeBlockPro
                 onChange={(title) => onChangeTitle(title, index)}
                 placeholder={t('Подзаголовок блока с кодом (необязательно)')}
             />
+            {`${block.code?.length || 0} / 10000`}
             <TextArea
                 value={block.code}
                 onChange={(code) => onChangeCode(code, index)}

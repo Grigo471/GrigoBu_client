@@ -1,62 +1,30 @@
 import {
-    type PropsWithChildren, ReactNode, memo, useCallback,
+    memo,
 } from 'react';
 import { useTranslation } from 'react-i18next';
-import { useSelector } from 'react-redux';
-import { useSearchParams } from 'react-router-dom';
 import { Virtuoso } from 'react-virtuoso';
-import { ArticleListType } from '../../model/types/ArticleListType';
-import { articlesListReducer, getArticles } from '../../model/slice/articlesListSlice';
-import {
-    getArticlesListError,
-    getArticlesListIsLoading,
-} from '../../model/selectors/articlesListSelectors';
-import { useAppDispatch } from '@/shared/lib/hooks/useAppDispatch';
-import { ReducerList, useDynamicModuleLoad } from '@/shared/lib/hooks/useDynamicModuleLoad';
-import { useInitialEffect } from '@/shared/lib/hooks/useInitialEffect';
-import { initArticlesList } from '../../model/services/initArticlesList/initArticlesList';
-import {
-    fetchNextArticlesPage,
-} from '../../model/services/fetchNextArticlesPage/fetchNextArticlePage';
+
 import { Text } from '@/shared/ui/Text';
-import { Article, ArticleDetails } from '@/entities/Article';
+import { Article } from '@/entities/Article';
 import { ArticleListItemSkeleton } from './ArticleListItemSkeleton';
 import { VStack } from '@/shared/ui/Stack';
-
-const reducers: ReducerList = {
-    articlesList: articlesListReducer,
-};
+import { ArticleListItem } from '../ArticleListItem/ArticleListItem';
 
 interface ArticlesListProps {
-   className?: string;
-   type?: ArticleListType;
-   header?: ReactNode;
+   articles?: Article[];
+   isLoading?: boolean;
+   error?: string;
+   onLoadNextPart?: () => void;
 }
 
-export const ArticlesList = memo((props: PropsWithChildren<ArticlesListProps>) => {
-    const { className, type = 'all', header } = props;
+export const ArticlesList = memo((props: ArticlesListProps) => {
+    const {
+        articles, isLoading, error, onLoadNextPart,
+    } = props;
     const { t } = useTranslation();
 
-    const articles = useSelector(getArticles.selectAll);
-    const error = useSelector(getArticlesListError);
-    const isLoading = useSelector(getArticlesListIsLoading);
-
-    const dispatch = useAppDispatch();
-
-    useDynamicModuleLoad({ reducers, removeAfterUnmount: false });
-
-    const [searchParams] = useSearchParams();
-
-    useInitialEffect(() => {
-        dispatch(initArticlesList(searchParams));
-    });
-
-    const onLoadNextPart = useCallback(() => {
-        dispatch(fetchNextArticlesPage());
-    }, [dispatch]);
-
     const renderArticle = (article: Article) => (
-        <ArticleDetails
+        <ArticleListItem
             article={article}
             key={article.id}
         />
@@ -68,14 +36,14 @@ export const ArticlesList = memo((props: PropsWithChildren<ArticlesListProps>) =
             <ArticleListItemSkeleton key={index} />
         ));
 
-    if (!isLoading && !articles.length) {
+    if (!isLoading && !articles?.length) {
         return (
-            <div className={className}>
+            <VStack gap="20">
                 <Text
                     size="l"
                     title={t('Статьи не найдены')}
                 />
-            </div>
+            </VStack>
         );
     }
 
@@ -91,7 +59,6 @@ export const ArticlesList = memo((props: PropsWithChildren<ArticlesListProps>) =
 
     return (
         <VStack gap="20">
-            {header}
             <Virtuoso
                 data={articles}
                 useWindowScroll

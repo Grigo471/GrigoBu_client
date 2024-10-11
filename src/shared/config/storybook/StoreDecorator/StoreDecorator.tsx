@@ -7,7 +7,6 @@ import { articleDetailsPageReducer } from '@/pages/ArticleDetailsPage/testing';
 import { authReducer } from '@/features/AuthByUsername/testing';
 import { profileCardReducers } from '@/features/ProfileCard/testing';
 import { editableProfileReducers } from '@/features/EditableProfileCard/testing';
-import { articlesListReducer } from '@/widgets/ArticlesList/testing';
 
 const defaultAsyncReducers: ReducerList = {
     authForm: authReducer,
@@ -15,7 +14,6 @@ const defaultAsyncReducers: ReducerList = {
     editableProfileCard: editableProfileReducers,
     addCommentForm: addCommentFormReducer,
     articleDetailsPage: articleDetailsPageReducer,
-    articlesList: articlesListReducer,
     UI: UIReducer,
 };
 

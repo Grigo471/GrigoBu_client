@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { LOCAL_STORAGE_TOKEN_KEY } from '../const/localStorage';
 
-interface RefreshResponse {
+export interface RefreshResponse {
     accessToken: string,
     refreshToken: string,
 }

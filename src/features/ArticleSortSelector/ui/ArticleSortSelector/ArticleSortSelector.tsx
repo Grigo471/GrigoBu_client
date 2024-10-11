@@ -25,12 +25,12 @@ export const ArticleSortSelector = memo((props: ArticleSortSelectorProps) => {
 
     const orderOptions = useMemo<ListBoxItem<SortOrder>[]>(() => [
         {
-            value: 'asc',
-            content: t('возрастанию'),
-        },
-        {
             value: 'desc',
             content: t('убыванию'),
+        },
+        {
+            value: 'asc',
+            content: t('возрастанию'),
         },
     ], [t]);
     const sortFieldOptions = useMemo<ListBoxItem<ArticleSortField>[]>(() => [
@@ -39,12 +39,8 @@ export const ArticleSortSelector = memo((props: ArticleSortSelectorProps) => {
             content: t('дате создания'),
         },
         {
-            value: 'title',
-            content: t('заголовку'),
-        },
-        {
-            value: 'views',
-            content: t('количеству просмотров'),
+            value: 'rating',
+            content: t('рейтингу'),
         },
     ], [t]);
 

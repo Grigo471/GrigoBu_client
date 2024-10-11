@@ -14,44 +14,51 @@ import { Icon } from '@/shared/ui/Icon';
 import CommentIcon from '@/shared/assets/icons/comment.svg';
 import { srcWithApi } from '@/shared/lib/url/srcWithApi/srcWithApi';
 
+type ArticleDetailsView = 'list' | 'details' | 'preview';
+
 interface ArticleDetailsProps {
    className?: string;
    article?: Article;
-   detailed?: boolean;
+   view?: ArticleDetailsView;
 }
 
 export const ArticleDetails = memo((props: ArticleDetailsProps) => {
-    const { className, article, detailed = false } = props;
+    const {
+        className, article, view = 'list',
+    } = props;
 
     if (!article) return null;
 
     const avatar = article?.user.avatar;
     const date = article?.createdAt.split('T')[0];
 
-    const title = detailed ? (
-        <Text
-            title={article?.title}
-            size="l"
-            bold
-        />
-    ) : (
-        <AppLink to={`/article/${article?.id}`}>
+    const title = view === 'list' ? (
+        <AppLink to={`/article/${article?.id}`} target="_blank">
             <Text
                 title={article?.title}
                 size="l"
                 bold
             />
         </AppLink>
+    ) : (
+        <Text
+            title={article?.title}
+            size="l"
+            bold
+        />
     );
 
     return (
         <div className={classNames('', {}, [className, cls.ArticleDetails])}>
             <HStack gap="16" align="start">
-                <ArticleRatingButton className={cls.rating} article={article} />
+                {
+                    view !== 'preview'
+                    && <ArticleRatingButton className={cls.rating} article={article} />
+                }
                 <Card max border="minimum" padding="24">
                     <VStack gap="8">
                         <HStack gap="8">
-                            <AppLink to={`/users/${article?.user.username}`}>
+                            <AppLink to={`/users/${article?.user.username}`} target="_blank">
                                 <HStack gap="8">
                                     <Avatar src={srcWithApi(avatar)} size={24} />
                                     <Text text={article?.user.username} bold />
@@ -70,8 +77,8 @@ export const ArticleDetails = memo((props: ArticleDetailsProps) => {
                                 />
                             ))}
                         </HStack>
-                        {!detailed && (
-                            <AppLink to={`/article/${article?.id}`}>
+                        {view === 'list' && (
+                            <AppLink to={`/article/${article?.id}`} target="_blank">
                                 <HStack gap="4">
                                     <Icon className={cls.comment} Svg={CommentIcon} clickable />
                                     <Text

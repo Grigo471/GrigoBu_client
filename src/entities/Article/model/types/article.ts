@@ -39,9 +39,3 @@ export interface Article {
     myRate?: Rate;
     commentsCount?: number;
 }
-
-export interface RateArticleResult {
-    myRate: Rate;
-    articleId: string;
-    rating: number;
-}

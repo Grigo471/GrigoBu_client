@@ -25,6 +25,7 @@ export const ArticleEditToolbar = memo(() => {
 
     const { id } = useParams<{ id: string }>();
     const { images } = useArticleFiles();
+    console.log(images);
 
     const isEdit = Boolean(id);
     const title = isEdit ? t('Редактирование статьи') : t('Создание новой статьи');

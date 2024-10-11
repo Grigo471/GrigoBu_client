@@ -28,9 +28,10 @@ export const AvatarDropdown = memo((props: AvatarDropdownProps) => {
 
     const dispatch = useAppDispatch();
 
-    const onLogout = useCallback(() => {
-        dispatch(logout());
+    const onLogout = useCallback(async () => {
+        await dispatch(logout());
         onCloseModal();
+        window.location.reload();
     }, [dispatch, onCloseModal]);
 
     const isAdminPanelAvailable = isAdmin || isModerator;

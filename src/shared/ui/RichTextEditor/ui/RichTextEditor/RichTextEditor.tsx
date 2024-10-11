@@ -58,7 +58,7 @@ export const RichTextEditor = (props: RichTextEditorProps) => {
 
     return (
         <VStack max className={className} gap="4">
-            <RichEditorToolbar selection={selection} />
+            <RichEditorToolbar selection={selection} value={value} />
             <RichEditorContent
                 ref={setContentEditableRef}
                 value={value}

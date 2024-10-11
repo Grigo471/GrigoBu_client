@@ -8,6 +8,7 @@ import { InsertLinkButton } from './InsertLinkButton';
 interface RichEditorToolbarProps {
    className?: string;
    selection?: Selection;
+    value?: string;
 }
 
 function createButton(
@@ -33,7 +34,7 @@ function createButton(
 }
 
 export const RichEditorToolbar = memo((props: RichEditorToolbarProps) => {
-    const { className, selection } = props;
+    const { className, selection, value = '' } = props;
 
     return (
         <HStack gap="4" className={className}>
@@ -41,6 +42,7 @@ export const RichEditorToolbar = memo((props: RichEditorToolbarProps) => {
             {createButton('Italic', '𝑰', 'italic')}
             {createButton('Clear formatting', 'T̲ₓ', 'removeFormat')}
             <InsertLinkButton selection={selection} />
+            {`${value?.length || 0} / 10000`}
         </HStack>
 
     );

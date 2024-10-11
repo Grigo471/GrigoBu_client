@@ -1,7 +1,7 @@
 import { PayloadAction, createSlice } from '@reduxjs/toolkit';
 import { ArticleDetailsSchema } from '../types/ArticleDetailsSchema';
 import {
-    Article, dislikeArticle, fetchArticleById, likeArticle,
+    Article, articlesApi, fetchArticleById,
     RateArticleResult,
 } from '@/entities/Article';
 
@@ -30,14 +30,8 @@ export const articleDetailsSlice = createSlice({
                 state.isLoading = false;
                 state.error = action.payload;
             })
-            .addCase(likeArticle.fulfilled, (state, action: PayloadAction<RateArticleResult>) => {
-                if (state.data) {
-                    state.data.myRate = action.payload.myRate;
-                    state.data.rating = action.payload.rating;
-                }
-            })
-            .addCase(
-                dislikeArticle.fulfilled,
+            .addMatcher(
+                articlesApi.endpoints.rateArticle.matchFulfilled,
                 (state, action: PayloadAction<RateArticleResult>) => {
                     if (state.data) {
                         state.data.myRate = action.payload.myRate;

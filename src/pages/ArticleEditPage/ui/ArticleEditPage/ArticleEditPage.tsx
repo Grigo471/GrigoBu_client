@@ -69,10 +69,6 @@ const ArticleEditPage = () => {
         );
     }
 
-    if (isLoading) {
-        return <ArticleEditPageSkeletons />;
-    }
-
     if (!canEdit) {
         return (
             <Text variant="error" title={t('Вы не можете редактировать данную статью')} />
@@ -80,18 +76,21 @@ const ArticleEditPage = () => {
     }
 
     const content = isPreview ? (
-        <ArticleDetails article={formData} />
+        <ArticleDetails article={formData} view="preview" />
     ) : (
         <ArticleEditForm />
     );
 
     return (
         <ArticleFilesProvider>
-            <StickyContentLayout
-                content={(<Page>{content}</Page>)}
-                left={(<AddArticleBlockDropdown />)}
-                right={(<ArticleEditToolbar />)}
-            />
+            {isLoading ? <ArticleEditPageSkeletons />
+                : (
+                    <StickyContentLayout
+                        content={(<Page>{content}</Page>)}
+                        left={(<AddArticleBlockDropdown />)}
+                        right={(<ArticleEditToolbar />)}
+                    />
+                ) }
         </ArticleFilesProvider>
     );
 };

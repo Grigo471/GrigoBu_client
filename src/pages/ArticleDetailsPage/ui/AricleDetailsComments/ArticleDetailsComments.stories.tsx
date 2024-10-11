@@ -13,6 +13,7 @@ const comments: ArticleDetailsCommentsSchema = {
             id: '1',
             text: 'hello',
             user: {
+                id: 2,
                 username: 'Billy',
             },
         },
@@ -20,6 +21,7 @@ const comments: ArticleDetailsCommentsSchema = {
             id: '2',
             text: 'goodbye',
             user: {
+                id: 1,
                 username: 'Bob',
             },
         },

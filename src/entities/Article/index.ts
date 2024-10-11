@@ -5,7 +5,7 @@ export { renderArticleBlock } from './ui/ArticleDetails/rednerArticleBlock';
 export type {
     Article, ArticleBlock, ArticleTextBlock,
     ArticleCodeBlock, ArticleImageBlock,
-    Rate, RateArticleResult,
+    Rate,
 } from './model/types/article';
 
 export type {
@@ -14,6 +14,8 @@ export type {
 
 export { fetchArticleById } from './model/services/fetchArticleById/fetchArticleById';
 
-export { likeArticle } from './model/services/likeArticle/likeArticle';
-
-export { dislikeArticle } from './model/services/dislikeArticle/dislikeArticle';
+export {
+    articlesApi,
+    useGetArticles, useGetSubscriptions, useGetUserArticles,
+    type RateArticleResult,
+} from './api/articlesApi';

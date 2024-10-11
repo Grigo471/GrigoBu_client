@@ -13,6 +13,7 @@ const initialForm: Article = {
     rating: 0,
     tags: [],
     user: {
+        id: 1,
         username: '',
     },
     blocks: [],
