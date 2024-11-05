@@ -1,4 +1,4 @@
-import { memo, useCallback } from 'react';
+import { memo, useCallback, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useSelector } from 'react-redux';
 import { classNames } from '@/shared/lib/classNames/classNames';
@@ -7,7 +7,6 @@ import { Card } from '@/shared/ui/Card';
 import { HStack, VStack } from '@/shared/ui/Stack';
 import { Text } from '@/shared/ui/Text';
 import { Avatar } from '@/shared/ui/Avatar';
-import { useInitialEffect } from '@/shared/lib/hooks/useInitialEffect';
 import { useAppDispatch } from '@/shared/lib/hooks/useAppDispatch';
 import { fetchProfile } from '../../model/services/fetchProfile';
 import {
@@ -39,9 +38,11 @@ export const ProfileCard = memo((props: ProfileCardProps) => {
     const userData = useSelector(getProfileData);
     const amISubscribed = useSelector(getProfileAmISubscribed);
 
-    useInitialEffect(() => {
+    useEffect(() => {
         dispatch(fetchProfile(username));
-    });
+    }, [username, dispatch]);
+
+    console.log(username);
 
     const onSubscribe = useCallback(() => {
         if (userData?.id) dispatch(subscribeToUser(userData.id));

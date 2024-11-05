@@ -17,5 +17,6 @@ export { fetchArticleById } from './model/services/fetchArticleById/fetchArticle
 export {
     articlesApi,
     useGetArticles, useGetSubscriptions, useGetUserArticles,
-    type RateArticleResult,
 } from './api/articlesApi';
+
+export { type RateArticleResult } from './api/types';

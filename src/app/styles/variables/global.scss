@@ -36,4 +36,18 @@
     --overlay-color: rgba(16 13 13 / 50%);
     --red-light: #d30a0a;
     --red-dark: #990303;
+
+    // heights
+
+    --navbar-height: 56px;
+
+    // widths
+
+    --article-card-width: 640px;
+    --rating-button-width: 56px;
+    --article-filters-width: 264px;
+    --articles-page-offset-x:
+        calc(
+            (100vw - var(--article-card-width) - var(--rating-button-width) - var(--article-filters-width) - 32px) / 2
+        );
 }

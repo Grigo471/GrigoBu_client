@@ -1,31 +1,9 @@
-/* eslint-disable no-restricted-syntax */
 import { rtkApi } from '@/shared/api/rtkApi';
-import { Article, Rate } from '../model/types/article';
-import { ArticleSortField } from '../model/consts/consts';
-import { SortOrder } from '@/shared/types';
-
-interface ArticlesPageParams {
-    limit: number;
-    page: number;
-    sort: ArticleSortField;
-    order: SortOrder;
-    search: string;
-}
-
-interface ProfilePageParams extends ArticlesPageParams {
-    username?: string;
-}
-
-export interface RateArticleResult {
-    myRate: Rate;
-    articleId: string;
-    rating: number;
-}
-
-interface RateArticleProps {
-    rate: 'like' | 'dislike';
-    articleId: string;
-}
+import { Article } from '../model/types/article';
+import {
+    ArticlesPageParams, ProfilePageParams, RateArticleProps, RateArticleResult,
+} from './types';
+import { ARTICLES_PAGE_CACHE_LIFETIME } from '@/shared/const/articlesApi';
 
 export const articlesApi = rtkApi.injectEndpoints({
     endpoints: (build) => ({
@@ -42,8 +20,9 @@ export const articlesApi = rtkApi.injectEndpoints({
             },
             merge: (currentCache, newItems, { arg }) => {
                 if (arg.page === 1) {
-                    currentCache = newItems;
-                } else if (arg.page * arg.limit > currentCache.length) {
+                    return newItems;
+                }
+                if (arg.page * arg.limit > currentCache.length) {
                     currentCache.push(...newItems);
                 }
             },
@@ -52,6 +31,7 @@ export const articlesApi = rtkApi.injectEndpoints({
                     && !!previousArg?.page
                     && (currentArg?.page > previousArg?.page);
             },
+            keepUnusedDataFor: ARTICLES_PAGE_CACHE_LIFETIME,
             providesTags: ['Articles'],
         }),
         getSubscriptions: build.query<Article[], ArticlesPageParams>({
@@ -121,8 +101,11 @@ export const articlesApi = rtkApi.injectEndpoints({
                     const { articleId, myRate, rating } = (await queryFulfilled).data;
                     const caches = articlesApi.util
                         .selectInvalidatedBy(getState(), ['Articles']);
-                    for (const { endpointName, originalArgs } of caches) {
-                        if (endpointName === 'getArticles' || endpointName === 'getSubscriptions') {
+
+                    caches.forEach(({ endpointName, originalArgs }) => {
+                        if (endpointName === 'getArticles'
+                            || endpointName === 'getSubscriptions'
+                            || endpointName === 'getUserArticles') {
                             dispatch(
                                 articlesApi.util
                                     .updateQueryData(endpointName, originalArgs, (draft) => {
@@ -136,7 +119,7 @@ export const articlesApi = rtkApi.injectEndpoints({
                                     }),
                             );
                         }
-                    }
+                    });
                 } catch (error) {
                     console.log(error);
                 }

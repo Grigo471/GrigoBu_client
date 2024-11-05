@@ -1,5 +1,6 @@
 .MainLayout {
     min-height: 100vh;
+    display: flex;
 }
 
 .navbar {
@@ -8,26 +9,8 @@
     z-index: 10000;
 }
 
-.contentWrapper {
-    display: grid;
-    grid-template-areas: "leftbar content";
-    grid-template-columns: min-content 1fr;
-}
-
-.leftbar {
-    height: 100vh;
-    width: 100%;
-    grid-area: leftbar;
-    padding: 20px;
-    position: sticky;
-    top: 16px;
-}
-
 .content {
-    margin-top: 72px;
-    grid-area: content;
-    max-width: 1100px;
-    justify-self: center;
-    padding: 0 32px;
+    margin-top: 56px;
     width: 100%;
+    height: calc(100vh - 56px);
 }

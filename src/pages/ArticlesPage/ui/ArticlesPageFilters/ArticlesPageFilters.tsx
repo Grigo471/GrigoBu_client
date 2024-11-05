@@ -14,6 +14,7 @@ import { ArticleSortField } from '@/entities/Article';
 import { articlesPageActions } from '../../model/slice/ArticlesPageSlice';
 import { SortOrder } from '@/shared/types';
 import { useDebounce } from '@/shared/lib/hooks/useDebounce';
+import { instantScrollTop } from '@/shared/lib/helpers/instantScrollTop';
 
 interface ArticlesPageFiltersProps {
    className?: string;
@@ -31,23 +32,20 @@ export const ArticlesPageFilters = memo((props: ArticlesPageFiltersProps) => {
     const [searchText, setSearchText] = useState(search);
 
     const onChangeSort = useCallback((sort: ArticleSortField) => {
-        // @ts-ignore
-        window.scrollTo({ top: 0, behavior: 'instant' });
+        instantScrollTop(0);
         dispatch(articlesPageActions.setSort(sort));
         dispatch(articlesPageActions.setPage(1));
     }, [dispatch]);
 
     const onChangeOrder = useCallback((order: SortOrder) => {
-        // @ts-ignore
-        window.scrollTo({ top: 0, behavior: 'instant' });
+        instantScrollTop(0);
         dispatch(articlesPageActions.setOrder(order));
         dispatch(articlesPageActions.setPage(1));
     }, [dispatch]);
 
     const debouncedSetSearch = useDebounce(
         (search: string) => {
-            // @ts-ignore
-            window.scrollTo({ top: 0, behavior: 'instant' });
+            instantScrollTop(0);
             dispatch(articlesPageActions.setSearch(search));
             dispatch(articlesPageActions.setPage(1));
         },

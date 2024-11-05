@@ -46,7 +46,7 @@ export const UsersPage = memo((props: PropsWithChildren<UsersPageProps>) => {
                 >
                     <VStack gap="20" max>
                         <Text title={t('Список пользователей')} />
-                        {users.map((user) => <UsersListItem user={user} />)}
+                        {users.map((user) => <UsersListItem key={user.id} user={user} />)}
                     </VStack>
                 </Page>
             )}

@@ -55,13 +55,13 @@ export const ArticleDetails = memo((props: ArticleDetailsProps) => {
                     view !== 'preview'
                     && <ArticleRatingButton className={cls.rating} article={article} />
                 }
-                <Card max border="minimum" padding="24">
+                <Card max border="minimum" padding="24" className={cls.card}>
                     <VStack gap="8">
                         <HStack gap="8">
                             <AppLink to={`/users/${article?.user.username}`} target="_blank">
                                 <HStack gap="8">
                                     <Avatar src={srcWithApi(avatar)} size={24} />
-                                    <Text text={article?.user.username} bold />
+                                    <span className={cls.username}>{article?.user.username}</span>
                                 </HStack>
                             </AppLink>
                             <Text text={date} />
