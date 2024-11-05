@@ -50,6 +50,7 @@ const App = memo(() => {
                 <MainLayout
                     navbar={<Navbar />}
                     content={<AppRouter />}
+                    toolbar={toolbar}
                 />
             </Suspense>
         </div>

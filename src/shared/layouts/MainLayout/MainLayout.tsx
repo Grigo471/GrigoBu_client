@@ -6,16 +6,18 @@ interface MainLayoutProps {
    className?: string;
    navbar: ReactElement;
    content: ReactElement;
+   toolbar?: ReactElement;
 }
 
 export const MainLayout = (props: MainLayoutProps) => {
     const {
-        className, navbar, content,
+        className, navbar, content, toolbar,
     } = props;
 
     return (
         <div className={classNames(cls.MainLayout, {}, [className])}>
             <div className={cls.navbar}>{navbar}</div>
+            <div className={cls.toolbar}>{toolbar}</div>
             <div className={cls.content}>{content}</div>
         </div>
     );

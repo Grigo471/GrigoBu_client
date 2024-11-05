@@ -33,7 +33,7 @@ export const ArticleDetails = memo((props: ArticleDetailsProps) => {
     const date = article?.createdAt.split('T')[0];
 
     const title = view === 'list' ? (
-        <AppLink to={`/article/${article?.id}`} target="_blank">
+        <AppLink to={`/article/${article?.id}`}>
             <Text
                 title={article?.title}
                 size="l"
@@ -58,7 +58,7 @@ export const ArticleDetails = memo((props: ArticleDetailsProps) => {
                 <Card max border="minimum" padding="24" className={cls.card}>
                     <VStack gap="8">
                         <HStack gap="8">
-                            <AppLink to={`/users/${article?.user.username}`} target="_blank">
+                            <AppLink to={`/users/${article?.user.username}`}>
                                 <HStack gap="8">
                                     <Avatar src={srcWithApi(avatar)} size={24} />
                                     <span className={cls.username}>{article?.user.username}</span>
@@ -78,7 +78,7 @@ export const ArticleDetails = memo((props: ArticleDetailsProps) => {
                             ))}
                         </HStack>
                         {view === 'list' && (
-                            <AppLink to={`/article/${article?.id}`} target="_blank">
+                            <AppLink to={`/article/${article?.id}`}>
                                 <HStack gap="4">
                                     <Icon className={cls.comment} Svg={CommentIcon} clickable />
                                     <Text

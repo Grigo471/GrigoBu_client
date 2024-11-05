@@ -2,7 +2,6 @@
     display: grid;
     grid-template-areas: "left content right";
     grid-template-columns: min-content 1fr min-content;
-    height: 100%;
 }
 
 .left {
@@ -14,7 +13,6 @@
 
 .content {
     grid-area: content;
-    max-width: 800px;
     justify-self: center;
     padding: 0 16px;
     width: 100%;

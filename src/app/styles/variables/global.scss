@@ -46,8 +46,8 @@
     --article-card-width: 640px;
     --rating-button-width: 56px;
     --article-filters-width: 264px;
-    --articles-page-offset-x:
+    --articles-page-width:
         calc(
-            (100vw - var(--article-card-width) - var(--rating-button-width) - var(--article-filters-width) - 32px) / 2
+            (var(--article-card-width) + var(--rating-button-width) + var(--article-filters-width) + 32px)
         );
 }

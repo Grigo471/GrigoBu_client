@@ -1,6 +1,7 @@
 .MainLayout {
     min-height: 100vh;
     display: flex;
+    justify-content: center;
 }
 
 .navbar {
@@ -9,8 +10,17 @@
     z-index: 10000;
 }
 
-.content {
-    margin-top: 56px;
-    width: 100%;
+.toolbar {
+    position: fixed;
+    left: 0;
+    top: 56px;
     height: calc(100vh - 56px);
+    width: 64px;
+}
+
+.content {
+    grid-area: content;
+    margin-top: 72px;
+    width: 100%;
+    max-width: var(--articles-page-width);
 }

@@ -8,7 +8,7 @@ import { ReducerList, useDynamicModuleLoad } from '@/shared/lib/hooks/useDynamic
 import { ArticlesPageFilters } from '../ArticlesPageFilters/ArticlesPageFilters';
 import { ArticlesPageList } from '../ArticlesPageList/ArticlesPageList';
 import { ARTICLES_PAGE_CACHE_LIFETIME } from '@/shared/const/articlesApi';
-import { ArticlesPageLayout } from '@/widgets/ArticlesPageLayout';
+import { StickyContentLayout } from '@/shared/layouts/StickyContentLayout';
 
 interface ArticlesPageProps {
    className?: string;
@@ -52,8 +52,8 @@ const ArticlesPage = (props: ArticlesPageProps) => {
     useDynamicModuleLoad({ reducers, removeAfterUnmount: false });
 
     return (
-        <ArticlesPageLayout
-            list={<ArticlesPageList />}
+        <StickyContentLayout
+            content={<ArticlesPageList />}
             right={<ArticlesPageFilters />}
         />
     );

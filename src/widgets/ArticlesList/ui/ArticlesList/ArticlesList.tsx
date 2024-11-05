@@ -1,11 +1,8 @@
 import React, {
     memo,
-    useCallback,
-    useEffect,
-    useRef,
 } from 'react';
 import { useTranslation } from 'react-i18next';
-import { Virtuoso } from 'react-virtuoso';
+import { ListRange, Virtuoso } from 'react-virtuoso';
 
 import { useLocation } from 'react-router-dom';
 import { Text } from '@/shared/ui/Text';
@@ -14,7 +11,6 @@ import { ArticleListItemSkeleton } from './ArticleListItemSkeleton';
 import { VStack } from '@/shared/ui/Stack';
 import { ArticleListItem } from '../ArticleListItem/ArticleListItem';
 import cls from './ArticlesList.module.scss';
-import { useThrottle } from '@/shared/lib/hooks/useThrottle';
 
 interface ArticlesListProps {
    articles?: Article[];
@@ -23,17 +19,15 @@ interface ArticlesListProps {
    onLoadNextPart?: () => void;
 }
 
+type ScrollSchema = Record<string, number>;
+
+const scrollByPath: ScrollSchema = {};
+
 export const ArticlesList = memo((props: ArticlesListProps) => {
     const {
         articles, isLoading, error, onLoadNextPart,
     } = props;
     const { t } = useTranslation();
-
-    const scrollerRef = useRef<HTMLElement | Window | null>(null);
-
-    const handleScrollerRef = useCallback((ref: HTMLElement | Window | null) => {
-        scrollerRef.current = ref;
-    }, []);
 
     const renderArticle = (article: Article) => (
         <ArticleListItem
@@ -55,34 +49,27 @@ export const ArticlesList = memo((props: ArticlesListProps) => {
         </>
     ));
 
-    const Header = memo(() => (
-        <div className={cls.header} />
-    ));
+    const { pathname } = useLocation();
 
-    const pathname = useLocation();
+    const rangeChanged = (range: ListRange) => {
+        scrollByPath[pathname] = range.startIndex;
+        console.log(scrollByPath);
+    };
 
-    const scrollHandler = useThrottle(() => {
-        sessionStorage.setItem(`${pathname.pathname} scrollPosition`, window.scrollY.toString());
-    }, 100);
-
-    useEffect(() => {
-        const scrollPosition = Number(sessionStorage.getItem(`${pathname.pathname} scrollPosition`)) || 0;
-        window.addEventListener('scroll', scrollHandler);
-        console.log(scrollPosition);
-        setTimeout(() => window.scrollTo({ top: scrollPosition, behavior: 'smooth' }), 100);
-
-        return () => {
-            window.removeEventListener('scroll', scrollHandler);
-        };
-    }, []);
+    // const scrollHandler = useThrottle(() => {
+    //     scrollByPath[pathname] = window.scrollY;
+    //     console.log(scrollByPath, pathname);
+    // }, 100);
 
     // useEffect(() => {
-    //     setTimeout(() => {
-    //         if (
-    //             scrollerRef.current
-    //         && scrollerRef.current instanceof HTMLElement
-    //         ) scrollerRef.current.scrollTo({ top: 500, behavior: 'smooth' });
-    //     }, 10);
+    //     const scrollPosition = scrollByPath[pathname] || 0;
+    //     console.log(scrollByPath);
+    //     window.addEventListener('scroll', scrollHandler);
+    //     setTimeout(() => window.scrollTo({ top: scrollPosition }), 100);
+
+    //     return () => {
+    //         window.removeEventListener('scroll', scrollHandler);
+    //     };
     // }, []);
 
     if (!isLoading && !articles?.length) {
@@ -109,9 +96,8 @@ export const ArticlesList = memo((props: ArticlesListProps) => {
     return (
         <Virtuoso
             data={articles}
-            // scrollerRef={handleScrollerRef}
             useWindowScroll
-            components={{ Footer, Header }}
+            components={{ Footer }}
             itemContent={(_, article) => renderArticle(article)}
             style={{ width: '100%', height: '100%' }}
             endReached={onLoadNextPart}
