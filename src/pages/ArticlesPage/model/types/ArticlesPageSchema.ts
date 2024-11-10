@@ -2,6 +2,7 @@ import { ArticleSortField } from '@/entities/Article';
 import { SortOrder } from '@/shared/types';
 
 export interface ArticlesPageSchema {
+    uncollapsedCards: string[];
     // pagination
     page: number;
     limit: number;

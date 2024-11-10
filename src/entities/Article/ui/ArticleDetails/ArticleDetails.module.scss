@@ -1,5 +1,7 @@
 .ArticleDetails {
-    padding-bottom: 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 8;
 }
 
 .avatar {
@@ -14,19 +16,6 @@
     width: 100%;
 }
 
-.rating {
-    position: sticky;
-    top: 16px;
-}
-
 .tag {
     opacity: 0.7;
-}
-
-.comment {
-    padding-top: 4px;
-}
-
-.card {
-    width: 640px;
 }

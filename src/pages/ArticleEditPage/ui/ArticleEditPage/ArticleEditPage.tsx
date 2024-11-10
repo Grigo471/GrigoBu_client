@@ -76,7 +76,7 @@ const ArticleEditPage = () => {
     }
 
     const content = isPreview ? (
-        <ArticleDetails article={formData} view="preview" />
+        <ArticleDetails article={formData} />
     ) : (
         <ArticleEditForm />
     );

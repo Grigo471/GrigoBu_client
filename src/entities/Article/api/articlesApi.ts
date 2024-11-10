@@ -57,6 +57,7 @@ export const articlesApi = rtkApi.injectEndpoints({
                     && !!previousArg?.page
                     && (currentArg?.page > previousArg?.page);
             },
+            keepUnusedDataFor: ARTICLES_PAGE_CACHE_LIFETIME,
             providesTags: ['Articles'],
         }),
         getUserArticles: build.query<Article[], ProfilePageParams>({
@@ -88,6 +89,7 @@ export const articlesApi = rtkApi.injectEndpoints({
                     && !!previousArg?.page
                     && (currentArg?.page > previousArg?.page);
             },
+            keepUnusedDataFor: ARTICLES_PAGE_CACHE_LIFETIME,
             providesTags: ['Articles'],
         }),
         rateArticle: build.mutation<RateArticleResult, RateArticleProps>({

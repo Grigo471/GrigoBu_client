@@ -1,7 +1,6 @@
 import { memo } from 'react';
 import { useParams } from 'react-router-dom';
 import { useSelector } from 'react-redux';
-import { ArticlesList } from '@/widgets/ArticlesList';
 import { useAppDispatch } from '@/shared/lib/hooks/useAppDispatch';
 import {
     getProfilePageLimit,
@@ -32,10 +31,11 @@ export const ProfilePageArticlesList = memo(() => {
     };
 
     return (
-        <ArticlesList
-            articles={data}
-            isLoading={isLoading}
-            onLoadNextPart={onLoadNextPart}
-        />
+        // <ArticlesList
+        //     articles={data}
+        //     isLoading={isLoading}
+        //     onLoadNextPart={onLoadNextPart}
+        // />
+        <div />
     );
 });

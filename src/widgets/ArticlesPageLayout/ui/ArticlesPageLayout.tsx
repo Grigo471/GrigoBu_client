@@ -1,6 +1,7 @@
 import { ReactElement, memo } from 'react';
 import { classNames } from '@/shared/lib/classNames/classNames';
 import cls from './ArticlesPageLayout.module.scss';
+// eslint-disable-next-line grigo-eslint-plugin/layers-hierarchy-imports
 import { ScrollToolbar } from '@/widgets/ScrollToolbar';
 
 interface ArticlesPageLayoutProps {

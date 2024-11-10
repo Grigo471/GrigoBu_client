@@ -1,8 +1,5 @@
 import React, {
     memo,
-    useCallback,
-    useEffect,
-    useRef,
 } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Virtuoso } from 'react-virtuoso';
@@ -15,29 +12,31 @@ import { VStack } from '@/shared/ui/Stack';
 import { ArticleListItem } from '../ArticleListItem/ArticleListItem';
 import cls from './ArticlesList.module.scss';
 import { useThrottle } from '@/shared/lib/hooks/useThrottle';
+import { useInitialEffect } from '@/shared/lib/hooks/useInitialEffect';
 
 interface ArticlesListProps {
    articles?: Article[];
    isLoading?: boolean;
+   uncollapsedCards: string[];
+   setUncollapsed: (articleId: string) => void;
+   page?: number;
    error?: string;
    onLoadNextPart?: () => void;
 }
 
+export const scrollByPath: Record<string, number> = {};
+
 export const ArticlesList = memo((props: ArticlesListProps) => {
     const {
-        articles, isLoading, error, onLoadNextPart,
+        articles, isLoading, error, page, onLoadNextPart, uncollapsedCards, setUncollapsed,
     } = props;
     const { t } = useTranslation();
-
-    const scrollerRef = useRef<HTMLElement | Window | null>(null);
-
-    const handleScrollerRef = useCallback((ref: HTMLElement | Window | null) => {
-        scrollerRef.current = ref;
-    }, []);
 
     const renderArticle = (article: Article) => (
         <ArticleListItem
             article={article}
+            uncollapsed={uncollapsedCards.includes(article.id)}
+            setUncollapsed={setUncollapsed}
             key={article.id}
         />
     );
@@ -59,31 +58,21 @@ export const ArticlesList = memo((props: ArticlesListProps) => {
         <div className={cls.header} />
     ));
 
-    const pathname = useLocation();
+    const { pathname } = useLocation();
 
-    const scrollHandler = useThrottle(() => {
-        sessionStorage.setItem(`${pathname.pathname} scrollPosition`, window.scrollY.toString());
+    const scrollHandler = useThrottle((e: React.UIEvent<HTMLDivElement>) => {
+        scrollByPath[pathname] = e.currentTarget.scrollTop;
     }, 100);
 
-    useEffect(() => {
-        const scrollPosition = Number(sessionStorage.getItem(`${pathname.pathname} scrollPosition`)) || 0;
-        window.addEventListener('scroll', scrollHandler);
-        console.log(scrollPosition);
-        setTimeout(() => window.scrollTo({ top: scrollPosition, behavior: 'smooth' }), 100);
-
-        return () => {
-            window.removeEventListener('scroll', scrollHandler);
-        };
-    }, []);
-
-    // useEffect(() => {
-    //     setTimeout(() => {
-    //         if (
-    //             scrollerRef.current
-    //         && scrollerRef.current instanceof HTMLElement
-    //         ) scrollerRef.current.scrollTo({ top: 500, behavior: 'smooth' });
-    //     }, 10);
-    // }, []);
+    useInitialEffect(() => {
+        const scrollPosition = scrollByPath[pathname];
+        if (scrollPosition && scrollPosition > 0) {
+            const virtuoso = document.getElementById(`virtuoso ${pathname}`);
+            setTimeout(() => {
+                virtuoso?.scrollTo({ top: scrollPosition, behavior: 'smooth' });
+            }, 100);
+        }
+    });
 
     if (!isLoading && !articles?.length) {
         return (
@@ -93,6 +82,14 @@ export const ArticlesList = memo((props: ArticlesListProps) => {
                     title={t('Статьи не найдены')}
                 />
             </VStack>
+        );
+    }
+
+    if (isLoading && page === 1) {
+        return (
+            <>
+                {getSkeletons()}
+            </>
         );
     }
 
@@ -108,9 +105,9 @@ export const ArticlesList = memo((props: ArticlesListProps) => {
 
     return (
         <Virtuoso
+            id={`virtuoso ${pathname}`}
             data={articles}
-            // scrollerRef={handleScrollerRef}
-            useWindowScroll
+            onScroll={scrollHandler}
             components={{ Footer, Header }}
             itemContent={(_, article) => renderArticle(article)}
             style={{ width: '100%', height: '100%' }}

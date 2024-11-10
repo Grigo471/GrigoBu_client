@@ -1,5 +1,7 @@
 export { ArticleDetails } from './ui/ArticleDetails/ArticleDetails';
 
+export { ArticleRatingButton } from './ui/ArticleRatingButton/ArticleRatingButton';
+
 export { renderArticleBlock } from './ui/ArticleDetails/rednerArticleBlock';
 
 export type {
