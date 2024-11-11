@@ -18,12 +18,11 @@ import { useInitialEffect } from '@/shared/lib/hooks/useInitialEffect';
 
 interface ArticleListItemProps {
    article: Article;
-   uncollapsed: boolean;
    setUncollapsed: (articleId: string) => void;
 }
 
 export const ArticleListItem = memo((props: ArticleListItemProps) => {
-    const { article, uncollapsed, setUncollapsed } = props;
+    const { article, setUncollapsed } = props;
     const { t } = useTranslation();
     const [overflowActive, setOverflowActive] = useState(false);
     const detailsRef = useRef<HTMLDivElement>();
@@ -53,9 +52,9 @@ export const ArticleListItem = memo((props: ArticleListItemProps) => {
                         ref={setDetailsRef}
                         article={article}
                         withLinks
-                        className={classNames('', { [cls.collapsed]: !uncollapsed }, [])}
+                        className={classNames('', { [cls.collapsed]: !article.uncollapsed }, [])}
                     />
-                    {overflowActive && !uncollapsed
+                    {overflowActive && !article.uncollapsed
                     && (
                         <Button
                             onClick={() => setUncollapsed(article.id)}

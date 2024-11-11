@@ -36,7 +36,7 @@ export const Icon = memo((props: IconProps) => {
             onClick={undefined}
             width={width}
             height={height}
-            className={classNames(cls.Icon, {}, [className])}
+            className={classNames(cls.Icon, {}, [clickable ? '' : className])}
         />
     );
 
@@ -44,7 +44,7 @@ export const Icon = memo((props: IconProps) => {
         return (
             <button
                 type="button"
-                className={cls.button}
+                className={classNames(cls.button, {}, [className])}
                 onClick={props.onClick}
             >
                 {icon}

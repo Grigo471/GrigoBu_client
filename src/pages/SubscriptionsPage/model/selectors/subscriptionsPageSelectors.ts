@@ -17,7 +17,3 @@ export const getSubscriptionsPageSort = (
 export const getSubscriptionsPageSearch = (
     state: StateSchema,
 ) => state.subscriptionsPage?.search ?? '';
-
-export const getSubscriptionsPageUncollapsed = (
-    state: StateSchema,
-) => state.subscriptionsPage?.uncollapsedCards ?? [];

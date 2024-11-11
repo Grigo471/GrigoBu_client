@@ -38,4 +38,5 @@ export interface Article {
     blocks: ArticleBlock[];
     myRate?: Rate;
     commentsCount?: number;
+    uncollapsed?: boolean;
 }

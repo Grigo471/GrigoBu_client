@@ -1,8 +1,11 @@
-import React, {
+import {
     memo,
+    useCallback,
+    useRef,
+    useState,
 } from 'react';
 import { useTranslation } from 'react-i18next';
-import { Virtuoso } from 'react-virtuoso';
+import { ListRange, Virtuoso, VirtuosoHandle } from 'react-virtuoso';
 
 import { useLocation } from 'react-router-dom';
 import { Text } from '@/shared/ui/Text';
@@ -11,14 +14,15 @@ import { ArticleListItemSkeleton } from './ArticleListItemSkeleton';
 import { VStack } from '@/shared/ui/Stack';
 import { ArticleListItem } from '../ArticleListItem/ArticleListItem';
 import cls from './ArticlesList.module.scss';
-import { useThrottle } from '@/shared/lib/hooks/useThrottle';
+import { Icon } from '@/shared/ui/Icon';
+import RefreshIcon from '@/shared/assets/icons/refresh.svg';
 import { useInitialEffect } from '@/shared/lib/hooks/useInitialEffect';
 
 interface ArticlesListProps {
    articles?: Article[];
    isLoading?: boolean;
-   uncollapsedCards: string[];
    setUncollapsed: (articleId: string) => void;
+   refreshHandler?: () => void;
    page?: number;
    error?: string;
    onLoadNextPart?: () => void;
@@ -28,14 +32,22 @@ export const scrollByPath: Record<string, number> = {};
 
 export const ArticlesList = memo((props: ArticlesListProps) => {
     const {
-        articles, isLoading, error, page, onLoadNextPart, uncollapsedCards, setUncollapsed,
+        articles, isLoading, error, page, refreshHandler,
+        onLoadNextPart, setUncollapsed,
     } = props;
     const { t } = useTranslation();
+
+    const [isScrolling, setIsScrolling] = useState(false);
+
+    const ref = useRef<VirtuosoHandle>();
+
+    function setVirtuosoRef(el: VirtuosoHandle) {
+        ref.current = el;
+    }
 
     const renderArticle = (article: Article) => (
         <ArticleListItem
             article={article}
-            uncollapsed={uncollapsedCards.includes(article.id)}
             setUncollapsed={setUncollapsed}
             key={article.id}
         />
@@ -54,23 +66,21 @@ export const ArticlesList = memo((props: ArticlesListProps) => {
         </>
     ));
 
-    const Header = memo(() => (
-        <div className={cls.header} />
-    ));
-
     const { pathname } = useLocation();
 
-    const scrollHandler = useThrottle((e: React.UIEvent<HTMLDivElement>) => {
-        scrollByPath[pathname] = e.currentTarget.scrollTop;
-    }, 100);
+    const rangeHandler = useCallback((range: ListRange) => {
+        scrollByPath[pathname] = Math.floor((range.startIndex + range.endIndex) / 2);
+    }, [pathname]);
 
     useInitialEffect(() => {
         const scrollPosition = scrollByPath[pathname];
         if (scrollPosition && scrollPosition > 0) {
-            const virtuoso = document.getElementById(`virtuoso ${pathname}`);
+            const virtuoso = ref.current;
+            setIsScrolling(true);
             setTimeout(() => {
-                virtuoso?.scrollTo({ top: scrollPosition, behavior: 'smooth' });
-            }, 100);
+                setIsScrolling(false);
+                virtuoso?.scrollToIndex({ index: scrollPosition, align: 'center' });
+            }, 69);
         }
     });
 
@@ -104,14 +114,18 @@ export const ArticlesList = memo((props: ArticlesListProps) => {
     }
 
     return (
-        <Virtuoso
-            id={`virtuoso ${pathname}`}
-            data={articles}
-            onScroll={scrollHandler}
-            components={{ Footer, Header }}
-            itemContent={(_, article) => renderArticle(article)}
-            style={{ width: '100%', height: '100%' }}
-            endReached={onLoadNextPart}
-        />
+        <>
+            <Icon onClick={refreshHandler} clickable Svg={RefreshIcon} className={cls.reload} />
+            <Virtuoso
+                id={`virtuoso ${pathname}`}
+                ref={setVirtuosoRef}
+                rangeChanged={rangeHandler}
+                data={articles}
+                components={{ Footer }}
+                itemContent={(_, article) => renderArticle(article)}
+                style={{ width: '100%', height: '100%', opacity: isScrolling ? '0' : '1' }}
+                endReached={onLoadNextPart}
+            />
+        </>
     );
 });

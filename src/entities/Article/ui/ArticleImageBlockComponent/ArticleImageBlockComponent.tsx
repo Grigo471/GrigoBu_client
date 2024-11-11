@@ -4,6 +4,8 @@ import cls from './ArticleImageBlockComponent.module.scss';
 import { ArticleImageBlock } from '../../model/types/article';
 import { Text } from '@/shared/ui/Text';
 import { srcWithApi } from '@/shared/lib/url/srcWithApi/srcWithApi';
+import { AppImage } from '@/shared/ui/AppImage';
+import { Skeleton } from '@/shared/ui/Skeleton';
 
 interface ArticleImageBlockComponentProps {
    className?: string;
@@ -16,7 +18,12 @@ export const ArticleImageBlockComponent = memo(
 
         return (
             <div className={classNames(cls.ArticleImageBlockComponent, {}, [className])}>
-                <img src={srcWithApi(block.src)} className={cls.img} alt={block.src} />
+                <AppImage
+                    src={srcWithApi(block.src)}
+                    fallback={<Skeleton width={500} height={520} />}
+                    className={cls.img}
+                    alt={block.src}
+                />
                 {block.title && (
                     <Text text={block.title} align="center" />
                 )}

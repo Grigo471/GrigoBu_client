@@ -11,7 +11,3 @@ export const getArticlesPageSort = (
 ) => state.articlesPage?.sort ?? 'createdAt';
 
 export const getArticlesPageSearch = (state: StateSchema) => state.articlesPage?.search ?? '';
-
-export const getArticlesPageUncollapsed = (
-    state: StateSchema,
-) => state.articlesPage?.uncollapsedCards ?? [];

@@ -6,9 +6,8 @@ import { articlesPageActions } from '../../model/slice/ArticlesPageSlice';
 import {
     getArticlesPageLimit, getArticlesPageNum,
     getArticlesPageOrder, getArticlesPageSearch, getArticlesPageSort,
-    getArticlesPageUncollapsed,
 } from '../../model/selectors/articlesPageSelectors';
-import { useGetArticles } from '@/entities/Article';
+import { articlesApi, useGetArticles } from '@/entities/Article';
 
 export const ArticlesPageList = memo(() => {
     const dispatch = useAppDispatch();
@@ -18,10 +17,9 @@ export const ArticlesPageList = memo(() => {
     const search = useSelector(getArticlesPageSearch);
     const page = useSelector(getArticlesPageNum);
     const limit = useSelector(getArticlesPageLimit);
-    const uncollapsedCards = useSelector(getArticlesPageUncollapsed);
 
     const {
-        data, isLoading, error, isFetching,
+        data, isLoading, error, isFetching, refetch,
     } = useGetArticles({
         order, sort, search, page, limit,
     });
@@ -30,18 +28,39 @@ export const ArticlesPageList = memo(() => {
         dispatch(articlesPageActions.setPage(page + 1));
     };
 
-    const setUncollapsed = useCallback((articleId: string) => {
-        dispatch(articlesPageActions.addUnCollapsedCards(articleId));
-    }, [dispatch]);
+    const scrollToTop = useCallback(() => {
+        const virtuoso = document.getElementById('virtuoso /');
+        virtuoso?.scrollTo(0, 0);
+    }, []);
+
+    const refreshHandler = useCallback(() => {
+        scrollToTop();
+        dispatch(articlesPageActions.setPage(1));
+        setTimeout(() => refetch(), 0);
+    }, [dispatch, scrollToTop, refetch]);
+
+    const setUncollapsed = (articleId: string) => {
+        dispatch(articlesApi.util.updateQueryData('getArticles', {
+            order, sort, search, page, limit,
+        }, (draft) => {
+            const article = draft.find(
+                (article) => article.id === articleId,
+            );
+            if (article) {
+                article.uncollapsed = true;
+            }
+        }));
+    };
 
     return (
         <ArticlesList
             articles={data}
-            uncollapsedCards={uncollapsedCards}
             setUncollapsed={setUncollapsed}
+            refreshHandler={refreshHandler}
             page={page}
             isLoading={isLoading || isFetching}
             onLoadNextPart={onLoadNextPart}
         />
+
     );
 });

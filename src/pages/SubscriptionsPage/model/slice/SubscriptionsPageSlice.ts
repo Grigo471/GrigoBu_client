@@ -9,7 +9,6 @@ import { SortOrder } from '@/shared/types';
 import { SubscriptionsPageSchema } from '../types/SubscriptionsPageSchema';
 
 const initialState: SubscriptionsPageSchema = {
-    uncollapsedCards: [],
     page: 1,
     limit: 5,
     sort: 'createdAt',
@@ -32,9 +31,6 @@ const subscriptionsPageSlice = createSlice({
         },
         setSearch: (state, action: PayloadAction<string>) => {
             state.search = action.payload;
-        },
-        addUnCollapsedCards: (state, action: PayloadAction<string>) => {
-            state.uncollapsedCards.push(action.payload);
         },
     },
 });
