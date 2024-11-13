@@ -4,10 +4,11 @@ import { ArticlesList } from '@/widgets/ArticlesList';
 import { useAppDispatch } from '@/shared/lib/hooks/useAppDispatch';
 import { articlesPageActions } from '../../model/slice/ArticlesPageSlice';
 import {
-    getArticlesPageLimit, getArticlesPageNum,
+    getArticlesPageNum,
     getArticlesPageOrder, getArticlesPageSearch, getArticlesPageSort,
 } from '../../model/selectors/articlesPageSelectors';
 import { articlesApi, useGetArticles } from '@/entities/Article';
+import { ARTICLES_PAGE_LIMIT } from '@/shared/const/articlesApi';
 
 export const ArticlesPageList = memo(() => {
     const dispatch = useAppDispatch();
@@ -16,7 +17,7 @@ export const ArticlesPageList = memo(() => {
     const sort = useSelector(getArticlesPageSort);
     const search = useSelector(getArticlesPageSearch);
     const page = useSelector(getArticlesPageNum);
-    const limit = useSelector(getArticlesPageLimit);
+    const limit = ARTICLES_PAGE_LIMIT;
 
     const {
         data, isLoading, error, isFetching, refetch,

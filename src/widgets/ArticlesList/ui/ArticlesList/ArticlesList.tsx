@@ -1,17 +1,19 @@
 import {
+    forwardRef,
     memo,
     useCallback,
     useRef,
     useState,
 } from 'react';
 import { useTranslation } from 'react-i18next';
-import { ListRange, Virtuoso, VirtuosoHandle } from 'react-virtuoso';
+import {
+    Components, ListRange, Virtuoso, VirtuosoHandle,
+} from 'react-virtuoso';
 
 import { useLocation } from 'react-router-dom';
 import { Text } from '@/shared/ui/Text';
 import { Article } from '@/entities/Article';
 import { ArticleListItemSkeleton } from './ArticleListItemSkeleton';
-import { VStack } from '@/shared/ui/Stack';
 import { ArticleListItem } from '../ArticleListItem/ArticleListItem';
 import cls from './ArticlesList.module.scss';
 import { Icon } from '@/shared/ui/Icon';
@@ -29,6 +31,19 @@ interface ArticlesListProps {
 }
 
 export const scrollByPath: Record<string, number> = {};
+
+// const Scroller: Components['Scroller'] = memo(forwardRef(({ style, children }, ref) => (
+//     <div style={style} ref={ref} className={cls.scroller}>
+//         <Icon Svg={RefreshIcon} className={cls.reload} />
+//         {children}
+//     </div>
+// )));
+
+const List: Components['List'] = memo(forwardRef(({ style, children }, ref) => (
+    <div style={style} ref={ref} className={cls.list}>
+        {children}
+    </div>
+)));
 
 export const ArticlesList = memo((props: ArticlesListProps) => {
     const {
@@ -86,12 +101,10 @@ export const ArticlesList = memo((props: ArticlesListProps) => {
 
     if (!isLoading && !articles?.length) {
         return (
-            <VStack gap="20">
-                <Text
-                    size="l"
-                    title={t('Статьи не найдены')}
-                />
-            </VStack>
+            <Text
+                size="l"
+                title={t('Статьи не найдены')}
+            />
         );
     }
 
@@ -121,9 +134,11 @@ export const ArticlesList = memo((props: ArticlesListProps) => {
                 ref={setVirtuosoRef}
                 rangeChanged={rangeHandler}
                 data={articles}
-                components={{ Footer }}
+                components={{ Footer, List }}
                 itemContent={(_, article) => renderArticle(article)}
-                style={{ width: '100%', height: '100%', opacity: isScrolling ? '0' : '1' }}
+                style={{
+                    opacity: isScrolling ? '0' : '1',
+                }}
                 endReached={onLoadNextPart}
             />
         </>

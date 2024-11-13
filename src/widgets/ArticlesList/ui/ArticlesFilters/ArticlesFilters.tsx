@@ -9,6 +9,7 @@ import { SortOrder } from '@/shared/types';
 import { ArticleSortField } from '@/entities/Article';
 
 interface ArticleFiltersProps {
+    className?: string;
     order: SortOrder;
     search: string;
     sort: ArticleSortField;
@@ -19,12 +20,12 @@ interface ArticleFiltersProps {
 
 export const ArticlesFilters = memo((props: ArticleFiltersProps) => {
     const {
-        order, search, sort, onChangeOrder, onChangeSearch, onChangeSort,
+        className, order, search, sort, onChangeOrder, onChangeSearch, onChangeSort,
     } = props;
     const { t } = useTranslation();
 
     return (
-        <VStack gap="32">
+        <VStack gap="16" className={className}>
             <Input
                 size="s"
                 addonLeft={<Icon Svg={SearchIcon} />}

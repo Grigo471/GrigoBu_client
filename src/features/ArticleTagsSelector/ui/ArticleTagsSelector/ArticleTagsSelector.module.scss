@@ -4,4 +4,10 @@
 
 .tag {
     cursor: pointer;
+    font: var(--font-s);
+}
+
+.tags {
+    max-height: 160px;
+    overflow-y: scroll;
 }

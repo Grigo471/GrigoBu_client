@@ -6,20 +6,11 @@ import { getUsername } from '@/entities/User';
 import { EditableProfileCard } from '@/features/EditableProfileCard';
 import { ProfileCard } from '@/features/ProfileCard';
 import { StickyContentLayout } from '@/shared/layouts/StickyContentLayout';
-
-import { profilePageReducer } from '../../model/slice/ProfilePageSlice';
-import { ReducerList, useDynamicModuleLoad } from '@/shared/lib/hooks/useDynamicModuleLoad';
 import { ProfilePageArticlesList } from '../ProfilePageArticlesList/ProfilePageArticlesList';
-
-const reducers: ReducerList = {
-    profilePage: profilePageReducer,
-};
 
 const ProfilePage = () => {
     const { username } = useParams<{ username: string }>();
     const myUsername = useSelector(getUsername);
-
-    useDynamicModuleLoad({ reducers, removeAfterUnmount: false });
 
     const ProfileHeader = memo(() => {
         if (username) {

@@ -2,10 +2,6 @@ import { StateSchema } from '@/app/providers/StoreProvider';
 
 export const getSubscriptionsPageNum = (state: StateSchema) => state.subscriptionsPage?.page || 1;
 
-export const getSubscriptionsPageLimit = (
-    state: StateSchema,
-) => state.subscriptionsPage?.limit || 5;
-
 export const getSubscriptionsPageOrder = (
     state: StateSchema,
 ) => state.subscriptionsPage?.order ?? 'desc';

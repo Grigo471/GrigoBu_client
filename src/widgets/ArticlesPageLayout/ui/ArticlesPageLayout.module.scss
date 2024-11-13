@@ -10,19 +10,18 @@
     top: 0;
     left: 0;
     width: 56px;
+    z-index: 100;
 }
 
 .listWrapper {
-    position: absolute;
     height: 100%;
-    top: 0;
-    left: var(--articles-page-offset-x);
-    width: calc(100vw - var(--articles-page-offset-x));
+    width: 100%;
 }
 
 .right {
+    pointer-events: none;
     position: absolute;
-    top: 16px;
-    width: 264px;
+    top: 0;
+    width: var(--article-filters-width);
     right: var(--articles-page-offset-x);
 }

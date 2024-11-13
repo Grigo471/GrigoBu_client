@@ -21,6 +21,7 @@ export interface StateSchema {
     user: UserSchema;
     UI: UISchema;
     [rtkApi.reducerPath]: ReturnType<typeof rtkApi.reducer>;
+    profilePage: ProfilePageSchema;
 
     usersPage?: UsersPageSchema;
     authForm?: AuthSchema;
@@ -28,7 +29,6 @@ export interface StateSchema {
     profileCard?: ProfileCardSchema;
     articlesPage?: ArticlesPageSchema;
     subscriptionsPage?: SubscriptionsPageSchema;
-    profilePage?: ProfilePageSchema;
     addCommentForm?: AddCommentFormSchema;
     articleDetailsPage?: ArticleDetailsPageSchema;
     articleEditPage?: ArticleEditPageSchema;

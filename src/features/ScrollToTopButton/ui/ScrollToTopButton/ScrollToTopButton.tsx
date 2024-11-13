@@ -1,4 +1,5 @@
-import { memo } from 'react';
+import { memo, useCallback } from 'react';
+import { useLocation } from 'react-router-dom';
 import { Icon } from '@/shared/ui/Icon';
 import CircleUpIcon from '@/shared/assets/icons/circle-up.svg';
 
@@ -9,9 +10,12 @@ interface ScrollToTopButtonProps {
 export const ScrollToTopButton = memo((props: ScrollToTopButtonProps) => {
     const { className } = props;
 
-    const onClick = () => {
-        window.scrollTo({ top: 0, behavior: 'smooth' });
-    };
+    const { pathname } = useLocation();
+
+    const onClick = useCallback(() => {
+        const virtuoso = document.getElementById(`virtuoso ${pathname}`);
+        if (virtuoso) virtuoso.scrollTo({ top: 0, behavior: 'smooth' });
+    }, [pathname]);
 
     return (
         <Icon

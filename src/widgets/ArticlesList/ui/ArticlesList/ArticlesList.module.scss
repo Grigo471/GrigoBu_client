@@ -14,5 +14,10 @@
 .reload {
     position: absolute;
     top: 16px;
-    left: -48px;
+    left: calc(var(--articles-page-offset-x) - 48px);
+    z-index: 100;
+}
+
+.list {
+    padding-left: var(--articles-page-offset-x);
 }

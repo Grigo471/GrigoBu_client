@@ -47,8 +47,8 @@ export const articlesApi = rtkApi.injectEndpoints({
             },
             merge: (currentCache, newItems, { arg }) => {
                 if (arg.page === 1) {
-                    currentCache = newItems;
-                } else if (arg.page * arg.limit > currentCache.length) {
+                    return newItems;
+                } if (arg.page * arg.limit > currentCache.length) {
                     currentCache.push(...newItems);
                 }
             },
@@ -79,8 +79,8 @@ export const articlesApi = rtkApi.injectEndpoints({
             },
             merge: (currentCache, newItems, { arg }) => {
                 if (arg.page === 1) {
-                    currentCache = newItems;
-                } else if (arg.page * arg.limit > currentCache.length) {
+                    return newItems;
+                } if (arg.page * arg.limit > currentCache.length) {
                     currentCache.push(...newItems);
                 }
             },

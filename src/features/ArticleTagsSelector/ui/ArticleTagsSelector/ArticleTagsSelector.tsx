@@ -19,7 +19,6 @@ import { useInitialEffect } from '@/shared/lib/hooks/useInitialEffect';
 import { fetchArticleTags } from '../../model/services/fetchArticleTags';
 import { Icon } from '@/shared/ui/Icon';
 import CrossIcon from '@/shared/assets/icons/cross-delete.svg';
-import { Text } from '@/shared/ui/Text';
 import { ArticleTagCreate } from './ArticleTagCreate';
 
 interface ArticleTagsSelectorProps {
@@ -57,7 +56,7 @@ export const ArticleTagsSelector = memo((props: ArticleTagsSelectorProps) => {
 
     return (
         <VStack gap="12" className={classNames(cls.ArticleTagsSelector, {}, [className])}>
-            <Text text={t('Выберите теги')} size="m" bold />
+            {/* <Text text={t('Выберите теги')} size="m" bold /> */}
             {withCreate && (
                 <ArticleTagCreate
                     onCreate={(createTag: string) => {
@@ -83,7 +82,7 @@ export const ArticleTagsSelector = memo((props: ArticleTagsSelectorProps) => {
                     ))}
                 </HStack>
             )}
-            <HStack gap="4" wrap="wrap">
+            <HStack gap="4" wrap="wrap" className={cls.tags}>
                 {tags.map((tag) => {
                     const isSelected = chosenTags.includes(tag);
                     return (

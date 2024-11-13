@@ -1,19 +1,28 @@
+import { createSelector } from '@reduxjs/toolkit';
 import { StateSchema } from '@/app/providers/StoreProvider';
 
-export const getProfilePageNum = (state: StateSchema) => state.profilePage?.page || 1;
+export const getProfilePage = (state: StateSchema) => state.profilePage?.profilePages;
 
-export const getProfilePageLimit = (
-    state: StateSchema,
-) => state.profilePage?.limit || 5;
+export const getProfilePageNum = createSelector(
+    getProfilePage,
+    (state: StateSchema, username: string) => username,
+    (profilePage, username) => profilePage?.[username]?.page || 1,
+);
 
-export const getProfilePageOrder = (
-    state: StateSchema,
-) => state.profilePage?.order ?? 'desc';
+export const getProfilePageOrder = createSelector(
+    getProfilePage,
+    (state: StateSchema, username: string) => username,
+    (profilePage, username) => profilePage?.[username]?.order || 'desc',
+);
 
-export const getProfilePageSort = (
-    state: StateSchema,
-) => state.profilePage?.sort ?? 'createdAt';
+export const getProfilePageSort = createSelector(
+    getProfilePage,
+    (state: StateSchema, username: string) => username,
+    (profilePage, username) => profilePage?.[username]?.sort ?? 'createdAt',
+);
 
-export const getProfilePageSearch = (
-    state: StateSchema,
-) => state.profilePage?.search ?? '';
+export const getProfilePageSearch = createSelector(
+    getProfilePage,
+    (state: StateSchema, username: string) => username,
+    (profilePage, username) => profilePage?.[username]?.search ?? '',
+);

@@ -4,8 +4,8 @@
 
     // s - font
 
-    --font-size-s: 12px;
-    --font-line-s: 16px;
+    --font-size-s: 14px;
+    --font-line-s: 20px;
     --font-s: var(--font-size-s) / var(--font-line-s) var(--font-family-text);
 
     // m - font
@@ -45,9 +45,9 @@
 
     --article-card-width: 640px;
     --rating-button-width: 56px;
-    --article-filters-width: 264px;
+    --article-filters-width: 300px;
     --articles-page-offset-x:
         calc(
-            (100vw - var(--article-card-width) - var(--rating-button-width) - var(--article-filters-width) - 32px) / 2
+            (100vw - var(--article-card-width) - var(--rating-button-width) - var(--article-filters-width) - 16px) / 2
         );
 }
