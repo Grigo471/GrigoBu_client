@@ -5,7 +5,6 @@ import {
 import { useAppDispatch } from '@/shared/lib/hooks/useAppDispatch';
 import { articlesPageActions, articlesPageReducer } from '../../model/slice/ArticlesPageSlice';
 import { ReducerList, useDynamicModuleLoad } from '@/shared/lib/hooks/useDynamicModuleLoad';
-import { ArticlesPageFilters } from '../ArticlesPageFilters/ArticlesPageFilters';
 import { ArticlesPageList } from '../ArticlesPageList/ArticlesPageList';
 import { ARTICLES_PAGE_CACHE_LIFETIME } from '@/shared/const/articlesApi';
 import { ArticlesPageLayout } from '@/widgets/ArticlesPageLayout';
@@ -36,7 +35,7 @@ const ArticlesPage = () => {
     return (
         <ArticlesPageLayout
             list={<ArticlesPageList />}
-            right={<ArticlesPageFilters />}
+            // right={<ArticlesPageFilters />}
         />
     );
 };

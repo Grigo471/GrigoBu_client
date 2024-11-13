@@ -1,5 +1,6 @@
-import { memo, useCallback } from 'react';
+import { forwardRef, memo, useCallback } from 'react';
 import { useSelector } from 'react-redux';
+import { Components } from 'react-virtuoso';
 import { ArticlesList } from '@/widgets/ArticlesList';
 import { useAppDispatch } from '@/shared/lib/hooks/useAppDispatch';
 import { articlesPageActions } from '../../model/slice/ArticlesPageSlice';
@@ -9,6 +10,15 @@ import {
 } from '../../model/selectors/articlesPageSelectors';
 import { articlesApi, useGetArticles } from '@/entities/Article';
 import { ARTICLES_PAGE_LIMIT } from '@/shared/const/articlesApi';
+import { ArticlesPageFilters } from '../ArticlesPageFilters/ArticlesPageFilters';
+import cls from './ArticlesPageList.module.scss';
+
+const Scroller: Components['Scroller'] = memo(forwardRef(({ style, children }, ref) => (
+    <div id="virtuoso /" style={style} ref={ref}>
+        <ArticlesPageFilters className={cls.filters} />
+        {children}
+    </div>
+)));
 
 export const ArticlesPageList = memo(() => {
     const dispatch = useAppDispatch();
@@ -61,6 +71,7 @@ export const ArticlesPageList = memo(() => {
             page={page}
             isLoading={isLoading || isFetching}
             onLoadNextPart={onLoadNextPart}
+            Scroller={Scroller}
         />
 
     );

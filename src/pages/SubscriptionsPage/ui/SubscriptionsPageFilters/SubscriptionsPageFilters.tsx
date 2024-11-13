@@ -1,7 +1,6 @@
 import { memo, useCallback, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { Card } from '@/shared/ui/Card';
-import { ArticlesFilters } from '@/widgets/ArticlesList';
 
 import { useAppDispatch } from '@/shared/lib/hooks/useAppDispatch';
 import { ArticleSortField } from '@/entities/Article';
@@ -12,6 +11,7 @@ import {
     getSubscriptionsPageSort,
 } from '../../model/selectors/subscriptionsPageSelectors';
 import { subscriptionsPageActions } from '../../model/slice/SubscriptionsPageSlice';
+import { ArticlesFilters } from '@/widgets/ArticlesList/ui/ArticlesFilters/ArticlesFilters';
 
 export const SubscriptionsPageFilters = memo(() => {
     const dispatch = useAppDispatch();

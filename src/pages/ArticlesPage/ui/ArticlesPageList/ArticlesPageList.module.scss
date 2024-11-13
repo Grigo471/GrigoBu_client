@@ -1,0 +1,11 @@
+.scroller {
+    padding-left: var(--articles-page-offset-x);
+}
+
+.filters {
+    position: sticky;
+    margin-left: 1000px;
+    top: 16px;
+    width: 320px;
+    z-index: 100;
+}

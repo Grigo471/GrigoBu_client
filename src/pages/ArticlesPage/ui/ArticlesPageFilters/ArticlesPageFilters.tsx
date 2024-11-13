@@ -6,7 +6,6 @@ import { useTranslation } from 'react-i18next';
 import { classNames } from '@/shared/lib/classNames/classNames';
 import cls from './ArticlesPageFilters.module.scss';
 import { Card } from '@/shared/ui/Card';
-import { ArticlesFilters } from '@/widgets/ArticlesList';
 import {
     getArticlesPageOrder,
     getArticlesPageSearch,
@@ -25,6 +24,7 @@ import { Icon } from '@/shared/ui/Icon';
 import CrossIcon from '@/shared/assets/icons/cross-delete.svg';
 import { HStack, VStack } from '@/shared/ui/Stack';
 import { Text } from '@/shared/ui/Text';
+import { ArticlesFilters } from '@/widgets/ArticlesList/ui/ArticlesFilters/ArticlesFilters';
 
 interface ArticlesPageFiltersProps {
    className?: string;

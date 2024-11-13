@@ -1,4 +1,5 @@
 import {
+    ComponentType,
     forwardRef,
     memo,
     useCallback,
@@ -7,7 +8,7 @@ import {
 } from 'react';
 import { useTranslation } from 'react-i18next';
 import {
-    Components, ListRange, Virtuoso, VirtuosoHandle,
+    Components, ListRange, ScrollerProps, Virtuoso, VirtuosoHandle,
 } from 'react-virtuoso';
 
 import { useLocation } from 'react-router-dom';
@@ -28,27 +29,15 @@ interface ArticlesListProps {
    page?: number;
    error?: string;
    onLoadNextPart?: () => void;
+   Scroller?: ComponentType<ScrollerProps>;
 }
 
 export const scrollByPath: Record<string, number> = {};
 
-// const Scroller: Components['Scroller'] = memo(forwardRef(({ style, children }, ref) => (
-//     <div style={style} ref={ref} className={cls.scroller}>
-//         <Icon Svg={RefreshIcon} className={cls.reload} />
-//         {children}
-//     </div>
-// )));
-
-const List: Components['List'] = memo(forwardRef(({ style, children }, ref) => (
-    <div style={style} ref={ref} className={cls.list}>
-        {children}
-    </div>
-)));
-
 export const ArticlesList = memo((props: ArticlesListProps) => {
     const {
         articles, isLoading, error, page, refreshHandler,
-        onLoadNextPart, setUncollapsed,
+        onLoadNextPart, setUncollapsed, Scroller,
     } = props;
     const { t } = useTranslation();
 
@@ -81,6 +70,43 @@ export const ArticlesList = memo((props: ArticlesListProps) => {
         </>
     ));
 
+    const List: Components['List'] = memo(
+        forwardRef(({ style, children }, ref) => {
+            // if (!isLoading && !articles?.length) {
+            //     return (
+            //         <Text
+            //             size="l"
+            //             title={t('Статьи не найдены')}
+            //         />
+            //     );
+            // }
+
+            // if (isLoading && page === 1) {
+            //     return (
+            //         <>
+            //             {getSkeletons()}
+            //         </>
+            //     );
+            // }
+
+            // if (error) {
+            //     return (
+            //         <Text
+            //             align="center"
+            //             variant="error"
+            //             title={t('Произошла ошибка при загрузке статьи')}
+            //         />
+            //     );
+            // }
+
+            return (
+                <div style={style} ref={ref} className={cls.list}>
+                    {children}
+                </div>
+            );
+        }),
+    );
+
     const { pathname } = useLocation();
 
     const rangeHandler = useCallback((range: ListRange) => {
@@ -99,43 +125,15 @@ export const ArticlesList = memo((props: ArticlesListProps) => {
         }
     });
 
-    if (!isLoading && !articles?.length) {
-        return (
-            <Text
-                size="l"
-                title={t('Статьи не найдены')}
-            />
-        );
-    }
-
-    if (isLoading && page === 1) {
-        return (
-            <>
-                {getSkeletons()}
-            </>
-        );
-    }
-
-    if (error) {
-        return (
-            <Text
-                align="center"
-                variant="error"
-                title={t('Произошла ошибка при загрузке статьи')}
-            />
-        );
-    }
-
     return (
         <>
             <Icon onClick={refreshHandler} clickable Svg={RefreshIcon} className={cls.reload} />
             <Virtuoso
-                id={`virtuoso ${pathname}`}
                 ref={setVirtuosoRef}
                 rangeChanged={rangeHandler}
                 data={articles}
-                components={{ Footer, List }}
-                itemContent={(_, article) => renderArticle(article)}
+                components={{ Scroller, List, Footer }}
+                itemContent={(_, article) => (renderArticle(article))}
                 style={{
                     opacity: isScrolling ? '0' : '1',
                 }}
