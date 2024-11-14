@@ -7,19 +7,12 @@ import { EditableProfileCard } from '@/features/EditableProfileCard';
 import { ProfileCard } from '@/features/ProfileCard';
 import { StickyContentLayout } from '@/shared/layouts/StickyContentLayout';
 
-import { profilePageReducer } from '../../model/slice/ProfilePageSlice';
-import { ReducerList, useDynamicModuleLoad } from '@/shared/lib/hooks/useDynamicModuleLoad';
 import { ProfilePageArticlesList } from '../ProfilePageArticlesList/ProfilePageArticlesList';
-
-const reducers: ReducerList = {
-    profilePage: profilePageReducer,
-};
+import { ProfilePageFilters } from '../ProfilePageFilters/ProfilePageFilters';
 
 const ProfilePage = () => {
     const { username } = useParams<{ username: string }>();
     const myUsername = useSelector(getUsername);
-
-    useDynamicModuleLoad({ reducers, removeAfterUnmount: false });
 
     const ProfileHeader = memo(() => {
         if (username) {
@@ -30,7 +23,7 @@ const ProfilePage = () => {
 
     return (
         <StickyContentLayout
-            // right={<ArticlesFilters />}
+            right={<ProfilePageFilters />}
             content={(
                 <Page
                     data-testid="ProfilePage"

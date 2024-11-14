@@ -10,7 +10,6 @@ import { SubscriptionsPageSchema } from '../types/SubscriptionsPageSchema';
 
 const initialState: SubscriptionsPageSchema = {
     page: 1,
-    limit: 5,
     sort: 'createdAt',
     search: '',
     order: 'desc',

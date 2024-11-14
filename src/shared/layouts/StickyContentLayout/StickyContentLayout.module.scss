@@ -14,7 +14,6 @@
 .content {
     grid-area: content;
     justify-self: center;
-    padding: 0 16px;
     width: 100%;
     height: 100%;
 }
@@ -24,4 +23,5 @@
     position: sticky;
     top: 72px;
     height: fit-content;
+    width: var(--article-filters-width);
 }

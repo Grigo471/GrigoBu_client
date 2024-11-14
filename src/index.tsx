@@ -7,6 +7,7 @@ import { StoreProvider } from '@/app/providers/StoreProvider';
 import App from './app/App';
 
 import '@/shared/config/i18n/i18n';
+import ScrollToTop from './shared/lib/router/ScrollToTop';
 
 const container = document.getElementById('root');
 if (!container) {
@@ -20,6 +21,7 @@ root.render(
 
             <ErrorBoundary>
                 <ThemeProvider>
+                    <ScrollToTop />
                     <App />
                 </ThemeProvider>
             </ErrorBoundary>

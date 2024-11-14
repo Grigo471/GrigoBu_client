@@ -15,12 +15,12 @@
 }
 
 *::-webkit-scrollbar {
-    width: 12px;
+    width: var(--scrollbar-width);
     height: 8px;
 }
 
 *::-webkit-scrollbar-track {
-    background: var(--bg-redesigned);
+    background: var(--light-bg-redesigned);
 }
 
 *::-webkit-scrollbar-thumb {

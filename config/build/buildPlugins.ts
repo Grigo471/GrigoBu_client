@@ -19,6 +19,7 @@ export function buildPlugins({
 
     const plugins = [
         new HtmlWebpackPlugin({
+            favicon: paths.favicon,
             template: paths.html,
         }),
         new webpack.ProgressPlugin(),

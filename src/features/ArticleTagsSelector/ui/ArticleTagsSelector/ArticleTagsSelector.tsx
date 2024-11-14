@@ -83,7 +83,7 @@ export const ArticleTagsSelector = memo((props: ArticleTagsSelectorProps) => {
                     ))}
                 </HStack>
             )}
-            <HStack gap="4" wrap="wrap">
+            <HStack gap="4" wrap="wrap" className={cls.tags}>
                 {tags.map((tag) => {
                     const isSelected = chosenTags.includes(tag);
                     return (

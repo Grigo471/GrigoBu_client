@@ -47,8 +47,8 @@ export const articlesApi = rtkApi.injectEndpoints({
             },
             merge: (currentCache, newItems, { arg }) => {
                 if (arg.page === 1) {
-                    currentCache = newItems;
-                } else if (arg.page * arg.limit > currentCache.length) {
+                    return newItems;
+                } if (arg.page * arg.limit > currentCache.length) {
                     currentCache.push(...newItems);
                 }
             },
@@ -57,6 +57,7 @@ export const articlesApi = rtkApi.injectEndpoints({
                     && !!previousArg?.page
                     && (currentArg?.page > previousArg?.page);
             },
+            keepUnusedDataFor: ARTICLES_PAGE_CACHE_LIFETIME,
             providesTags: ['Articles'],
         }),
         getUserArticles: build.query<Article[], ProfilePageParams>({
@@ -78,8 +79,8 @@ export const articlesApi = rtkApi.injectEndpoints({
             },
             merge: (currentCache, newItems, { arg }) => {
                 if (arg.page === 1) {
-                    currentCache = newItems;
-                } else if (arg.page * arg.limit > currentCache.length) {
+                    return newItems;
+                } if (arg.page * arg.limit > currentCache.length) {
                     currentCache.push(...newItems);
                 }
             },
@@ -88,6 +89,7 @@ export const articlesApi = rtkApi.injectEndpoints({
                     && !!previousArg?.page
                     && (currentArg?.page > previousArg?.page);
             },
+            keepUnusedDataFor: ARTICLES_PAGE_CACHE_LIFETIME,
             providesTags: ['Articles'],
         }),
         rateArticle: build.mutation<RateArticleResult, RateArticleProps>({

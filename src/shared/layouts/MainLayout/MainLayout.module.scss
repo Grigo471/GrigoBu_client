@@ -5,9 +5,10 @@
 }
 
 .navbar {
-    width: 100%;
+    width: calc(100vw - var(--scrollbar-width));
     position: fixed;
     z-index: 10000;
+    align-self: start;
 }
 
 .toolbar {
@@ -20,7 +21,7 @@
 
 .content {
     grid-area: content;
-    margin-top: 72px;
+    margin-top: 56px;
     width: 100%;
     max-width: var(--articles-page-width);
 }

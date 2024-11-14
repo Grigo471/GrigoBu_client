@@ -10,10 +10,11 @@ import { ArticlesPageSchema } from '../types/ArticlesPageSchema';
 
 const initialState: ArticlesPageSchema = {
     page: 1,
-    limit: 5,
     sort: 'createdAt',
     search: '',
     order: 'desc',
+    tags: [],
+    tagsVisible: false,
 };
 
 const articlesPageSlice = createSlice({
@@ -31,6 +32,12 @@ const articlesPageSlice = createSlice({
         },
         setSearch: (state, action: PayloadAction<string>) => {
             state.search = action.payload;
+        },
+        setTags: (state, action: PayloadAction<string[]>) => {
+            state.tags = action.payload;
+        },
+        toggleTagsVisible: (state) => {
+            state.tagsVisible = !state.tagsVisible;
         },
     },
 });

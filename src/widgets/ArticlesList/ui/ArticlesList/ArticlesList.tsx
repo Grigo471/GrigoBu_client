@@ -1,38 +1,51 @@
 import React, {
     memo,
+    useCallback,
+    useRef,
+    useState,
 } from 'react';
 import { useTranslation } from 'react-i18next';
-import { ListRange, Virtuoso } from 'react-virtuoso';
+import { ListRange, Virtuoso, VirtuosoHandle } from 'react-virtuoso';
 
 import { useLocation } from 'react-router-dom';
 import { Text } from '@/shared/ui/Text';
 import { Article } from '@/entities/Article';
 import { ArticleListItemSkeleton } from './ArticleListItemSkeleton';
-import { VStack } from '@/shared/ui/Stack';
 import { ArticleListItem } from '../ArticleListItem/ArticleListItem';
 import cls from './ArticlesList.module.scss';
+import { useInitialEffect } from '@/shared/lib/hooks/useInitialEffect';
 
 interface ArticlesListProps {
    articles?: Article[];
    isLoading?: boolean;
+   page?: number;
    error?: string;
    onLoadNextPart?: () => void;
+   setUncollapsed: (articleId: string) => void;
 }
 
 type ScrollSchema = Record<string, number>;
 
-const scrollByPath: ScrollSchema = {};
+export const scrollByPath: ScrollSchema = {};
 
 export const ArticlesList = memo((props: ArticlesListProps) => {
     const {
-        articles, isLoading, error, onLoadNextPart,
+        articles, isLoading, error, page, onLoadNextPart, setUncollapsed,
     } = props;
     const { t } = useTranslation();
+    const { pathname } = useLocation();
+    const ref = useRef<VirtuosoHandle>();
+    const [isScrolling, setIsScrolling] = useState(false);
+
+    function setVirtuosoRef(el: VirtuosoHandle) {
+        ref.current = el;
+    }
 
     const renderArticle = (article: Article) => (
         <ArticleListItem
             article={article}
             key={article.id}
+            setUncollapsed={setUncollapsed}
         />
     );
 
@@ -49,58 +62,51 @@ export const ArticlesList = memo((props: ArticlesListProps) => {
         </>
     ));
 
-    const { pathname } = useLocation();
+    const rangeHandler = useCallback((range: ListRange) => {
+        scrollByPath[pathname] = Math.floor((range.startIndex + range.endIndex) / 2);
+    }, [pathname]);
 
-    const rangeChanged = (range: ListRange) => {
-        scrollByPath[pathname] = range.startIndex;
-        console.log(scrollByPath);
-    };
+    useInitialEffect(() => {
+        const scrollPosition = scrollByPath[pathname];
+        if (scrollPosition && scrollPosition > 0) {
+            const virtuoso = ref.current;
+            setIsScrolling(true);
+            setTimeout(() => {
+                setIsScrolling(false);
+                virtuoso?.scrollToIndex({ index: scrollPosition, align: 'center' });
+            }, 69);
+        }
+    });
 
-    // const scrollHandler = useThrottle(() => {
-    //     scrollByPath[pathname] = window.scrollY;
-    //     console.log(scrollByPath, pathname);
-    // }, 100);
-
-    // useEffect(() => {
-    //     const scrollPosition = scrollByPath[pathname] || 0;
-    //     console.log(scrollByPath);
-    //     window.addEventListener('scroll', scrollHandler);
-    //     setTimeout(() => window.scrollTo({ top: scrollPosition }), 100);
-
-    //     return () => {
-    //         window.removeEventListener('scroll', scrollHandler);
-    //     };
-    // }, []);
-
-    if (!isLoading && !articles?.length) {
-        return (
-            <VStack gap="20">
+    return (
+        <>
+            {(isLoading && page === 1) && getSkeletons()}
+            {(!isLoading && !articles?.length) && (
                 <Text
                     size="l"
                     title={t('Статьи не найдены')}
                 />
-            </VStack>
-        );
-    }
-
-    if (error) {
-        return (
-            <Text
-                align="center"
-                variant="error"
-                title={t('Произошла ошибка при загрузке статьи')}
+            )}
+            {(error) && (
+                <Text
+                    align="center"
+                    variant="error"
+                    title={t('Произошла ошибка при загрузке статьи')}
+                />
+            )}
+            <Virtuoso
+                data={articles}
+                ref={setVirtuosoRef}
+                useWindowScroll
+                initialTopMostItemIndex={0}
+                rangeChanged={rangeHandler}
+                components={{ Footer }}
+                itemContent={(_, article) => renderArticle(article)}
+                style={{
+                    opacity: isScrolling ? '0' : '1',
+                }}
+                endReached={onLoadNextPart}
             />
-        );
-    }
-
-    return (
-        <Virtuoso
-            data={articles}
-            useWindowScroll
-            components={{ Footer }}
-            itemContent={(_, article) => renderArticle(article)}
-            style={{ width: '100%', height: '100%' }}
-            endReached={onLoadNextPart}
-        />
+        </>
     );
 });

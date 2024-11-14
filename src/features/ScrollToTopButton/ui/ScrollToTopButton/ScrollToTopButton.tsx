@@ -10,7 +10,7 @@ export const ScrollToTopButton = memo((props: ScrollToTopButtonProps) => {
     const { className } = props;
 
     const onClick = () => {
-        window.scrollTo({ top: 0, behavior: 'smooth' });
+        window.scrollTo({ top: 0 });
     };
 
     return (

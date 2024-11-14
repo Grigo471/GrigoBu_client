@@ -15,10 +15,12 @@ export const MainLayout = (props: MainLayoutProps) => {
     } = props;
 
     return (
-        <div className={classNames(cls.MainLayout, {}, [className])}>
+        <>
             <div className={cls.navbar}>{navbar}</div>
-            <div className={cls.toolbar}>{toolbar}</div>
-            <div className={cls.content}>{content}</div>
-        </div>
+            <div className={classNames(cls.MainLayout, {}, [className])}>
+                <div className={cls.toolbar}>{toolbar}</div>
+                <div className={cls.content}>{content}</div>
+            </div>
+        </>
     );
 };

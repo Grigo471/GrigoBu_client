@@ -9,10 +9,7 @@ import { ArticlesPageFilters } from '../ArticlesPageFilters/ArticlesPageFilters'
 import { ArticlesPageList } from '../ArticlesPageList/ArticlesPageList';
 import { ARTICLES_PAGE_CACHE_LIFETIME } from '@/shared/const/articlesApi';
 import { StickyContentLayout } from '@/shared/layouts/StickyContentLayout';
-
-interface ArticlesPageProps {
-   className?: string;
-}
+import { scrollByPath } from '@/widgets/ArticlesList';
 
 const reducers: ReducerList = {
     articlesPage: articlesPageReducer,
@@ -20,24 +17,8 @@ const reducers: ReducerList = {
 
 let timer: NodeJS.Timeout;
 
-const ArticlesPage = (props: ArticlesPageProps) => {
-    const { className } = props;
+const ArticlesPage = () => {
     const dispatch = useAppDispatch();
-
-    // const scrollHandler = useThrottle(() => {
-    //     sessionStorage.setItem('ArticlesPage scrollPosition', window.scrollY.toString());
-    // }, 100);
-
-    // useEffect(() => {
-    //     const scrollPosition = Number(sessionStorage.getItem('ArticlesPage scrollPosition')) || 0;
-    //     window.addEventListener('scroll', scrollHandler);
-    //     console.log(scrollPosition);
-    //     setTimeout(() => window.scrollTo({ top: scrollPosition }), 10);
-
-    //     return () => {
-    //         window.removeEventListener('scroll', scrollHandler);
-    //     };
-    // }, []);
 
     useEffect(() => {
         if (timer) clearTimeout(timer);
@@ -45,6 +26,7 @@ const ArticlesPage = (props: ArticlesPageProps) => {
         return () => {
             timer = setTimeout(() => {
                 dispatch(articlesPageActions.setPage(1));
+                scrollByPath['/'] = 0;
             }, ARTICLES_PAGE_CACHE_LIFETIME * 1000);
         };
     });

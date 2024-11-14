@@ -1,13 +1,15 @@
-import { memo } from 'react';
+import { memo, useCallback } from 'react';
 import { useSelector } from 'react-redux';
 import { ArticlesList } from '@/widgets/ArticlesList';
 import { useAppDispatch } from '@/shared/lib/hooks/useAppDispatch';
 import { articlesPageActions } from '../../model/slice/ArticlesPageSlice';
 import {
-    getArticlesPageLimit, getArticlesPageNum,
-    getArticlesPageOrder, getArticlesPageSearch, getArticlesPageSort,
+    getArticlesPageNum, getArticlesPageOrder,
+    getArticlesPageSearch, getArticlesPageSort,
 } from '../../model/selectors/articlesPageSelectors';
-import { useGetArticles } from '@/entities/Article';
+import { articlesApi, useGetArticles } from '@/entities/Article';
+import { ARTICLES_PAGE_LIMIT } from '@/shared/const/articlesApi';
+import { instantScrollTop } from '@/shared/lib/helpers/instantScrollTop';
 
 export const ArticlesPageList = memo(() => {
     const dispatch = useAppDispatch();
@@ -16,10 +18,10 @@ export const ArticlesPageList = memo(() => {
     const sort = useSelector(getArticlesPageSort);
     const search = useSelector(getArticlesPageSearch);
     const page = useSelector(getArticlesPageNum);
-    const limit = useSelector(getArticlesPageLimit);
+    const limit = ARTICLES_PAGE_LIMIT;
 
     const {
-        data, isLoading, error,
+        data, isLoading, error, refetch, isFetching,
     } = useGetArticles({
         order, sort, search, page, limit,
     });
@@ -28,11 +30,43 @@ export const ArticlesPageList = memo(() => {
         dispatch(articlesPageActions.setPage(page + 1));
     };
 
+    const refreshHandler = useCallback(() => {
+        instantScrollTop(0);
+        dispatch(articlesPageActions.setPage(1));
+        setTimeout(() => refetch(), 0);
+    }, [dispatch, refetch]);
+
+    const setUncollapsed = (articleId: string) => {
+        dispatch(articlesApi.util.updateQueryData('getArticles', {
+            order, sort, search, page, limit,
+        }, (draft) => {
+            const article = draft.find(
+                (article) => article.id === articleId,
+            );
+            if (article) {
+                article.uncollapsed = true;
+            }
+        }));
+    };
+
     return (
+        // <StickyContentLayout
+        //     left={(
+        //         <Icon
+        //             onClick={refreshHandler}
+        //             clickable
+        //             Svg={RefreshIcon}
+        //         />
+        //     )}
+        //     content={(
         <ArticlesList
             articles={data}
-            isLoading={isLoading}
+            page={page}
+            isLoading={isLoading || isFetching}
+            setUncollapsed={setUncollapsed}
             onLoadNextPart={onLoadNextPart}
         />
+        //     )}
+        // />
     );
 });

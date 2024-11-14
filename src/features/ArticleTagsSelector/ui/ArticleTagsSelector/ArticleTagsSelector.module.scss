@@ -5,3 +5,8 @@
 .tag {
     cursor: pointer;
 }
+
+.tags {
+    max-height: 160px;
+    overflow-y: scroll;
+}

@@ -1,1 +1,3 @@
 export const ARTICLES_PAGE_CACHE_LIFETIME = 10;
+
+export const ARTICLES_PAGE_LIMIT = 5;

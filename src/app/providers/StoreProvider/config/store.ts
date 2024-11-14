@@ -7,6 +7,7 @@ import { UIReducer } from '@/features/UI';
 import { rtkApi } from '@/shared/api/rtkApi';
 import { StateSchema, ThunkExtraArg } from './StateSchema';
 import { createReducerManager } from './reducerManager';
+import { profilePageReducer } from '@/pages/ProfilePage';
 
 export function createReduxStore(
     initialState?: StateSchema,
@@ -16,6 +17,7 @@ export function createReduxStore(
         ...asyncReducers,
         user: userReducer,
         UI: UIReducer,
+        profilePage: profilePageReducer,
         [rtkApi.reducerPath]: rtkApi.reducer,
     };
 
