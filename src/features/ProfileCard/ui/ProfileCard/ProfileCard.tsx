@@ -38,11 +38,11 @@ export const ProfileCard = memo((props: ProfileCardProps) => {
     const userData = useSelector(getProfileData);
     const amISubscribed = useSelector(getProfileAmISubscribed);
 
+    const date = userData?.createdAt?.split('T')[0];
+
     useEffect(() => {
         dispatch(fetchProfile(username));
     }, [username, dispatch]);
-
-    console.log(username);
 
     const onSubscribe = useCallback(() => {
         if (userData?.id) dispatch(subscribeToUser(userData.id));
@@ -56,6 +56,7 @@ export const ProfileCard = memo((props: ProfileCardProps) => {
 
     const subscribeButton = amISubscribed ? (
         <Button
+            className={cls.subscribeButton}
             onClick={onUnSubscribe}
         >
             {t('Вы подписаны')}
@@ -73,11 +74,13 @@ export const ProfileCard = memo((props: ProfileCardProps) => {
     if (!userData) return null;
 
     return (
-        <Card max className={classNames(cls.EditableProfileCard, {}, [className])}>
-            <HStack max>
-                <Avatar src={avatar} />
-                <VStack max>
-                    <Text title={userData?.username} />
+        <Card padding="16" max className={classNames(cls.EditableProfileCard, {}, [className])}>
+            <HStack gap="16" max>
+                <Avatar size={124} src={avatar} className={cls.avatar} />
+                <VStack gap="8" max className={cls.info}>
+                    <Text title={userData?.username} size="l" />
+                    <Text text={`${t('Рейтинг')}: ${userData.rating}`} />
+                    <Text text={`${t('Грибёт с')} ${date}`} />
                     {userData?.status && <Text text={userData.status} />}
                 </VStack>
                 {authData && subscribeButton}

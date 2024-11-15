@@ -1,6 +1,11 @@
 .Avatar {
     border-radius: 50%;
     object-fit: cover;
-    height: 100px;
-    width: 100px;
+    height: 200px;
+    width: 200px;
+}
+
+.DefaultAvatar {
+    padding: 4px;
+    background-color: var(--light-bg-redesigned);
 }

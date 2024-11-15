@@ -7,6 +7,7 @@ export interface User {
     avatar?: string;
     status?: string;
     rating?: number;
+    createdAt?: string;
     role?: UserRole;
     jsonSettings?: JsonSettings;
 }

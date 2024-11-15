@@ -2,6 +2,8 @@
     min-height: 100vh;
     display: flex;
     justify-content: center;
+    width: calc(100vw - var(--scrollbar-width));
+    justify-self: start;
 }
 
 .navbar {
@@ -24,4 +26,8 @@
     margin-top: 56px;
     width: 100%;
     max-width: var(--articles-page-width);
+}
+
+.transperent {
+    opacity: 0;
 }

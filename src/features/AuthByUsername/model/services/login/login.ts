@@ -31,6 +31,7 @@ export const login = createAsyncThunk<
 
             localStorage.setItem(LOCAL_STORAGE_TOKEN_KEY, accessToken);
             dispatch(userActions.setAuthData(user));
+            window.location.reload();
 
             return response.data;
         } catch (error) {

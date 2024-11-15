@@ -46,13 +46,13 @@ const AuthForm = memo((props: AuthFormProps) => {
         dispatch(authActions.setPassword(value));
     }, [dispatch]);
 
-    const onSubmit = useCallback(() => {
+    const onSubmit = () => {
         if (isLogin) {
             dispatch(login({ username, password }));
         } else {
             dispatch(registration({ username, password }));
         }
-    }, [dispatch, password, username, isLogin]);
+    };
 
     const onToggle = useCallback(() => {
         setIsLogin((prev) => !prev);

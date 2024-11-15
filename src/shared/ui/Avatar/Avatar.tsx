@@ -4,8 +4,7 @@ import {
 import { classNames } from '@/shared/lib/classNames/classNames';
 import cls from './Avatar.module.scss';
 import { AppImage } from '../AppImage';
-import DefaultAvatar from '../../assets/icons/default-avatar.svg';
-import { Icon } from '../Icon';
+import DefaultAvatar from '../../assets/png/defaultAvatar.png';
 import { Skeleton } from '../Skeleton';
 
 interface AvatarProps {
@@ -28,13 +27,26 @@ export const Avatar = (
     }), [size]);
 
     const fallback = <Skeleton width={size} height={size} border="50%" />;
-    const errorFallback = (
-        <Icon
-            width={size}
-            height={size}
-            Svg={DefaultAvatar}
-        />
-    );
+    // const errorFallback = (
+    //     <Icon
+    //         Svg={DefaultAvatar}
+    //         width={size}
+    //         height={size}
+    //         className={className}
+    //     />
+    // );
+
+    if (!src) {
+        return (
+            <AppImage
+                src={DefaultAvatar}
+                style={styles}
+                className={classNames(cls.Avatar, {}, [className, cls.DefaultAvatar])}
+                alt={alt}
+                fallback={fallback}
+            />
+        );
+    }
 
     return (
         <AppImage
@@ -42,7 +54,7 @@ export const Avatar = (
             style={styles}
             className={classNames(cls.Avatar, {}, [className])}
             alt={alt}
-            errorFallback={errorFallback}
+            errorFallback={fallback}
             fallback={fallback}
         />
     );

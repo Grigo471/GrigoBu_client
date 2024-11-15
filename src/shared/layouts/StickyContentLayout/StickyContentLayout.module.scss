@@ -21,7 +21,8 @@
 .right {
     grid-area: right;
     position: sticky;
-    top: 72px;
+    top: 56px;
+    padding-top: 16px;
     height: fit-content;
     width: var(--article-filters-width);
 }

@@ -58,6 +58,7 @@ export const ArticlesList = memo((props: ArticlesListProps) => {
     const Footer = memo(() => (
         <>
             {isLoading && getSkeletons()}
+            {isScrolling && <div className={cls.scrollFallback} />}
             <div className={cls.footer} />
         </>
     ));

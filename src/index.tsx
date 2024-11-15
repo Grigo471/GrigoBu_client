@@ -18,14 +18,12 @@ const root = createRoot(container);
 root.render(
     <BrowserRouter>
         <StoreProvider>
-
             <ErrorBoundary>
                 <ThemeProvider>
                     <ScrollToTop />
                     <App />
                 </ThemeProvider>
             </ErrorBoundary>
-
         </StoreProvider>
     </BrowserRouter>,
 );

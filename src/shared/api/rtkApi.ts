@@ -7,7 +7,8 @@ import { LOCAL_STORAGE_TOKEN_KEY } from '../const/localStorage';
 const baseQuery = fetchBaseQuery({
     baseUrl: __API__,
     prepareHeaders: (headers) => {
-        headers.set('Authorization', `Bearer ${localStorage.getItem(LOCAL_STORAGE_TOKEN_KEY)}`);
+        headers.set('Authorization', `Bearer ${localStorage
+            .getItem(LOCAL_STORAGE_TOKEN_KEY) || ''}`);
         return headers;
     },
     credentials: 'include',
