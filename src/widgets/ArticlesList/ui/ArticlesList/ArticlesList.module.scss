@@ -12,6 +12,11 @@
 }
 
 .card {
-    width: 200px;
-    height: 500px;
+    width: var(--article-card-width);
+}
+
+.refresh {
+    position: fixed;
+    top: 72px;
+    left: var(--refresh-btn-left);
 }

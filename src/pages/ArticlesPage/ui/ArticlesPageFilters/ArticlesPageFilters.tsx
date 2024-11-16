@@ -62,7 +62,11 @@ export const ArticlesPageFilters = memo(() => {
     }, [debouncedSetSearch]);
 
     const setTags = useCallback((tags: string[]) => {
-        dispatch(articlesPageActions.setTags(tags));
+        if (tags.length < 4) {
+            instantScrollTop(0);
+            dispatch(articlesPageActions.setTags(tags));
+            dispatch(articlesPageActions.setPage(1));
+        }
     }, [dispatch]);
 
     const toggleTagsVisible = useCallback(() => {

@@ -6,6 +6,7 @@ import { articlesPageActions } from '../../model/slice/ArticlesPageSlice';
 import {
     getArticlesPageNum, getArticlesPageOrder,
     getArticlesPageSearch, getArticlesPageSort,
+    getArticlesPageTags,
 } from '../../model/selectors/articlesPageSelectors';
 import { articlesApi, useGetArticles } from '@/entities/Article';
 import { ARTICLES_PAGE_LIMIT } from '@/shared/const/articlesApi';
@@ -18,12 +19,15 @@ export const ArticlesPageList = memo(() => {
     const sort = useSelector(getArticlesPageSort);
     const search = useSelector(getArticlesPageSearch);
     const page = useSelector(getArticlesPageNum);
+    const tags = useSelector(getArticlesPageTags);
     const limit = ARTICLES_PAGE_LIMIT;
+
+    const inlineTags = tags.join(',').replaceAll(' ', '%20');
 
     const {
         data, isLoading, error, refetch, isFetching,
     } = useGetArticles({
-        order, sort, search, page, limit,
+        order, sort, search, page, limit, tags: inlineTags,
     });
 
     const onLoadNextPart = () => {
@@ -38,7 +42,7 @@ export const ArticlesPageList = memo(() => {
 
     const setUncollapsed = (articleId: string) => {
         dispatch(articlesApi.util.updateQueryData('getArticles', {
-            order, sort, search, page, limit,
+            order, sort, search, page, limit, tags: inlineTags,
         }, (draft) => {
             const article = draft.find(
                 (article) => article.id === articleId,
@@ -50,23 +54,13 @@ export const ArticlesPageList = memo(() => {
     };
 
     return (
-        // <StickyContentLayout
-        //     left={(
-        //         <Icon
-        //             onClick={refreshHandler}
-        //             clickable
-        //             Svg={RefreshIcon}
-        //         />
-        //     )}
-        //     content={(
         <ArticlesList
             articles={data}
             page={page}
             isLoading={isLoading || isFetching}
             setUncollapsed={setUncollapsed}
             onLoadNextPart={onLoadNextPart}
+            refreshHandler={refreshHandler}
         />
-        //     )}
-        // />
     );
 });

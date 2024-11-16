@@ -51,4 +51,8 @@
         calc(
             (var(--article-card-width) + var(--rating-button-width) + var(--article-filters-width) + 32px)
         );
+
+    // positions
+
+    --refresh-btn-left: calc((100vw - var(--articles-page-width) - var(--scrollbar-width)) / 2 - 48px);
 }

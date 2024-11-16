@@ -14,6 +14,8 @@ import { ArticleListItemSkeleton } from './ArticleListItemSkeleton';
 import { ArticleListItem } from '../ArticleListItem/ArticleListItem';
 import cls from './ArticlesList.module.scss';
 import { useInitialEffect } from '@/shared/lib/hooks/useInitialEffect';
+import { Icon } from '@/shared/ui/Icon';
+import RefreshIcon from '@/shared/assets/icons/refresh.svg';
 
 interface ArticlesListProps {
    articles?: Article[];
@@ -22,6 +24,7 @@ interface ArticlesListProps {
    error?: string;
    onLoadNextPart?: () => void;
    setUncollapsed: (articleId: string) => void;
+   refreshHandler: () => void;
 }
 
 type ScrollSchema = Record<string, number>;
@@ -30,7 +33,7 @@ export const scrollByPath: ScrollSchema = {};
 
 export const ArticlesList = memo((props: ArticlesListProps) => {
     const {
-        articles, isLoading, error, page, onLoadNextPart, setUncollapsed,
+        articles, isLoading, error, page, onLoadNextPart, setUncollapsed, refreshHandler,
     } = props;
     const { t } = useTranslation();
     const { pathname } = useLocation();
@@ -79,9 +82,24 @@ export const ArticlesList = memo((props: ArticlesListProps) => {
         }
     });
 
+    if (isLoading && page === 1) {
+        return (
+            <>
+                {getSkeletons()}
+            </>
+
+        );
+    }
+
     return (
         <>
-            {(isLoading && page === 1) && getSkeletons()}
+            <Icon
+                className={cls.refresh}
+                onClick={refreshHandler}
+                clickable
+                Svg={RefreshIcon}
+            />
+            {/* {(isLoading && page === 1) && getSkeletons()} */}
             {(!isLoading && !articles?.length) && (
                 <Text
                     size="l"

@@ -1,4 +1,4 @@
-import { memo } from 'react';
+import { memo, useCallback } from 'react';
 import { useParams } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { useAppDispatch } from '@/shared/lib/hooks/useAppDispatch';
@@ -13,6 +13,7 @@ import { profilePageActions } from '../../model/slice/ProfilePageSlice';
 import { StateSchema } from '@/app/providers/StoreProvider';
 import { ARTICLES_PAGE_LIMIT } from '@/shared/const/articlesApi';
 import { ArticlesList } from '@/widgets/ArticlesList';
+import { instantScrollTop } from '@/shared/lib/helpers/instantScrollTop';
 
 export const ProfilePageArticlesList = memo(() => {
     const dispatch = useAppDispatch();
@@ -34,6 +35,12 @@ export const ProfilePageArticlesList = memo(() => {
         dispatch(profilePageActions.setPage(username, page + 1));
     };
 
+    const refreshHandler = useCallback(() => {
+        instantScrollTop(0);
+        dispatch(profilePageActions.setPage(username, 1));
+        setTimeout(() => refetch(), 0);
+    }, [dispatch, refetch, username]);
+
     const setUncollapsed = (articleId: string) => {
         dispatch(articlesApi.util.updateQueryData('getUserArticles', {
             order, sort, search, page, limit, username,
@@ -50,9 +57,11 @@ export const ProfilePageArticlesList = memo(() => {
     return (
         <ArticlesList
             articles={data}
+            page={page}
             isLoading={isLoading || isFetching}
             onLoadNextPart={onLoadNextPart}
             setUncollapsed={setUncollapsed}
+            refreshHandler={refreshHandler}
         />
     );
 });

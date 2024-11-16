@@ -1,4 +1,4 @@
-import { memo } from 'react';
+import { memo, useCallback } from 'react';
 import { useSelector } from 'react-redux';
 import { ArticlesList } from '@/widgets/ArticlesList';
 import { useAppDispatch } from '@/shared/lib/hooks/useAppDispatch';
@@ -11,6 +11,7 @@ import {
 import { articlesApi, useGetSubscriptions } from '@/entities/Article';
 import { ARTICLES_PAGE_LIMIT } from '@/shared/const/articlesApi';
 import { subscriptionsPageActions } from '../../model/slice/SubscriptionsPageSlice';
+import { instantScrollTop } from '@/shared/lib/helpers/instantScrollTop';
 
 export const SubscriptionsPageList = memo(() => {
     const dispatch = useAppDispatch();
@@ -30,6 +31,12 @@ export const SubscriptionsPageList = memo(() => {
     const onLoadNextPart = () => {
         dispatch(subscriptionsPageActions.setPage(page + 1));
     };
+
+    const refreshHandler = useCallback(() => {
+        instantScrollTop(0);
+        dispatch(subscriptionsPageActions.setPage(1));
+        setTimeout(() => refetch(), 0);
+    }, [dispatch, refetch]);
 
     const setUncollapsed = (articleId: string) => {
         dispatch(articlesApi.util.updateQueryData('getSubscriptions', {
@@ -51,6 +58,7 @@ export const SubscriptionsPageList = memo(() => {
             isLoading={isLoading || isFetching}
             setUncollapsed={setUncollapsed}
             onLoadNextPart={onLoadNextPart}
+            refreshHandler={refreshHandler}
         />
     );
 });

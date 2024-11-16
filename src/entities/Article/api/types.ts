@@ -2,7 +2,7 @@ import { SortOrder } from '@/shared/types';
 import { ArticleSortField } from '../model/consts/consts';
 import { Rate } from '../model/types/article';
 
-export interface ArticlesPageParams {
+export interface SubscriptionsPageParams {
     limit: number;
     page: number;
     sort: ArticleSortField;
@@ -10,7 +10,11 @@ export interface ArticlesPageParams {
     search: string;
 }
 
-export interface ProfilePageParams extends ArticlesPageParams {
+export interface ArticlesPageParams extends SubscriptionsPageParams {
+    tags?: string;
+}
+
+export interface ProfilePageParams extends SubscriptionsPageParams {
     username?: string;
 }
 

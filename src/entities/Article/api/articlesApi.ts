@@ -2,6 +2,7 @@ import { rtkApi } from '@/shared/api/rtkApi';
 import { Article } from '../model/types/article';
 import {
     ArticlesPageParams, ProfilePageParams, RateArticleProps, RateArticleResult,
+    SubscriptionsPageParams,
 } from './types';
 import { ARTICLES_PAGE_CACHE_LIFETIME } from '@/shared/const/articlesApi';
 
@@ -13,9 +14,11 @@ export const articlesApi = rtkApi.injectEndpoints({
                 params,
             }),
             serializeQueryArgs: ({ endpointName, queryArgs }) => {
-                const { order, search, sort } = queryArgs;
+                const {
+                    order, search, sort, tags,
+                } = queryArgs;
                 return {
-                    order, search, sort, endpointName,
+                    order, search, sort, endpointName, tags,
                 };
             },
             merge: (currentCache, newItems, { arg }) => {
@@ -34,7 +37,7 @@ export const articlesApi = rtkApi.injectEndpoints({
             keepUnusedDataFor: ARTICLES_PAGE_CACHE_LIFETIME,
             providesTags: ['Articles'],
         }),
-        getSubscriptions: build.query<Article[], ArticlesPageParams>({
+        getSubscriptions: build.query<Article[], SubscriptionsPageParams>({
             query: (params) => ({
                 url: 'articles/subscriptions',
                 params,

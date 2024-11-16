@@ -74,7 +74,7 @@ export const ProfileCard = memo((props: ProfileCardProps) => {
     if (!userData) return null;
 
     return (
-        <Card padding="16" max className={classNames(cls.EditableProfileCard, {}, [className])}>
+        <Card padding="16" className={classNames(cls.EditableProfileCard, {}, [className])}>
             <HStack gap="16" max>
                 <Avatar size={124} src={avatar} className={cls.avatar} />
                 <VStack gap="8" max className={cls.info}>
