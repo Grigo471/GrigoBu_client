@@ -25,6 +25,7 @@ const usersPagesSlice = createSlice({
         search: '',
         order: 'desc',
         sort: 'rating',
+        isSubs: false,
         ids: [],
         entities: {},
     }),
@@ -37,6 +38,9 @@ const usersPagesSlice = createSlice({
         },
         setSearch: (state, action: PayloadAction<string>) => {
             state.search = action.payload;
+        },
+        setIsSubs: (state, action: PayloadAction<boolean>) => {
+            state.isSubs = action.payload;
         },
     },
     extraReducers: (builder) => {

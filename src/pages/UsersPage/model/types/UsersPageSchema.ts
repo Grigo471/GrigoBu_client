@@ -9,4 +9,5 @@ export interface UsersPageSchema extends EntityState<User> {
     order: SortOrder;
     sort: UsersSortField;
     search: string;
+    isSubs: boolean;
 }

@@ -19,3 +19,7 @@ export const getUsersPageSort = (
 export const getUsersPageSearch = (
     state: StateSchema,
 ) => state.usersPage?.search ?? '';
+
+export const getUsersPageIsSubs = (
+    state: StateSchema,
+) => state.usersPage?.isSubs ?? false;
