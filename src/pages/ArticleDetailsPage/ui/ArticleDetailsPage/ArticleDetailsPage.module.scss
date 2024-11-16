@@ -5,3 +5,8 @@
 .commentTitle {
     margin-top: 20px;
 }
+
+.comments {
+    width: var(--article-card-width);
+    align-self: end;
+}

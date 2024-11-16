@@ -1,4 +1,4 @@
-export { ArticleDetails } from './ui/ArticleDetails/ArticleDetails';
+export { ArticleDetails, ArticleTagsRow } from './ui/ArticleDetails/ArticleDetails';
 
 export { ArticleRatingButton } from './ui/ArticleRatingButton/ArticleRatingButton';
 

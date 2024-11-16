@@ -13,6 +13,15 @@
     align-self: start;
 }
 
+.navbar::before {
+    position: fixed;
+    content: "";
+    z-index: -10000;
+    width: 100vw;
+    background: var(--dark-bg-redesigned);
+    height: var(--navbar-height);
+}
+
 .toolbar {
     position: fixed;
     left: 0;

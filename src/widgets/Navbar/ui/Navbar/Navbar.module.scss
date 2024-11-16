@@ -4,7 +4,7 @@
     grid-template-areas: "appLogo items actions";
     grid-template-columns: min-content 1fr min-content;
     background: var(--dark-bg-redesigned);
-    height: 56px;
+    height: var(--navbar-height);
 }
 
 .appLogo {

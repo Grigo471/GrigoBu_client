@@ -4,9 +4,10 @@ import {
     createSlice,
 } from '@reduxjs/toolkit';
 import { StateSchema } from '@/app/providers/StoreProvider';
-import { User } from '@/entities/User';
+import { User, UsersSortField } from '@/entities/User';
 import { UsersPageSchema } from '../types/UsersPageSchema';
 import { fetchUsers } from '../services/fetchUsers/fetchUsers';
+import { SortOrder } from '@/shared/types';
 
 const usersAdapter = createEntityAdapter<User>({
     selectId: (user) => user.id,
@@ -21,10 +22,22 @@ const usersPagesSlice = createSlice({
     initialState: usersAdapter.getInitialState<UsersPageSchema>({
         isLoading: false,
         error: undefined,
+        search: '',
+        order: 'desc',
+        sort: 'rating',
         ids: [],
         entities: {},
     }),
     reducers: {
+        setOrder: (state, action: PayloadAction<SortOrder>) => {
+            state.order = action.payload;
+        },
+        setSort: (state, action: PayloadAction<UsersSortField>) => {
+            state.sort = action.payload;
+        },
+        setSearch: (state, action: PayloadAction<string>) => {
+            state.search = action.payload;
+        },
     },
     extraReducers: (builder) => {
         builder
@@ -46,4 +59,4 @@ const usersPagesSlice = createSlice({
     },
 });
 
-export const { reducer: usersPageReducer } = usersPagesSlice;
+export const { reducer: usersPageReducer, actions: usersPageActions } = usersPagesSlice;

@@ -4,6 +4,7 @@ import {
 import { useTranslation } from 'react-i18next';
 import {
     Article, ArticleDetails, ArticleRatingButton,
+    ArticleTagsRow,
 } from '@/entities/Article';
 import cls from './ArticleListItem.module.scss';
 import { HStack, VStack } from '@/shared/ui/Stack';
@@ -51,7 +52,7 @@ export const ArticleListItem = memo((props: ArticleListItemProps) => {
                     <ArticleDetails
                         ref={setDetailsRef}
                         article={article}
-                        withLinks
+                        type="list"
                         className={classNames('', { [cls.collapsed]: !article.uncollapsed }, [])}
                     />
                     {overflowActive && !article.uncollapsed
@@ -62,6 +63,7 @@ export const ArticleListItem = memo((props: ArticleListItemProps) => {
                                 {t('Показать больше')}
                             </Button>
                         )}
+                    <ArticleTagsRow tags={article.tags} />
                     <AppLink to={`/article/${article?.id}`}>
                         <HStack gap="4">
                             <Icon className={cls.comment} Svg={CommentIcon} clickable />

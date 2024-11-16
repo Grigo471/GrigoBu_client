@@ -11,10 +11,11 @@ import cls from './ArticleDetailsPage.module.scss';
 import { ArticleDetailsComments } from '../AricleDetailsComments/ArticleDetailsComments';
 import { StickyContentLayout } from '@/shared/layouts/StickyContentLayout';
 import { AdditionalInfoContainer } from '../AdditionalInfoContainer/AdditionalInfoContainer';
-import { ArticleDetails, fetchArticleById } from '@/entities/Article';
+import { fetchArticleById } from '@/entities/Article';
 import { useInitialEffect } from '@/shared/lib/hooks/useInitialEffect';
 import { getArticleDetailsData } from '../../model/selectors/articleSelector';
 import { useAppDispatch } from '@/shared/lib/hooks/useAppDispatch';
+import { ArticleDetailsCard } from '../ArticleDetailsCard/ArticleDetailsCard';
 
 interface ArticleDetailsPageProps {
    className?: string;
@@ -52,8 +53,8 @@ const ArticleDetailsPage = (props: ArticleDetailsPageProps) => {
             content={(
                 <Page className={classNames(cls.ArticleDetailsPage, {}, [className])}>
                     <VStack gap="16" max>
-                        <ArticleDetails article={article} />
-                        <ArticleDetailsComments id={id} />
+                        <ArticleDetailsCard article={article} />
+                        <ArticleDetailsComments id={id} className={cls.comments} />
                     </VStack>
                 </Page>
             )}

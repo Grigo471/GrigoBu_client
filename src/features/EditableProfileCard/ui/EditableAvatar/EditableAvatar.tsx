@@ -12,6 +12,7 @@ import {
 import { Icon } from '@/shared/ui/Icon';
 import PhotoIcon from '@/shared/assets/icons/photo.svg';
 import cls from './EditableAvatar.module.scss';
+import { classNames } from '@/shared/lib/classNames/classNames';
 
 interface EditableAvatarProps {
    className?: string;
@@ -32,12 +33,12 @@ export const EditableAvatar = memo((props: EditableAvatarProps) => {
         <FileUpload
             onUpload={onUpload}
             accept="image/*"
-            className={cls.EditableAvatar}
+            className={classNames(cls.EditableAvatar, {}, [className])}
         >
             <div className={cls.overlay}>
                 <Icon Svg={PhotoIcon} />
             </div>
-            <Avatar className={className} src={avatar} />
+            <Avatar size={124} src={avatar} />
         </FileUpload>
     );
 });

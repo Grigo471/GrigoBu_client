@@ -1,25 +1,24 @@
 import { memo, useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
 import { SortOrder } from '@/shared/types';
-import { ArticleSortField } from '@/entities/Article';
-import { ListBox } from '@/shared/ui/Popups';
+import { ListBox, ListBoxItem } from '@/shared/ui/Popups/ui/ListBox/ListBox';
 import { VStack } from '@/shared/ui/Stack';
+import { UsersSortField } from '@/entities/User';
 import { Text } from '@/shared/ui/Text';
-import { ListBoxItem } from '@/shared/ui/Popups/ui/ListBox/ListBox';
 
-interface ArticleSortSelectorProps {
-    className?: string;
-    sort: ArticleSortField;
-    order: SortOrder;
-    onChangeOrder: (newOrder: SortOrder) => void;
-    onChangeSort: (newSort: ArticleSortField) => void;
+interface UsersSortSelectorProps {
+   className?: string;
+   sort: UsersSortField;
+   order: SortOrder;
+   onChangeOrder: (newOrder: SortOrder) => void;
+   onChangeSort: (newSort: UsersSortField) => void;
 }
 
-export const ArticleSortSelector = memo((props: ArticleSortSelectorProps) => {
+export const UsersSortSelector = memo((props: UsersSortSelectorProps) => {
     const {
         className, sort, order, onChangeOrder, onChangeSort,
     } = props;
-    const { t } = useTranslation('article');
+    const { t } = useTranslation('users');
 
     const orderOptions = useMemo<ListBoxItem<SortOrder>[]>(() => [
         {
@@ -31,21 +30,26 @@ export const ArticleSortSelector = memo((props: ArticleSortSelectorProps) => {
             content: t('возрастанию'),
         },
     ], [t]);
-    const sortFieldOptions = useMemo<ListBoxItem<ArticleSortField>[]>(() => [
+    const sortFieldOptions = useMemo<ListBoxItem<UsersSortField>[]>(() => [
+        {
+            value: 'rating',
+            content: t('рейтингу'),
+        },
         {
             value: 'createdAt',
             content: t('дате создания'),
         },
         {
-            value: 'rating',
-            content: t('рейтингу'),
+            value: 'username',
+            content: t('имени'),
         },
     ], [t]);
 
     return (
+
         <VStack gap="8" className={className}>
             <Text text={t('Сортировать по')} />
-            <ListBox<ArticleSortField>
+            <ListBox<UsersSortField>
                 items={sortFieldOptions}
                 value={sort}
                 onChange={onChangeSort}
@@ -56,5 +60,6 @@ export const ArticleSortSelector = memo((props: ArticleSortSelectorProps) => {
                 onChange={onChangeOrder}
             />
         </VStack>
+
     );
 });

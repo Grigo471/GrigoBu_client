@@ -14,13 +14,25 @@ import { classNames } from '@/shared/lib/classNames/classNames';
 interface ArticleDetailsProps {
     article?: Article;
     className?: string;
-    withLinks?: boolean;
+    type?: 'list' | 'details' | 'preview';
 }
+
+export const ArticleTagsRow = memo(({ tags }: { tags: string[] }) => (
+    <HStack gap="16" wrap="wrap">
+        {tags.map((tag) => (
+            <Text
+                className={cls.tag}
+                key={tag}
+                text={`#${tag}`}
+            />
+        ))}
+    </HStack>
+));
 
 export const ArticleDetails = memo(
     React.forwardRef<HTMLDivElement, ArticleDetailsProps>((props, ref) => {
         const {
-            article, withLinks = false, className,
+            article, type = 'list', className,
         } = props;
 
         if (!article) return null;
@@ -28,7 +40,7 @@ export const ArticleDetails = memo(
         const avatar = article?.user.avatar;
         const date = article?.createdAt.split('T')[0];
 
-        const title = withLinks ? (
+        const title = type === 'list' ? (
             <AppLink to={`/article/${article?.id}`}>
                 <Text
                     title={article?.title}
@@ -44,28 +56,28 @@ export const ArticleDetails = memo(
             />
         );
 
+        const userInfo = type === 'preview' ? (
+            <HStack gap="8">
+                <Avatar src={srcWithApi(avatar)} size={24} />
+                <span className={cls.username}>{article?.user.username}</span>
+            </HStack>
+        ) : (
+            <AppLink to={`/users/${article?.user.username}`}>
+                <HStack gap="8">
+                    <Avatar src={srcWithApi(avatar)} size={24} />
+                    <span className={cls.username}>{article?.user.username}</span>
+                </HStack>
+            </AppLink>
+        );
+
         return (
             <div ref={ref} className={classNames(cls.ArticleDetails, {}, [className])}>
                 <HStack gap="8">
-                    <AppLink to={`/users/${article?.user.username}`}>
-                        <HStack gap="8">
-                            <Avatar src={srcWithApi(avatar)} size={24} />
-                            <span className={cls.username}>{article?.user.username}</span>
-                        </HStack>
-                    </AppLink>
+                    {userInfo}
                     <Text text={date} />
                 </HStack>
                 {title}
                 {article?.blocks.map(renderArticleBlock)}
-                <HStack gap="16" wrap="wrap">
-                    {article?.tags.map((tag) => (
-                        <Text
-                            className={cls.tag}
-                            key={tag}
-                            text={`#${tag}`}
-                        />
-                    ))}
-                </HStack>
             </div>
         );
     }),

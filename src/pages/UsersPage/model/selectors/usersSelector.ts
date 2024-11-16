@@ -7,3 +7,15 @@ export const getUsersPageIsLoading = (
 export const getUsersPageError = (
     state: StateSchema,
 ) => state.usersPage?.error;
+
+export const getUsersPageOrder = (
+    state: StateSchema,
+) => state.usersPage?.order ?? 'desc';
+
+export const getUsersPageSort = (
+    state: StateSchema,
+) => state.usersPage?.sort ?? 'rating';
+
+export const getUsersPageSearch = (
+    state: StateSchema,
+) => state.usersPage?.search ?? '';

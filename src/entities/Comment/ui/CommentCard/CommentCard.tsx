@@ -47,7 +47,7 @@ export const CommentCard = memo((props: CommentCardProps) => {
 
     return (
 
-        <Card padding="24" border="round" max>
+        <Card padding="24" max>
             <VStack
                 data-testid="CommentCard.content"
                 gap="8"

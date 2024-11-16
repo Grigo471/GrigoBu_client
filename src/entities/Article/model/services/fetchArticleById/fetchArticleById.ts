@@ -18,13 +18,6 @@ export const fetchArticleById = createAsyncThunk<Article, string | undefined, Th
                 throw new Error();
             }
 
-            const article = response.data;
-            article.blocks.forEach((block) => {
-                if (block.type === 'image') {
-                    block.src = `${__API__}/${block.src}`;
-                }
-            });
-
             return response.data;
         } catch (error) {
             return rejectWithValue('error');

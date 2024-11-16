@@ -47,7 +47,7 @@ const AddCommentForm = memo((props: addCommentFormProps) => {
 
     return (
 
-        <Card padding="24" border="round" max>
+        <Card padding="24" max>
             <HStack
                 data-testid="AddCommentForm"
                 justify="between"

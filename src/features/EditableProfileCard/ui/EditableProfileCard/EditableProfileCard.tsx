@@ -1,7 +1,6 @@
 import { memo, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useSelector } from 'react-redux';
-import { classNames } from '@/shared/lib/classNames/classNames';
 import cls from './EditableProfileCard.module.scss';
 import { Card } from '@/shared/ui/Card';
 import { HStack, VStack } from '@/shared/ui/Stack';
@@ -28,6 +27,8 @@ export const EditableProfileCard = memo((props: EditableProfileCardProps) => {
     const userData = useSelector(getUserAuthData);
     const [isEdit, setIsEdit] = useState(false);
 
+    const date = userData?.createdAt?.split('T')[0];
+
     useDynamicModuleLoad({ reducers });
 
     const editToolbar = isEdit
@@ -48,11 +49,13 @@ export const EditableProfileCard = memo((props: EditableProfileCardProps) => {
         );
 
     return (
-        <Card padding="16" max className={classNames(cls.EditableProfileCard, {}, [className])}>
+        <Card padding="16" max className={className}>
             <HStack gap="16" max>
-                <EditableAvatar />
-                <VStack max>
-                    <Text title={userData?.username} />
+                <EditableAvatar className={cls.avatar} />
+                <VStack gap="8" max className={cls.info}>
+                    <Text title={userData?.username} size="l" />
+                    <Text text={`${t('Рейтинг')}: ${userData?.rating}`} />
+                    <Text text={`${t('Грибёт с')} ${date}`} />
                     {userData?.status && <Text text={userData.status} />}
                 </VStack>
                 {editToolbar}

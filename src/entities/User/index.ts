@@ -5,6 +5,7 @@ export type {
 
 export {
     type UserRole,
+    type UsersSortField,
 } from './model/consts/consts';
 
 export {
