@@ -7,11 +7,12 @@ interface MainLayoutProps {
    navbar: ReactElement;
    content: ReactElement;
    toolbar?: ReactElement;
+   bottomToolbar?: ReactElement;
 }
 
 export const MainLayout = (props: MainLayoutProps) => {
     const {
-        className, navbar, content, toolbar,
+        className, navbar, content, toolbar, bottomToolbar,
     } = props;
 
     return (
@@ -21,6 +22,7 @@ export const MainLayout = (props: MainLayoutProps) => {
                 <div className={cls.toolbar}>{toolbar}</div>
                 <div className={cls.content}>{content}</div>
             </div>
+            <div className={cls.bottomToolbar}>{bottomToolbar}</div>
         </>
     );
 };

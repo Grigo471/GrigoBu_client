@@ -41,7 +41,7 @@ const ArticleEditPage = () => {
     const error = useSelector(getArticleEditPageError);
     const isPreview = useSelector(getArticleEditPageIsPreview);
 
-    useDynamicModuleLoad({ reducers });
+    useDynamicModuleLoad({ reducers, removeAfterUnmount: false });
 
     useEffect(() => {
         if (isEdit) {
@@ -54,7 +54,9 @@ const ArticleEditPage = () => {
         }
     }, [isEdit, dispatch, authData, id]);
 
-    const canEdit = !isEdit || formData?.user.username === authData?.username;
+    const canEdit = !isEdit
+    || formData?.user.username === authData?.username
+    || authData?.role === 'admin';
 
     if (error) {
         return (

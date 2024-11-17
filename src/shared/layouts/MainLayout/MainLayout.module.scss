@@ -37,6 +37,8 @@
     max-width: var(--articles-page-width);
 }
 
-.transperent {
-    opacity: 0;
+.bottomToolbar {
+    position: fixed;
+    right: 64px;
+    bottom: 36px;
 }

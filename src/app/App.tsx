@@ -15,6 +15,7 @@ import { AppLoaderLayout } from '@/shared/layouts/AppLoaderLayout';
 import { useAppToolbar } from './lib/useAppToolbar';
 import { withTheme } from './providers/ThemeProvider/ui/withTheme';
 import { LOCAL_STORAGE_TOKEN_KEY } from '@/shared/const/localStorage';
+import { BottomRightToolbar } from '@/widgets/BottomRightToolbar';
 
 const App = memo(() => {
     const { theme } = useTheme();
@@ -51,6 +52,7 @@ const App = memo(() => {
                     navbar={<Navbar />}
                     content={<AppRouter />}
                     toolbar={toolbar}
+                    bottomToolbar={<BottomRightToolbar />}
                 />
             </Suspense>
         </div>

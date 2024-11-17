@@ -1,0 +1,11 @@
+.ScrollToTopButton {
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.ScrollToTopButton:hover {
+    background: linear-gradient(var(--hint-redesigned) 0%, var(--bg-redesigned) 100%);
+    opacity: 0.3;
+}
