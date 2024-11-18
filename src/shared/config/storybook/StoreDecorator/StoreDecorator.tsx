@@ -5,8 +5,8 @@ import { addCommentFormReducer } from '@/features/AddCommentForm/testing';
 import { UIReducer } from '@/features/UI/testing';
 import { articleDetailsPageReducer } from '@/pages/ArticleDetailsPage/testing';
 import { authReducer } from '@/features/AuthByUsername/testing';
-import { profileCardReducers } from '@/features/ProfileCard/testing';
-import { editableProfileReducers } from '@/features/EditableProfileCard/testing';
+import { profileCardReducers } from '@/widgets/ProfileCard/testing';
+import { editableProfileReducers } from '@/widgets/EditableProfileCard/testing';
 
 const defaultAsyncReducers: ReducerList = {
     authForm: authReducer,

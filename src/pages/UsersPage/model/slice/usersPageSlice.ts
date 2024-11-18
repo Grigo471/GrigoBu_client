@@ -8,7 +8,7 @@ import { User, UsersSortField } from '@/entities/User';
 import { UsersPageSchema } from '../types/UsersPageSchema';
 import { fetchUsers } from '../services/fetchUsers/fetchUsers';
 import { SortOrder } from '@/shared/types';
-import { subscribeToUser, unsubscribeToUser } from '@/features/ProfileCard';
+import { subscribeToUser, unsubscribeToUser } from '@/features/SubscribeToUserButton';
 
 const usersAdapter = createEntityAdapter<User>({
     selectId: (profile) => profile.id,

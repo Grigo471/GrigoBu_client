@@ -6,7 +6,7 @@ export const subscribeToUser = createAsyncThunk<
     number | undefined,
     ThunkConfig<string>
 >(
-    'ProfileCard/subscribeToUser',
+    'SubscribeToUserButton/subscribeToUser',
     async (userId, thunkApi) => {
         const { extra, rejectWithValue } = thunkApi;
 

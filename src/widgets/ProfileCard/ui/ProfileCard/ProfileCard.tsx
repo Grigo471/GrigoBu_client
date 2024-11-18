@@ -1,4 +1,4 @@
-import { memo, useCallback, useEffect } from 'react';
+import { memo, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useSelector } from 'react-redux';
 import { classNames } from '@/shared/lib/classNames/classNames';
@@ -13,13 +13,11 @@ import {
     getProfileAmISubscribed,
     getProfileData,
 } from '../../model/selectors/profileCardSelectors';
-import { Button } from '@/shared/ui/Button';
-import { subscribeToUser } from '../../model/services/subscribeToUser';
 import { ReducerList, useDynamicModuleLoad } from '@/shared/lib/hooks/useDynamicModuleLoad';
 import { profileCardReducers } from '../../testing';
-import { unsubscribeToUser } from '../../model/services/unsubscribeToUser';
 import { getUserAuthData } from '@/entities/User';
 import { srcWithApi } from '@/shared/lib/url/srcWithApi/srcWithApi';
+import { SubscribeToUserButton } from '@/features/SubscribeToUserButton';
 
 interface ProfileCardProps {
    className?: string;
@@ -44,31 +42,7 @@ export const ProfileCard = memo((props: ProfileCardProps) => {
         dispatch(fetchProfile(username));
     }, [username, dispatch]);
 
-    const onSubscribe = useCallback(() => {
-        if (userData?.id) dispatch(subscribeToUser(userData.id));
-    }, [dispatch, userData?.id]);
-
-    const onUnSubscribe = useCallback(() => {
-        if (userData?.id) dispatch(unsubscribeToUser(userData.id));
-    }, [dispatch, userData?.id]);
-
     useDynamicModuleLoad({ reducers });
-
-    const subscribeButton = amISubscribed ? (
-        <Button
-            className={cls.subscribeButton}
-            onClick={onUnSubscribe}
-            variant="filled"
-        >
-            {t('Вы подписаны')}
-        </Button>
-    ) : (
-        <Button
-            onClick={onSubscribe}
-        >
-            {t('Подписаться')}
-        </Button>
-    );
 
     const avatar = srcWithApi(userData?.avatar);
 
@@ -84,7 +58,8 @@ export const ProfileCard = memo((props: ProfileCardProps) => {
                     <Text text={`${t('Грибёт с')} ${date}`} />
                     {userData?.status && <Text text={userData.status} />}
                 </VStack>
-                {authData && subscribeButton}
+                {authData
+                && <SubscribeToUserButton userId={userData.id} amISubscribed={amISubscribed} />}
             </HStack>
         </Card>
     );
