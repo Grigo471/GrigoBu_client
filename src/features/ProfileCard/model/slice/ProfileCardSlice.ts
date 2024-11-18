@@ -1,8 +1,9 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { ProfileCardSchema } from '../types/ProfileCardSchema';
-import { fetchProfile, fetchProfileResult } from '../services/fetchProfile';
+import { fetchProfile } from '../services/fetchProfile';
 import { subscribeToUser } from '../services/subscribeToUser';
 import { unsubscribeToUser } from '../services/unsubscribeToUser';
+import { User } from '@/entities/User';
 
 const initialState: ProfileCardSchema = {
 };
@@ -22,10 +23,9 @@ export const ProfileCardSlice = createSlice({
             )
             .addCase(
                 fetchProfile.fulfilled,
-                (state, { payload }: PayloadAction<fetchProfileResult>) => {
+                (state, { payload }: PayloadAction<User>) => {
                     state.isLoading = false;
-                    state.profileData = payload.user;
-                    state.amISubscribed = payload.amISubscribed;
+                    state.profileData = payload;
                     state.error = undefined;
                 },
             )
@@ -44,8 +44,8 @@ export const ProfileCardSlice = createSlice({
             )
             .addCase(
                 subscribeToUser.fulfilled,
-                (state, { payload }: PayloadAction<boolean>) => {
-                    state.amISubscribed = payload;
+                (state) => {
+                    if (state.profileData) state.profileData.amISubscribed = true;
                     state.isSubscribeLoading = false;
                 },
             )
@@ -65,7 +65,7 @@ export const ProfileCardSlice = createSlice({
             .addCase(
                 unsubscribeToUser.fulfilled,
                 (state) => {
-                    state.amISubscribed = false;
+                    if (state.profileData) state.profileData.amISubscribed = false;
                     state.isSubscribeLoading = false;
                 },
             )

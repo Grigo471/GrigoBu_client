@@ -2,7 +2,7 @@ import { createAsyncThunk } from '@reduxjs/toolkit';
 import { ThunkConfig } from '@/app/providers/StoreProvider';
 
 export const subscribeToUser = createAsyncThunk<
-    boolean,
+    number,
     number | undefined,
     ThunkConfig<string>
 >(
@@ -11,7 +11,7 @@ export const subscribeToUser = createAsyncThunk<
         const { extra, rejectWithValue } = thunkApi;
 
         try {
-            const response = await extra.api.post<boolean>(
+            const response = await extra.api.post<number>(
                 `users/${userId}/subscribe`,
                 { withCredentials: true },
             );

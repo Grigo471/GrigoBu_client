@@ -8,9 +8,10 @@ import { User, UsersSortField } from '@/entities/User';
 import { UsersPageSchema } from '../types/UsersPageSchema';
 import { fetchUsers } from '../services/fetchUsers/fetchUsers';
 import { SortOrder } from '@/shared/types';
+import { subscribeToUser, unsubscribeToUser } from '@/features/ProfileCard';
 
 const usersAdapter = createEntityAdapter<User>({
-    selectId: (user) => user.id,
+    selectId: (profile) => profile.id,
 });
 
 export const getUsers = usersAdapter.getSelectors<StateSchema>(
@@ -59,7 +60,21 @@ const usersPagesSlice = createSlice({
             .addCase(fetchUsers.rejected, (state, action) => {
                 state.isLoading = false;
                 state.error = action.payload;
-            });
+            })
+            .addCase(
+                subscribeToUser.fulfilled,
+                (state, { payload }: PayloadAction<number>) => {
+                    const user = state.entities[payload];
+                    if (user) user.amISubscribed = true;
+                },
+            )
+            .addCase(
+                unsubscribeToUser.fulfilled,
+                (state, { payload }: PayloadAction<number>) => {
+                    const user = state.entities[payload];
+                    if (user) user.amISubscribed = false;
+                },
+            );
     },
 });
 

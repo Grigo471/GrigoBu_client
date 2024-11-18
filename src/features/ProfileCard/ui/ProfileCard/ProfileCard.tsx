@@ -58,6 +58,7 @@ export const ProfileCard = memo((props: ProfileCardProps) => {
         <Button
             className={cls.subscribeButton}
             onClick={onUnSubscribe}
+            variant="filled"
         >
             {t('Вы подписаны')}
         </Button>
@@ -77,9 +78,9 @@ export const ProfileCard = memo((props: ProfileCardProps) => {
         <Card padding="16" className={classNames(cls.EditableProfileCard, {}, [className])}>
             <HStack gap="16" max>
                 <Avatar size={124} src={avatar} className={cls.avatar} />
-                <VStack gap="8" max className={cls.info}>
+                <VStack gap="8" max>
                     <Text title={userData?.username} size="l" />
-                    <Text text={`${t('Рейтинг')}: ${userData.rating}`} />
+                    <Text bold text={`${t('Рейтинг')}: ${userData.rating}`} />
                     <Text text={`${t('Грибёт с')} ${date}`} />
                     {userData?.status && <Text text={userData.status} />}
                 </VStack>

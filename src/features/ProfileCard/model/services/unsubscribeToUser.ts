@@ -2,7 +2,7 @@ import { createAsyncThunk } from '@reduxjs/toolkit';
 import { ThunkConfig } from '@/app/providers/StoreProvider';
 
 export const unsubscribeToUser = createAsyncThunk<
-    boolean,
+    number,
     number | undefined,
     ThunkConfig<string>
 >(
@@ -11,7 +11,7 @@ export const unsubscribeToUser = createAsyncThunk<
         const { extra, rejectWithValue } = thunkApi;
 
         try {
-            const response = await extra.api.delete<boolean>(
+            const response = await extra.api.delete<number>(
                 `users/${userId}/unsubscribe`,
                 { withCredentials: true },
             );

@@ -10,7 +10,7 @@ export const getProfileIsLoading = (
 
 export const getProfileAmISubscribed = (
     state: StateSchema,
-) => state.profileCard?.amISubscribed;
+) => state.profileCard?.profileData?.amISubscribed;
 
 export const getProfileError = (
     state: StateSchema,

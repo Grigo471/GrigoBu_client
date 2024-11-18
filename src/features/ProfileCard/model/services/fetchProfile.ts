@@ -2,13 +2,8 @@ import { createAsyncThunk } from '@reduxjs/toolkit';
 import { ThunkConfig } from '@/app/providers/StoreProvider';
 import { User } from '@/entities/User';
 
-export interface fetchProfileResult {
-    user: User,
-    amISubscribed?: boolean,
-}
-
 export const fetchProfile = createAsyncThunk<
-    fetchProfileResult,
+    User,
     string,
     ThunkConfig<string>
 >(
@@ -17,7 +12,7 @@ export const fetchProfile = createAsyncThunk<
         const { extra, rejectWithValue } = thunkApi;
 
         try {
-            const response = await extra.api.get<fetchProfileResult>(
+            const response = await extra.api.get<User>(
                 `users/${username}`,
                 { withCredentials: true },
             );
