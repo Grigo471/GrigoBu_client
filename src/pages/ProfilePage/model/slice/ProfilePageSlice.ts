@@ -38,7 +38,9 @@ const profilePageSlice = createSlice({
         },
         setOrder: {
             reducer: (state, { payload }: PayloadAction<PayloadWithUsername<SortOrder>>) => {
-                state.profilePages[payload.username].order = payload.arg;
+                if (state.profilePages[payload.username]) {
+                    state.profilePages[payload.username].order = payload.arg;
+                }
             },
             prepare: (username: string, order: SortOrder) => ({
                 payload: { username, arg: order },
@@ -46,7 +48,9 @@ const profilePageSlice = createSlice({
         },
         setSort: {
             reducer: (state, { payload }: PayloadAction<PayloadWithUsername<ArticleSortField>>) => {
-                state.profilePages[payload.username].sort = payload.arg;
+                if (state.profilePages[payload.username]) {
+                    state.profilePages[payload.username].sort = payload.arg;
+                }
             },
             prepare: (username: string, sort: ArticleSortField) => ({
                 payload: { username, arg: sort },
@@ -54,7 +58,9 @@ const profilePageSlice = createSlice({
         },
         setSearch: {
             reducer: (state, { payload }: PayloadAction<PayloadWithUsername<string>>) => {
-                state.profilePages[payload.username].search = payload.arg;
+                if (state.profilePages[payload.username]) {
+                    state.profilePages[payload.username].search = payload.arg;
+                }
             },
             prepare: (username: string, search: string) => ({
                 payload: { username, arg: search },

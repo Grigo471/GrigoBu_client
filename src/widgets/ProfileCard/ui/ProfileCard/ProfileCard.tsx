@@ -1,4 +1,4 @@
-import { memo, useEffect } from 'react';
+import { memo } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useSelector } from 'react-redux';
 import { classNames } from '@/shared/lib/classNames/classNames';
@@ -18,6 +18,7 @@ import { profileCardReducers } from '../../testing';
 import { getUserAuthData } from '@/entities/User';
 import { srcWithApi } from '@/shared/lib/url/srcWithApi/srcWithApi';
 import { SubscribeToUserButton } from '@/features/SubscribeToUserButton';
+import { useInitialEffect } from '@/shared/lib/hooks/useInitialEffect';
 
 interface ProfileCardProps {
    className?: string;
@@ -38,9 +39,9 @@ export const ProfileCard = memo((props: ProfileCardProps) => {
 
     const date = userData?.createdAt?.split('T')[0];
 
-    useEffect(() => {
+    useInitialEffect(() => {
         dispatch(fetchProfile(username));
-    }, [username, dispatch]);
+    });
 
     useDynamicModuleLoad({ reducers });
 

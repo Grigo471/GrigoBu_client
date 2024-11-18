@@ -14,10 +14,20 @@ import {
     getProfilePageOrder, getProfilePageSearch, getProfilePageSort,
 } from '../../model/selectors/profilePageSelectors';
 import { profilePageActions } from '../../model/slice/ProfilePageSlice';
+import { HStack, VStack } from '@/shared/ui/Stack';
+import { Avatar } from '@/shared/ui/Avatar';
+import { srcWithApi } from '@/shared/lib/url/srcWithApi/srcWithApi';
+import { getUserAuthData } from '@/entities/User';
+import { getProfileData } from '@/widgets/ProfileCard';
+import { Text } from '@/shared/ui/Text';
+import { SubscribeToUserButton } from '@/features/SubscribeToUserButton';
 
 export const ProfilePageFilters = memo(() => {
     const dispatch = useAppDispatch();
     const username = useParams<{ username: string }>().username ?? '';
+    const authData = useSelector(getUserAuthData);
+    const profileData = useSelector(getProfileData);
+    const avatar = profileData ? profileData.avatar : authData?.avatar;
 
     const order = useSelector((state: StateSchema) => getProfilePageOrder(state, username));
     const sort = useSelector((state: StateSchema) => getProfilePageSort(state, username));
@@ -53,14 +63,29 @@ export const ProfilePageFilters = memo(() => {
 
     return (
         <Card padding="24">
-            <ArticlesFilters
-                order={order}
-                sort={sort}
-                search={searchText}
-                onChangeOrder={onChangeOrder}
-                onChangeSearch={onChangeSearch}
-                onChangeSort={onChangeSort}
-            />
+            <VStack gap="24">
+                <VStack gap="16">
+                    <HStack gap="8">
+                        <Avatar src={srcWithApi(avatar)} size={32} />
+                        <Text size="l" text={username} bold />
+                    </HStack>
+                    {profileData
+                && (
+                    <SubscribeToUserButton
+                        userId={profileData.id}
+                        amISubscribed={profileData.amISubscribed}
+                    />
+                )}
+                </VStack>
+                <ArticlesFilters
+                    order={order}
+                    sort={sort}
+                    search={searchText}
+                    onChangeOrder={onChangeOrder}
+                    onChangeSearch={onChangeSearch}
+                    onChangeSort={onChangeSort}
+                />
+            </VStack>
         </Card>
     );
 });

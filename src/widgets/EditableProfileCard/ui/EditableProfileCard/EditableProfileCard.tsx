@@ -7,9 +7,6 @@ import { HStack, VStack } from '@/shared/ui/Stack';
 import { getUserAuthData } from '@/entities/User';
 import { Text } from '@/shared/ui/Text';
 import { EditableAvatar } from '../EditableAvatar/EditableAvatar';
-import { Button } from '@/shared/ui/Button';
-import { Icon } from '@/shared/ui/Icon';
-import SettingsIcon from '@/shared/assets/icons/settings.svg';
 import { ReducerList, useDynamicModuleLoad } from '@/shared/lib/hooks/useDynamicModuleLoad';
 import { editableProfileReducers } from '../../testing';
 
@@ -31,22 +28,22 @@ export const EditableProfileCard = memo((props: EditableProfileCardProps) => {
 
     useDynamicModuleLoad({ reducers });
 
-    const editToolbar = isEdit
-        ? (
-            <HStack gap="8">
-                <Button>
-                    {t('Сохранить')}
-                </Button>
-                <Button
-                    onClick={() => setIsEdit(false)}
-                >
-                    {t('Отмена')}
-                </Button>
-            </HStack>
-        )
-        : (
-            <Icon Svg={SettingsIcon} clickable onClick={() => setIsEdit(true)} />
-        );
+    // const editToolbar = isEdit
+    //     ? (
+    //         <HStack gap="8">
+    //             <Button>
+    //                 {t('Сохранить')}
+    //             </Button>
+    //             <Button
+    //                 onClick={() => setIsEdit(false)}
+    //             >
+    //                 {t('Отмена')}
+    //             </Button>
+    //         </HStack>
+    //     )
+    //     : (
+    //         <Icon Svg={SettingsIcon} clickable onClick={() => setIsEdit(true)} />
+    //     );
 
     return (
         <Card padding="16" max className={className}>
@@ -58,7 +55,7 @@ export const EditableProfileCard = memo((props: EditableProfileCardProps) => {
                     <Text text={`${t('Грибёт с')} ${date}`} />
                     {userData?.status && <Text text={userData.status} />}
                 </VStack>
-                {editToolbar}
+                {/* {editToolbar} */}
             </HStack>
         </Card>
     );
