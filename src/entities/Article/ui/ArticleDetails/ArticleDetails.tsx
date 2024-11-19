@@ -14,7 +14,7 @@ import { classNames } from '@/shared/lib/classNames/classNames';
 interface ArticleDetailsProps {
     article?: Article;
     className?: string;
-    type?: 'list' | 'details' | 'preview';
+    type?: 'list' | 'details' | 'preview' | 'userList';
 }
 
 export const ArticleTagsRow = memo(({ tags }: { tags: string[] }) => (
@@ -40,7 +40,7 @@ export const ArticleDetails = memo(
         const avatar = article?.user.avatar;
         const date = article?.createdAt.split('T')[0];
 
-        const title = type === 'list' ? (
+        const title = (type === 'list' || type === 'userList') ? (
             <AppLink to={`/article/${article?.id}`}>
                 <Text
                     title={article?.title}
@@ -56,7 +56,7 @@ export const ArticleDetails = memo(
             />
         );
 
-        const userInfo = type === 'preview' ? (
+        const userInfo = (type === 'preview' || type === 'userList') ? (
             <HStack gap="8">
                 <Avatar src={srcWithApi(avatar)} size={24} />
                 <span className={cls.username}>{article?.user.username}</span>

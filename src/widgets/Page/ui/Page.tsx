@@ -19,7 +19,6 @@ export const Page = memo((props: PropsWithChildren<PageProps>) => {
             data-testid={props['data-testid'] ?? 'Page'}
         >
             {children}
-            {/* <div className={cls.footer} /> */}
         </main>
     );
 });

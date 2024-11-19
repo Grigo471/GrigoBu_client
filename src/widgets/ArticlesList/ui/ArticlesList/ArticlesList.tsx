@@ -1,4 +1,4 @@
-import React, {
+import {
     memo,
     useCallback,
     useRef,
@@ -7,7 +7,7 @@ import React, {
 import { useTranslation } from 'react-i18next';
 import { ListRange, Virtuoso, VirtuosoHandle } from 'react-virtuoso';
 
-import { useLocation } from 'react-router-dom';
+import { useLocation, useParams } from 'react-router-dom';
 import { Text } from '@/shared/ui/Text';
 import { Article } from '@/entities/Article';
 import { ArticleListItemSkeleton } from './ArticleListItemSkeleton';
@@ -37,6 +37,7 @@ export const ArticlesList = memo((props: ArticlesListProps) => {
     } = props;
     const { t } = useTranslation();
     const { pathname } = useLocation();
+    const { username } = useParams();
     const ref = useRef<VirtuosoHandle>();
     const [isScrolling, setIsScrolling] = useState(false);
 
@@ -48,6 +49,7 @@ export const ArticlesList = memo((props: ArticlesListProps) => {
         <ArticleListItem
             article={article}
             key={article.id}
+            type={username ? 'userList' : 'list'}
             setUncollapsed={setUncollapsed}
         />
     );

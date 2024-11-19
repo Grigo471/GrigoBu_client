@@ -3,6 +3,7 @@ import { AdminPanelPage } from '@/pages/AdminPanelPage';
 import { ArticleDetailsPage } from '@/pages/ArticleDetailsPage';
 import { ArticleEditPage } from '@/pages/ArticleEditPage';
 import { ArticlesPage } from '@/pages/ArticlesPage';
+import { AuthPage } from '@/pages/AuthPage';
 
 import { ForbiddenPage } from '@/pages/ForbiddenPage';
 import { NotFoundPage } from '@/pages/NotFoundPage';
@@ -12,6 +13,7 @@ import { UsersPage } from '@/pages/UsersPage';
 import {
     AppRoutes, getRouteAbout, getRouteAdmin, getRouteArticleCreate,
     getRouteArticleDetails, getRouteArticleEdit, getRouteArticles,
+    getRouteAuthorization,
     getRouteForbidden, getRouteProfile,
     getRouteSubscriptions,
     getRouteUsers,
@@ -19,6 +21,10 @@ import {
 import { AppRoutesProps } from '@/shared/types/router';
 
 export const routeConfig: Record<AppRoutes, AppRoutesProps> = {
+    [AppRoutes.AUTHORIZATION]: {
+        path: getRouteAuthorization(),
+        element: <AuthPage />,
+    },
     [AppRoutes.ARTICLES]: {
         path: getRouteArticles(),
         element: <ArticlesPage />,
@@ -34,6 +40,7 @@ export const routeConfig: Record<AppRoutes, AppRoutesProps> = {
     [AppRoutes.SUBSCRIPTIONS]: {
         path: getRouteSubscriptions(),
         element: <SubscriptionsPage />,
+        authOnly: true,
     },
     [AppRoutes.PROFILE]: {
         path: getRouteProfile(':username'),
@@ -42,7 +49,6 @@ export const routeConfig: Record<AppRoutes, AppRoutesProps> = {
     [AppRoutes.ARTICLE_DETAILS]: {
         path: getRouteArticleDetails(':id'),
         element: <ArticleDetailsPage />,
-        authOnly: true,
     },
     [AppRoutes.ARTICLE_CREATE]: {
         path: getRouteArticleCreate(),

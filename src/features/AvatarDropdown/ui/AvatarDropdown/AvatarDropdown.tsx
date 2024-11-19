@@ -13,11 +13,10 @@ import { useAppDispatch } from '@/shared/lib/hooks/useAppDispatch';
 
 interface AvatarDropdownProps {
    className?: string;
-   onCloseModal: () => void;
 }
 
 export const AvatarDropdown = memo((props: AvatarDropdownProps) => {
-    const { className, onCloseModal } = props;
+    const { className } = props;
     const { t } = useTranslation();
 
     const authData = useSelector(getUserAuthData);
@@ -30,9 +29,8 @@ export const AvatarDropdown = memo((props: AvatarDropdownProps) => {
 
     const onLogout = useCallback(async () => {
         await dispatch(logout());
-        onCloseModal();
         window.location.reload();
-    }, [dispatch, onCloseModal]);
+    }, [dispatch]);
 
     const isAdminPanelAvailable = isAdmin || isModerator;
 

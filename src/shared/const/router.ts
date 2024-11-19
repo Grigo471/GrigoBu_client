@@ -1,4 +1,5 @@
 export enum AppRoutes {
+    AUTHORIZATION = 'authorization',
     ARTICLES = 'articles',
     ABOUT = 'about',
     PROFILE = 'profile',
@@ -13,6 +14,7 @@ export enum AppRoutes {
     FORBIDDEN = 'forbidden',
 }
 
+export const getRouteAuthorization = () => '/auth';
 export const getRouteArticles = () => '/';
 export const getRouteAbout = () => '/about';
 export const getRouteUsers = () => '/users';
@@ -25,6 +27,7 @@ export const getRouteAdmin = () => '/admin';
 export const getRouteForbidden = () => '/forbidden';
 
 export const AppRouteByPathPattern: Record<string, AppRoutes> = {
+    [getRouteAuthorization()]: AppRoutes.AUTHORIZATION,
     [getRouteArticles()]: AppRoutes.ARTICLES,
     [getRouteAbout()]: AppRoutes.ABOUT,
     [getRouteProfile(':username')]: AppRoutes.PROFILE,

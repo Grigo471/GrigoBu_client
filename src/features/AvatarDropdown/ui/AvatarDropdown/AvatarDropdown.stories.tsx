@@ -11,7 +11,6 @@ const meta: Meta<typeof AvatarDropdown> = {
     component: AvatarDropdown,
     tags: ['autodocs'],
     args: {
-        onCloseModal: () => {},
     },
     decorators: [
         StoreDecorator({
