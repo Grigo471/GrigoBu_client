@@ -64,7 +64,6 @@ export const ArticlesList = memo((props: ArticlesListProps) => {
         <>
             {isLoading && getSkeletons()}
             {isScrolling && <div className={cls.scrollFallback} />}
-            <div className={cls.footer} />
         </>
     ));
 
@@ -74,7 +73,7 @@ export const ArticlesList = memo((props: ArticlesListProps) => {
 
     useInitialEffect(() => {
         const scrollPosition = scrollByPath[pathname];
-        if (scrollPosition && scrollPosition > 0) {
+        if (scrollPosition && scrollPosition > 1) {
             const virtuoso = ref.current;
             setIsScrolling(true);
             setTimeout(() => {

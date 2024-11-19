@@ -27,7 +27,7 @@ export const ProfilePageFilters = memo(() => {
     const username = useParams<{ username: string }>().username ?? '';
     const authData = useSelector(getUserAuthData);
     const profileData = useSelector(getProfileData);
-    const avatar = profileData ? profileData.avatar : authData?.avatar;
+    const avatar = username === authData?.username ? authData.avatar : profileData?.avatar;
 
     const order = useSelector((state: StateSchema) => getProfilePageOrder(state, username));
     const sort = useSelector((state: StateSchema) => getProfilePageSort(state, username));

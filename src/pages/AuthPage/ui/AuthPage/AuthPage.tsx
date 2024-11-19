@@ -19,7 +19,7 @@ export const AuthPage = memo(() => {
     //  const state = location.state as LocationState;
 
     if (auth) {
-        return <Navigate to={`/users/${auth.username}`} state={{ from: location }} replace />;
+        return <Navigate to="/" state={{ from: location }} replace />;
     }
 
     return (

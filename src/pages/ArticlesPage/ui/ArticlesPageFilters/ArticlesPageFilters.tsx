@@ -22,10 +22,25 @@ import { Button } from '@/shared/ui/Button';
 import { ArticleTagsSelector } from '@/features/ArticleTagsSelector';
 import { Icon } from '@/shared/ui/Icon';
 import CrossIcon from '@/shared/assets/icons/cross-delete.svg';
+import { Radio, RadioItem } from '@/shared/ui/Radio';
+
+type RateFilter = 'liked' | 'disliked';
 
 export const ArticlesPageFilters = memo(() => {
     const dispatch = useAppDispatch();
     const { t } = useTranslation();
+    const [rateFilter, setRateFilter] = useState<RateFilter>('liked');
+
+    const radioItems: RadioItem<RateFilter>[] = [
+        {
+            value: 'liked',
+            label: 'liked',
+        },
+        {
+            value: 'disliked',
+            label: 'disliked',
+        },
+    ];
 
     const order = useSelector(getArticlesPageOrder);
     const sort = useSelector(getArticlesPageSort);
@@ -83,6 +98,12 @@ export const ArticlesPageFilters = memo(() => {
                     onChangeOrder={onChangeOrder}
                     onChangeSearch={onChangeSearch}
                     onChangeSort={onChangeSort}
+                />
+                <Radio<RateFilter>
+                    items={radioItems}
+                    name=""
+                    value={rateFilter}
+                    onChange={(value) => setRateFilter(value)}
                 />
                 <VStack>
                     <Text bold text={t('Моя оценка')} />

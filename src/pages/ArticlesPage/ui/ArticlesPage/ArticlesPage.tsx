@@ -15,16 +15,16 @@ const reducers: ReducerList = {
     articlesPage: articlesPageReducer,
 };
 
-let timer: NodeJS.Timeout;
+let articlesPageTimer: NodeJS.Timeout;
 
 const ArticlesPage = () => {
     const dispatch = useAppDispatch();
 
     useEffect(() => {
-        if (timer) clearTimeout(timer);
+        if (articlesPageTimer) clearTimeout(articlesPageTimer);
 
         return () => {
-            timer = setTimeout(() => {
+            articlesPageTimer = setTimeout(() => {
                 dispatch(articlesPageActions.setPage(1));
                 scrollByPath['/'] = 0;
             }, ARTICLES_PAGE_CACHE_LIFETIME * 1000);

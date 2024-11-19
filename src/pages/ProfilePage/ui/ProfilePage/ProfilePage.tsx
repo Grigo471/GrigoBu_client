@@ -14,7 +14,7 @@ import { profilePageActions } from '../../model/slice/ProfilePageSlice';
 import { ARTICLES_PAGE_CACHE_LIFETIME } from '@/shared/const/articlesApi';
 import { scrollByPath } from '@/widgets/ArticlesList';
 
-let timer: NodeJS.Timeout;
+let profilePageTimer: NodeJS.Timeout;
 
 const ProfilePage = () => {
     const username = useParams<{ username: string }>().username ?? '';
@@ -29,10 +29,10 @@ const ProfilePage = () => {
     });
 
     useEffect(() => {
-        if (timer) clearTimeout(timer);
+        if (profilePageTimer) clearTimeout(profilePageTimer);
 
         return () => {
-            timer = setTimeout(() => {
+            profilePageTimer = setTimeout(() => {
                 dispatch(profilePageActions.setPage(username, 1));
                 scrollByPath[`/users/${username}`] = 0;
             }, ARTICLES_PAGE_CACHE_LIFETIME * 1000);

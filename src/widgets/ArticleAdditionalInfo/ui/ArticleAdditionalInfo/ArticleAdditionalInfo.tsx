@@ -8,6 +8,7 @@ import { Text } from '@/shared/ui/Text';
 import { Button } from '@/shared/ui/Button';
 import { srcWithApi } from '@/shared/lib/url/srcWithApi/srcWithApi';
 import { SubscribeToUserButton } from '@/features/SubscribeToUserButton';
+import { AppLink } from '@/shared/ui/AppLink';
 
 interface ArticleAdditionalInfoProps {
    className?: string;
@@ -30,10 +31,12 @@ export const ArticleAdditionalInfo = memo((props: ArticleAdditionalInfoProps) =>
 
     return (
         <VStack gap="16" className={className}>
-            <HStack gap="8">
-                <Avatar src={srcWithApi(author.avatar)} size={32} />
-                <Text text={author.username} bold />
-            </HStack>
+            <AppLink to={`/users/${author.username}`}>
+                <HStack gap="8">
+                    <Avatar src={srcWithApi(author.avatar)} size={32} />
+                    <span>{author.username}</span>
+                </HStack>
+            </AppLink>
             <Text text={date} />
             <SubscribeToUserButton userId={author.id} />
             {canEdit && <Button onClick={onEdit}>{t('Редактировать')}</Button>}

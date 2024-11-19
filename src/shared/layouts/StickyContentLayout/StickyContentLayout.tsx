@@ -21,7 +21,10 @@ export const StickyContentLayout = memo((props: StickyContentLayoutProps) => {
             data-testid={props['data-testid'] ?? 'Page'}
         >
             {left && <div className={cls.left}>{left}</div>}
-            <div className={cls.content}>{content}</div>
+            <div className={cls.content}>
+                {content}
+                <div className={cls.footer} />
+            </div>
             {right && <div className={cls.right}>{right}</div>}
         </main>
     );

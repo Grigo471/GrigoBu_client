@@ -51,12 +51,10 @@ const ArticleDetailsPage = (props: ArticleDetailsPageProps) => {
 
         <StickyContentLayout
             content={(
-                <Page className={classNames(cls.ArticleDetailsPage, {}, [className])}>
-                    <VStack gap="16" max>
-                        <ArticleDetailsCard article={article} />
-                        <ArticleDetailsComments id={id} className={cls.comments} />
-                    </VStack>
-                </Page>
+                <VStack gap="16" max>
+                    <ArticleDetailsCard article={article} />
+                    <ArticleDetailsComments id={id} className={cls.comments} />
+                </VStack>
             )}
             right={<AdditionalInfoContainer />}
         />

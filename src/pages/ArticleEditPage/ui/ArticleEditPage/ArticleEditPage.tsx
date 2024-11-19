@@ -2,7 +2,6 @@ import { memo, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { useSelector } from 'react-redux';
-import { Page } from '@/widgets/Page';
 import { useAppDispatch } from '@/shared/lib/hooks/useAppDispatch';
 import { getUserAuthData } from '@/entities/User';
 import { ArticleDetails, fetchArticleById } from '@/entities/Article';
@@ -88,7 +87,7 @@ const ArticleEditPage = () => {
             {isLoading ? <ArticleEditPageSkeletons />
                 : (
                     <StickyContentLayout
-                        content={(<Page>{content}</Page>)}
+                        content={(content)}
                         left={(<AddArticleBlockDropdown />)}
                         right={(<ArticleEditToolbar />)}
                     />

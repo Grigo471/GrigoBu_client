@@ -51,7 +51,7 @@ export const Navbar = memo((props: NavbarProps) => {
                 <Icon clickable Svg={PlusIcon} />
             </AppLink>
             <NotificationsButton />
-            <AvatarDropdown />
+            <AvatarDropdown onCloseModal={onCloseModal} />
         </HStack>
     ) : (
         <>

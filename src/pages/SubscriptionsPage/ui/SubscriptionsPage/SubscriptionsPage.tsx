@@ -15,16 +15,16 @@ const reducers: ReducerList = {
     subscriptionsPage: subscriptionsPageReducer,
 };
 
-let timer: NodeJS.Timeout;
+let subscriptionsPageTimer: NodeJS.Timeout;
 
 const SubscriptionsPage = () => {
     const dispatch = useAppDispatch();
 
     useEffect(() => {
-        if (timer) clearTimeout(timer);
+        if (subscriptionsPageTimer) clearTimeout(subscriptionsPageTimer);
 
         return () => {
-            timer = setTimeout(() => {
+            subscriptionsPageTimer = setTimeout(() => {
                 dispatch(subscriptionsPageActions.setPage(1));
                 scrollByPath['/subs'] = 0;
             }, ARTICLES_PAGE_CACHE_LIFETIME * 1000);

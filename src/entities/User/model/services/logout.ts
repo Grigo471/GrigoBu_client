@@ -14,6 +14,7 @@ export const logout = createAsyncThunk<
         try {
             const response = await extra.api.post('auth/logout');
             localStorage.removeItem(LOCAL_STORAGE_TOKEN_KEY);
+            window.location.reload();
             return response.data;
         } catch (error) {
             return rejectWithValue('error');
