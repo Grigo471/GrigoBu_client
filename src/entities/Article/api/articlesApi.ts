@@ -9,10 +9,14 @@ import { ARTICLES_PAGE_CACHE_LIFETIME } from '@/shared/const/articlesApi';
 export const articlesApi = rtkApi.injectEndpoints({
     endpoints: (build) => ({
         getArticles: build.query<Article[], ArticlesPageParams>({
-            query: (params) => ({
-                url: '/articles',
-                params,
-            }),
+            query: (params) => {
+                const { myRate } = params;
+                const endpoint = myRate ? 'articles/myRate' : 'articles';
+                return {
+                    url: endpoint,
+                    params,
+                };
+            },
             serializeQueryArgs: ({ endpointName, queryArgs }) => {
                 const {
                     order, search, sort, tags, myRate,

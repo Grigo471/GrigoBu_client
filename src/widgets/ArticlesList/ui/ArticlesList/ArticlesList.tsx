@@ -115,6 +115,7 @@ export const ArticlesList = memo((props: ArticlesListProps) => {
                 />
             )}
             <Virtuoso
+                onScroll={() => console.log('scroll')}
                 data={articles}
                 ref={setVirtuosoRef}
                 useWindowScroll

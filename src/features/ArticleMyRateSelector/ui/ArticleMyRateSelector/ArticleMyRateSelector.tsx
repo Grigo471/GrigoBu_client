@@ -3,6 +3,7 @@ import { useTranslation } from 'react-i18next';
 import { Checkbox, CheckboxItem } from '@/shared/ui/Radio';
 import { Rate } from '@/entities/Article';
 import { Text } from '@/shared/ui/Text';
+import { VStack } from '@/shared/ui/Stack';
 
 interface ArticleMyRateSelectorProps {
    rate?: Rate;
@@ -26,8 +27,8 @@ export const ArticleMyRateSelector = memo((props: ArticleMyRateSelectorProps) =>
     ];
 
     return (
-        <>
-            <Text text={t('Моя оценка')} />
+        <VStack gap="8">
+            <Text text={t('Моя оценка')} bold />
             <Checkbox<Rate>
                 items={items}
                 name="myRateCheckbox"
@@ -35,6 +36,6 @@ export const ArticleMyRateSelector = memo((props: ArticleMyRateSelectorProps) =>
                 onChange={onChange}
                 direction="column"
             />
-        </>
+        </VStack>
     );
 });

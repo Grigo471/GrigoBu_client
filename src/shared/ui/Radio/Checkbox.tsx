@@ -36,7 +36,7 @@ export const CheckboxComponent = <T extends string | number>(props: CheckboxProp
             className={classNames(cls.Radio, {}, [className])}
         >
             {items?.map((item) => (
-                <HStack gap="4">
+                <HStack key={item.label} gap="4">
                     <input
                         type="checkbox"
                         id={`${name} ${item.value}`}

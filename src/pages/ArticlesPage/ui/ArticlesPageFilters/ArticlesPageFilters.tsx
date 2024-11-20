@@ -12,7 +12,7 @@ import {
     getArticlesPageTagsVisible,
 } from '../../model/selectors/articlesPageSelectors';
 import { useAppDispatch } from '@/shared/lib/hooks/useAppDispatch';
-import { ArticleSortField, Rate, getUserAuthData } from '@/entities/Article';
+import { ArticleSortField, Rate } from '@/entities/Article';
 import { articlesPageActions } from '../../model/slice/ArticlesPageSlice';
 import { SortOrder } from '@/shared/types';
 import { useDebounce } from '@/shared/lib/hooks/useDebounce';
@@ -23,6 +23,7 @@ import { ArticleTagsSelector } from '@/features/ArticleTagsSelector';
 import { Icon } from '@/shared/ui/Icon';
 import CrossIcon from '@/shared/assets/icons/cross-delete.svg';
 import { ArticleMyRateSelector } from '@/features/ArticleMyRateSelector';
+import { getUserAuthData } from '@/entities/User';
 
 export const ArticlesPageFilters = memo(() => {
     const dispatch = useAppDispatch();
@@ -73,8 +74,9 @@ export const ArticlesPageFilters = memo(() => {
     }, [dispatch]);
 
     const toggleTagsVisible = useCallback(() => {
+        if (tagsVisible) dispatch(articlesPageActions.setTags([]));
         dispatch(articlesPageActions.toggleTagsVisible());
-    }, [dispatch]);
+    }, [dispatch, tagsVisible]);
 
     const onChangeRate = useCallback((rate: Rate) => {
         instantScrollTop(0);
@@ -88,7 +90,7 @@ export const ArticlesPageFilters = memo(() => {
 
     return (
         <Card padding="24">
-            <VStack gap="16" max>
+            <VStack gap="24" max>
                 <ArticlesFilters
                     order={order}
                     sort={sort}
@@ -103,7 +105,7 @@ export const ArticlesPageFilters = memo(() => {
                         onChange={onChangeRate}
                     />
                 )}
-                <VStack>
+                <VStack gap="8">
                     <Button
                         variant="clear"
                         onClick={toggleTagsVisible}

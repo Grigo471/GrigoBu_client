@@ -76,7 +76,7 @@ export const SubscriptionsPageFilters = memo(() => {
                 <VStack gap="16">
                     <Text title={t('Мои подписки')} />
                     {subscriptions?.map((subscription) => (
-                        <AppLink to={`/users/${subscription.username}`}>
+                        <AppLink key={subscription.username} to={`/users/${subscription.username}`}>
                             <HStack gap="8">
                                 <Avatar src={srcWithApi(subscription.avatar)} size={32} />
                                 <Text text={subscription.username} bold />

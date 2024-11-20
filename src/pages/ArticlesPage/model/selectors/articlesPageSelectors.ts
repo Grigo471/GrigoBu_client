@@ -10,7 +10,7 @@ export const getArticlesPageSort = (
 
 export const getArticlesPageSearch = (state: StateSchema) => state.articlesPage?.search ?? '';
 
-export const getArticlesPageTags = (state: StateSchema) => state.articlesPage?.tags ?? [];
+export const getArticlesPageTags = (state: StateSchema) => state.articlesPage?.tags;
 
 export const getArticlesPageMyRateFilter = (
     state: StateSchema,

@@ -24,7 +24,7 @@ export const ArticlesPageList = memo(() => {
     const myRate = useSelector(getArticlesPageMyRateFilter);
     const limit = ARTICLES_PAGE_LIMIT;
 
-    const inlineTags = tags.join(',').replaceAll(' ', '%20');
+    const inlineTags = tags?.join(',').replaceAll(' ', '%20');
 
     const {
         data, isLoading, error, refetch, isFetching,

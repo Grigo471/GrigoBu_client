@@ -3,7 +3,6 @@ import {
 } from 'react';
 import { useSelector } from 'react-redux';
 import { useTranslation } from 'react-i18next';
-import { classNames } from '@/shared/lib/classNames/classNames';
 import cls from './ArticleTagsSelector.module.scss';
 import { HStack, VStack } from '@/shared/ui/Stack';
 import { Card } from '@/shared/ui/Card';
@@ -19,7 +18,6 @@ import { useInitialEffect } from '@/shared/lib/hooks/useInitialEffect';
 import { fetchArticleTags } from '../../model/services/fetchArticleTags';
 import { Icon } from '@/shared/ui/Icon';
 import CrossIcon from '@/shared/assets/icons/cross-delete.svg';
-import { Text } from '@/shared/ui/Text';
 import { ArticleTagCreate } from './ArticleTagCreate';
 
 interface ArticleTagsSelectorProps {
@@ -56,8 +54,7 @@ export const ArticleTagsSelector = memo((props: ArticleTagsSelectorProps) => {
     };
 
     return (
-        <VStack gap="12" className={classNames(cls.ArticleTagsSelector, {}, [className])}>
-            <Text text={t('Выберите теги')} size="m" bold />
+        <VStack gap="12" className={className}>
             {withCreate && (
                 <ArticleTagCreate
                     onCreate={(createTag: string) => {

@@ -25,7 +25,6 @@ export const ArticleEditToolbar = memo(() => {
 
     const { id } = useParams<{ id: string }>();
     const { images } = useArticleFiles();
-    console.log(images);
 
     const isEdit = Boolean(id);
     const title = isEdit ? t('Редактирование статьи') : t('Создание новой статьи');
@@ -71,7 +70,12 @@ export const ArticleEditToolbar = memo(() => {
                         key={err}
                     />
                 ))}
-                <ArticleTagsSelector chosenTags={tags} setChosenTags={setTags} withCreate />
+                <ArticleTagsSelector
+                    className={cls.tags}
+                    chosenTags={tags}
+                    setChosenTags={setTags}
+                    withCreate
+                />
             </VStack>
         </Card>
     );
