@@ -1,1 +1,1 @@
-export { Radio, type RadioItem } from './Radio';
+export { Checkbox, type CheckboxItem } from './Checkbox';

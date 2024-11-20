@@ -1,4 +1,4 @@
-import { ArticleSortField } from '@/entities/Article';
+import { ArticleSortField, Rate } from '@/entities/Article';
 import { SortOrder } from '@/shared/types';
 
 export interface ArticlesPageSchema {
@@ -9,5 +9,7 @@ export interface ArticlesPageSchema {
     sort: ArticleSortField;
     search: string;
     tags: string[];
+    myRateFilter?: Rate;
+    // ui
     tagsVisible: boolean;
 }

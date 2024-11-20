@@ -15,10 +15,10 @@ export const articlesApi = rtkApi.injectEndpoints({
             }),
             serializeQueryArgs: ({ endpointName, queryArgs }) => {
                 const {
-                    order, search, sort, tags,
+                    order, search, sort, tags, myRate,
                 } = queryArgs;
                 return {
-                    order, search, sort, endpointName, tags,
+                    order, search, sort, endpointName, tags, myRate,
                 };
             },
             merge: (currentCache, newItems, { arg }) => {

@@ -4,6 +4,7 @@ import {
 } from '@reduxjs/toolkit';
 import {
     ArticleSortField,
+    Rate,
 } from '@/entities/Article';
 import { SortOrder } from '@/shared/types';
 import { ArticlesPageSchema } from '../types/ArticlesPageSchema';
@@ -38,6 +39,9 @@ const articlesPageSlice = createSlice({
         },
         toggleTagsVisible: (state) => {
             state.tagsVisible = !state.tagsVisible;
+        },
+        setMyRateFilter: (state, action: PayloadAction<Rate | undefined>) => {
+            state.myRateFilter = action.payload;
         },
     },
 });

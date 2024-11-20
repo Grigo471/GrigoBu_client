@@ -4,6 +4,7 @@ import { ArticlesList } from '@/widgets/ArticlesList';
 import { useAppDispatch } from '@/shared/lib/hooks/useAppDispatch';
 import { articlesPageActions } from '../../model/slice/ArticlesPageSlice';
 import {
+    getArticlesPageMyRateFilter,
     getArticlesPageNum, getArticlesPageOrder,
     getArticlesPageSearch, getArticlesPageSort,
     getArticlesPageTags,
@@ -20,6 +21,7 @@ export const ArticlesPageList = memo(() => {
     const search = useSelector(getArticlesPageSearch);
     const page = useSelector(getArticlesPageNum);
     const tags = useSelector(getArticlesPageTags);
+    const myRate = useSelector(getArticlesPageMyRateFilter);
     const limit = ARTICLES_PAGE_LIMIT;
 
     const inlineTags = tags.join(',').replaceAll(' ', '%20');
@@ -27,7 +29,7 @@ export const ArticlesPageList = memo(() => {
     const {
         data, isLoading, error, refetch, isFetching,
     } = useGetArticles({
-        order, sort, search, page, limit, tags: inlineTags,
+        order, sort, search, page, limit, tags: inlineTags, myRate,
     });
 
     const onLoadNextPart = () => {

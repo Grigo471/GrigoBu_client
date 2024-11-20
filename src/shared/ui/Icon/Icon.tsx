@@ -36,7 +36,11 @@ export const Icon = memo((props: IconProps) => {
             onClick={undefined}
             width={width}
             height={height}
-            className={classNames(cls.Icon, {}, [clickable ? '' : className])}
+            className={classNames(
+                cls.Icon,
+                { },
+                [clickable ? '' : className],
+            )}
         />
     );
 

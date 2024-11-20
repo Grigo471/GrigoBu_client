@@ -12,6 +12,7 @@ export interface SubscriptionsPageParams {
 
 export interface ArticlesPageParams extends SubscriptionsPageParams {
     tags?: string;
+    myRate?: Rate;
 }
 
 export interface ProfilePageParams extends SubscriptionsPageParams {

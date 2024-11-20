@@ -4,6 +4,7 @@ import { useTranslation } from 'react-i18next';
 import { Card } from '@/shared/ui/Card';
 import { ArticlesFilters } from '@/widgets/ArticlesList';
 import {
+    getArticlesPageMyRateFilter,
     getArticlesPageOrder,
     getArticlesPageSearch,
     getArticlesPageSort,
@@ -11,42 +12,29 @@ import {
     getArticlesPageTagsVisible,
 } from '../../model/selectors/articlesPageSelectors';
 import { useAppDispatch } from '@/shared/lib/hooks/useAppDispatch';
-import { ArticleSortField } from '@/entities/Article';
+import { ArticleSortField, Rate, getUserAuthData } from '@/entities/Article';
 import { articlesPageActions } from '../../model/slice/ArticlesPageSlice';
 import { SortOrder } from '@/shared/types';
 import { useDebounce } from '@/shared/lib/hooks/useDebounce';
 import { instantScrollTop } from '@/shared/lib/helpers/instantScrollTop';
 import { HStack, VStack } from '@/shared/ui/Stack';
-import { Text } from '@/shared/ui/Text';
 import { Button } from '@/shared/ui/Button';
 import { ArticleTagsSelector } from '@/features/ArticleTagsSelector';
 import { Icon } from '@/shared/ui/Icon';
 import CrossIcon from '@/shared/assets/icons/cross-delete.svg';
-import { Radio, RadioItem } from '@/shared/ui/Radio';
-
-type RateFilter = 'liked' | 'disliked';
+import { ArticleMyRateSelector } from '@/features/ArticleMyRateSelector';
 
 export const ArticlesPageFilters = memo(() => {
     const dispatch = useAppDispatch();
     const { t } = useTranslation();
-    const [rateFilter, setRateFilter] = useState<RateFilter>('liked');
-
-    const radioItems: RadioItem<RateFilter>[] = [
-        {
-            value: 'liked',
-            label: 'liked',
-        },
-        {
-            value: 'disliked',
-            label: 'disliked',
-        },
-    ];
+    const authData = useSelector(getUserAuthData);
 
     const order = useSelector(getArticlesPageOrder);
     const sort = useSelector(getArticlesPageSort);
     const search = useSelector(getArticlesPageSearch);
     const tags = useSelector(getArticlesPageTags);
     const tagsVisible = useSelector(getArticlesPageTagsVisible);
+    const myRate = useSelector(getArticlesPageMyRateFilter);
 
     const [searchText, setSearchText] = useState(search);
 
@@ -88,6 +76,16 @@ export const ArticlesPageFilters = memo(() => {
         dispatch(articlesPageActions.toggleTagsVisible());
     }, [dispatch]);
 
+    const onChangeRate = useCallback((rate: Rate) => {
+        instantScrollTop(0);
+        if (myRate !== rate) {
+            dispatch(articlesPageActions.setMyRateFilter(rate));
+        } else {
+            dispatch(articlesPageActions.setMyRateFilter(undefined));
+        }
+        dispatch(articlesPageActions.setPage(1));
+    }, [dispatch, myRate]);
+
     return (
         <Card padding="24">
             <VStack gap="16" max>
@@ -99,19 +97,12 @@ export const ArticlesPageFilters = memo(() => {
                     onChangeSearch={onChangeSearch}
                     onChangeSort={onChangeSort}
                 />
-                <Radio<RateFilter>
-                    items={radioItems}
-                    name=""
-                    value={rateFilter}
-                    onChange={(value) => setRateFilter(value)}
-                />
-                <VStack>
-                    <Text bold text={t('Моя оценка')} />
-                    <HStack gap="16">
-                        <Text text={t('Плюс')} />
-                        <Text text={t('Минус')} />
-                    </HStack>
-                </VStack>
+                {authData && (
+                    <ArticleMyRateSelector
+                        rate={myRate}
+                        onChange={onChangeRate}
+                    />
+                )}
                 <VStack>
                     <Button
                         variant="clear"

@@ -1,16 +1,16 @@
 import { memo, useCallback } from 'react';
 import { Flex, FlexDirection } from '../Stack/Flex/Flex';
 import { classNames } from '@/shared/lib/classNames/classNames';
-import cls from './Radio.module.scss';
+import cls from './Checkbox.module.scss';
 import { HStack } from '../Stack';
 
-export interface RadioItem<T extends string> {
+export interface CheckboxItem<T extends string | number> {
    value: T;
    label: string;
 }
 
-interface RadioProps<T extends string> {
-   items: RadioItem<T>[];
+interface CheckboxProps<T extends string | number> {
+   items: CheckboxItem<T>[];
    className?: string;
    name: string;
    value?: T;
@@ -19,7 +19,7 @@ interface RadioProps<T extends string> {
    direction?: FlexDirection;
 }
 
-export const RadioComponent = <T extends string>(props: RadioProps<T>) => {
+export const CheckboxComponent = <T extends string | number>(props: CheckboxProps<T>) => {
     const {
         className, items, name, value, onChange, disabled, direction = 'column',
     } = props;
@@ -57,4 +57,4 @@ export const RadioComponent = <T extends string>(props: RadioProps<T>) => {
     );
 };
 
-export const Radio = memo(RadioComponent) as typeof RadioComponent;
+export const Checkbox = memo(CheckboxComponent) as typeof CheckboxComponent;

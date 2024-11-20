@@ -72,6 +72,7 @@ module.exports = {
                     'wrap',
                     'whiteSpace',
                     'view',
+                    'name',
                 ],
             },
         ],

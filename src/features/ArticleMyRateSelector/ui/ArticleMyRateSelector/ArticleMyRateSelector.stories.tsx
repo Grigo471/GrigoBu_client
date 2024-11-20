@@ -1,19 +1,19 @@
 import type { Meta, StoryObj } from '@storybook/react';
 
 import { ThemeDecorator } from '@/shared/config/storybook/ThemeDecorator/ThemeDecorator';
-import { Checkbox } from './Checkbox';
+import { ArticleMyRateSelector } from './ArticleMyRateSelector';
 import { Theme } from '@/shared/const/theme';
 
-const meta: Meta<typeof Checkbox> = {
-    title: 'shared/Checkbox',
-    component: Checkbox,
+const meta: Meta<typeof ArticleMyRateSelector> = {
+    title: 'shared/ArticleMyRateSelector',
+    component: ArticleMyRateSelector,
     tags: ['autodocs'],
     argTypes: {
     },
 };
 
 export default meta;
-type Story = StoryObj<typeof Checkbox>;
+type Story = StoryObj<typeof ArticleMyRateSelector>;
 
 export const Light: Story = {
     args: {
