@@ -12,6 +12,8 @@ import { articlesApi, useGetSubscriptions } from '@/entities/Article';
 import { ARTICLES_PAGE_LIMIT } from '@/shared/const/articlesApi';
 import { subscriptionsPageActions } from '../../model/slice/SubscriptionsPageSlice';
 import { instantScrollTop } from '@/shared/lib/helpers/instantScrollTop';
+import { useInitialEffect } from '@/shared/lib/hooks/useInitialEffect';
+import { uiFlags } from '@/shared/lib/ui/lib/UIFlags';
 
 export const SubscriptionsPageList = memo(() => {
     const dispatch = useAppDispatch();
@@ -32,10 +34,10 @@ export const SubscriptionsPageList = memo(() => {
         dispatch(subscriptionsPageActions.setPage(page + 1));
     };
 
-    const refreshHandler = useCallback(() => {
+    const refreshHandler = useCallback(async () => {
         instantScrollTop(0);
-        dispatch(subscriptionsPageActions.setPage(1));
-        setTimeout(() => refetch(), 0);
+        await dispatch(subscriptionsPageActions.setPage(1));
+        refetch();
     }, [dispatch, refetch]);
 
     const setUncollapsed = (articleId: string) => {
@@ -50,6 +52,11 @@ export const SubscriptionsPageList = memo(() => {
             }
         }));
     };
+
+    useInitialEffect(() => {
+        if (uiFlags.shouldSubscriptionsPageRefresh) refreshHandler();
+        uiFlags.shouldSubscriptionsPageRefresh = false;
+    });
 
     return (
         <ArticlesList

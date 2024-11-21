@@ -56,6 +56,7 @@ export const ProfileCard = memo((props: ProfileCardProps) => {
                 <VStack gap="8" max>
                     <Text title={userData?.username} size="l" />
                     <Text bold text={`${t('Рейтинг')}: ${userData.rating}`} />
+                    <Text text={`${userData.subscribers} ${t('подписчиков')}`} />
                     <Text text={`${t('Грибёт с')} ${date}`} />
                     {userData?.status && <Text text={userData.status} />}
                 </VStack>

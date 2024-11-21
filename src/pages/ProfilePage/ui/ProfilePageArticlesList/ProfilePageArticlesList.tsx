@@ -35,10 +35,10 @@ export const ProfilePageArticlesList = memo(() => {
         dispatch(profilePageActions.setPage(username, page + 1));
     };
 
-    const refreshHandler = useCallback(() => {
+    const refreshHandler = useCallback(async () => {
         instantScrollTop(0);
-        dispatch(profilePageActions.setPage(username, 1));
-        setTimeout(() => refetch(), 0);
+        await dispatch(profilePageActions.setPage(username, 1));
+        refetch();
     }, [dispatch, refetch, username]);
 
     const setUncollapsed = (articleId: string) => {

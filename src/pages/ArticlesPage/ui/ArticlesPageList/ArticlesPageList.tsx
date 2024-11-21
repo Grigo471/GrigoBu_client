@@ -24,7 +24,7 @@ export const ArticlesPageList = memo(() => {
     const myRate = useSelector(getArticlesPageMyRateFilter);
     const limit = ARTICLES_PAGE_LIMIT;
 
-    const inlineTags = tags?.join(',').replaceAll(' ', '%20');
+    const inlineTags = tags?.join(',').replaceAll(' ', '%20') || '';
 
     const {
         data, isLoading, error, refetch, isFetching,
@@ -36,10 +36,10 @@ export const ArticlesPageList = memo(() => {
         dispatch(articlesPageActions.setPage(page + 1));
     };
 
-    const refreshHandler = useCallback(() => {
+    const refreshHandler = useCallback(async () => {
         instantScrollTop(0);
-        dispatch(articlesPageActions.setPage(1));
-        setTimeout(() => refetch(), 0);
+        await dispatch(articlesPageActions.setPage(1));
+        refetch();
     }, [dispatch, refetch]);
 
     const setUncollapsed = (articleId: string) => {

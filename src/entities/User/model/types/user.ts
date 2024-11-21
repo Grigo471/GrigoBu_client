@@ -10,6 +10,8 @@ export interface User {
     createdAt?: string;
     role?: UserRole;
     jsonSettings?: JsonSettings;
+    subscribers?: number;
+    subscriptions?: number;
     amISubscribed?: boolean;
 }
 

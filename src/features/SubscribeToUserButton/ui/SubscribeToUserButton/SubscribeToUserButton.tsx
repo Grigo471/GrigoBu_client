@@ -6,6 +6,7 @@ import { useAppDispatch } from '@/shared/lib/hooks/useAppDispatch';
 import { subscribeToUser } from '../../model/services/subscribeToUser';
 import { unsubscribeToUser } from '../../model/services/unsubscribeToUser';
 import { classNames } from '@/shared/lib/classNames/classNames';
+import { uiFlags } from '@/shared/lib/ui/lib/UIFlags';
 
 interface SubscribeToUserButtonProps {
    className?: string;
@@ -23,12 +24,14 @@ export const SubscribeToUserButton = memo((props: SubscribeToUserButtonProps) =>
         setIsLoading(true);
         await dispatch(subscribeToUser(userId));
         setIsLoading(false);
+        uiFlags.shouldSubscriptionsPageRefresh = true;
     }, [dispatch, userId]);
 
     const onUnSubscribe = useCallback(async () => {
         setIsLoading(true);
         await dispatch(unsubscribeToUser(userId));
         setIsLoading(false);
+        uiFlags.shouldSubscriptionsPageRefresh = true;
     }, [dispatch, userId]);
 
     const subscribeButton = amISubscribed ? (
