@@ -9,6 +9,7 @@ import { UsersPageSchema } from '../types/UsersPageSchema';
 import { fetchUsers } from '../services/fetchUsers/fetchUsers';
 import { SortOrder } from '@/shared/types';
 import { subscribeToUser, unsubscribeToUser } from '@/features/SubscribeToUserButton';
+import { UsersSubsRelation } from '@/features/UsersSubsCheckbox';
 
 const usersAdapter = createEntityAdapter<User>({
     selectId: (profile) => profile.id,
@@ -26,7 +27,6 @@ const usersPagesSlice = createSlice({
         search: '',
         order: 'desc',
         sort: 'rating',
-        isSubs: false,
         ids: [],
         entities: {},
     }),
@@ -40,8 +40,8 @@ const usersPagesSlice = createSlice({
         setSearch: (state, action: PayloadAction<string>) => {
             state.search = action.payload;
         },
-        setIsSubs: (state, action: PayloadAction<boolean>) => {
-            state.isSubs = action.payload;
+        setSubsFilter: (state, action: PayloadAction<UsersSubsRelation | undefined>) => {
+            state.subsFilter = action.payload;
         },
     },
     extraReducers: (builder) => {

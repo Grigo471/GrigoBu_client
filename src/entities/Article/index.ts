@@ -1,7 +1,5 @@
 export { ArticleDetails, ArticleTagsRow } from './ui/ArticleDetails/ArticleDetails';
 
-export { ArticleRatingButton } from './ui/ArticleRatingButton/ArticleRatingButton';
-
 export { renderArticleBlock } from './ui/ArticleDetails/rednerArticleBlock';
 
 export type {
@@ -19,6 +17,7 @@ export { fetchArticleById } from './model/services/fetchArticleById/fetchArticle
 export {
     articlesApi,
     useGetArticles, useGetSubscriptions, useGetUserArticles,
+    useRateArticle,
 } from './api/articlesApi';
 
 export { type RateArticleResult } from './api/types';

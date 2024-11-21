@@ -3,8 +3,7 @@ import {
 } from 'react';
 import { useTranslation } from 'react-i18next';
 import {
-    Article, ArticleDetails, ArticleRatingButton,
-    ArticleTagsRow,
+    Article, ArticleDetails, ArticleTagsRow,
 } from '@/entities/Article';
 import cls from './ArticleListItem.module.scss';
 import { HStack, VStack } from '@/shared/ui/Stack';
@@ -16,6 +15,7 @@ import CommentIcon from '@/shared/assets/icons/comment.svg';
 import { classNames } from '@/shared/lib/classNames/classNames';
 import { Button } from '@/shared/ui/Button';
 import { useInitialEffect } from '@/shared/lib/hooks/useInitialEffect';
+import { ArticleRatingButton } from '@/features/ArticleRatingButton';
 
 interface ArticleListItemProps {
     article: Article;

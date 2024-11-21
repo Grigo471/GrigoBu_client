@@ -38,7 +38,7 @@ export const ArticleAdditionalInfo = memo((props: ArticleAdditionalInfoProps) =>
                 </HStack>
             </AppLink>
             <Text text={date} />
-            <SubscribeToUserButton userId={author.id} />
+            <SubscribeToUserButton userId={author.id} amISubscribed={author.amISubscribed} />
             {canEdit && <Button onClick={onEdit}>{t('Редактировать')}</Button>}
         </VStack>
     );

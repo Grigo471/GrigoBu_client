@@ -4,6 +4,7 @@ import {
     Article, articlesApi, fetchArticleById,
     RateArticleResult,
 } from '@/entities/Article';
+import { subscribeToUser, unsubscribeToUser } from '@/features/SubscribeToUserButton';
 
 const initialState: ArticleDetailsSchema = {
     isLoading: true,
@@ -30,6 +31,18 @@ export const articleDetailsSlice = createSlice({
                 state.isLoading = false;
                 state.error = action.payload;
             })
+            .addCase(
+                subscribeToUser.fulfilled,
+                (state) => {
+                    if (state.data?.user) state.data.user.amISubscribed = true;
+                },
+            )
+            .addCase(
+                unsubscribeToUser.fulfilled,
+                (state) => {
+                    if (state.data?.user) state.data.user.amISubscribed = false;
+                },
+            )
             .addMatcher(
                 articlesApi.endpoints.rateArticle.matchFulfilled,
                 (state, action: PayloadAction<RateArticleResult>) => {

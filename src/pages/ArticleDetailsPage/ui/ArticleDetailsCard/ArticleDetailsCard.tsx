@@ -2,12 +2,12 @@ import {
     memo,
 } from 'react';
 import {
-    Article, ArticleDetails, ArticleRatingButton,
-    ArticleTagsRow,
+    Article, ArticleDetails, ArticleTagsRow,
 } from '@/entities/Article';
 import cls from './ArticleDetailsCard.module.scss';
 import { HStack, VStack } from '@/shared/ui/Stack';
 import { Card } from '@/shared/ui/Card';
+import { ArticleRatingButton } from '@/features/ArticleRatingButton';
 
 interface ArticleDetailsCardProps {
     article?: Article;

@@ -20,6 +20,6 @@ export const getUsersPageSearch = (
     state: StateSchema,
 ) => state.usersPage?.search ?? '';
 
-export const getUsersPageIsSubs = (
+export const getUsersPageSubsFilter = (
     state: StateSchema,
-) => state.usersPage?.isSubs ?? false;
+) => state.usersPage?.subsFilter;

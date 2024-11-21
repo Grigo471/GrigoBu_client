@@ -5,8 +5,7 @@ import { VStack } from '@/shared/ui/Stack';
 import ArrowIcon from '@/shared/assets/icons/arrow-bottom.svg';
 import { Icon } from '@/shared/ui/Icon';
 import { Button } from '@/shared/ui/Button';
-import { Article } from '../../model/types/article';
-import { useRateArticle } from '../../api/articlesApi';
+import { Article, useRateArticle } from '@/entities/Article';
 
 interface ArticleRatingButtonProps {
    className?: string;

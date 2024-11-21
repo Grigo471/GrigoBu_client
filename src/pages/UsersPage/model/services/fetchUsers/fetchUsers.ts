@@ -2,7 +2,7 @@ import { createAsyncThunk } from '@reduxjs/toolkit';
 import { ThunkConfig } from '@/app/providers/StoreProvider';
 import { User } from '@/entities/User';
 import {
-    getUsersPageIsSubs,
+    getUsersPageSubsFilter,
     getUsersPageOrder, getUsersPageSearch, getUsersPageSort,
 } from '../../selectors/usersSelector';
 
@@ -14,8 +14,9 @@ export const fetchUsers = createAsyncThunk<User[], void, ThunkConfig<string>>(
         const order = getUsersPageOrder(getState());
         const sort = getUsersPageSort(getState());
         const search = getUsersPageSearch(getState());
-        const isSubs = getUsersPageIsSubs(getState());
-        const endpoint = `/users${isSubs ? '/subscriptions' : ''}`;
+        const subsFilter = getUsersPageSubsFilter(getState());
+
+        const endpoint = subsFilter ? `/users/${subsFilter}` : '/users';
 
         try {
             const response = await extra.api.get<User[]>(endpoint, {
