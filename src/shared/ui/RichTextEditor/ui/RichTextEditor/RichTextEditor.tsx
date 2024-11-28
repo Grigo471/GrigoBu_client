@@ -24,7 +24,7 @@ export const RichTextEditor = (props: RichTextEditorProps) => {
     const contentRef = useRef<HTMLDivElement>();
     const [selection, setSelection] = useState<Selection>();
 
-    function onClickOutside(event: MouseEvent) {
+    const onClickOutside = useCallback((event: MouseEvent) => {
         if (event.target === contentRef.current) {
             return;
         }
@@ -32,20 +32,20 @@ export const RichTextEditor = (props: RichTextEditorProps) => {
             return;
         }
         setSelection(undefined);
-    }
+    }, []);
 
-    function getSelectedNode(): Selection | undefined {
+    const getSelectedNode = useCallback((): Selection | undefined => {
         const selection = window.getSelection();
         if (selection && selection.rangeCount > 0) {
             return selection || undefined;
         }
 
         return undefined;
-    }
+    }, []);
 
     const onTextSelect = useCallback(() => {
         setSelection(getSelectedNode());
-    }, []);
+    }, [getSelectedNode]);
 
     function setContentEditableRef(el: HTMLDivElement) {
         contentRef.current = el;

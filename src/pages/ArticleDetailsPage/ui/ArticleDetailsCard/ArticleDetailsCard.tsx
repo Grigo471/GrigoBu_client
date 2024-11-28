@@ -19,7 +19,7 @@ export const ArticleDetailsCard = memo((props: ArticleDetailsCardProps) => {
     if (!article) return null;
 
     return (
-        <HStack gap="16" align="start" className={cls.ArticleDetailsCard}>
+        <HStack gap="16" align="start">
             <ArticleRatingButton className={cls.rating} article={article} />
             <Card border="minimum" padding="24" className={cls.card}>
                 <VStack gap="8">

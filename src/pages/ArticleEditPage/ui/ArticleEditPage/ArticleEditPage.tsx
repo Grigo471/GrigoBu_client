@@ -1,10 +1,10 @@
-import { memo, useEffect } from 'react';
+import { memo } from 'react';
 import { useParams } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { useSelector } from 'react-redux';
 import { useAppDispatch } from '@/shared/lib/hooks/useAppDispatch';
 import { getUserAuthData } from '@/entities/User';
-import { ArticleDetails, fetchArticleById } from '@/entities/Article';
+import { fetchArticleById } from '@/entities/Article';
 import {
     articleEditPageActions, articleEditPageReducers,
 } from '../../model/slice/ArticleEditPageSlice';
@@ -22,8 +22,9 @@ import {
     getArticleEditPageIsLoading,
     getArticleEditPageIsPreview,
 } from '../../model/selectors/articleEditPageSelectors';
-import { AddArticleBlockDropdown } from '../AddArticleBlockDropdown/AddArticleBlockDropdown';
 import ArticleFilesProvider from '../ArticleFilesProvider/ArticleFilesProvider';
+import { useInitialEffect } from '@/shared/lib/hooks/useInitialEffect';
+import { ArticlePreviewCard } from '../ArticlePreviewCard/ArticlePreviewCard';
 
 const reducers: ReducerList = {
     articleEditPage: articleEditPageReducers,
@@ -42,7 +43,7 @@ const ArticleEditPage = () => {
 
     useDynamicModuleLoad({ reducers, removeAfterUnmount: false });
 
-    useEffect(() => {
+    useInitialEffect(() => {
         if (isEdit) {
             dispatch(fetchArticleById(id));
         } else {
@@ -51,7 +52,7 @@ const ArticleEditPage = () => {
                 dispatch(articleEditPageActions.setUser(authData));
             }
         }
-    }, [isEdit, dispatch, authData, id]);
+    });
 
     const canEdit = !isEdit
     || formData?.user.username === authData?.username
@@ -77,7 +78,7 @@ const ArticleEditPage = () => {
     }
 
     const content = isPreview ? (
-        <ArticleDetails article={formData} />
+        <ArticlePreviewCard article={formData} />
     ) : (
         <ArticleEditForm />
     );
@@ -88,7 +89,6 @@ const ArticleEditPage = () => {
                 : (
                     <StickyContentLayout
                         content={(content)}
-                        left={(<AddArticleBlockDropdown />)}
                         right={(<ArticleEditToolbar />)}
                     />
                 ) }

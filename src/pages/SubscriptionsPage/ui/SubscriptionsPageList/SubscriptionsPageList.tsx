@@ -1,6 +1,6 @@
 import { memo, useCallback } from 'react';
 import { useSelector } from 'react-redux';
-import { ArticlesList } from '@/widgets/ArticlesList';
+import { ArticlesList, scrollByPath } from '@/widgets/ArticlesList';
 import { useAppDispatch } from '@/shared/lib/hooks/useAppDispatch';
 import {
     getSubscriptionsPageNum,
@@ -14,6 +14,7 @@ import { subscriptionsPageActions } from '../../model/slice/SubscriptionsPageSli
 import { instantScrollTop } from '@/shared/lib/helpers/instantScrollTop';
 import { useInitialEffect } from '@/shared/lib/hooks/useInitialEffect';
 import { uiFlags } from '@/shared/lib/ui/lib/UIFlags';
+import { rtkApi } from '@/shared/api/rtkApi';
 
 export const SubscriptionsPageList = memo(() => {
     const dispatch = useAppDispatch();
@@ -54,7 +55,13 @@ export const SubscriptionsPageList = memo(() => {
     };
 
     useInitialEffect(() => {
-        if (uiFlags.shouldSubscriptionsPageRefresh) refreshHandler();
+        if (uiFlags.shouldSubscriptionsPageRefresh) {
+            scrollByPath['/subs'] = 0;
+            setTimeout(() => {
+                dispatch(subscriptionsPageActions.setPage(1));
+                dispatch(rtkApi.util.invalidateTags(['Subscriptions']));
+            }, 0);
+        }
         uiFlags.shouldSubscriptionsPageRefresh = false;
     });
 

@@ -16,20 +16,20 @@ import cls from './ArticlesList.module.scss';
 import { useInitialEffect } from '@/shared/lib/hooks/useInitialEffect';
 import { Icon } from '@/shared/ui/Icon';
 import RefreshIcon from '@/shared/assets/icons/refresh.svg';
+import { ARTICLES_PAGE_LIMIT } from '@/shared/const/articlesApi';
 
 interface ArticlesListProps {
    articles?: Article[];
    isLoading?: boolean;
-   page?: number;
+   page: number;
    error?: string;
-   onLoadNextPart?: () => void;
+   onLoadNextPart: () => void;
    setUncollapsed: (articleId: string) => void;
    refreshHandler: () => void;
 }
 
-type ScrollSchema = Record<string, number>;
-
-export const scrollByPath: ScrollSchema = {};
+export const scrollByPath: Record<string, number> = {};
+export const rangeByPath: Record<string, number> = {};
 
 export const ArticlesList = memo((props: ArticlesListProps) => {
     const {
@@ -67,19 +67,47 @@ export const ArticlesList = memo((props: ArticlesListProps) => {
         </>
     ));
 
+    const endReached = () => {
+        if (articles?.length && articles?.length === ARTICLES_PAGE_LIMIT * page) {
+            onLoadNextPart();
+        }
+    };
+
+    const scrollHandler = useCallback(() => {
+        scrollByPath[pathname] = window.scrollY;
+    }, [pathname]);
+
     const rangeHandler = useCallback((range: ListRange) => {
-        scrollByPath[pathname] = Math.floor((range.startIndex + range.endIndex) / 2);
+        rangeByPath[pathname] = Math.floor((range.startIndex + range.endIndex) / 2);
     }, [pathname]);
 
     useInitialEffect(() => {
+        window.addEventListener('scroll', scrollHandler);
+        return () => {
+            window.removeEventListener('scroll', scrollHandler);
+        };
+    });
+
+    const scrollToRange = useCallback((rangePosition: number) => new Promise((resolve) => {
+        setIsScrolling(true);
+        setTimeout(() => {
+            resolve(ref.current?.scrollToIndex({ index: rangePosition }));
+        }, 69);
+    }), []);
+
+    const scrollToPosition = useCallback((scrollPosition: number) => new Promise((resolve) => {
+        setTimeout(() => {
+            resolve(ref.current?.scrollTo({ top: scrollPosition }));
+        }, 40);
+    }), []);
+
+    useInitialEffect(() => {
         const scrollPosition = scrollByPath[pathname];
-        if (scrollPosition && scrollPosition > 1) {
-            const virtuoso = ref.current;
-            setIsScrolling(true);
-            setTimeout(() => {
-                setIsScrolling(false);
-                virtuoso?.scrollToIndex({ index: scrollPosition, align: 'center' });
-            }, 69);
+        const rangePosition = rangeByPath[pathname];
+        if (rangePosition && rangePosition > 0) {
+            scrollToRange(rangePosition).then(() => {
+                scrollToPosition(scrollPosition).then(() => setIsScrolling(false));
+            });
         }
     });
 
@@ -100,7 +128,6 @@ export const ArticlesList = memo((props: ArticlesListProps) => {
                 clickable
                 Svg={RefreshIcon}
             />
-            {/* {(isLoading && page === 1) && getSkeletons()} */}
             {(!isLoading && !articles?.length) && (
                 <Text
                     size="l"
@@ -115,7 +142,6 @@ export const ArticlesList = memo((props: ArticlesListProps) => {
                 />
             )}
             <Virtuoso
-                onScroll={() => console.log('scroll')}
                 data={articles}
                 ref={setVirtuosoRef}
                 useWindowScroll
@@ -126,7 +152,7 @@ export const ArticlesList = memo((props: ArticlesListProps) => {
                 style={{
                     opacity: isScrolling ? '0' : '1',
                 }}
-                endReached={onLoadNextPart}
+                endReached={endReached}
             />
         </>
     );

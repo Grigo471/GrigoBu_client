@@ -9,7 +9,6 @@ import { ReducerList, useDynamicModuleLoad } from '@/shared/lib/hooks/useDynamic
 import { StickyContentLayout } from '@/shared/layouts/StickyContentLayout';
 import { VStack } from '@/shared/ui/Stack';
 import { UsersListItem } from '../UsersListItem/UsersListItem';
-import cls from './UsersPage.module.scss';
 import { UsersPageFilters } from '../UsersPageFilters/UsersPageFilters';
 
 const reducers: ReducerList = {
@@ -33,7 +32,7 @@ export const UsersPage = memo(() => {
         <StickyContentLayout
             right={<UsersPageFilters />}
             content={(
-                <VStack gap="20" max className={cls.UsersPage}>
+                <VStack gap="20" max>
                     {users.map((user) => <UsersListItem key={user.id} user={user} />)}
                 </VStack>
             )}

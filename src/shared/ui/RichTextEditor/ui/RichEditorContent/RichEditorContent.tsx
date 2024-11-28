@@ -3,6 +3,8 @@ import {
     ForwardedRef,
     forwardRef,
     HTMLAttributes,
+    useCallback,
+    useEffect,
     useMemo,
     useRef,
     useState,
@@ -10,7 +12,6 @@ import {
 import cls from './RichEditorContent.module.scss';
 import { classNames } from '@/shared/lib/classNames/classNames';
 import { RichTextSanitizer } from '../../helpers/RichTextSanitizer';
-import { useInitialEffect } from '@/shared/lib/hooks/useInitialEffect';
 
 type HTMLDivProps = Omit<HTMLAttributes<HTMLDivElement>, 'onChange' | 'disabled'>;
 
@@ -37,7 +38,7 @@ export const RichEditorContent = forwardRef((
 
     const elRef = useRef<HTMLElement>();
 
-    const pasteHandler = (e: ClipboardEvent) => {
+    const pasteHandler = useCallback((e: ClipboardEvent) => {
         e.preventDefault();
         const paste = RichTextSanitizer(e.clipboardData?.getData('text') ?? '');
         const selection = window.getSelection();
@@ -46,13 +47,10 @@ export const RichEditorContent = forwardRef((
         selection.getRangeAt(0).insertNode(document.createTextNode(paste));
         selection.collapseToEnd();
         onChange(elRef.current?.innerHTML ?? '');
-    };
+    }, [onChange]);
 
-    useInitialEffect(() => {
-        if (elRef.current) {
-            elRef.current.addEventListener('paste', pasteHandler);
-        }
-
+    useEffect(() => {
+        if (elRef.current) elRef.current.addEventListener('paste', pasteHandler);
         return () => {
             if (elRef.current) {
                 elRef.current.removeEventListener('paste', pasteHandler);

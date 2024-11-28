@@ -22,15 +22,15 @@ export const EditableArticleTextBlock = memo((props: EditableArticleTextBlockPro
     const { t } = useTranslation();
     const dispatch = useAppDispatch();
 
-    const onChangeTitle = useCallback((title: string, index: number) => {
+    const onChangeTitle = useCallback((title: string) => {
         dispatch(articleEditPageActions.updateArticleBlockTitle(title, index));
-    }, [dispatch]);
+    }, [dispatch, index]);
 
-    const onChangeText = useCallback((text: string, index: number) => {
+    const onChangeText = useCallback((text: string) => {
         dispatch(
             articleEditPageActions.updateArticleBlockValue(text, index, 'text'),
         );
-    }, [dispatch]);
+    }, [dispatch, index]);
 
     return (
         <EditableArticleBlockWrapper
@@ -42,12 +42,13 @@ export const EditableArticleTextBlock = memo((props: EditableArticleTextBlockPro
                 label={t('Подзаголовок')}
                 size="s"
                 value={block.title}
-                onChange={(title) => onChangeTitle(title, index)}
+                onChange={onChangeTitle}
                 placeholder={t('Подзаголовок текстового блока (необязательно)')}
             />
             <RichTextEditor
                 value={block.paragraphs}
-                onChange={(value) => onChangeText(value, index)}
+                onChange={onChangeText}
+                placeholder={t('Введите текст')}
             />
         </EditableArticleBlockWrapper>
     );

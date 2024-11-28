@@ -13,6 +13,7 @@ import { FileUpload } from '@/shared/ui/FileUpload';
 import { useArticleFiles } from '../../ArticleFilesProvider/ArticleFilesProvider';
 import { Icon } from '@/shared/ui/Icon';
 import CrossIcon from '@/shared/assets/icons/cross-delete.svg';
+import { Button } from '@/shared/ui/Button';
 
 interface EditableArticleImageBlockProps {
    block: ArticleImageBlock;
@@ -70,7 +71,9 @@ export const EditableArticleImageBlock = memo((props: EditableArticleImageBlockP
                     accept="image/*"
                     className={cls.EditableAvatar}
                 >
-                    {t('Загрузите изображение')}
+                    <Button>
+                        {t('Загрузите изображение')}
+                    </Button>
                 </FileUpload>
             )}
             {block.src && (
@@ -78,6 +81,8 @@ export const EditableArticleImageBlock = memo((props: EditableArticleImageBlockP
                     <Icon
                         Svg={CrossIcon}
                         className={cls.deleteBtn}
+                        width={16}
+                        height={16}
                         clickable
                         onClick={onDeleteImage}
                     />

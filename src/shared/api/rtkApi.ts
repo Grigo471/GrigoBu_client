@@ -38,5 +38,5 @@ export const rtkApi = createApi({
     baseQuery: baseQueryWithReauth,
     endpoints: (builder) => ({
     }),
-    tagTypes: ['Articles'],
+    tagTypes: ['Articles', 'Subscriptions', 'UserArticles'],
 });

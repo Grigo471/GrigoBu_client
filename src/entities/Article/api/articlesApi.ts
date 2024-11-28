@@ -65,7 +65,7 @@ export const articlesApi = rtkApi.injectEndpoints({
                     && (currentArg?.page > previousArg?.page);
             },
             keepUnusedDataFor: ARTICLES_PAGE_CACHE_LIFETIME,
-            providesTags: ['Articles'],
+            providesTags: ['Subscriptions'],
         }),
         getUserArticles: build.query<Article[], ProfilePageParams>({
             query: ({
@@ -97,7 +97,7 @@ export const articlesApi = rtkApi.injectEndpoints({
                     && (currentArg?.page > previousArg?.page);
             },
             keepUnusedDataFor: ARTICLES_PAGE_CACHE_LIFETIME,
-            providesTags: ['Articles'],
+            providesTags: ['UserArticles'],
         }),
         rateArticle: build.mutation<RateArticleResult, RateArticleProps>({
             query: ({ articleId, rate }) => ({
@@ -109,7 +109,10 @@ export const articlesApi = rtkApi.injectEndpoints({
                 try {
                     const { articleId, myRate, rating } = (await queryFulfilled).data;
                     const caches = articlesApi.util
-                        .selectInvalidatedBy(getState(), ['Articles']);
+                        .selectInvalidatedBy(
+                            getState(),
+                            ['Articles', 'Subscriptions', 'UserArticles'],
+                        );
 
                     caches.forEach(({ endpointName, originalArgs }) => {
                         if (endpointName === 'getArticles'
