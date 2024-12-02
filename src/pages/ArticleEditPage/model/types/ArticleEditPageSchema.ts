@@ -2,7 +2,9 @@ import { Article } from '@/entities/Article';
 import { ValidateArticleError } from '../consts/consts';
 
 export interface ArticleEditPageSchema {
-    form: Article;
+    editForm: Article;
+    createForm: Article;
+    isEdit: boolean;
     isPreview: boolean;
     isLoading?: boolean;
     error?: string;

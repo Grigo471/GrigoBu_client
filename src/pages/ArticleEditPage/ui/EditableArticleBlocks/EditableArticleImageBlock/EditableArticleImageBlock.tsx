@@ -14,6 +14,7 @@ import { useArticleFiles } from '../../ArticleFilesProvider/ArticleFilesProvider
 import { Icon } from '@/shared/ui/Icon';
 import CrossIcon from '@/shared/assets/icons/cross-delete.svg';
 import { Button } from '@/shared/ui/Button';
+import { srcWithApiOrBlob } from '@/shared/lib/url/srcWithApi/srcWithApi';
 
 interface EditableArticleImageBlockProps {
    block: ArticleImageBlock;
@@ -86,7 +87,10 @@ export const EditableArticleImageBlock = memo((props: EditableArticleImageBlockP
                         clickable
                         onClick={onDeleteImage}
                     />
-                    <AppImage src={block.src} className={cls.img} />
+                    <AppImage
+                        src={srcWithApiOrBlob(block.src)}
+                        className={cls.img}
+                    />
                 </div>
             )}
         </EditableArticleBlockWrapper>

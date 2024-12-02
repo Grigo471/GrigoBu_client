@@ -8,7 +8,6 @@ import { ArticleSortField } from '@/entities/Article';
 
 import { SortOrder } from '@/shared/types';
 import { useDebounce } from '@/shared/lib/hooks/useDebounce';
-import { instantScrollTop } from '@/shared/lib/helpers/instantScrollTop';
 import { StateSchema } from '@/app/providers/StoreProvider';
 import {
     getProfilePageOrder, getProfilePageSearch, getProfilePageSort,
@@ -36,20 +35,20 @@ export const ProfilePageFilters = memo(() => {
     const [searchText, setSearchText] = useState(search);
 
     const onChangeSort = useCallback((sort: ArticleSortField) => {
-        instantScrollTop(0);
+        window.scrollTo(0, 0);
         dispatch(profilePageActions.setSort(username, sort));
         dispatch(profilePageActions.setPage(username, 1));
     }, [dispatch, username]);
 
     const onChangeOrder = useCallback((order: SortOrder) => {
-        instantScrollTop(0);
+        window.scrollTo(0, 0);
         dispatch(profilePageActions.setOrder(username, order));
         dispatch(profilePageActions.setPage(username, 1));
     }, [dispatch, username]);
 
     const debouncedSetSearch = useDebounce(
         (search: string) => {
-            instantScrollTop(0);
+            window.scrollTo(0, 0);
             dispatch(profilePageActions.setSearch(username, search));
             dispatch(profilePageActions.setPage(username, 1));
         },

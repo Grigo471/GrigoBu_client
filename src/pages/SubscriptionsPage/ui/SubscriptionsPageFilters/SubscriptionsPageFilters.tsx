@@ -11,7 +11,6 @@ import {
 } from '../../model/selectors/subscriptionsPageSelectors';
 import { SortOrder } from '@/shared/types';
 import { useDebounce } from '@/shared/lib/hooks/useDebounce';
-import { instantScrollTop } from '@/shared/lib/helpers/instantScrollTop';
 import { subscriptionsPageActions } from '../../model/slice/SubscriptionsPageSlice';
 import { useGetSubscriptionsUsers } from '../../api/subscriptionsUsersApi';
 import { Text } from '@/shared/ui/Text';
@@ -36,20 +35,20 @@ export const SubscriptionsPageFilters = memo(() => {
     const [searchText, setSearchText] = useState(search);
 
     const onChangeSort = useCallback((sort: ArticleSortField) => {
-        instantScrollTop(0);
+        window.scrollTo(0, 0);
         dispatch(subscriptionsPageActions.setSort(sort));
         dispatch(subscriptionsPageActions.setPage(1));
     }, [dispatch]);
 
     const onChangeOrder = useCallback((order: SortOrder) => {
-        instantScrollTop(0);
+        window.scrollTo(0, 0);
         dispatch(subscriptionsPageActions.setOrder(order));
         dispatch(subscriptionsPageActions.setPage(1));
     }, [dispatch]);
 
     const debouncedSetSearch = useDebounce(
         (search: string) => {
-            instantScrollTop(0);
+            window.scrollTo(0, 0);
             dispatch(subscriptionsPageActions.setSearch(search));
             dispatch(subscriptionsPageActions.setPage(1));
         },

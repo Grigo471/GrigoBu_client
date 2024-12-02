@@ -1,6 +1,7 @@
 import {
     memo,
     useCallback,
+    useLayoutEffect,
     useRef,
     useState,
 } from 'react';
@@ -73,20 +74,13 @@ export const ArticlesList = memo((props: ArticlesListProps) => {
         }
     };
 
-    const scrollHandler = useCallback(() => {
-        scrollByPath[pathname] = window.scrollY;
-    }, [pathname]);
-
     const rangeHandler = useCallback((range: ListRange) => {
         rangeByPath[pathname] = Math.floor((range.startIndex + range.endIndex) / 2);
     }, [pathname]);
 
-    useInitialEffect(() => {
-        window.addEventListener('scroll', scrollHandler);
-        return () => {
-            window.removeEventListener('scroll', scrollHandler);
-        };
-    });
+    useLayoutEffect(() => () => {
+        scrollByPath[pathname] = window.scrollY - 72;
+    }, [pathname]);
 
     const scrollToRange = useCallback((rangePosition: number) => new Promise((resolve) => {
         setIsScrolling(true);
@@ -98,7 +92,7 @@ export const ArticlesList = memo((props: ArticlesListProps) => {
     const scrollToPosition = useCallback((scrollPosition: number) => new Promise((resolve) => {
         setTimeout(() => {
             resolve(ref.current?.scrollTo({ top: scrollPosition }));
-        }, 40);
+        }, 69);
     }), []);
 
     useInitialEffect(() => {
@@ -142,6 +136,8 @@ export const ArticlesList = memo((props: ArticlesListProps) => {
                 />
             )}
             <Virtuoso
+                increaseViewportBy={{ top: 0, bottom: 0 }}
+                overscan={{ main: 0, reverse: 0 }}
                 data={articles}
                 ref={setVirtuosoRef}
                 useWindowScroll

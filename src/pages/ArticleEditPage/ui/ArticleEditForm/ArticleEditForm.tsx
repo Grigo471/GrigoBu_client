@@ -31,8 +31,8 @@ export const ArticleEditForm = memo((props: ArticleEditFormProps) => {
     }, [dispatch]);
 
     return (
-        <HStack gap="16" justify="end">
-            <AddArticleBlockDropdown />
+        <HStack gap="16" justify="end" align="start">
+            <AddArticleBlockDropdown className={cls.dropdown} />
             <VStack
                 max
                 gap="16"

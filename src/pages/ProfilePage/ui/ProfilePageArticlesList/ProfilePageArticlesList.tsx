@@ -13,7 +13,6 @@ import { profilePageActions } from '../../model/slice/ProfilePageSlice';
 import { StateSchema } from '@/app/providers/StoreProvider';
 import { ARTICLES_PAGE_LIMIT } from '@/shared/const/articlesApi';
 import { ArticlesList } from '@/widgets/ArticlesList';
-import { instantScrollTop } from '@/shared/lib/helpers/instantScrollTop';
 
 export const ProfilePageArticlesList = memo(() => {
     const dispatch = useAppDispatch();
@@ -36,7 +35,7 @@ export const ProfilePageArticlesList = memo(() => {
     };
 
     const refreshHandler = useCallback(async () => {
-        instantScrollTop(0);
+        window.scrollTo(0, 0);
         await dispatch(profilePageActions.setPage(username, 1));
         refetch();
     }, [dispatch, refetch, username]);

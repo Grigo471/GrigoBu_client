@@ -11,7 +11,6 @@ import {
 import { articlesApi, useGetSubscriptions } from '@/entities/Article';
 import { ARTICLES_PAGE_LIMIT } from '@/shared/const/articlesApi';
 import { subscriptionsPageActions } from '../../model/slice/SubscriptionsPageSlice';
-import { instantScrollTop } from '@/shared/lib/helpers/instantScrollTop';
 import { useInitialEffect } from '@/shared/lib/hooks/useInitialEffect';
 import { uiFlags } from '@/shared/lib/ui/lib/UIFlags';
 import { rtkApi } from '@/shared/api/rtkApi';
@@ -26,7 +25,7 @@ export const SubscriptionsPageList = memo(() => {
     const limit = ARTICLES_PAGE_LIMIT;
 
     const {
-        data, isLoading, error, isFetching, refetch,
+        data, isLoading, error, isFetching, refetch, originalArgs,
     } = useGetSubscriptions({
         order, sort, search, page, limit,
     });
@@ -36,22 +35,22 @@ export const SubscriptionsPageList = memo(() => {
     };
 
     const refreshHandler = useCallback(async () => {
-        instantScrollTop(0);
+        window.scrollTo(0, 0);
         await dispatch(subscriptionsPageActions.setPage(1));
         refetch();
     }, [dispatch, refetch]);
 
     const setUncollapsed = (articleId: string) => {
-        dispatch(articlesApi.util.updateQueryData('getSubscriptions', {
-            order, sort, search, page, limit,
-        }, (draft) => {
-            const article = draft.find(
-                (article) => article.id === articleId,
-            );
-            if (article) {
-                article.uncollapsed = true;
-            }
-        }));
+        if (originalArgs) {
+            dispatch(articlesApi.util.updateQueryData('getSubscriptions', originalArgs, (draft) => {
+                const article = draft.find(
+                    (article) => article.id === articleId,
+                );
+                if (article) {
+                    article.uncollapsed = true;
+                }
+            }));
+        }
     };
 
     useInitialEffect(() => {

@@ -3,7 +3,7 @@ import { classNames } from '@/shared/lib/classNames/classNames';
 import cls from './ArticleImageBlockComponent.module.scss';
 import { ArticleImageBlock } from '../../model/types/article';
 import { Text } from '@/shared/ui/Text';
-import { srcWithApi } from '@/shared/lib/url/srcWithApi/srcWithApi';
+import { srcWithApiOrBlob } from '@/shared/lib/url/srcWithApi/srcWithApi';
 import { AppImage } from '@/shared/ui/AppImage';
 import { Skeleton } from '@/shared/ui/Skeleton';
 
@@ -19,7 +19,7 @@ export const ArticleImageBlockComponent = memo(
         return (
             <div className={classNames(cls.ArticleImageBlockComponent, {}, [className])}>
                 <AppImage
-                    src={srcWithApi(block.src)}
+                    src={srcWithApiOrBlob(block.src)}
                     className={cls.img}
                     fallback={<Skeleton width={500} height={520} />}
                     alt={block.src}

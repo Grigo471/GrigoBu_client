@@ -68,5 +68,6 @@ export const AddArticleBlockDropdown = memo((props: AddArticleBlockDropdownProps
                 />
             )}
         />
+
     );
 });

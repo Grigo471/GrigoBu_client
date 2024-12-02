@@ -1,4 +1,4 @@
-import { memo } from 'react';
+import { memo, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { useSelector } from 'react-redux';
@@ -43,14 +43,16 @@ const ArticleEditPage = () => {
 
     useDynamicModuleLoad({ reducers, removeAfterUnmount: false });
 
+    useEffect(() => {
+        dispatch(articleEditPageActions.setIsEdit(isEdit));
+    }, [isEdit, dispatch]);
+
     useInitialEffect(() => {
+        dispatch(articleEditPageActions.setIsPreview(false));
         if (isEdit) {
             dispatch(fetchArticleById(id));
-        } else {
-            dispatch(articleEditPageActions.clearState());
-            if (authData) {
-                dispatch(articleEditPageActions.setUser(authData));
-            }
+        } else if (authData) {
+            dispatch(articleEditPageActions.setUser(authData));
         }
     });
 

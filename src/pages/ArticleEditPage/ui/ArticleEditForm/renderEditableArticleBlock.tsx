@@ -23,7 +23,7 @@ export const renderEditableArticleBlock = (props: RenderEditableArticleBlockProp
             <EditableArticleCodeBlock
                 block={block}
                 index={index}
-                key={block.id}
+                key={block.id + block.type}
             />
         );
     case 'text':
@@ -31,7 +31,7 @@ export const renderEditableArticleBlock = (props: RenderEditableArticleBlockProp
             <EditableArticleTextBlock
                 block={block}
                 index={index}
-                key={block.id}
+                key={block.id + block.type}
             />
         );
     case 'image':
@@ -39,7 +39,7 @@ export const renderEditableArticleBlock = (props: RenderEditableArticleBlockProp
             <EditableArticleImageBlock
                 block={block}
                 index={index}
-                key={block.id}
+                key={block.id + block.type}
             />
         );
     default:

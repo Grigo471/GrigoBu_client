@@ -16,7 +16,6 @@ import { ArticleSortField, Rate } from '@/entities/Article';
 import { articlesPageActions } from '../../model/slice/ArticlesPageSlice';
 import { SortOrder } from '@/shared/types';
 import { useDebounce } from '@/shared/lib/hooks/useDebounce';
-import { instantScrollTop } from '@/shared/lib/helpers/instantScrollTop';
 import { HStack, VStack } from '@/shared/ui/Stack';
 import { Button } from '@/shared/ui/Button';
 import { ArticleTagsSelector } from '@/features/ArticleTagsSelector';
@@ -40,20 +39,20 @@ export const ArticlesPageFilters = memo(() => {
     const [searchText, setSearchText] = useState(search);
 
     const onChangeSort = useCallback((sort: ArticleSortField) => {
-        instantScrollTop(0);
+        window.scrollTo(0, 0);
         dispatch(articlesPageActions.setSort(sort));
         dispatch(articlesPageActions.setPage(1));
     }, [dispatch]);
 
     const onChangeOrder = useCallback((order: SortOrder) => {
-        instantScrollTop(0);
+        window.scrollTo(0, 0);
         dispatch(articlesPageActions.setOrder(order));
         dispatch(articlesPageActions.setPage(1));
     }, [dispatch]);
 
     const debouncedSetSearch = useDebounce(
         (search: string) => {
-            instantScrollTop(0);
+            window.scrollTo(0, 0);
             dispatch(articlesPageActions.setSearch(search));
             dispatch(articlesPageActions.setPage(1));
         },
@@ -67,19 +66,22 @@ export const ArticlesPageFilters = memo(() => {
 
     const setTags = useCallback((tags: string[]) => {
         if (tags.length < 4) {
-            instantScrollTop(0);
+            window.scrollTo(0, 0);
             dispatch(articlesPageActions.setTags(tags));
             dispatch(articlesPageActions.setPage(1));
         }
     }, [dispatch]);
 
     const toggleTagsVisible = useCallback(() => {
-        if (tagsVisible) dispatch(articlesPageActions.setTags([]));
+        if (tagsVisible) {
+            window.scrollTo(0, 0);
+            dispatch(articlesPageActions.setTags([]));
+        }
         dispatch(articlesPageActions.toggleTagsVisible());
     }, [dispatch, tagsVisible]);
 
     const onChangeRate = useCallback((rate: Rate) => {
-        instantScrollTop(0);
+        window.scrollTo(0, 0);
         if (myRate !== rate) {
             dispatch(articlesPageActions.setMyRateFilter(rate));
         } else {

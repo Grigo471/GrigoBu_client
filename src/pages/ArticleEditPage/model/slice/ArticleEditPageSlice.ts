@@ -23,7 +23,9 @@ const initialState: ArticleEditPageSchema = {
     isPreview: false,
     isLoading: false,
     error: undefined,
-    form: initialForm,
+    isEdit: false,
+    createForm: initialForm,
+    editForm: initialForm,
 };
 
 interface EditBlockPayload {
@@ -36,22 +38,28 @@ export const articleEditPageSlice = createSlice({
     name: 'articleEditPage',
     initialState,
     reducers: {
+        setIsEdit: (state, action: PayloadAction<boolean>) => {
+            state.isEdit = action.payload;
+        },
         setUser: (state, action: PayloadAction<User>) => {
-            state.form.user = action.payload;
+            state.createForm.user = action.payload;
         },
         setIsPreview: (state, action: PayloadAction<boolean>) => {
             state.isPreview = action.payload;
         },
         setTags: (state, action: PayloadAction<string[]>) => {
-            state.form.tags = action.payload;
+            const form = state.isEdit ? state.editForm : state.createForm;
+            form.tags = action.payload;
         },
         updateArticleTitle: (state, action: PayloadAction<string>) => {
-            state.form.title = action.payload;
+            const form = state.isEdit ? state.editForm : state.createForm;
+            form.title = action.payload;
         },
         updateArticleBlockTitle: {
             reducer: (state, action: PayloadAction<EditBlockPayload>) => {
                 const { index, value } = action.payload;
-                const block = state.form?.blocks?.[index];
+                const form = state.isEdit ? state.editForm : state.createForm;
+                const block = form?.blocks?.[index];
                 block.title = value;
             },
             prepare: (value: string, index: number) => ({ payload: { index, value } }),
@@ -59,7 +67,8 @@ export const articleEditPageSlice = createSlice({
         updateArticleBlockValue: {
             reducer: (state, action: PayloadAction<EditBlockPayload>) => {
                 const { index, value, blockType } = action.payload;
-                const block = state.form?.blocks?.[index];
+                const form = state.isEdit ? state.editForm : state.createForm;
+                const block = form.blocks?.[index];
                 switch (blockType) {
                 case 'text':
                     if (block?.type === 'text') block.paragraphs = value;
@@ -80,9 +89,10 @@ export const articleEditPageSlice = createSlice({
             ) => ({ payload: { index, value, blockType } }),
         },
         addArticleBlock: (state, { payload }: PayloadAction<ArticleBlockType>) => {
+            const form = state.isEdit ? state.editForm : state.createForm;
             switch (payload) {
             case 'text':
-                state.form?.blocks.push({
+                form.blocks.push({
                     type: payload,
                     title: '',
                     paragraphs: '',
@@ -90,7 +100,7 @@ export const articleEditPageSlice = createSlice({
                 });
                 break;
             case 'code':
-                state.form?.blocks.push({
+                form.blocks.push({
                     type: payload,
                     title: '',
                     code: '',
@@ -98,7 +108,7 @@ export const articleEditPageSlice = createSlice({
                 });
                 break;
             case 'image':
-                state.form?.blocks.push({
+                form.blocks.push({
                     type: payload,
                     title: '',
                     src: '',
@@ -109,31 +119,35 @@ export const articleEditPageSlice = createSlice({
             }
         },
         moveBlockUp: (state, { payload }: PayloadAction<number>) => {
-            if (state.form.blocks && (payload > 0)) {
-                state.form.blocks
-                    .splice(payload - 1, 0, state.form.blocks.splice(payload, 1)[0]);
+            const form = state.isEdit ? state.editForm : state.createForm;
+            if (form.blocks && (payload > 0)) {
+                form.blocks
+                    .splice(payload - 1, 0, form.blocks.splice(payload, 1)[0]);
             }
         },
         moveBlockDown: (state, { payload }: PayloadAction<number>) => {
-            if (state.form.blocks && (payload < state.form.blocks.length - 1)) {
-                state.form.blocks
-                    .splice(payload + 1, 0, state.form.blocks.splice(payload, 1)[0]);
+            const form = state.isEdit ? state.editForm : state.createForm;
+            if (form.blocks && (payload < form.blocks.length - 1)) {
+                form.blocks
+                    .splice(payload + 1, 0, form.blocks.splice(payload, 1)[0]);
             }
         },
         deleteImage: (state, { payload }: PayloadAction<number>) => {
-            const block = state.form.blocks[payload];
+            const form = state.isEdit ? state.editForm : state.createForm;
+            const block = form.blocks[payload];
             if (block.type === 'image') {
                 block.src = '';
             }
         },
         deleteBlock: (state, action: PayloadAction<number>) => {
-            state.form.blocks = state.form?.blocks.filter(
+            const form = state.isEdit ? state.editForm : state.createForm;
+            form.blocks = form?.blocks.filter(
                 (block, index) => index !== action.payload,
             );
         },
-        clearState: (state) => {
-            state.form = initialForm;
-        },
+        // clearState: (state) => {
+        //     state.form = initialForm;
+        // },
     },
     extraReducers: (builder) => {
         builder
@@ -143,7 +157,7 @@ export const articleEditPageSlice = createSlice({
             })
             .addCase(fetchArticleById.fulfilled, (state, action: PayloadAction<Article>) => {
                 state.isLoading = false;
-                state.form = action.payload;
+                state.editForm = action.payload;
             })
             .addCase(fetchArticleById.rejected, (state, action) => {
                 state.isLoading = false;
