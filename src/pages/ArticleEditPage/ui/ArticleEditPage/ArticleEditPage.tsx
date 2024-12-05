@@ -1,4 +1,4 @@
-import { memo, useEffect } from 'react';
+import { memo, useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { useSelector } from 'react-redux';
@@ -20,7 +20,6 @@ import {
     getArticleEditPageError,
     getArticleEditPageForm,
     getArticleEditPageIsLoading,
-    getArticleEditPageIsPreview,
 } from '../../model/selectors/articleEditPageSelectors';
 import ArticleFilesProvider from '../ArticleFilesProvider/ArticleFilesProvider';
 import { useInitialEffect } from '@/shared/lib/hooks/useInitialEffect';
@@ -35,11 +34,12 @@ const ArticleEditPage = () => {
     const dispatch = useAppDispatch();
     const { id } = useParams<{id:string}>();
     const isEdit = Boolean(id);
+
+    const [isPreview, setIsPreview] = useState(false);
     const authData = useSelector(getUserAuthData);
     const formData = useSelector(getArticleEditPageForm);
     const isLoading = useSelector(getArticleEditPageIsLoading);
     const error = useSelector(getArticleEditPageError);
-    const isPreview = useSelector(getArticleEditPageIsPreview);
 
     useDynamicModuleLoad({ reducers, removeAfterUnmount: false });
 
@@ -48,7 +48,6 @@ const ArticleEditPage = () => {
     }, [isEdit, dispatch]);
 
     useInitialEffect(() => {
-        dispatch(articleEditPageActions.setIsPreview(false));
         if (isEdit) {
             dispatch(fetchArticleById(id));
         } else if (authData) {
@@ -91,7 +90,12 @@ const ArticleEditPage = () => {
                 : (
                     <StickyContentLayout
                         content={(content)}
-                        right={(<ArticleEditToolbar />)}
+                        right={(
+                            <ArticleEditToolbar
+                                isPreview={isPreview}
+                                setIsPreview={setIsPreview}
+                            />
+                        )}
                     />
                 ) }
         </ArticleFilesProvider>

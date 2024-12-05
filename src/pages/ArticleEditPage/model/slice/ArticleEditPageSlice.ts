@@ -20,7 +20,6 @@ const initialForm: Article = {
 };
 
 const initialState: ArticleEditPageSchema = {
-    isPreview: false,
     isLoading: false,
     error: undefined,
     isEdit: false,
@@ -43,9 +42,6 @@ export const articleEditPageSlice = createSlice({
         },
         setUser: (state, action: PayloadAction<User>) => {
             state.createForm.user = action.payload;
-        },
-        setIsPreview: (state, action: PayloadAction<boolean>) => {
-            state.isPreview = action.payload;
         },
         setTags: (state, action: PayloadAction<string[]>) => {
             const form = state.isEdit ? state.editForm : state.createForm;
@@ -169,7 +165,6 @@ export const articleEditPageSlice = createSlice({
             })
             .addCase(saveArticle.fulfilled, (state) => {
                 state.isLoading = false;
-                state.isPreview = true;
                 state.validateErrors = undefined;
             })
             .addCase(saveArticle.rejected, (state, action) => {

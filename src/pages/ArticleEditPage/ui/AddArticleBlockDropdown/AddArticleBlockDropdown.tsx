@@ -2,14 +2,12 @@ import {
     memo, SVGProps, useCallback, VFC,
 } from 'react';
 import { useTranslation } from 'react-i18next';
-import { useSelector } from 'react-redux';
 import { classNames } from '@/shared/lib/classNames/classNames';
 import { Dropdown } from '@/shared/ui/Popups';
 import PlusIcon from '@/shared/assets/icons/plus.svg';
 import { Icon } from '@/shared/ui/Icon';
 import { useAppDispatch } from '@/shared/lib/hooks/useAppDispatch';
 import { articleEditPageActions } from '../../model/slice/ArticleEditPageSlice';
-import { getArticleEditPageIsPreview } from '../../model/selectors/articleEditPageSelectors';
 import { ArticleBlockType } from '@/entities/Article';
 import { HStack } from '@/shared/ui/Stack';
 import TextIcon from '@/shared/assets/icons/article.svg';
@@ -26,8 +24,6 @@ export const AddArticleBlockDropdown = memo((props: AddArticleBlockDropdownProps
     } = props;
     const { t } = useTranslation();
     const dispatch = useAppDispatch();
-
-    const isPreview = useSelector(getArticleEditPageIsPreview);
 
     const onAddArticleBlock = useCallback((blockType: ArticleBlockType) => {
         dispatch(articleEditPageActions.addArticleBlock(blockType));
@@ -57,13 +53,11 @@ export const AddArticleBlockDropdown = memo((props: AddArticleBlockDropdownProps
 
     return (
         <Dropdown
-            disabled={isPreview}
             className={classNames('', {}, [className])}
             direction="bottomRight"
             items={items}
             trigger={(
                 <Icon
-                    clickable={!isPreview}
                     Svg={PlusIcon}
                 />
             )}

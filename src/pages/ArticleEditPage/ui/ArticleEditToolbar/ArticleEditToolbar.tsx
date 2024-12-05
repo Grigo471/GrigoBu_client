@@ -8,7 +8,6 @@ import { VStack } from '@/shared/ui/Stack';
 import { Text } from '@/shared/ui/Text';
 import { Button } from '@/shared/ui/Button';
 import {
-    getArticleEditPageIsPreview,
     getArticleEditPageTags,
     getArticleEditPageValidateErrors,
 } from '../../model/selectors/articleEditPageSelectors';
@@ -19,7 +18,12 @@ import { validateErrorsTranslations } from '../../model/consts/consts';
 import { useArticleFiles } from '../ArticleFilesProvider/ArticleFilesProvider';
 import { ArticleTagsSelector } from '@/features/ArticleTagsSelector';
 
-export const ArticleEditToolbar = memo(() => {
+interface ArticleEditToolbarProps {
+    isPreview: boolean;
+    setIsPreview: (prev: boolean) => void;
+}
+
+export const ArticleEditToolbar = memo(({ isPreview, setIsPreview }: ArticleEditToolbarProps) => {
     const { t } = useTranslation();
     const dispatch = useAppDispatch();
 
@@ -28,8 +32,6 @@ export const ArticleEditToolbar = memo(() => {
 
     const isEdit = Boolean(id);
     const title = isEdit ? t('Редактирование статьи') : t('Создание новой статьи');
-
-    const isPreview = useSelector(getArticleEditPageIsPreview);
     const validateErrors = useSelector(getArticleEditPageValidateErrors);
     const tags = useSelector(getArticleEditPageTags);
 
@@ -38,8 +40,8 @@ export const ArticleEditToolbar = memo(() => {
     }, [dispatch]);
 
     const onChangeIsPreview = useCallback(() => {
-        dispatch(articleEditPageActions.setIsPreview(!isPreview));
-    }, [dispatch, isPreview]);
+        setIsPreview(!isPreview);
+    }, [setIsPreview, isPreview]);
 
     const onSaveArticle = useCallback(() => {
         dispatch(saveArticle({ isEdit, images }));

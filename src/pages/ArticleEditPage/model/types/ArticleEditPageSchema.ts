@@ -5,7 +5,6 @@ export interface ArticleEditPageSchema {
     editForm: Article;
     createForm: Article;
     isEdit: boolean;
-    isPreview: boolean;
     isLoading?: boolean;
     error?: string;
     validateErrors?: ValidateArticleError[];
