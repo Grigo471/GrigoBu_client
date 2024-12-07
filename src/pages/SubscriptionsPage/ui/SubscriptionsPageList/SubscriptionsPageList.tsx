@@ -1,27 +1,32 @@
 import { memo, useCallback } from 'react';
 import { useSelector } from 'react-redux';
-import { ArticlesList, scrollByPath } from '@/widgets/ArticlesList';
+import { ArticlesList } from '@/widgets/ArticlesList';
 import { useAppDispatch } from '@/shared/lib/hooks/useAppDispatch';
 import {
-    getSubscriptionsPageNum,
     getSubscriptionsPageOrder,
     getSubscriptionsPageSearch,
     getSubscriptionsPageSort,
 } from '../../model/selectors/subscriptionsPageSelectors';
-import { articlesApi, useGetSubscriptions } from '@/entities/Article';
+import {
+    articlesApi,
+    articlesListsPagesActions,
+    getArticlesListPageByPathname,
+    useGetSubscriptions,
+} from '@/entities/Article';
 import { ARTICLES_PAGE_LIMIT } from '@/shared/const/articlesApi';
-import { subscriptionsPageActions } from '../../model/slice/SubscriptionsPageSlice';
-import { useInitialEffect } from '@/shared/lib/hooks/useInitialEffect';
-import { uiFlags } from '@/shared/lib/ui/lib/UIFlags';
-import { rtkApi } from '@/shared/api/rtkApi';
+import { StateSchema } from '@/app/providers/StoreProvider';
+import { getRouteSubscriptions } from '@/shared/const/router';
 
 export const SubscriptionsPageList = memo(() => {
     const dispatch = useAppDispatch();
+    const pathname = getRouteSubscriptions();
 
     const order = useSelector(getSubscriptionsPageOrder);
     const sort = useSelector(getSubscriptionsPageSort);
     const search = useSelector(getSubscriptionsPageSearch);
-    const page = useSelector(getSubscriptionsPageNum);
+    const page = useSelector(
+        (state: StateSchema) => getArticlesListPageByPathname(state, pathname),
+    );
     const limit = ARTICLES_PAGE_LIMIT;
 
     const {
@@ -31,14 +36,14 @@ export const SubscriptionsPageList = memo(() => {
     });
 
     const onLoadNextPart = () => {
-        dispatch(subscriptionsPageActions.setPage(page + 1));
+        dispatch(articlesListsPagesActions.setPage(pathname, page + 1));
     };
 
     const refreshHandler = useCallback(async () => {
         window.scrollTo(0, 0);
-        await dispatch(subscriptionsPageActions.setPage(1));
+        await dispatch(articlesListsPagesActions.setPage(pathname, 1));
         refetch();
-    }, [dispatch, refetch]);
+    }, [dispatch, refetch, pathname]);
 
     const setUncollapsed = (articleId: string) => {
         if (originalArgs) {
@@ -52,17 +57,6 @@ export const SubscriptionsPageList = memo(() => {
             }));
         }
     };
-
-    useInitialEffect(() => {
-        if (uiFlags.shouldSubscriptionsPageRefresh) {
-            scrollByPath['/subs'] = 0;
-            setTimeout(() => {
-                dispatch(subscriptionsPageActions.setPage(1));
-                dispatch(rtkApi.util.invalidateTags(['Subscriptions']));
-            }, 0);
-        }
-        uiFlags.shouldSubscriptionsPageRefresh = false;
-    });
 
     return (
         <ArticlesList

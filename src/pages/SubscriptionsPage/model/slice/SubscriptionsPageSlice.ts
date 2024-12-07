@@ -9,7 +9,6 @@ import { SortOrder } from '@/shared/types';
 import { SubscriptionsPageSchema } from '../types/SubscriptionsPageSchema';
 
 const initialState: SubscriptionsPageSchema = {
-    page: 1,
     sort: 'createdAt',
     search: '',
     order: 'desc',
@@ -19,9 +18,6 @@ const subscriptionsPageSlice = createSlice({
     name: 'subscriptionsPageSlice',
     initialState,
     reducers: {
-        setPage: (state, action: PayloadAction<number>) => {
-            state.page = action.payload;
-        },
         setOrder: (state, action: PayloadAction<SortOrder>) => {
             state.order = action.payload;
         },

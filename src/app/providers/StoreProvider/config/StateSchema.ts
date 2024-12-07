@@ -16,12 +16,14 @@ import { UsersPageSchema } from '@/pages/UsersPage';
 import { ArticlesPageSchema } from '@/pages/ArticlesPage';
 import { SubscriptionsPageSchema } from '@/pages/SubscriptionsPage';
 import { ProfilePageSchema } from '@/pages/ProfilePage';
+import { ArticlesListsPagesSchema } from '@/entities/Article';
 
 export interface StateSchema {
     user: UserSchema;
     UI: UISchema;
     [rtkApi.reducerPath]: ReturnType<typeof rtkApi.reducer>;
     profilePage: ProfilePageSchema;
+    articlesListsPages: ArticlesListsPagesSchema;
 
     usersPage?: UsersPageSchema;
     authForm?: AuthSchema;

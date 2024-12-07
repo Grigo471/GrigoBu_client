@@ -1,7 +1,5 @@
 import { StateSchema } from '@/app/providers/StoreProvider';
 
-export const getSubscriptionsPageNum = (state: StateSchema) => state.subscriptionsPage?.page || 1;
-
 export const getSubscriptionsPageOrder = (
     state: StateSchema,
 ) => state.subscriptionsPage?.order ?? 'desc';

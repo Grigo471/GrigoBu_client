@@ -12,7 +12,16 @@ export type {
     ArticleSortField, ArticleBlockType,
 } from './model/consts/consts';
 
+export { getArticlesListPageByPathname } from './model/selectors/articlesListsPagesSelector';
+
 export { fetchArticleById } from './model/services/fetchArticleById/fetchArticleById';
+
+export {
+    articlesListsPagesReducer,
+    articlesListsPagesActions,
+} from './model/slice/articlesListsPagesSlice';
+
+export type { ArticlesListsPagesSchema } from './model/types/articlesListsPages';
 
 export {
     articlesApi,

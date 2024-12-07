@@ -4,7 +4,7 @@ import { useTranslation } from 'react-i18next';
 import { Card } from '@/shared/ui/Card';
 import { ArticlesFilters } from '@/widgets/ArticlesList';
 import { useAppDispatch } from '@/shared/lib/hooks/useAppDispatch';
-import { ArticleSortField } from '@/entities/Article';
+import { articlesListsPagesActions, ArticleSortField } from '@/entities/Article';
 import {
     getSubscriptionsPageOrder, getSubscriptionsPageSearch,
     getSubscriptionsPageSort,
@@ -18,10 +18,12 @@ import { AppLink } from '@/shared/ui/AppLink';
 import { HStack, VStack } from '@/shared/ui/Stack';
 import { Avatar } from '@/shared/ui/Avatar';
 import { srcWithApi } from '@/shared/lib/url/srcWithApi/srcWithApi';
+import { getRouteSubscriptions } from '@/shared/const/router';
 
 export const SubscriptionsPageFilters = memo(() => {
     const dispatch = useAppDispatch();
     const { t } = useTranslation();
+    const pathname = getRouteSubscriptions();
 
     const order = useSelector(getSubscriptionsPageOrder);
     const sort = useSelector(getSubscriptionsPageSort);
@@ -37,20 +39,20 @@ export const SubscriptionsPageFilters = memo(() => {
     const onChangeSort = useCallback((sort: ArticleSortField) => {
         window.scrollTo(0, 0);
         dispatch(subscriptionsPageActions.setSort(sort));
-        dispatch(subscriptionsPageActions.setPage(1));
-    }, [dispatch]);
+        dispatch(articlesListsPagesActions.setPage(pathname, 1));
+    }, [dispatch, pathname]);
 
     const onChangeOrder = useCallback((order: SortOrder) => {
         window.scrollTo(0, 0);
         dispatch(subscriptionsPageActions.setOrder(order));
-        dispatch(subscriptionsPageActions.setPage(1));
-    }, [dispatch]);
+        dispatch(articlesListsPagesActions.setPage(pathname, 1));
+    }, [dispatch, pathname]);
 
     const debouncedSetSearch = useDebounce(
         (search: string) => {
             window.scrollTo(0, 0);
             dispatch(subscriptionsPageActions.setSearch(search));
-            dispatch(subscriptionsPageActions.setPage(1));
+            dispatch(articlesListsPagesActions.setPage(pathname, 1));
         },
         500,
     );
