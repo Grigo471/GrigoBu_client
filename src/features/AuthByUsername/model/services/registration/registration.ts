@@ -3,6 +3,9 @@ import { userActions } from '@/entities/User';
 import { LOCAL_STORAGE_TOKEN_KEY } from '@/shared/const/localStorage';
 import { ThunkConfig } from '@/app/providers/StoreProvider';
 import { AuthResponse, LoginProps } from '../../types/authSchema';
+import { resetScrolls } from '@/shared/lib/router/scrollByPath';
+import { rtkApi } from '@/shared/api/rtkApi';
+import { articlesListsPagesActions } from '@/entities/Article';
 
 export const registration = createAsyncThunk<
     AuthResponse,
@@ -26,8 +29,11 @@ export const registration = createAsyncThunk<
             } = response.data;
 
             localStorage.setItem(LOCAL_STORAGE_TOKEN_KEY, accessToken);
+            dispatch(rtkApi.util.resetApiState());
+            resetScrolls();
+            dispatch(articlesListsPagesActions.resetAllPages());
+
             dispatch(userActions.setAuthData(user));
-            window.location.reload();
 
             return response.data;
         } catch (error) {

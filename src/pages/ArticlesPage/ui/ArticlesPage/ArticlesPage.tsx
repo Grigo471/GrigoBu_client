@@ -8,9 +8,9 @@ import { ArticlesPageFilters } from '../ArticlesPageFilters/ArticlesPageFilters'
 import { ArticlesPageList } from '../ArticlesPageList/ArticlesPageList';
 import { ARTICLES_PAGE_CACHE_LIFETIME } from '@/shared/const/articlesApi';
 import { StickyContentLayout } from '@/shared/layouts/StickyContentLayout';
-import { scrollByPath } from '@/widgets/ArticlesList';
 import { useArticlesListPageActions } from '@/entities/Article';
 import { getRouteArticles } from '@/shared/const/router';
+import { scrollByPath } from '@/shared/lib/router/scrollByPath';
 
 const reducers: ReducerList = {
     articlesPage: articlesPageReducer,

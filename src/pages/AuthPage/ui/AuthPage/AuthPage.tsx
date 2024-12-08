@@ -8,18 +8,18 @@ import { getUserAuthData } from '@/entities/User';
 import { Page } from '@/widgets/Page';
 import { Card } from '@/shared/ui/Card';
 
-// interface LocationState {
-//    from?: Location;
-// }
+interface LocationState {
+   from?: Location;
+}
 
 export const AuthPage = memo(() => {
     const { t } = useTranslation();
     const auth = useSelector(getUserAuthData);
     const location = useLocation();
-    //  const state = location.state as LocationState;
+    const state = location.state as LocationState;
 
     if (auth) {
-        return <Navigate to="/" state={{ from: location }} replace />;
+        return <Navigate to={state.from?.pathname || '/'} state={{ from: location }} replace />;
     }
 
     return (

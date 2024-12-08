@@ -23,6 +23,7 @@ export {
 export { fetchArticleById } from './model/services/fetchArticleById/fetchArticleById';
 
 export {
+    articlesListsPagesActions,
     articlesListsPagesReducer,
     useArticlesListPageActions,
 } from './model/slice/articlesListsPagesSlice';

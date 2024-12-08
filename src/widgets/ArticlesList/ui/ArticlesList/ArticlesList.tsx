@@ -1,12 +1,9 @@
 import {
     memo,
-    useCallback,
     useLayoutEffect,
-    useRef,
-    useState,
 } from 'react';
 import { useTranslation } from 'react-i18next';
-import { ListRange, Virtuoso, VirtuosoHandle } from 'react-virtuoso';
+import { Virtuoso } from 'react-virtuoso';
 
 import { useLocation, useParams } from 'react-router-dom';
 import { Text } from '@/shared/ui/Text';
@@ -17,6 +14,7 @@ import cls from './ArticlesList.module.scss';
 import { Icon } from '@/shared/ui/Icon';
 import RefreshIcon from '@/shared/assets/icons/refresh.svg';
 import { ARTICLES_PAGE_LIMIT } from '@/shared/const/articlesApi';
+import { scrollByPath } from '@/shared/lib/router/scrollByPath';
 
 interface ArticlesListProps {
    articles?: Article[];
@@ -27,9 +25,6 @@ interface ArticlesListProps {
    refreshHandler: () => void;
 }
 
-export const scrollByPath: Record<string, number> = {};
-export const rangeByPath: Record<string, number> = {};
-
 export const ArticlesList = memo((props: ArticlesListProps) => {
     const {
         articles, isLoading, error, page, setUncollapsed, refreshHandler,
@@ -37,12 +32,7 @@ export const ArticlesList = memo((props: ArticlesListProps) => {
     const { t } = useTranslation();
     const { pathname } = useLocation();
     const { username } = useParams();
-    const ref = useRef<VirtuosoHandle>();
-    const [isScrolling, setIsScrolling] = useState(false);
     const { setPage } = useArticlesListPageActions();
-    function setVirtuosoRef(el: VirtuosoHandle) {
-        ref.current = el;
-    }
 
     const renderArticle = (article: Article) => (
         <ArticleListItem
@@ -62,7 +52,7 @@ export const ArticlesList = memo((props: ArticlesListProps) => {
     const Footer = memo(() => (
         <>
             {isLoading && getSkeletons()}
-            {isScrolling && <div className={cls.scrollFallback} />}
+            <div />
         </>
     ));
 
@@ -75,36 +65,9 @@ export const ArticlesList = memo((props: ArticlesListProps) => {
         }
     };
 
-    const rangeHandler = useCallback((range: ListRange) => {
-        rangeByPath[pathname] = Math.floor((range.startIndex + range.endIndex) / 2);
-    }, [pathname]);
-
-    const scrollToRange = useCallback((rangePosition: number) => new Promise((resolve) => {
-        setIsScrolling(true);
-        setTimeout(() => {
-            resolve(ref.current?.scrollToIndex({ index: rangePosition }));
-        }, 69);
-    }), []);
-
-    const scrollToPosition = useCallback((scrollPosition: number) => new Promise((resolve) => {
-        setTimeout(() => {
-            resolve(ref.current?.scrollTo({ top: scrollPosition }));
-        }, 69);
-    }), []);
-
-    useLayoutEffect(() => {
-        const scrollPosition = scrollByPath[pathname];
-        const rangePosition = rangeByPath[pathname];
-        if (rangePosition && rangePosition > 0) {
-            scrollToRange(rangePosition).then(() => {
-                scrollToPosition(scrollPosition).then(() => setIsScrolling(false));
-            });
-        }
-
-        return () => {
-            scrollByPath[pathname] = window.scrollY - 72;
-        };
-    }, [pathname, scrollToPosition, scrollToRange]);
+    useLayoutEffect(() => () => {
+        scrollByPath[pathname] = window.scrollY;
+    });
 
     if (isLoading && page === 1) {
         return (
@@ -136,19 +99,15 @@ export const ArticlesList = memo((props: ArticlesListProps) => {
                     title={t('Произошла ошибка при загрузке статьи')}
                 />
             )}
+            {/** used to be version 2.4.1 */ }
             <Virtuoso
-                // increaseViewportBy={{ top: 500, bottom: 500 }}
+                increaseViewportBy={{ top: 2000, bottom: 2000 }}
                 overscan={{ main: 2000, reverse: 2000 }}
                 data={articles}
-                ref={setVirtuosoRef}
                 useWindowScroll
-                initialTopMostItemIndex={0}
-                rangeChanged={rangeHandler}
+                initialScrollTop={scrollByPath[pathname] || 0}
                 components={{ Footer }}
                 itemContent={(_, article) => renderArticle(article)}
-                style={{
-                    opacity: isScrolling ? '0' : '1',
-                }}
                 endReached={endReached}
             />
         </>

@@ -44,9 +44,9 @@
     // widths
 
     --scrollbar-width: 12px;
-    --article-card-width: 640px;
+    --article-card-width: 720px;
     --rating-button-width: 56px;
-    --article-filters-width: 264px;
+    --article-filters-width: 280px;
     --articles-page-width:
         calc(
             (var(--article-card-width) + var(--rating-button-width) + var(--article-filters-width) + 32px)

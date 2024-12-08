@@ -10,7 +10,17 @@ interface ThemeProviderProps {
     children?: ReactNode
 }
 
-const fallbackTheme = localStorage.getItem(LOCAL_STORAGE_THEME_KEY) as Theme;
+const fallbackTheme = () => {
+    const savedTheme = localStorage.getItem(LOCAL_STORAGE_THEME_KEY) as Theme;
+    if (!savedTheme) {
+        if (window.matchMedia) {
+            if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+                return Theme.DARK;
+            }
+        }
+    }
+    return savedTheme;
+};
 
 const ThemeProvider = (props: ThemeProviderProps) => {
     const {
@@ -19,7 +29,7 @@ const ThemeProvider = (props: ThemeProviderProps) => {
     } = props;
 
     const [isThemeInited, setIsThemeInited] = useState(false);
-    const [theme, setTheme] = useState<Theme>(initialTheme || fallbackTheme || Theme.LIGHT);
+    const [theme, setTheme] = useState<Theme>(initialTheme || fallbackTheme() || Theme.LIGHT);
 
     useEffect(() => {
         if (!isThemeInited && initialTheme) {

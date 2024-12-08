@@ -24,6 +24,9 @@ export const articlesListsPagesSlice = buildSlice({
         resetPage: (state, { payload }: PayloadAction<string>) => {
             state.pages[payload] = 1;
         },
+        resetAllPages: (state) => {
+            Object.keys(state.pages).forEach((key) => { state.pages[key] = 0; });
+        },
         setSort: {
             reducer: (state, { payload }: PayloadAction<{
                 pathname: string, sort: ArticleSortField
@@ -61,6 +64,7 @@ export const articlesListsPagesSlice = buildSlice({
 });
 
 export const {
+    actions: articlesListsPagesActions,
     reducer: articlesListsPagesReducer,
     useActions: useArticlesListPageActions,
 } = articlesListsPagesSlice;

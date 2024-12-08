@@ -1,11 +1,11 @@
 import { memo, useEffect } from 'react';
 import { StickyContentLayout } from '@/shared/layouts/StickyContentLayout';
-import { scrollByPath } from '@/widgets/ArticlesList';
 import { ARTICLES_PAGE_CACHE_LIFETIME } from '@/shared/const/articlesApi';
 import { SubscriptionsPageList } from '../SubscriptionsPageList/SubscriptionsPageList';
 import { SubscriptionsPageFilters } from '../SubscriptionsPageFilters/SubscriptionsPageFilters';
 import { useArticlesListPageActions } from '@/entities/Article';
 import { getRouteSubscriptions } from '@/shared/const/router';
+import { scrollByPath } from '@/shared/lib/router/scrollByPath';
 
 let subscriptionsPageTimer: NodeJS.Timeout;
 

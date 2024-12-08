@@ -9,8 +9,8 @@ import { ProfilePageArticlesList } from '../ProfilePageArticlesList/ProfilePageA
 import { ProfilePageFilters } from '../ProfilePageFilters/ProfilePageFilters';
 import cls from './ProfilePage.module.scss';
 import { ARTICLES_PAGE_CACHE_LIFETIME } from '@/shared/const/articlesApi';
-import { scrollByPath } from '@/widgets/ArticlesList';
 import { useArticlesListPageActions } from '@/entities/Article';
+import { scrollByPath } from '@/shared/lib/router/scrollByPath';
 
 let profilePageTimer: NodeJS.Timeout;
 

@@ -21,10 +21,13 @@ interface ArticleListItemProps {
     article: Article;
     type?: 'list' | 'userList';
     setUncollapsed: (articleId: string) => void;
+    className?: string;
 }
 
 export const ArticleListItem = memo((props: ArticleListItemProps) => {
-    const { article, type, setUncollapsed } = props;
+    const {
+        article, type, setUncollapsed, className,
+    } = props;
     const { t } = useTranslation();
     const [overflowActive, setOverflowActive] = useState(false);
     const detailsRef = useRef<HTMLDivElement>();
@@ -46,7 +49,7 @@ export const ArticleListItem = memo((props: ArticleListItemProps) => {
     });
 
     return (
-        <HStack gap="16" align="start" className={cls.ArticleListItem}>
+        <HStack gap="16" align="start" className={classNames(cls.ArticleListItem, {}, [className])}>
             <ArticleRatingButton className={cls.rating} article={article} />
             <Card border="minimum" padding="24" className={cls.card}>
                 <VStack gap="8">
