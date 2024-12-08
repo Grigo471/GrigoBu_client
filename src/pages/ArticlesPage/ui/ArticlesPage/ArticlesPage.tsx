@@ -2,14 +2,15 @@ import {
     memo, useEffect,
 } from 'react';
 
-import { useAppDispatch } from '@/shared/lib/hooks/useAppDispatch';
-import { articlesPageActions, articlesPageReducer } from '../../model/slice/ArticlesPageSlice';
+import { articlesPageReducer } from '../../model/slice/ArticlesPageSlice';
 import { ReducerList, useDynamicModuleLoad } from '@/shared/lib/hooks/useDynamicModuleLoad';
 import { ArticlesPageFilters } from '../ArticlesPageFilters/ArticlesPageFilters';
 import { ArticlesPageList } from '../ArticlesPageList/ArticlesPageList';
 import { ARTICLES_PAGE_CACHE_LIFETIME } from '@/shared/const/articlesApi';
 import { StickyContentLayout } from '@/shared/layouts/StickyContentLayout';
 import { scrollByPath } from '@/widgets/ArticlesList';
+import { useArticlesListPageActions } from '@/entities/Article';
+import { getRouteArticles } from '@/shared/const/router';
 
 const reducers: ReducerList = {
     articlesPage: articlesPageReducer,
@@ -18,15 +19,16 @@ const reducers: ReducerList = {
 let articlesPageTimer: NodeJS.Timeout;
 
 const ArticlesPage = () => {
-    const dispatch = useAppDispatch();
+    const pathname = getRouteArticles();
+    const { resetPage } = useArticlesListPageActions();
 
     useEffect(() => {
         if (articlesPageTimer) clearTimeout(articlesPageTimer);
 
         return () => {
             articlesPageTimer = setTimeout(() => {
-                dispatch(articlesPageActions.setPage(1));
-                scrollByPath['/'] = 0;
+                resetPage(pathname);
+                scrollByPath[pathname] = 0;
             }, ARTICLES_PAGE_CACHE_LIFETIME * 1000);
         };
     });

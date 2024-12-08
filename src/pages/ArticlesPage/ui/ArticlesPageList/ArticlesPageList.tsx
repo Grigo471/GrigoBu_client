@@ -1,29 +1,33 @@
-import { memo, useCallback, useEffect } from 'react';
+import { memo, useCallback } from 'react';
 import { useSelector } from 'react-redux';
 import { ArticlesList } from '@/widgets/ArticlesList';
 import { useAppDispatch } from '@/shared/lib/hooks/useAppDispatch';
-import { articlesPageActions } from '../../model/slice/ArticlesPageSlice';
 import {
     getArticlesPageMyRateFilter,
-    getArticlesPageNum, getArticlesPageOrder,
-    getArticlesPageSearch, getArticlesPageSort,
     getArticlesPageTags,
 } from '../../model/selectors/articlesPageSelectors';
-import { articlesApi, useGetArticles } from '@/entities/Article';
+import {
+    articlesApi,
+    useGetArticles,
+    useArticlesListPage,
+    useArticlesListPageActions,
+    useArticlesMainFiltersSelector,
+} from '@/entities/Article';
 import { ARTICLES_PAGE_LIMIT } from '@/shared/const/articlesApi';
+import { getRouteArticles } from '@/shared/const/router';
 
 export const ArticlesPageList = memo(() => {
     const dispatch = useAppDispatch();
+    const pathname = getRouteArticles();
 
-    const order = useSelector(getArticlesPageOrder);
-    const sort = useSelector(getArticlesPageSort);
-    const search = useSelector(getArticlesPageSearch);
-    const page = useSelector(getArticlesPageNum);
+    const { sort, order, search } = useArticlesMainFiltersSelector(pathname);
     const tags = useSelector(getArticlesPageTags);
     const myRate = useSelector(getArticlesPageMyRateFilter);
+    const page = useArticlesListPage(pathname);
     const limit = ARTICLES_PAGE_LIMIT;
-
     const inlineTags = tags?.join(',').replaceAll(' ', '%20') || '';
+
+    const { resetPage } = useArticlesListPageActions();
 
     const {
         data, isLoading, error, refetch, isFetching, originalArgs,
@@ -31,15 +35,11 @@ export const ArticlesPageList = memo(() => {
         order, sort, search, page, limit, tags: inlineTags, myRate,
     });
 
-    const onLoadNextPart = () => {
-        dispatch(articlesPageActions.setPage(page + 1));
-    };
-
     const refreshHandler = useCallback(async () => {
         window.scrollTo(0, 0);
-        await dispatch(articlesPageActions.setPage(1));
+        await resetPage(pathname);
         refetch();
-    }, [dispatch, refetch]);
+    }, [refetch, pathname, resetPage]);
 
     const setUncollapsed = (articleId: string) => {
         if (originalArgs) {
@@ -54,19 +54,12 @@ export const ArticlesPageList = memo(() => {
         }
     };
 
-    useEffect(() => {
-        if (data && !isFetching && !isLoading && data.length > page * limit) {
-            dispatch(articlesPageActions.setPage(Math.ceil(data.length / limit)));
-        }
-    });
-
     return (
         <ArticlesList
             articles={data}
             page={page}
             isLoading={isLoading || isFetching}
             setUncollapsed={setUncollapsed}
-            onLoadNextPart={onLoadNextPart}
             refreshHandler={refreshHandler}
         />
     );

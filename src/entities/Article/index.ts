@@ -12,16 +12,22 @@ export type {
     ArticleSortField, ArticleBlockType,
 } from './model/consts/consts';
 
-export { getArticlesListPageByPathname } from './model/selectors/articlesListsPagesSelector';
+export {
+    useArticlesListPage,
+    useArticlesListOrder,
+    useArticlesListSearch,
+    useArticlesListSort,
+    useArticlesMainFiltersSelector,
+} from './model/selectors/articlesListsPagesSelectors';
 
 export { fetchArticleById } from './model/services/fetchArticleById/fetchArticleById';
 
 export {
     articlesListsPagesReducer,
-    articlesListsPagesActions,
+    useArticlesListPageActions,
 } from './model/slice/articlesListsPagesSlice';
 
-export type { ArticlesListsPagesSchema } from './model/types/articlesListsPages';
+export type { ArticlesListsPagesSchema } from './model/types/articlesList';
 
 export {
     articlesApi,
@@ -30,3 +36,5 @@ export {
 } from './api/articlesApi';
 
 export { type RateArticleResult } from './api/types';
+
+export { useArticlesFilters } from './lib/hooks/useArticlesFilters';

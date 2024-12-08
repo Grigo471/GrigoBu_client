@@ -1,28 +1,26 @@
 import { memo, useCallback } from 'react';
 import { useParams } from 'react-router-dom';
-import { useSelector } from 'react-redux';
 import { useAppDispatch } from '@/shared/lib/hooks/useAppDispatch';
+
 import {
-    getProfilePageNum,
-    getProfilePageOrder,
-    getProfilePageSearch,
-    getProfilePageSort,
-} from '../../model/selectors/profilePageSelectors';
-import { articlesApi, useGetUserArticles } from '@/entities/Article';
-import { profilePageActions } from '../../model/slice/ProfilePageSlice';
-import { StateSchema } from '@/app/providers/StoreProvider';
+    articlesApi, useArticlesListPage,
+    useArticlesListPageActions,
+    useArticlesMainFiltersSelector,
+    useGetUserArticles,
+} from '@/entities/Article';
 import { ARTICLES_PAGE_LIMIT } from '@/shared/const/articlesApi';
 import { ArticlesList } from '@/widgets/ArticlesList';
 
 export const ProfilePageArticlesList = memo(() => {
     const dispatch = useAppDispatch();
     const username = useParams<{ username: string }>().username ?? '';
+    const pathname = `/users/${username}`;
 
-    const order = useSelector((state: StateSchema) => getProfilePageOrder(state, username));
-    const sort = useSelector((state: StateSchema) => getProfilePageSort(state, username));
-    const search = useSelector((state: StateSchema) => getProfilePageSearch(state, username));
-    const page = useSelector((state: StateSchema) => getProfilePageNum(state, username));
+    const { sort, order, search } = useArticlesMainFiltersSelector(pathname);
+    const page = useArticlesListPage(pathname);
     const limit = ARTICLES_PAGE_LIMIT;
+
+    const { resetPage } = useArticlesListPageActions();
 
     const {
         data, isLoading, error, isFetching, refetch,
@@ -30,15 +28,11 @@ export const ProfilePageArticlesList = memo(() => {
         order, sort, search, page, limit, username,
     });
 
-    const onLoadNextPart = () => {
-        dispatch(profilePageActions.setPage(username, page + 1));
-    };
-
     const refreshHandler = useCallback(async () => {
         window.scrollTo(0, 0);
-        await dispatch(profilePageActions.setPage(username, 1));
+        await resetPage(pathname);
         refetch();
-    }, [dispatch, refetch, username]);
+    }, [refetch, pathname, resetPage]);
 
     const setUncollapsed = (articleId: string) => {
         dispatch(articlesApi.util.updateQueryData('getUserArticles', {
@@ -58,7 +52,6 @@ export const ProfilePageArticlesList = memo(() => {
             articles={data}
             page={page}
             isLoading={isLoading || isFetching}
-            onLoadNextPart={onLoadNextPart}
             setUncollapsed={setUncollapsed}
             refreshHandler={refreshHandler}
         />

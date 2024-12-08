@@ -10,11 +10,10 @@ import { ListRange, Virtuoso, VirtuosoHandle } from 'react-virtuoso';
 
 import { useLocation, useParams } from 'react-router-dom';
 import { Text } from '@/shared/ui/Text';
-import { Article } from '@/entities/Article';
+import { Article, useArticlesListPageActions } from '@/entities/Article';
 import { ArticleListItemSkeleton } from './ArticleListItemSkeleton';
 import { ArticleListItem } from '../ArticleListItem/ArticleListItem';
 import cls from './ArticlesList.module.scss';
-import { useInitialEffect } from '@/shared/lib/hooks/useInitialEffect';
 import { Icon } from '@/shared/ui/Icon';
 import RefreshIcon from '@/shared/assets/icons/refresh.svg';
 import { ARTICLES_PAGE_LIMIT } from '@/shared/const/articlesApi';
@@ -24,7 +23,6 @@ interface ArticlesListProps {
    isLoading?: boolean;
    page: number;
    error?: string;
-   onLoadNextPart: () => void;
    setUncollapsed: (articleId: string) => void;
    refreshHandler: () => void;
 }
@@ -34,14 +32,14 @@ export const rangeByPath: Record<string, number> = {};
 
 export const ArticlesList = memo((props: ArticlesListProps) => {
     const {
-        articles, isLoading, error, page, onLoadNextPart, setUncollapsed, refreshHandler,
+        articles, isLoading, error, page, setUncollapsed, refreshHandler,
     } = props;
     const { t } = useTranslation();
     const { pathname } = useLocation();
     const { username } = useParams();
     const ref = useRef<VirtuosoHandle>();
     const [isScrolling, setIsScrolling] = useState(false);
-
+    const { setPage } = useArticlesListPageActions();
     function setVirtuosoRef(el: VirtuosoHandle) {
         ref.current = el;
     }
@@ -69,17 +67,16 @@ export const ArticlesList = memo((props: ArticlesListProps) => {
     ));
 
     const endReached = () => {
-        if (articles?.length && articles?.length === ARTICLES_PAGE_LIMIT * page) {
-            onLoadNextPart();
+        if (articles) {
+            const currPage = Math.ceil(articles.length / ARTICLES_PAGE_LIMIT);
+            if (articles.length === currPage * ARTICLES_PAGE_LIMIT) {
+                setPage(pathname, currPage + 1);
+            }
         }
     };
 
     const rangeHandler = useCallback((range: ListRange) => {
         rangeByPath[pathname] = Math.floor((range.startIndex + range.endIndex) / 2);
-    }, [pathname]);
-
-    useLayoutEffect(() => () => {
-        scrollByPath[pathname] = window.scrollY - 72;
     }, [pathname]);
 
     const scrollToRange = useCallback((rangePosition: number) => new Promise((resolve) => {
@@ -95,7 +92,7 @@ export const ArticlesList = memo((props: ArticlesListProps) => {
         }, 69);
     }), []);
 
-    useInitialEffect(() => {
+    useLayoutEffect(() => {
         const scrollPosition = scrollByPath[pathname];
         const rangePosition = rangeByPath[pathname];
         if (rangePosition && rangePosition > 0) {
@@ -103,7 +100,11 @@ export const ArticlesList = memo((props: ArticlesListProps) => {
                 scrollToPosition(scrollPosition).then(() => setIsScrolling(false));
             });
         }
-    });
+
+        return () => {
+            scrollByPath[pathname] = window.scrollY - 72;
+        };
+    }, [pathname, scrollToPosition, scrollToRange]);
 
     if (isLoading && page === 1) {
         return (
@@ -136,8 +137,8 @@ export const ArticlesList = memo((props: ArticlesListProps) => {
                 />
             )}
             <Virtuoso
-                increaseViewportBy={{ top: 0, bottom: 0 }}
-                overscan={{ main: 0, reverse: 0 }}
+                // increaseViewportBy={{ top: 500, bottom: 500 }}
+                overscan={{ main: 2000, reverse: 2000 }}
                 data={articles}
                 ref={setVirtuosoRef}
                 useWindowScroll

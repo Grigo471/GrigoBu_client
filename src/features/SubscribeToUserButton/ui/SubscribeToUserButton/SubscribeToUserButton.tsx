@@ -6,8 +6,9 @@ import { useAppDispatch } from '@/shared/lib/hooks/useAppDispatch';
 import { subscribeToUser } from '../../model/services/subscribeToUser';
 import { unsubscribeToUser } from '../../model/services/unsubscribeToUser';
 import { classNames } from '@/shared/lib/classNames/classNames';
-import { articlesListsPagesActions } from '@/entities/Article';
+import { useArticlesListPageActions } from '@/entities/Article';
 import { rtkApi } from '@/shared/api/rtkApi';
+import { getRouteSubscriptions } from '@/shared/const/router';
 
 interface SubscribeToUserButtonProps {
    className?: string;
@@ -20,11 +21,12 @@ export const SubscribeToUserButton = memo((props: SubscribeToUserButtonProps) =>
     const { t } = useTranslation();
     const dispatch = useAppDispatch();
     const [isLoading, setIsLoading] = useState(false);
+    const { resetPage } = useArticlesListPageActions();
 
     const clearSubscriptionsPageCache = useCallback(async () => {
-        await dispatch(articlesListsPagesActions.setPage('/subs', 1));
+        await resetPage(getRouteSubscriptions());
         await dispatch(rtkApi.util.invalidateTags(['Subscriptions']));
-    }, [dispatch]);
+    }, [dispatch, resetPage]);
 
     const onSubscribe = useCallback(async () => {
         setIsLoading(true);

@@ -8,18 +8,18 @@ import { StickyContentLayout } from '@/shared/layouts/StickyContentLayout';
 import { ProfilePageArticlesList } from '../ProfilePageArticlesList/ProfilePageArticlesList';
 import { ProfilePageFilters } from '../ProfilePageFilters/ProfilePageFilters';
 import cls from './ProfilePage.module.scss';
-import { useInitialEffect } from '@/shared/lib/hooks/useInitialEffect';
-import { useAppDispatch } from '@/shared/lib/hooks/useAppDispatch';
-import { profilePageActions } from '../../model/slice/ProfilePageSlice';
 import { ARTICLES_PAGE_CACHE_LIFETIME } from '@/shared/const/articlesApi';
 import { scrollByPath } from '@/widgets/ArticlesList';
+import { useArticlesListPageActions } from '@/entities/Article';
 
 let profilePageTimer: NodeJS.Timeout;
 
 const ProfilePage = () => {
     const username = useParams<{ username: string }>().username ?? '';
+    const pathname = `/users/${username}`;
     const myUsername = useSelector(getUsername);
-    const dispatch = useAppDispatch();
+
+    const { resetPage } = useArticlesListPageActions();
 
     const ProfileHeader = memo(() => {
         if (username) {
@@ -33,14 +33,10 @@ const ProfilePage = () => {
 
         return () => {
             profilePageTimer = setTimeout(() => {
-                dispatch(profilePageActions.setPage(username, 1));
+                resetPage(pathname);
                 scrollByPath[`/users/${username}`] = 0;
             }, ARTICLES_PAGE_CACHE_LIFETIME * 1000);
         };
-    });
-
-    useInitialEffect(() => {
-        dispatch(profilePageActions.initiatePage(username || ''));
     });
 
     return (

@@ -14,15 +14,12 @@ import { ProfileCardSchema } from '@/widgets/ProfileCard';
 import { ArticleTagsSelectorSchema } from '@/features/ArticleTagsSelector';
 import { UsersPageSchema } from '@/pages/UsersPage';
 import { ArticlesPageSchema } from '@/pages/ArticlesPage';
-import { SubscriptionsPageSchema } from '@/pages/SubscriptionsPage';
-import { ProfilePageSchema } from '@/pages/ProfilePage';
 import { ArticlesListsPagesSchema } from '@/entities/Article';
 
 export interface StateSchema {
     user: UserSchema;
     UI: UISchema;
     [rtkApi.reducerPath]: ReturnType<typeof rtkApi.reducer>;
-    profilePage: ProfilePageSchema;
     articlesListsPages: ArticlesListsPagesSchema;
 
     usersPage?: UsersPageSchema;
@@ -30,7 +27,6 @@ export interface StateSchema {
     editableProfileCard?: EditableProfileSchema;
     profileCard?: ProfileCardSchema;
     articlesPage?: ArticlesPageSchema;
-    subscriptionsPage?: SubscriptionsPageSchema;
     addCommentForm?: AddCommentFormSchema;
     articleDetailsPage?: ArticleDetailsPageSchema;
     articleEditPage?: ArticleEditPageSchema;

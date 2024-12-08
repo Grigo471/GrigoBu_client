@@ -1,33 +1,26 @@
 import { memo, useCallback } from 'react';
-import { useSelector } from 'react-redux';
 import { ArticlesList } from '@/widgets/ArticlesList';
 import { useAppDispatch } from '@/shared/lib/hooks/useAppDispatch';
-import {
-    getSubscriptionsPageOrder,
-    getSubscriptionsPageSearch,
-    getSubscriptionsPageSort,
-} from '../../model/selectors/subscriptionsPageSelectors';
+
 import {
     articlesApi,
-    articlesListsPagesActions,
-    getArticlesListPageByPathname,
+    useArticlesListPage,
+    useArticlesListPageActions,
+    useArticlesMainFiltersSelector,
     useGetSubscriptions,
 } from '@/entities/Article';
 import { ARTICLES_PAGE_LIMIT } from '@/shared/const/articlesApi';
-import { StateSchema } from '@/app/providers/StoreProvider';
 import { getRouteSubscriptions } from '@/shared/const/router';
 
 export const SubscriptionsPageList = memo(() => {
     const dispatch = useAppDispatch();
     const pathname = getRouteSubscriptions();
 
-    const order = useSelector(getSubscriptionsPageOrder);
-    const sort = useSelector(getSubscriptionsPageSort);
-    const search = useSelector(getSubscriptionsPageSearch);
-    const page = useSelector(
-        (state: StateSchema) => getArticlesListPageByPathname(state, pathname),
-    );
+    const { sort, order, search } = useArticlesMainFiltersSelector(pathname);
+    const page = useArticlesListPage(pathname);
     const limit = ARTICLES_PAGE_LIMIT;
+
+    const { resetPage } = useArticlesListPageActions();
 
     const {
         data, isLoading, error, isFetching, refetch, originalArgs,
@@ -35,15 +28,11 @@ export const SubscriptionsPageList = memo(() => {
         order, sort, search, page, limit,
     });
 
-    const onLoadNextPart = () => {
-        dispatch(articlesListsPagesActions.setPage(pathname, page + 1));
-    };
-
     const refreshHandler = useCallback(async () => {
         window.scrollTo(0, 0);
-        await dispatch(articlesListsPagesActions.setPage(pathname, 1));
+        await resetPage(pathname);
         refetch();
-    }, [dispatch, refetch, pathname]);
+    }, [refetch, pathname, resetPage]);
 
     const setUncollapsed = (articleId: string) => {
         if (originalArgs) {
@@ -64,7 +53,6 @@ export const SubscriptionsPageList = memo(() => {
             page={page}
             isLoading={isLoading || isFetching}
             setUncollapsed={setUncollapsed}
-            onLoadNextPart={onLoadNextPart}
             refreshHandler={refreshHandler}
         />
     );
