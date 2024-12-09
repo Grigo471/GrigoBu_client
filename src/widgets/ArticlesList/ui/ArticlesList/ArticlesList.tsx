@@ -1,9 +1,10 @@
 import {
     memo,
     useLayoutEffect,
+    useRef,
 } from 'react';
 import { useTranslation } from 'react-i18next';
-import { Virtuoso } from 'react-virtuoso';
+import { StateSnapshot, Virtuoso, VirtuosoHandle } from 'react-virtuoso';
 
 import { useLocation, useParams } from 'react-router-dom';
 import { Text } from '@/shared/ui/Text';
@@ -14,7 +15,6 @@ import cls from './ArticlesList.module.scss';
 import { Icon } from '@/shared/ui/Icon';
 import RefreshIcon from '@/shared/assets/icons/refresh.svg';
 import { ARTICLES_PAGE_LIMIT } from '@/shared/const/articlesApi';
-import { scrollByPath } from '@/shared/lib/router/scrollByPath';
 
 interface ArticlesListProps {
    articles?: Article[];
@@ -25,6 +25,8 @@ interface ArticlesListProps {
    refreshHandler: () => void;
 }
 
+const stateByPathname: Record<string, StateSnapshot | undefined> = {};
+
 export const ArticlesList = memo((props: ArticlesListProps) => {
     const {
         articles, isLoading, error, page, setUncollapsed, refreshHandler,
@@ -33,6 +35,10 @@ export const ArticlesList = memo((props: ArticlesListProps) => {
     const { pathname } = useLocation();
     const { username } = useParams();
     const { setPage } = useArticlesListPageActions();
+    const ref = useRef<VirtuosoHandle>();
+    function setVirtuosoRef(el: VirtuosoHandle) {
+        ref.current = el;
+    }
 
     const renderArticle = (article: Article) => (
         <ArticleListItem
@@ -66,7 +72,7 @@ export const ArticlesList = memo((props: ArticlesListProps) => {
     };
 
     useLayoutEffect(() => () => {
-        scrollByPath[pathname] = window.scrollY;
+        ref.current?.getState((state) => { stateByPathname[pathname] = state; });
     });
 
     if (isLoading && page === 1) {
@@ -101,11 +107,13 @@ export const ArticlesList = memo((props: ArticlesListProps) => {
             )}
             {/** used to be version 2.4.1 */ }
             <Virtuoso
-                increaseViewportBy={{ top: 2000, bottom: 2000 }}
-                overscan={{ main: 2000, reverse: 2000 }}
+                increaseViewportBy={{ top: 500, bottom: 500 }}
+                overscan={{ main: 500, reverse: 500 }}
                 data={articles}
+                ref={setVirtuosoRef}
                 useWindowScroll
-                initialScrollTop={scrollByPath[pathname] || 0}
+                // initialScrollTop={scrollByPath[pathname] || 0}
+                restoreStateFrom={stateByPathname[pathname]}
                 components={{ Footer }}
                 itemContent={(_, article) => renderArticle(article)}
                 endReached={endReached}

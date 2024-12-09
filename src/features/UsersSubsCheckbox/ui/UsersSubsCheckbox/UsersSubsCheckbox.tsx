@@ -1,6 +1,6 @@
 import { memo } from 'react';
 import { useTranslation } from 'react-i18next';
-import { Checkbox, CheckboxItem } from '@/shared/ui/Radio';
+import { Checkbox, CheckboxItem } from '@/shared/ui/Checkbox';
 
 export type UsersSubsRelation = 'subscribers' | 'subscriptions';
 
