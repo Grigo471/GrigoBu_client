@@ -1,6 +1,6 @@
 interface ViruolizedListProps<T> {
     className?: string;
-    data: T;
+    data: T[];
 }
 
 export function ViruolizedList<T>(props: ViruolizedListProps<T>) {

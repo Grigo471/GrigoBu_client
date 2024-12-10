@@ -4,7 +4,7 @@ import {
     useRef,
 } from 'react';
 import { useTranslation } from 'react-i18next';
-import { StateSnapshot, Virtuoso, VirtuosoHandle } from 'react-virtuoso';
+import { Virtuoso, VirtuosoHandle } from 'react-virtuoso';
 
 import { useLocation, useParams } from 'react-router-dom';
 import { Text } from '@/shared/ui/Text';
@@ -15,6 +15,9 @@ import cls from './ArticlesList.module.scss';
 import { Icon } from '@/shared/ui/Icon';
 import RefreshIcon from '@/shared/assets/icons/refresh.svg';
 import { ARTICLES_PAGE_LIMIT } from '@/shared/const/articlesApi';
+import {
+    getVirtuosoStateByPathname, setVirtuosoStateByPathname,
+} from '@/shared/lib/virtuosoState/virtuosoStateByPathname';
 
 interface ArticlesListProps {
    articles?: Article[];
@@ -25,20 +28,25 @@ interface ArticlesListProps {
    refreshHandler: () => void;
 }
 
-const stateByPathname: Record<string, StateSnapshot | undefined> = {};
-
 export const ArticlesList = memo((props: ArticlesListProps) => {
     const {
         articles, isLoading, error, page, setUncollapsed, refreshHandler,
     } = props;
     const { t } = useTranslation();
+
     const { pathname } = useLocation();
     const { username } = useParams();
     const { setPage } = useArticlesListPageActions();
+
     const ref = useRef<VirtuosoHandle>();
     function setVirtuosoRef(el: VirtuosoHandle) {
         ref.current = el;
     }
+
+    const virtuosoState = getVirtuosoStateByPathname(pathname);
+    const scrollTop = (virtuosoState?.scrollTop && virtuosoState?.scrollTop > 500)
+        ? undefined
+        : virtuosoState?.scrollTop;
 
     const renderArticle = (article: Article) => (
         <ArticleListItem
@@ -72,8 +80,9 @@ export const ArticlesList = memo((props: ArticlesListProps) => {
     };
 
     useLayoutEffect(() => () => {
-        ref.current?.getState((state) => { stateByPathname[pathname] = state; });
-    });
+        ref.current?.getState((state) => { setVirtuosoStateByPathname(pathname, state); });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, []);
 
     if (isLoading && page === 1) {
         return (
@@ -112,8 +121,10 @@ export const ArticlesList = memo((props: ArticlesListProps) => {
                 data={articles}
                 ref={setVirtuosoRef}
                 useWindowScroll
-                // initialScrollTop={scrollByPath[pathname] || 0}
-                restoreStateFrom={stateByPathname[pathname]}
+                initialScrollTop={scrollTop}
+                restoreStateFrom={
+                    scrollTop ? undefined : virtuosoState
+                }
                 components={{ Footer }}
                 itemContent={(_, article) => renderArticle(article)}
                 endReached={endReached}

@@ -10,7 +10,7 @@ import { ProfilePageFilters } from '../ProfilePageFilters/ProfilePageFilters';
 import cls from './ProfilePage.module.scss';
 import { ARTICLES_PAGE_CACHE_LIFETIME } from '@/shared/const/articlesApi';
 import { useArticlesListPageActions } from '@/entities/Article';
-import { scrollByPath } from '@/shared/lib/router/scrollByPath';
+import { resetVirtuosoSatetByPath } from '@/shared/lib/virtuosoState/virtuosoStateByPathname';
 
 let profilePageTimer: NodeJS.Timeout;
 
@@ -34,7 +34,7 @@ const ProfilePage = () => {
         return () => {
             profilePageTimer = setTimeout(() => {
                 resetPage(pathname);
-                scrollByPath[`/users/${username}`] = 0;
+                resetVirtuosoSatetByPath(`/users/${username}`);
             }, ARTICLES_PAGE_CACHE_LIFETIME * 1000);
         };
     });

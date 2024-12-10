@@ -4,8 +4,8 @@ import { ThunkConfig } from '@/app/providers/StoreProvider';
 import { LOCAL_STORAGE_TOKEN_KEY } from '@/shared/const/localStorage';
 import { userActions } from '@/entities/User';
 import { rtkApi } from '@/shared/api/rtkApi';
-import { resetScrolls } from '@/shared/lib/router/scrollByPath';
 import { articlesListsPagesActions } from '@/entities/Article';
+import { resetAllVirtuosoState } from '@/shared/lib/virtuosoState/virtuosoStateByPathname';
 
 export const login = createAsyncThunk<
     AuthResponse,
@@ -34,7 +34,7 @@ export const login = createAsyncThunk<
 
             localStorage.setItem(LOCAL_STORAGE_TOKEN_KEY, accessToken);
             dispatch(rtkApi.util.resetApiState());
-            resetScrolls();
+            resetAllVirtuosoState();
             dispatch(articlesListsPagesActions.resetAllPages());
 
             dispatch(userActions.setAuthData(user));

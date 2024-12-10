@@ -3,9 +3,9 @@ import { userActions } from '@/entities/User';
 import { LOCAL_STORAGE_TOKEN_KEY } from '@/shared/const/localStorage';
 import { ThunkConfig } from '@/app/providers/StoreProvider';
 import { AuthResponse, LoginProps } from '../../types/authSchema';
-import { resetScrolls } from '@/shared/lib/router/scrollByPath';
 import { rtkApi } from '@/shared/api/rtkApi';
 import { articlesListsPagesActions } from '@/entities/Article';
+import { resetAllVirtuosoState } from '@/shared/lib/virtuosoState/virtuosoStateByPathname';
 
 export const registration = createAsyncThunk<
     AuthResponse,
@@ -30,7 +30,7 @@ export const registration = createAsyncThunk<
 
             localStorage.setItem(LOCAL_STORAGE_TOKEN_KEY, accessToken);
             dispatch(rtkApi.util.resetApiState());
-            resetScrolls();
+            resetAllVirtuosoState();
             dispatch(articlesListsPagesActions.resetAllPages());
 
             dispatch(userActions.setAuthData(user));
