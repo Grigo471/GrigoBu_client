@@ -1,7 +1,7 @@
 import { StateSnapshot } from 'react-virtuoso';
 
 export const virtuosoStateByPathname: Record<string, StateSnapshot | undefined> = {};
-export const resetVirtuosoSatetByPath = (pathname: string) => {
+export const resetVirtuosoStateByPath = (pathname: string) => {
     virtuosoStateByPathname[pathname] = undefined;
 };
 

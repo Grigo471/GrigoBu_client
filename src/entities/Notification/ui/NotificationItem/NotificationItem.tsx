@@ -18,18 +18,18 @@ export const NotificationItem = memo((props: PropsWithChildren<NotificationItemP
         <Card
             className={classNames(cls.NotificationItem, {}, [className])}
         >
-            <Text title={item.title} text={item.description} />
+            <Text title={item.type} text={item.value?.toString()} />
         </Card>
 
     );
 
-    if (item.href) {
-        return (
-            <a className={cls.link} target="_blank" href={item.href} rel="noreferrer">
-                {content}
-            </a>
-        );
-    }
+    // if (item.href) {
+    //     return (
+    //         <a className={cls.link} target="_blank" href={item.href} rel="noreferrer">
+    //             {content}
+    //         </a>
+    //     );
+    // }
 
     return content;
 });

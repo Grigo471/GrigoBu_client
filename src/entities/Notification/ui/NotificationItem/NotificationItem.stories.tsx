@@ -6,9 +6,9 @@ import { Notification } from '../../model/types/notification';
 import { Theme } from '@/shared/const/theme';
 
 const notification: Notification = {
-    id: '1',
-    title: 'Notification',
-    description: 'This is notification',
+    id: 1,
+    type: 'comment',
+    name: 'This is notification',
 };
 
 const meta: Meta<typeof NotificationItem> = {

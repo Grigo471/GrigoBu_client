@@ -47,28 +47,28 @@ export const ArticlesPageFilters = memo(() => {
     const setTags = useCallback((tags: string[]) => {
         if (tags.length < 4) {
             window.scrollTo(0, 0);
-            dispatch(articlesPageActions.setTags(tags));
             resetPage(pathname);
+            dispatch(articlesPageActions.setTags(tags));
         }
     }, [dispatch, pathname, resetPage]);
 
     const toggleTagsVisible = useCallback(() => {
         if (tagsVisible) {
             window.scrollTo(0, 0);
-            dispatch(articlesPageActions.setTags([]));
             resetPage(pathname);
+            dispatch(articlesPageActions.setTags([]));
         }
         dispatch(articlesPageActions.toggleTagsVisible());
     }, [dispatch, tagsVisible, resetPage, pathname]);
 
     const onChangeRate = useCallback((rate: Rate) => {
         window.scrollTo(0, 0);
+        resetPage(pathname);
         if (myRate !== rate) {
             dispatch(articlesPageActions.setMyRateFilter(rate));
         } else {
             dispatch(articlesPageActions.setMyRateFilter(undefined));
         }
-        resetPage(pathname);
     }, [dispatch, myRate, pathname, resetPage]);
 
     return (

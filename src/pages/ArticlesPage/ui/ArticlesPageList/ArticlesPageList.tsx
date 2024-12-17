@@ -57,8 +57,8 @@ export const ArticlesPageList = memo(() => {
     return (
         <ArticlesList
             articles={data}
-            page={page}
-            isLoading={isLoading || isFetching}
+            isLoading={isLoading || (isFetching && page === 1)}
+            isFetching={isFetching}
             setUncollapsed={setUncollapsed}
             refreshHandler={refreshHandler}
         />

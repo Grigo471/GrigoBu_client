@@ -10,7 +10,7 @@ import { ARTICLES_PAGE_CACHE_LIFETIME } from '@/shared/const/articlesApi';
 import { StickyContentLayout } from '@/shared/layouts/StickyContentLayout';
 import { useArticlesListPageActions } from '@/entities/Article';
 import { getRouteArticles } from '@/shared/const/router';
-import { resetVirtuosoSatetByPath } from '@/shared/lib/virtuosoState/virtuosoStateByPathname';
+import { resetVirtuosoStateByPath } from '@/shared/lib/virtuosoState/virtuosoStateByPathname';
 
 const reducers: ReducerList = {
     articlesPage: articlesPageReducer,
@@ -28,7 +28,7 @@ const ArticlesPage = () => {
         return () => {
             articlesPageTimer = setTimeout(() => {
                 resetPage(pathname);
-                resetVirtuosoSatetByPath(pathname);
+                resetVirtuosoStateByPath(pathname);
             }, ARTICLES_PAGE_CACHE_LIFETIME * 1000);
         };
     });

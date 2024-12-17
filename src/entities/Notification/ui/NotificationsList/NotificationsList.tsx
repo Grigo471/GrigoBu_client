@@ -16,7 +16,7 @@ export const NotificationsList = memo((props: PropsWithChildren<NotificationsLis
     const { t } = useTranslation();
 
     const { data, isLoading } = useGetNotificationsList(null, {
-        pollingInterval: 10000,
+        pollingInterval: 3000,
     });
 
     const Skeleton = SkeletonRedesigned;

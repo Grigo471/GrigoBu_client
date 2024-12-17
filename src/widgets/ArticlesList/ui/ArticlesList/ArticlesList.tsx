@@ -1,5 +1,6 @@
 import {
     memo,
+    useEffect,
     useLayoutEffect,
     useRef,
 } from 'react';
@@ -16,13 +17,13 @@ import { Icon } from '@/shared/ui/Icon';
 import RefreshIcon from '@/shared/assets/icons/refresh.svg';
 import { ARTICLES_PAGE_LIMIT } from '@/shared/const/articlesApi';
 import {
-    getVirtuosoStateByPathname, setVirtuosoStateByPathname,
+    getVirtuosoStateByPathname, resetVirtuosoStateByPath, setVirtuosoStateByPathname,
 } from '@/shared/lib/virtuosoState/virtuosoStateByPathname';
 
 interface ArticlesListProps {
    articles?: Article[];
    isLoading?: boolean;
-   page: number;
+   isFetching?: boolean;
    error?: string;
    setUncollapsed: (articleId: string) => void;
    refreshHandler: () => void;
@@ -30,7 +31,7 @@ interface ArticlesListProps {
 
 export const ArticlesList = memo((props: ArticlesListProps) => {
     const {
-        articles, isLoading, error, page, setUncollapsed, refreshHandler,
+        articles, isLoading, isFetching, error, setUncollapsed, refreshHandler,
     } = props;
     const { t } = useTranslation();
 
@@ -59,13 +60,13 @@ export const ArticlesList = memo((props: ArticlesListProps) => {
 
     const getSkeletons = () => new Array(3)
         .fill(0)
-        .map((item, index) => (
+        .map((_, index) => (
             <ArticleListItemSkeleton key={index} />
         ));
 
     const Footer = memo(() => (
         <>
-            {isLoading && getSkeletons()}
+            {isFetching && getSkeletons()}
             <div />
         </>
     ));
@@ -79,12 +80,16 @@ export const ArticlesList = memo((props: ArticlesListProps) => {
         }
     };
 
+    useEffect(() => {
+        if (virtuosoState) resetVirtuosoStateByPath(pathname);
+    });
+
     useLayoutEffect(() => () => {
         ref.current?.getState((state) => { setVirtuosoStateByPathname(pathname, state); });
     // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
-    if (isLoading && page === 1) {
+    if (isLoading) {
         return (
             <>
                 {getSkeletons()}
@@ -101,7 +106,7 @@ export const ArticlesList = memo((props: ArticlesListProps) => {
                 clickable
                 Svg={RefreshIcon}
             />
-            {(!isLoading && !articles?.length) && (
+            {(!isLoading && !isFetching && !articles?.length) && (
                 <Text
                     size="l"
                     title={t('Статьи не найдены')}

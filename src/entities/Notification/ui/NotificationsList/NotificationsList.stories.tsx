@@ -8,19 +8,19 @@ import { Theme } from '@/shared/const/theme';
 
 const notifications: Notification[] = [
     {
-        id: '1',
-        title: 'Notification 1',
-        description: 'This is notification',
+        id: 1,
+        type: 'comment',
+        name: 'This is notification',
     },
     {
-        id: '2',
-        title: 'Notification 2',
-        description: 'This is notification',
+        id: 2,
+        type: 'comment',
+        name: 'This is notification',
     },
     {
-        id: '3',
-        title: 'Notification 3',
-        description: 'This is notification',
+        id: 3,
+        type: 'comment',
+        name: 'This is notification',
     },
 ];
 

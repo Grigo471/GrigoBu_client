@@ -28,21 +28,21 @@ export function useArticlesFilters() {
 
     const onChangeSort = useCallback((sort: ArticleSortField) => {
         window.scrollTo(0, 0);
-        setSort(pathname, sort);
         resetPage(pathname);
+        setSort(pathname, sort);
     }, [pathname, resetPage, setSort]);
 
     const onChangeOrder = useCallback((order: SortOrder) => {
         window.scrollTo(0, 0);
-        setOrder(pathname, order);
         resetPage(pathname);
+        setOrder(pathname, order);
     }, [pathname, resetPage, setOrder]);
 
     const debouncedSetSearch = useDebounce(
         (search: string) => {
             window.scrollTo(0, 0);
-            setSearch(pathname, search);
             resetPage(pathname);
+            setSearch(pathname, search);
         },
         500,
     );

@@ -5,7 +5,7 @@ import { SubscriptionsPageList } from '../SubscriptionsPageList/SubscriptionsPag
 import { SubscriptionsPageFilters } from '../SubscriptionsPageFilters/SubscriptionsPageFilters';
 import { useArticlesListPageActions } from '@/entities/Article';
 import { getRouteSubscriptions } from '@/shared/const/router';
-import { resetVirtuosoSatetByPath } from '@/shared/lib/virtuosoState/virtuosoStateByPathname';
+import { resetVirtuosoStateByPath } from '@/shared/lib/virtuosoState/virtuosoStateByPathname';
 
 let subscriptionsPageTimer: NodeJS.Timeout;
 
@@ -19,7 +19,7 @@ const SubscriptionsPage = () => {
         return () => {
             subscriptionsPageTimer = setTimeout(() => {
                 resetPage(pathname);
-                resetVirtuosoSatetByPath(pathname);
+                resetVirtuosoStateByPath(pathname);
             }, ARTICLES_PAGE_CACHE_LIFETIME * 1000);
         };
     });
