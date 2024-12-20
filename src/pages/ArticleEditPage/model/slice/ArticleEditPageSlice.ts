@@ -15,6 +15,7 @@ const initialForm: Article = {
     user: {
         id: 1,
         username: '',
+        createdAt: '',
     },
     blocks: [],
 };

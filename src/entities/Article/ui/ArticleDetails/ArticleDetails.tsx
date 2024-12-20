@@ -1,5 +1,6 @@
 /* eslint-disable react/no-unused-prop-types */
 import React, { memo } from 'react';
+import { useTranslation } from 'react-i18next';
 import { HStack } from '@/shared/ui/Stack';
 import cls from './ArticleDetails.module.scss';
 
@@ -10,6 +11,7 @@ import { Avatar } from '@/shared/ui/Avatar';
 import { AppLink } from '@/shared/ui/AppLink';
 import { srcWithApi } from '@/shared/lib/url/srcWithApi/srcWithApi';
 import { classNames } from '@/shared/lib/classNames/classNames';
+import { formatDateToLocal } from '@/shared/lib/helpers/date/formatDateToLocal';
 
 interface ArticleDetailsProps {
     article?: Article;
@@ -35,10 +37,12 @@ export const ArticleDetails = memo(
             article, type = 'list', className,
         } = props;
 
+        const { i18n } = useTranslation();
+
         if (!article) return null;
 
         const avatar = article?.user.avatar;
-        const date = article?.createdAt.split('T')[0];
+        const date = formatDateToLocal(article?.createdAt, i18n.language);
 
         const title = (type === 'list' || type === 'userList') ? (
             <AppLink to={`/article/${article?.id}`}>

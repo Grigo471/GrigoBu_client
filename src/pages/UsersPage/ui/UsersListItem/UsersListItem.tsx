@@ -9,6 +9,7 @@ import { Text } from '@/shared/ui/Text';
 import { srcWithApi } from '@/shared/lib/url/srcWithApi/srcWithApi';
 import { AppLink } from '@/shared/ui/AppLink';
 import { SubscribeToUserButton } from '@/features/SubscribeToUserButton';
+import { formatDateToLocal } from '@/shared/lib/helpers/date/formatDateToLocal';
 
 interface UsersListItemProps {
    className?: string;
@@ -17,10 +18,10 @@ interface UsersListItemProps {
 
 export const UsersListItem = memo((props: UsersListItemProps) => {
     const { className, user } = props;
-    const { t } = useTranslation();
+    const { t, i18n } = useTranslation();
     const authData = useSelector(getUserAuthData);
 
-    const date = user.createdAt?.split('T')[0];
+    const date = formatDateToLocal(user.createdAt, i18n.language, false);
 
     return (
         <Card className={className} max>

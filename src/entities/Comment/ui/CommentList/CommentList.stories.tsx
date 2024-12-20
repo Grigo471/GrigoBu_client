@@ -12,6 +12,7 @@ const comments: Comment[] = [
         user: {
             id: 1,
             username: 'Billy',
+            createdAt: '',
         },
     },
     {
@@ -20,6 +21,7 @@ const comments: Comment[] = [
         user: {
             id: 2,
             username: 'Bob',
+            createdAt: '',
         },
     },
 ];

@@ -20,6 +20,7 @@ const meta: Meta<typeof ArticleDetails> = {
             user: {
                 id: 1,
                 username: 'Grigo',
+                createdAt: '',
                 avatar: 'https://p.turbosquid.com/ts-thumb/Ax/XUKtDV/FxtkjVoD/homer1200/jpg/1590143115/600x600/fit_q87/c8d0e5a16813b132c3740438479c620649e28627/homer1200.jpg',
             },
             blocks: [

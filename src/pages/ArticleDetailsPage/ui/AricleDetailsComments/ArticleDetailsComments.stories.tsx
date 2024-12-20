@@ -15,6 +15,7 @@ const comments: ArticleDetailsCommentsSchema = {
             user: {
                 id: 2,
                 username: 'Billy',
+                createdAt: '',
             },
         },
         2: {
@@ -23,6 +24,7 @@ const comments: ArticleDetailsCommentsSchema = {
             user: {
                 id: 1,
                 username: 'Bob',
+                createdAt: '',
             },
         },
     },

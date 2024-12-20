@@ -9,6 +9,7 @@ const comment: Comment = {
     user: {
         id: 1,
         username: 'Billy',
+        createdAt: '',
     },
 };
 
