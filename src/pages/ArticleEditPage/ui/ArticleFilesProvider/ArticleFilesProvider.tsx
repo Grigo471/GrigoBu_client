@@ -11,11 +11,7 @@ interface ArticleFilesContextProps {
 }
 const ArticleFilesContext = createContext<ArticleFilesContextProps>({});
 
-const ArticleFilesProvider = (props: PropsWithChildren) => {
-    const {
-        children,
-    } = props;
-
+const ArticleFilesProvider = ({ children }: PropsWithChildren) => {
     const [images, setImages] = useState<File[]>([]);
 
     const defaultProps = useMemo(() => ({ images, setImages }), [images, setImages]);
