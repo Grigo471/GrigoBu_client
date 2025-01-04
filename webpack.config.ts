@@ -3,6 +3,17 @@ import path from 'path';
 import { buildWebpackConfig } from './config/build/buildWebpackConfig';
 import { BuildEnv, BuildPaths } from './config/build/types/config';
 
+function getApiUrl(mode: BuildMode, apiUrl?: string) {
+    if (apiUrl) {
+        return apiUrl;
+    }
+    if (mode === 'production') {
+        return 'http://griboo.ru:5000';
+    }
+
+    return 'http://localhost:5000';
+}
+
 export default (env: BuildEnv) => {
     const paths: BuildPaths = {
         entry: path.resolve(__dirname, 'src', 'index.tsx'),
@@ -18,7 +29,7 @@ export default (env: BuildEnv) => {
     const isDev = mode === 'development';
     const PORT = env?.port || 3000;
     const analyze = !!env?.analyze;
-    const apiUrl = env?.apiUrl || 'http://localhost:5000';
+    const apiUrl = getApiUrl(mode, env?.apiUrl);
 
     const config: webpack.Configuration = buildWebpackConfig({
         mode,
