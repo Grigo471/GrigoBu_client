@@ -8,10 +8,10 @@ function getApiUrl(mode: BuildMode, apiUrl?: string) {
         return apiUrl;
     }
     if (mode === 'production') {
-        return 'http://griboo.ru:5000';
+        return 'https://griboo.ru:5000';
     }
 
-    return 'http://localhost:5000';
+    return 'https://localhost:5000';
 }
 
 export default (env: BuildEnv) => {
