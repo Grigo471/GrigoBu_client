@@ -9,7 +9,7 @@ import { saveArticle } from '../services/saveArticle/saveArticle';
 const initialForm: Article = {
     id: '',
     title: '',
-    createdAt: '',
+    createdAt: new Date().toString(),
     rating: 0,
     tags: [],
     user: {

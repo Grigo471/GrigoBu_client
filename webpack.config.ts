@@ -11,7 +11,7 @@ function getApiUrl(mode: BuildMode, apiUrl?: string) {
         return 'https://griboo.ru/api';
     }
 
-    return 'https://localhost:5000';
+    return 'http://localhost:5000';
 }
 
 export default (env: BuildEnv) => {
