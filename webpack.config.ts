@@ -8,7 +8,7 @@ function getApiUrl(mode: BuildMode, apiUrl?: string) {
         return apiUrl;
     }
     if (mode === 'production') {
-        return 'https://griboo.ru:5000';
+        return 'https://griboo.ru/api';
     }
 
     return 'https://localhost:5000';
