@@ -48,23 +48,25 @@ export const ArticleEditToolbar = memo(({ isPreview, setIsPreview }: ArticleEdit
     }, [dispatch, isEdit, images]);
 
     return (
-        <Card className={cls.menu} padding="16">
+        <Card className={cls.menu} padding="16" max>
             <VStack max gap="12">
                 <Text
                     size="m"
                     text={title}
                     bold
                 />
-                <Button
-                    onClick={onChangeIsPreview}
-                >
-                    {isPreview ? t('Редактировать') : t('Предпросмотр')}
-                </Button>
-                <Button
-                    onClick={onSaveArticle}
-                >
-                    {t('Отправить')}
-                </Button>
+                <VStack adaptive gap="12">
+                    <Button
+                        onClick={onChangeIsPreview}
+                    >
+                        {isPreview ? t('Редактировать') : t('Предпросмотр')}
+                    </Button>
+                    <Button
+                        onClick={onSaveArticle}
+                    >
+                        {t('Отправить')}
+                    </Button>
+                </VStack>
                 {validateErrors?.length && validateErrors?.map((err) => (
                     <Text
                         variant="error"

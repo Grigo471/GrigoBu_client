@@ -10,6 +10,7 @@ import cls from './ListBox.module.scss';
 import popupCls from '../../styles/popups.module.scss';
 import ArrowIcon from '../../../../assets/icons/arrow-bottom.svg';
 import { Icon } from '../../../Icon';
+import { Text } from '../../../Text';
 
 export interface ListBoxItem<T extends string> {
    value: T;
@@ -46,7 +47,7 @@ export function ListBox<T extends string>(props: ListBoxProps<T>) {
 
     return (
         <HStack gap="4">
-            {label && <span>{`${label}>`}</span>}
+            {label && <Text text={label} />}
             <HListbox
                 as="div"
                 className={classNames(cls.ListBox, {}, [className, popupCls.popup])}

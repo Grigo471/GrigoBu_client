@@ -5,7 +5,7 @@ import {
     Article, ArticleDetails, ArticleTagsRow,
 } from '@/entities/Article';
 import cls from './ArticleDetailsCard.module.scss';
-import { HStack, VStack } from '@/shared/ui/Stack';
+import { VStack } from '@/shared/ui/Stack';
 import { Card } from '@/shared/ui/Card';
 import { ArticleRatingButton } from '@/features/ArticleRatingButton';
 
@@ -19,7 +19,7 @@ export const ArticleDetailsCard = memo((props: ArticleDetailsCardProps) => {
     if (!article) return null;
 
     return (
-        <HStack gap="16" align="start">
+        <div className={cls.ArticleDetailsCard}>
             <ArticleRatingButton className={cls.rating} article={article} />
             <Card border="minimum" padding="24" className={cls.card}>
                 <VStack gap="8">
@@ -30,6 +30,6 @@ export const ArticleDetailsCard = memo((props: ArticleDetailsCardProps) => {
                     <ArticleTagsRow tags={article.tags} />
                 </VStack>
             </Card>
-        </HStack>
+        </div>
     );
 });

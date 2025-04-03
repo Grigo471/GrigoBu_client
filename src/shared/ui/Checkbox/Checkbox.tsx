@@ -17,11 +17,12 @@ interface CheckboxProps<T extends string | number> {
    onChange: (value: T) => void;
    disabled?: boolean;
    direction?: FlexDirection;
+    adaptive?: boolean;
 }
 
 export const CheckboxComponent = <T extends string | number>(props: CheckboxProps<T>) => {
     const {
-        className, items, name, value, onChange, disabled, direction = 'column',
+        className, items, name, value, onChange, disabled, direction = 'column', adaptive = false,
     } = props;
 
     const onChangeHandler = useCallback((value: T) => {
@@ -32,6 +33,7 @@ export const CheckboxComponent = <T extends string | number>(props: CheckboxProp
         <Flex
             align="start"
             direction={direction}
+            adaptive={adaptive}
             gap="8"
             className={classNames(cls.Radio, {}, [className])}
         >

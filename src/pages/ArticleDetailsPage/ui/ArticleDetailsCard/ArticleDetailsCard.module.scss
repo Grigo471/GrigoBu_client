@@ -1,3 +1,9 @@
+.ArticleDetailsCard {
+    display: flex;
+    gap: 16px;
+    align-items: start;
+}
+
 .rating {
     position: sticky;
     top: 72px;
@@ -5,4 +11,18 @@
 
 .card {
     width: var(--article-card-width);
+}
+
+@media screen and (max-width: 900px) {
+    .ArticleDetailsCard {
+        flex-direction: column;
+        position: relative;
+    }
+
+    .rating {
+        position: absolute;
+        z-index: 10;
+        top: 16px;
+        right: 16px;
+    }
 }

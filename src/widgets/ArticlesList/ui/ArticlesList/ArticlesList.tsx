@@ -72,6 +72,7 @@ export const ArticlesList = memo((props: ArticlesListProps) => {
     ));
 
     const endReached = () => {
+        console.log('end reached');
         if (articles) {
             const currPage = Math.ceil(articles.length / ARTICLES_PAGE_LIMIT);
             if (articles.length === currPage * ARTICLES_PAGE_LIMIT) {

@@ -2,7 +2,27 @@
     transform: rotate(180deg);
 }
 
+.upBtn {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
 .ArticleRatingButton {
     padding-bottom: 72px;
     width: (--rating-button-width);
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+@media screen and (max-width: 900px) {
+    .ArticleRatingButton {
+        padding: 0;
+        flex-direction: row;
+    }
+
+    .upBtn {
+        flex-direction: row;
+    }
 }

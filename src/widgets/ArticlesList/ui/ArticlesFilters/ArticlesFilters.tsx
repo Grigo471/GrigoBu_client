@@ -24,7 +24,7 @@ export const ArticlesFilters = memo((props: ArticleFiltersProps) => {
     const { t } = useTranslation();
 
     return (
-        <VStack gap="32">
+        <VStack gap="32" max mbGap="12">
             <Input
                 size="s"
                 addonLeft={<Icon Svg={SearchIcon} />}

@@ -9,9 +9,9 @@ export function buildSvgLoader() {
                     plugins: [
                         {
                             name: 'convertColors',
-                            params: {
-                                currentColor: true,
-                            },
+                            // params: {
+                            //     currentColor: true,
+                            // },
                         },
                     ],
                 },

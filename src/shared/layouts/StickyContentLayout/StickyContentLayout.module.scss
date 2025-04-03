@@ -31,3 +31,16 @@
 .footer {
     height: 100px;
 }
+
+@media screen and (max-width: 900px) {
+    .StickyContentLayout {
+        display: flex;
+        flex-direction: column;
+        padding: 0 16px;
+    }
+
+    .right {
+        position: static;
+        height: fit-content;
+    }
+}

@@ -1,0 +1,13 @@
+.StackItem {
+    width: 224px;
+
+    a {
+        h1 {
+            color: var(--accent-redesigned);
+        }
+
+        h1:hover {
+            color: var(--icon-redesigned);
+        }
+    }
+}

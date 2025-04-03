@@ -27,7 +27,7 @@ export const ArticleMyRateSelector = memo((props: ArticleMyRateSelectorProps) =>
     ];
 
     return (
-        <VStack gap="8">
+        <VStack gap="8" adaptive>
             <Text text={t('Моя оценка')} bold />
             <Checkbox<Rate>
                 items={items}
@@ -35,6 +35,7 @@ export const ArticleMyRateSelector = memo((props: ArticleMyRateSelectorProps) =>
                 value={rate}
                 onChange={onChange}
                 direction="column"
+                adaptive
             />
         </VStack>
     );

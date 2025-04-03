@@ -19,7 +19,7 @@ export const getRouteArticles = () => '/';
 export const getRouteAbout = () => '/about';
 export const getRouteUsers = () => '/users';
 export const getRouteSubscriptions = () => '/subs';
-export const getRouteProfile = (username: string) => `users/${username}`;
+export const getRouteProfile = (username: string) => `/users/${username}`;
 export const getRouteArticleDetails = (id: string) => `/article/${id}`;
 export const getRouteArticleCreate = () => '/create';
 export const getRouteArticleEdit = (id: string) => `/article/${id}/edit`;

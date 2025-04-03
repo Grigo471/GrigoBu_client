@@ -7,7 +7,6 @@ import {
 } from '@/entities/Article';
 import cls from './ArticleListItem.module.scss';
 import { HStack, VStack } from '@/shared/ui/Stack';
-import { Card } from '@/shared/ui/Card';
 import { AppLink } from '@/shared/ui/AppLink';
 import { Icon } from '@/shared/ui/Icon';
 import { Text } from '@/shared/ui/Text';
@@ -16,6 +15,7 @@ import { classNames } from '@/shared/lib/classNames/classNames';
 import { Button } from '@/shared/ui/Button';
 import { useInitialEffect } from '@/shared/lib/hooks/useInitialEffect';
 import { ArticleRatingButton } from '@/features/ArticleRatingButton';
+import { Card } from '@/shared/ui/Card';
 
 interface ArticleListItemProps {
     article: Article;
@@ -49,7 +49,7 @@ export const ArticleListItem = memo((props: ArticleListItemProps) => {
     });
 
     return (
-        <HStack gap="16" align="start" className={classNames(cls.ArticleListItem, {}, [className])}>
+        <div className={classNames(cls.ArticleListItem, {}, [className])}>
             <ArticleRatingButton className={cls.rating} article={article} />
             <Card border="minimum" padding="24" className={cls.card}>
                 <VStack gap="8">
@@ -79,6 +79,6 @@ export const ArticleListItem = memo((props: ArticleListItemProps) => {
                     </AppLink>
                 </VStack>
             </Card>
-        </HStack>
+        </div>
     );
 });

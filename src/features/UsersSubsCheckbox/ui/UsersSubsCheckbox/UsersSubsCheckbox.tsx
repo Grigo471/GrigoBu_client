@@ -32,6 +32,7 @@ export const UsersSubsCheckbox = memo((props: UsersSubsCheckboxProps) => {
             value={value}
             onChange={onChange}
             direction="column"
+            adaptive
             className={className}
         />
     );

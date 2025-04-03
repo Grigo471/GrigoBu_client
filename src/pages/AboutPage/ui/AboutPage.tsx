@@ -1,29 +1,46 @@
 import { useTranslation } from 'react-i18next';
-import { useState } from 'react';
 import { Page } from '@/widgets/Page';
-import { RichTextEditor, RichTextSanitizer } from '@/shared/ui/RichTextEditor';
-import { VStack } from '@/shared/ui/Stack';
-
-// eslint-disable-next-line max-len
-const content = '<a href="https://codesandbox.io/p/sandbox/nostalgic-tamas-3pk6gr?file=%2Fsrc%2FEditor.jsx%3A25%2C9-25%2C32">https://codesandbox.io/p/sandbox/nostalgic-tamas-3pk6gr?file=%2Fsrc%2FEditor.jsx%3A25%2C9-25%2C32</a>Программа, которую по традиции называют «Hello, world!», очень проста. Она выводит куда-либо фразу «Hello, world!», или другую подобную, средствами некоего языка. JavaScript — это язык, программы на котором можно выполнять в разных средах. В нашем случае речь идёт о браузерах и о серверной платформе Node.js. Если до сих пор вы не написали ни строчки кода на JS и читаете этот текст в браузере, на настольном компьютере, это значит, что вы буквально в считанных секундах от своей первой JavaScript-программы. Существуют и другие способы запуска JS-кода в браузере. Так, если говорить об обычном использовании программ на JavaScript, они загружаются в браузер для обеспечения работы веб-страниц. Как правило, код оформляют в виде отдельных файлов с расширением .js, которые подключают к веб-страницам, но программный код можно включать и непосредственно в код страницы. Всё это делается с помощью тега <script> ПРОВЕРКА';
+import { HStack, VStack } from '@/shared/ui/Stack';
+import { Text } from '@/shared/ui/Text';
+import { RichTextOutput } from '@/shared/ui/RichTextEditor';
+import { FrontEndStack } from '../model/consts/stacks';
+import { StackItem } from './StackItem/StackItem';
 
 const AboutPage = () => {
     const { t } = useTranslation('main');
 
-    const [text, setText] = useState(RichTextSanitizer(content));
-
-    const onChange = (value: string) => setText(value);
-
     return (
         <Page data-testid="MainPage">
             <VStack max gap="16">
-                {t('Главная страница')}
-                {text}
-                <div dangerouslySetInnerHTML={{ __html: text }} />
-                <RichTextEditor
-                    value={text}
-                    onChange={onChange}
+                <Text
+                    title={t('Добро пожаловать!')}
+                    bold
+                    size="l"
                 />
+                <Text
+                    text={t('Это учебный проект, выполненный на основе курса Тимура Ульби')}
+                    size="l"
+                />
+                <RichTextOutput
+                    value={
+                        `
+                        <p>Меня зовут Сергей, я начинающий фронтенд разработчик. 
+                        Этот проект я разработал в качестве демонстрации своих умений, 
+                        он является усовершенствованной фулл-стек версией проекта, 
+                        который создается в ходе курса от Тимура Ульби 
+                        <a href='https://ulbitv.ru/frontend'>
+                        "Продвинутый Frontend. В production на React".
+                        </a></p>
+                        <p>В проекте используется большой стек технологий:</p>
+                        `
+                    }
+                />
+                <Text title={t('Фронтенд: ')} size="l" align="center" />
+                <HStack wrap="wrap" gap="16" align="start">
+                    {FrontEndStack.map(
+                        (item) => <StackItem item={item} />,
+                    )}
+                </HStack>
             </VStack>
         </Page>
     );

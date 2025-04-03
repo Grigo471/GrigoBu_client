@@ -67,6 +67,44 @@
     gap: 32px;
 }
 
+@media screen and (max-width: 900px) {
+    .directionColumn .adaptive {
+        flex-direction: row;
+    }
+
+    .directionRow .adaptive {
+        flex-direction: column;
+    }
+
+    .mbAlignStart {
+        align-items: flex-start;
+    }
+
+    .mbAlignCenter {
+        align-items: center;
+    }
+
+    .mbAlignEnd {
+        align-items: flex-end;
+    }
+
+    .mbGap4 {
+        gap: 4px;
+    }
+
+    .mbGap8 {
+        gap: 8px;
+    }
+
+    .mbGap12 {
+        gap: 12px;
+    }
+
+    .mbGap16 {
+        gap: 16px;
+    }
+}
+
 .max {
     width: 100%;
 }

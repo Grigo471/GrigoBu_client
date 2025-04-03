@@ -1,7 +1,6 @@
 import { memo, useCallback } from 'react';
 import { classNames } from '@/shared/lib/classNames/classNames';
 import cls from './ArticleRatingButton.module.scss';
-import { VStack } from '@/shared/ui/Stack';
 import ArrowIcon from '@/shared/assets/icons/arrow-bottom.svg';
 import { Icon } from '@/shared/ui/Icon';
 import { Button } from '@/shared/ui/Button';
@@ -26,7 +25,7 @@ export const ArticleRatingButton = memo((props: ArticleRatingButtonProps) => {
     }, [rateArticle, article.id]);
 
     return (
-        <VStack gap="8" className={classNames(cls.ArticleRatingButton, {}, [className])}>
+        <div className={classNames(cls.ArticleRatingButton, {}, [className])}>
             <Button
                 square
                 variant="filled"
@@ -34,10 +33,10 @@ export const ArticleRatingButton = memo((props: ArticleRatingButtonProps) => {
                 onClick={onLike}
                 disabled={isRateLoading}
             >
-                <VStack align="center">
+                <div className={cls.upBtn}>
                     <Icon className={cls.up} Svg={ArrowIcon} />
                     {article.rating}
-                </VStack>
+                </div>
             </Button>
             <Button
                 square
@@ -48,6 +47,6 @@ export const ArticleRatingButton = memo((props: ArticleRatingButtonProps) => {
             >
                 <Icon Svg={ArrowIcon} />
             </Button>
-        </VStack>
+        </div>
     );
 });

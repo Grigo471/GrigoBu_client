@@ -56,3 +56,16 @@
 
     --refresh-btn-left: calc((100vw - var(--articles-page-width) - var(--scrollbar-width)) / 2 - 48px);
 }
+
+@media screen and (max-width: 900px) {
+    :root {
+        --article-card-width: calc(100vw - 32px);
+        --rating-button-width: 5vw;
+        --article-filters-width: 100%;
+        --articles-page-width: 100%;
+
+        // positions
+
+        --refresh-btn-left: calc((100vw - var(--articles-page-width) - var(--scrollbar-width)) / 2 - 48px);
+    }
+}

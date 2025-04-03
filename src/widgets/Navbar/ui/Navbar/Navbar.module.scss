@@ -12,7 +12,60 @@
 }
 
 .items {
+    display: flex;
+    flex-direction: row;
+    gap: 24px;
     justify-self: center;
+}
+
+.burger {
+    display: none;
+    padding-top: 6px;
+    margin-right: 36px;
+}
+
+.overlay,
+.settings {
+    display: none;
+}
+
+@media screen and (max-width: 900px) {
+    .Navbar {
+        padding: 0 16px;
+    }
+
+    .burger {
+        display: block;
+    }
+
+    .items {
+        width: 0;
+        position: fixed;
+        top: 0;
+        left: 0;
+        transition: width 0.2s;
+    }
+
+    .overlayOpen {
+        display: block;
+    }
+
+    .sidebarOpen {
+        display: flex;
+        flex-direction: column;
+        gap: 36px;
+        background: var(--dark-bg-redesigned);
+        width: 320px;
+        height: 100vh;
+        z-index: 100;
+        padding: 64px;
+        border-right: 3px solid var(--bg-redesigned);
+
+        .settings {
+            display: flex;
+            gap: 8px;
+        }
+    }
 }
 
 .login,

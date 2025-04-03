@@ -31,7 +31,7 @@ export const ProfilePageFilters = memo(() => {
     return (
         <Card padding="24">
             <VStack gap="24">
-                <VStack gap="16">
+                <VStack gap="16" adaptive>
                     <HStack gap="8">
                         <Avatar src={srcWithApi(avatar)} size={32} />
                         <Text size="l" text={username} bold />

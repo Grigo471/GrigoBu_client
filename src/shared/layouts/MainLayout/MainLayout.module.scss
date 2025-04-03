@@ -31,7 +31,6 @@
 }
 
 .content {
-    grid-area: content;
     margin-top: 56px;
     width: 100%;
     max-width: var(--articles-page-width);
@@ -41,4 +40,14 @@
     position: fixed;
     right: 64px;
     bottom: 36px;
+}
+
+@media screen and (max-width: 900px) {
+    .toolbar {
+        display: none;
+    }
+
+    .bottomToolbar {
+        display: none;
+    }
 }

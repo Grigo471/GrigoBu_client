@@ -73,7 +73,7 @@ export const ArticlesPageFilters = memo(() => {
 
     return (
         <Card padding="24">
-            <VStack gap="24" max>
+            <VStack gap="24" max mbGap="16">
                 <ArticlesFilters
                     order={order}
                     sort={sort}

@@ -59,7 +59,7 @@ export const UsersPageFilters = memo(() => {
 
     return (
         <Card padding="24">
-            <VStack gap="32">
+            <VStack gap="32" mbGap="16">
                 <Input
                     size="s"
                     addonLeft={<Icon Svg={SearchIcon} />}
