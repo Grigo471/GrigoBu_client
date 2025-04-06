@@ -74,6 +74,7 @@ module.exports = {
                     'whiteSpace',
                     'view',
                     'name',
+                    'href',
                 ],
             },
         ],

@@ -1,6 +1,7 @@
 import { ReactElement } from 'react';
 import { classNames } from '@/shared/lib/classNames/classNames';
 import cls from './MainLayout.module.scss';
+import { Footer } from './Footer/Footer';
 
 interface MainLayoutProps {
    className?: string;
@@ -22,6 +23,7 @@ export const MainLayout = (props: MainLayoutProps) => {
                 <div className={cls.toolbar}>{toolbar}</div>
                 <div className={cls.content}>{content}</div>
             </div>
+            <Footer />
             <div className={cls.bottomToolbar}>{bottomToolbar}</div>
         </>
     );

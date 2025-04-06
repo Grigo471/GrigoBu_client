@@ -18,6 +18,7 @@ const $api = axios.create({
     withCredentials: true,
     headers: {
         Authorization: `Bearer ${localStorage.getItem(LOCAL_STORAGE_TOKEN_KEY) || ''}`,
+        'Access-Control-Allow-Origin': '*',
     },
 });
 

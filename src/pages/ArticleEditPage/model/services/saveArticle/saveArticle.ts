@@ -4,7 +4,9 @@ import { ThunkConfig } from '@/app/providers/StoreProvider';
 import { getArticleEditPageForm } from '../../selectors/articleEditPageSelectors';
 import { ValidateArticleError } from '../../consts/consts';
 import { validateArticleData } from '../validateArticleData/validateArticleData';
-import { Article } from '@/entities/Article';
+import { Article, articlesListsPagesActions } from '@/entities/Article';
+import { rtkApi } from '@/shared/api/rtkApi';
+import { resetAllVirtuosoState } from '@/shared/lib/virtuosoState/virtuosoStateByPathname';
 
 interface SaveArticleProps {
     images?: File[];
@@ -18,7 +20,9 @@ export const saveArticle = createAsyncThunk<
 >(
     'articleEditPage/saveArticle',
     async (props, thunkApi) => {
-        const { extra, rejectWithValue, getState } = thunkApi;
+        const {
+            extra, rejectWithValue, getState, dispatch,
+        } = thunkApi;
         const { isEdit, images } = props;
 
         const form = getArticleEditPageForm(getState());
@@ -53,12 +57,16 @@ export const saveArticle = createAsyncThunk<
 
         try {
             const response = isEdit
-                ? await extra.api.put<Article>(`/articles/${form?.id}`, formData)
+                ? await extra.api.patch<Article>(`/articles/${form?.id}`, formData)
                 : await extra.api.post<Article>('/articles', formData);
 
             if (!response.data) {
                 throw new Error();
             }
+
+            dispatch(rtkApi.util.resetApiState());
+            resetAllVirtuosoState();
+            dispatch(articlesListsPagesActions.resetAllPages());
 
             return response.data;
         } catch (error) {

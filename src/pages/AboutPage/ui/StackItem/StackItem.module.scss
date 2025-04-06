@@ -1,13 +1,14 @@
 .StackItem {
-    width: 224px;
+    max-width: 260px;
+    margin-top: 16px;
 
     a {
         h1 {
-            color: var(--accent-redesigned);
+            color: var(--icon-redesigned);
         }
 
         h1:hover {
-            color: var(--icon-redesigned);
+            color: var(--accent-redesigned);
         }
     }
 }

@@ -1,5 +1,6 @@
 .popup {
     position: relative;
+    z-index: 100;
 }
 
 .active {
@@ -14,6 +15,7 @@
     border-radius: 18px;
     border: 1px solid var(--accent-redesigned);
     overflow: hidden;
+    z-index: 10000;
 }
 
 .trigger {

@@ -28,18 +28,18 @@
     width: var(--article-filters-width);
 }
 
-.footer {
-    height: 100px;
-}
-
 @media screen and (max-width: 900px) {
     .StickyContentLayout {
         display: flex;
         flex-direction: column;
+    }
+
+    .content {
         padding: 0 16px;
     }
 
     .right {
+        padding: 16px;
         position: static;
         height: fit-content;
     }

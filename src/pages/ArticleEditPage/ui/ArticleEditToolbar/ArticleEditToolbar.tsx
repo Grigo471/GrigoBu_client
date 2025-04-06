@@ -1,6 +1,6 @@
 import { memo, useCallback } from 'react';
 import { useTranslation } from 'react-i18next';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import cls from './ArticleEditToolbar.module.scss';
 import { Card } from '@/shared/ui/Card';
@@ -17,6 +17,8 @@ import { saveArticle } from '../../model/services/saveArticle/saveArticle';
 import { validateErrorsTranslations } from '../../model/consts/consts';
 import { useArticleFiles } from '../ArticleFilesProvider/ArticleFilesProvider';
 import { ArticleTagsSelector } from '@/features/ArticleTagsSelector';
+import { getRouteArticleDetails, getRouteArticles } from '@/shared/const/router';
+import { deleteArticle } from '../../model/services/deleteArticle/deleteArticle';
 
 interface ArticleEditToolbarProps {
     isPreview: boolean;
@@ -29,6 +31,8 @@ export const ArticleEditToolbar = memo(({ isPreview, setIsPreview }: ArticleEdit
 
     const { id } = useParams<{ id: string }>();
     const { images } = useArticleFiles();
+
+    const navigate = useNavigate();
 
     const isEdit = Boolean(id);
     const title = isEdit ? t('Редактирование статьи') : t('Создание новой статьи');
@@ -44,8 +48,20 @@ export const ArticleEditToolbar = memo(({ isPreview, setIsPreview }: ArticleEdit
     }, [setIsPreview, isPreview]);
 
     const onSaveArticle = useCallback(() => {
-        dispatch(saveArticle({ isEdit, images }));
-    }, [dispatch, isEdit, images]);
+        dispatch(saveArticle({ isEdit, images }))
+            .then(({ payload }) => {
+                if (payload && 'id' in payload) navigate(getRouteArticleDetails(payload.id));
+            });
+    }, [dispatch, isEdit, images, navigate]);
+
+    const onDeleteArticle = useCallback(() => {
+        if (id) {
+            dispatch(deleteArticle(id))
+                .then(() => {
+                    navigate(getRouteArticles());
+                });
+        }
+    }, [dispatch, navigate, id]);
 
     return (
         <Card className={cls.menu} padding="16" max>
@@ -66,6 +82,14 @@ export const ArticleEditToolbar = memo(({ isPreview, setIsPreview }: ArticleEdit
                     >
                         {t('Отправить')}
                     </Button>
+                    {isEdit && (
+                        <Button
+                            color="error"
+                            onClick={onDeleteArticle}
+                        >
+                            {t('Удалить статью')}
+                        </Button>
+                    )}
                 </VStack>
                 {validateErrors?.length && validateErrors?.map((err) => (
                     <Text
