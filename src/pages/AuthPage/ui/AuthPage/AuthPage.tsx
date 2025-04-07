@@ -1,5 +1,4 @@
 import { memo } from 'react';
-import { useTranslation } from 'react-i18next';
 import { useSelector } from 'react-redux';
 import { Navigate, useLocation } from 'react-router-dom';
 import cls from './AuthPage.module.scss';
@@ -13,7 +12,6 @@ interface LocationState {
 }
 
 export const AuthPage = memo(() => {
-    const { t } = useTranslation();
     const auth = useSelector(getUserAuthData);
     const location = useLocation();
     const state = location.state as LocationState;

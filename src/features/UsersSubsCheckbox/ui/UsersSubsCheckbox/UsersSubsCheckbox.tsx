@@ -12,7 +12,7 @@ interface UsersSubsCheckboxProps {
 
 export const UsersSubsCheckbox = memo((props: UsersSubsCheckboxProps) => {
     const { className, value, onChange } = props;
-    const { t } = useTranslation();
+    const { t } = useTranslation('users');
 
     const items: CheckboxItem<UsersSubsRelation>[] = [
         {

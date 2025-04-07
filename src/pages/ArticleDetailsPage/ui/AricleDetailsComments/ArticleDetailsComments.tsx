@@ -30,7 +30,7 @@ export const ArticleDetailsComments = memo((
     props: PropsWithChildren<ArticleDetailsCommentsProps>,
 ) => {
     const { className, id } = props;
-    const { t } = useTranslation();
+    const { t } = useTranslation('comments');
     const dispatch = useAppDispatch();
 
     const comments = useSelector(getArticleComments.selectAll);

@@ -25,7 +25,7 @@ import { getRouteArticles } from '@/shared/const/router';
 
 export const ArticlesPageFilters = memo(() => {
     const dispatch = useAppDispatch();
-    const { t } = useTranslation();
+    const { t } = useTranslation('articles');
     const pathname = getRouteArticles();
     const authData = useSelector(getUserAuthData);
 

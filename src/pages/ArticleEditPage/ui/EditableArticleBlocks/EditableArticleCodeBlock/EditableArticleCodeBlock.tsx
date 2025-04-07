@@ -18,7 +18,7 @@ export const EditableArticleCodeBlock = memo((props: EditableArticleCodeBlockPro
     const {
         block, index,
     } = props;
-    const { t } = useTranslation();
+    const { t } = useTranslation('article-edit');
     const dispatch = useAppDispatch();
 
     const onChangeTitle = useCallback((title: string, index: number) => {

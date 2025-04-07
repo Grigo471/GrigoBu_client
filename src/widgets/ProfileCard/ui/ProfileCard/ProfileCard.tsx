@@ -31,7 +31,7 @@ const reducers: ReducerList = {
 
 export const ProfileCard = memo((props: ProfileCardProps) => {
     const { className, username } = props;
-    const { t } = useTranslation();
+    const { t } = useTranslation('users');
     const dispatch = useAppDispatch();
     const authData = useSelector(getUserAuthData);
     const userData = useSelector(getProfileData);

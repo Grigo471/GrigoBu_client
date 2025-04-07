@@ -16,7 +16,7 @@ interface NotificationItemProps {
 export const NotificationItem = memo((props: PropsWithChildren<NotificationItemProps>) => {
     const { className, item } = props;
 
-    const { t, i18n } = useTranslation();
+    const { t, i18n } = useTranslation('notifications');
 
     const notificationContent = useCallback((item: Notification) => {
         switch (item.type) {

@@ -25,7 +25,7 @@ export const EditableArticleImageBlock = memo((props: EditableArticleImageBlockP
     const {
         block, index,
     } = props;
-    const { t } = useTranslation();
+    const { t } = useTranslation('article-edit');
     const dispatch = useAppDispatch();
     const { src } = block;
     const { addImage, deleteImage } = useArticleFiles();

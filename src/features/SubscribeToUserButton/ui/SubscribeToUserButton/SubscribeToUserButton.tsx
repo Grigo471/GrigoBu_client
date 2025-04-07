@@ -18,7 +18,7 @@ interface SubscribeToUserButtonProps {
 
 export const SubscribeToUserButton = memo((props: SubscribeToUserButtonProps) => {
     const { className, userId, amISubscribed } = props;
-    const { t } = useTranslation();
+    const { t } = useTranslation('users');
     const dispatch = useAppDispatch();
     const [isLoading, setIsLoading] = useState(false);
     const { resetPage } = useArticlesListPageActions();

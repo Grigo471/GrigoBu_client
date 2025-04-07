@@ -12,7 +12,7 @@ import cls from './AboutPage.module.scss';
 import { Card } from '@/shared/ui/Card';
 
 const AboutPage = () => {
-    const { t } = useTranslation('main');
+    const { t } = useTranslation('about');
 
     return (
         <Page data-testid="MainPage">

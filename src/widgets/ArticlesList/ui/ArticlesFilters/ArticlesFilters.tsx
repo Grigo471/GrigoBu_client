@@ -21,7 +21,7 @@ export const ArticlesFilters = memo((props: ArticleFiltersProps) => {
     const {
         order, search, sort, onChangeOrder, onChangeSearch, onChangeSort,
     } = props;
-    const { t } = useTranslation();
+    const { t } = useTranslation('articles');
 
     return (
         <VStack gap="32" max mbGap="12">

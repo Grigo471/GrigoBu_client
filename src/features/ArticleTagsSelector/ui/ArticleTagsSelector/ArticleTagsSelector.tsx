@@ -2,7 +2,6 @@ import {
     memo,
 } from 'react';
 import { useSelector } from 'react-redux';
-import { useTranslation } from 'react-i18next';
 import cls from './ArticleTagsSelector.module.scss';
 import { HStack, VStack } from '@/shared/ui/Stack';
 import { Card } from '@/shared/ui/Card';
@@ -35,7 +34,6 @@ export const ArticleTagsSelector = memo((props: ArticleTagsSelectorProps) => {
     const {
         className, withCreate, chosenTags = [], setChosenTags,
     } = props;
-    const { t } = useTranslation();
     const dispatch = useAppDispatch();
     const tags = useSelector(getArticleAllTags);
 

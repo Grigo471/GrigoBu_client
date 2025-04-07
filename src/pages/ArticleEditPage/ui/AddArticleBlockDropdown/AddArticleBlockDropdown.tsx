@@ -22,7 +22,7 @@ export const AddArticleBlockDropdown = memo((props: AddArticleBlockDropdownProps
     const {
         className,
     } = props;
-    const { t } = useTranslation();
+    const { t } = useTranslation('article-edit');
     const dispatch = useAppDispatch();
 
     const onAddArticleBlock = useCallback((blockType: ArticleBlockType) => {

@@ -28,7 +28,7 @@ export const ArticleListItem = memo((props: ArticleListItemProps) => {
     const {
         article, type, setUncollapsed, className,
     } = props;
-    const { t } = useTranslation();
+    const { t } = useTranslation('articles');
     const [overflowActive, setOverflowActive] = useState(false);
     const detailsRef = useRef<HTMLDivElement>();
 

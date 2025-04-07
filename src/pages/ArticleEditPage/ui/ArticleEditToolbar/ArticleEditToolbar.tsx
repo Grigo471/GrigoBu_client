@@ -26,7 +26,7 @@ interface ArticleEditToolbarProps {
 }
 
 export const ArticleEditToolbar = memo(({ isPreview, setIsPreview }: ArticleEditToolbarProps) => {
-    const { t } = useTranslation();
+    const { t } = useTranslation('article-edit');
     const dispatch = useAppDispatch();
 
     const { id } = useParams<{ id: string }>();
@@ -35,7 +35,7 @@ export const ArticleEditToolbar = memo(({ isPreview, setIsPreview }: ArticleEdit
     const navigate = useNavigate();
 
     const isEdit = Boolean(id);
-    const title = isEdit ? t('Редактирование статьи') : t('Создание новой статьи');
+    const title = isEdit ? t('Article editing') : t('Создание новой статьи');
     const validateErrors = useSelector(getArticleEditPageValidateErrors);
     const tags = useSelector(getArticleEditPageTags);
 

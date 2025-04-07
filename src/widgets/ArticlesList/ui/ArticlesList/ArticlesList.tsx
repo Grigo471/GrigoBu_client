@@ -33,7 +33,7 @@ export const ArticlesList = memo((props: ArticlesListProps) => {
     const {
         articles, isLoading, isFetching, error, setUncollapsed, refreshHandler,
     } = props;
-    const { t } = useTranslation();
+    const { t } = useTranslation('articles');
 
     const { pathname } = useLocation();
     const { username } = useParams();

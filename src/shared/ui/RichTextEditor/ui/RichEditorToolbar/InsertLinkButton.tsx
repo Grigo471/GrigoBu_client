@@ -9,7 +9,7 @@ import { Icon } from '../../../Icon';
 export const InsertLinkButton = memo(({ selection }: {selection?: Selection}) => {
     const [isLink, setIsLink] = useState(false);
     const [url, setUrl] = useState('');
-    const { t } = useTranslation();
+    const { t } = useTranslation('article-edit');
 
     return isLink
         ? (

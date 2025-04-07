@@ -14,7 +14,7 @@ interface CommentListProps {
 
 export const CommentList = memo((props: PropsWithChildren<CommentListProps>) => {
     const { className, comments, isLoading } = props;
-    const { t } = useTranslation();
+    const { t } = useTranslation('comments');
 
     if (isLoading) {
         return (

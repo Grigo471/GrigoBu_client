@@ -58,7 +58,7 @@ const AuthForm = memo((props: AuthFormProps) => {
         setIsLogin((prev) => !prev);
     }, [setIsLogin]);
 
-    const { t } = useTranslation();
+    const { t } = useTranslation('auth');
 
     useDynamicModuleLoad({ reducers });
 

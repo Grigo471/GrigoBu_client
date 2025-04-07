@@ -13,7 +13,7 @@ interface ArticleMyRateSelectorProps {
 
 export const ArticleMyRateSelector = memo((props: ArticleMyRateSelectorProps) => {
     const { className, rate, onChange } = props;
-    const { t } = useTranslation();
+    const { t } = useTranslation('articles');
 
     const items: CheckboxItem<Rate>[] = [
         {

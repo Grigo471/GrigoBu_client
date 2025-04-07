@@ -30,7 +30,7 @@ const reducers: ReducerList = {
 };
 
 const ArticleEditPage = () => {
-    const { t } = useTranslation();
+    const { t } = useTranslation('article-edit');
     const dispatch = useAppDispatch();
     const { id } = useParams<{id:string}>();
     const isEdit = Boolean(id);

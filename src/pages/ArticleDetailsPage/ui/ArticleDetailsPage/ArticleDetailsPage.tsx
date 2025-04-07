@@ -27,7 +27,7 @@ const reducers: ReducerList = {
 
 const ArticleDetailsPage = (props: ArticleDetailsPageProps) => {
     const { className } = props;
-    const { t } = useTranslation('article');
+    const { t } = useTranslation('articles');
     const { id } = useParams< string >();
     const dispatch = useAppDispatch();
 

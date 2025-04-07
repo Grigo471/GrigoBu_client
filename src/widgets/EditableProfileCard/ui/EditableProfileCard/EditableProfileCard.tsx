@@ -1,4 +1,4 @@
-import { memo, useState } from 'react';
+import { memo } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useSelector } from 'react-redux';
 import cls from './EditableProfileCard.module.scss';
@@ -20,13 +20,14 @@ const reducers: ReducerList = {
 
 export const EditableProfileCard = memo((props: EditableProfileCardProps) => {
     const { className } = props;
-    const { t } = useTranslation();
+    const { t } = useTranslation('users');
     const userData = useSelector(getUserAuthData);
-    const [isEdit, setIsEdit] = useState(false);
 
     const date = userData?.createdAt?.split('T')[0];
 
     useDynamicModuleLoad({ reducers });
+
+    // const [isEdit, setIsEdit] = useState(false);
 
     // const editToolbar = isEdit
     //     ? (

@@ -21,7 +21,7 @@ export const ArticleAdditionalInfo = memo((props: ArticleAdditionalInfoProps) =>
     const {
         className, author, createdAt, onEdit,
     } = props;
-    const { t } = useTranslation();
+    const { t } = useTranslation('articles');
 
     const authData = useSelector(getUserAuthData);
 

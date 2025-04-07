@@ -12,7 +12,7 @@ import { Avatar } from '@/shared/ui/Avatar';
 import { srcWithApi } from '@/shared/lib/url/srcWithApi/srcWithApi';
 
 export const SubscriptionsPageFilters = memo(() => {
-    const { t } = useTranslation();
+    const { t } = useTranslation('articles');
 
     const {
         sort,

@@ -18,7 +18,7 @@ interface UsersListItemProps {
 
 export const UsersListItem = memo((props: UsersListItemProps) => {
     const { className, user } = props;
-    const { t, i18n } = useTranslation();
+    const { t, i18n } = useTranslation('users');
     const authData = useSelector(getUserAuthData);
 
     const date = formatDateToLocal(user.createdAt, i18n.language, false);

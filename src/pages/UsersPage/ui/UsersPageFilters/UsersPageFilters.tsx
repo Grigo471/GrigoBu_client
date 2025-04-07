@@ -21,7 +21,7 @@ import { UsersSubsCheckbox, UsersSubsRelation } from '@/features/UsersSubsCheckb
 
 export const UsersPageFilters = memo(() => {
     const dispatch = useAppDispatch();
-    const { t } = useTranslation();
+    const { t } = useTranslation('users');
     const order = useSelector(getUsersPageOrder);
     const sort = useSelector(getUsersPageSort);
     const search = useSelector(getUsersPageSearch);

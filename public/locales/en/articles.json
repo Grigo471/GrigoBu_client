@@ -15,9 +15,5 @@
     "заголовку": "title",
     "количеству просмотров": "views",
     "Поиск": "Search",
-    "All": "All",
-    "IT": "IT",
-    "SCIENCE": "SCIENCE",
-    "ECONOMICS": "ECONOMICS",
-    "Статьи не найдины": "Articles not found"
+    "Статьи не найдены": "Articles not found"
 }

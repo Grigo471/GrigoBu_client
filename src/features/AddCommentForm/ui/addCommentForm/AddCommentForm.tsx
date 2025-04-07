@@ -24,7 +24,7 @@ export interface addCommentFormProps {
 
 const AddCommentForm = memo((props: addCommentFormProps) => {
     const { className, onSendComment } = props;
-    const { t } = useTranslation('article');
+    const { t } = useTranslation('comments');
 
     const text = useSelector(getAddCommentFormText);
 

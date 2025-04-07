@@ -11,7 +11,7 @@ interface ArticleTagCreateProps {
 
 export const ArticleTagCreate = (props: ArticleTagCreateProps) => {
     const { onCreate } = props;
-    const { t } = useTranslation();
+    const { t } = useTranslation('article-edit');
 
     const [createTag, setCreateTag] = useState('');
 
@@ -24,12 +24,12 @@ export const ArticleTagCreate = (props: ArticleTagCreateProps) => {
 
     return (
         <>
-            <Text text={t('Выберите теги')} size="m" bold />
+            <Text text={t('Choose tags')} size="m" bold />
             <HStack gap="4">
                 <Input
                     value={createTag}
                     onChange={(value) => setCreateTag(value)}
-                    placeholder={t('или создайте свои')}
+                    placeholder={t('or create your own tags')}
                     size="s"
                 />
                 <Button square onClick={onClickHandler}>+</Button>
