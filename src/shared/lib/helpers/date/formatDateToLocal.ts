@@ -1,8 +1,17 @@
+/**
+ * Форматирует дату с учетом языка и местного времени
+ * @param dateStr - дата, которую хотим форматировать
+ * @param language - язык, в формате которого будет полученная дата
+ * @param withTime - включать ли время в итоговую дату
+ * @returns {string} возвращает отформатированную дату
+ */
+
 export const formatDateToLocal = (
-    dateStr: string,
+    dateStr?: string,
     language: string = 'ru',
     withTime: boolean = true,
 ) => {
+    if (!dateStr) return '';
     const date = new Date(dateStr);
     const options: Intl.DateTimeFormatOptions = {
         day: 'numeric',

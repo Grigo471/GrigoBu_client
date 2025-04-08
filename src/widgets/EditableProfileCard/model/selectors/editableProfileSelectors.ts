@@ -1,5 +1,17 @@
 import { StateSchema } from '@/app/providers/StoreProvider';
 
+export const getEditableProfileData = (
+    state: StateSchema,
+) => state.editableProfileCard?.profileData;
+
+export const getEditableProfileIsLoading = (
+    state: StateSchema,
+) => state.editableProfileCard?.isLoading;
+
+export const getEditableProfileError = (
+    state: StateSchema,
+) => state.editableProfileCard?.error;
+
 export const getEditableProfileIsAvatarLoading = (
     state: StateSchema,
 ) => state.editableProfileCard?.isAvatarLoading;

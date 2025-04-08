@@ -13,6 +13,7 @@ import { HStack } from '@/shared/ui/Stack';
 import TextIcon from '@/shared/assets/icons/article.svg';
 import PhotoIcon from '@/shared/assets/icons/photo.svg';
 import CodeIcon from '@/shared/assets/icons/code.svg';
+import cls from './AddArticleBlockDropdown.module.scss';
 
 interface AddArticleBlockDropdownProps {
    className?: string;
@@ -53,12 +54,13 @@ export const AddArticleBlockDropdown = memo((props: AddArticleBlockDropdownProps
 
     return (
         <Dropdown
-            className={classNames('', {}, [className])}
+            className={classNames(cls.AddArticleBlockDropdown, {}, [className])}
             direction="bottomRight"
             items={items}
             trigger={(
                 <Icon
                     Svg={PlusIcon}
+                    className={cls.trigger}
                 />
             )}
         />

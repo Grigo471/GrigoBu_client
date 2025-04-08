@@ -31,11 +31,13 @@ export const UsersListItem = memo((props: UsersListItemProps) => {
                 </AppLink>
 
                 <VStack gap="8" max>
-                    <HStack gap="8" align="end">
+                    <HStack gap="8" align="end" wrap="wrap">
                         <AppLink to={`${user.username}`}>
                             <Text title={user.username} size="l" />
                         </AppLink>
                         <Text variant="accent" text={`${t('Рейтинг')}: ${user.rating}`} />
+                        <Text text={`${t('Подписчиков')}: ${user.subscribers}`} />
+                        <Text variant="accent" text={`${t('Подписок')}: ${user.subscriptions}`} />
                     </HStack>
                     <Text text={`${t('Грибёт с')} ${date}`} />
                 </VStack>

@@ -1,3 +1,6 @@
+/**
+ * Перечисление всех страниц приложения
+ */
 export enum AppRoutes {
     AUTHORIZATION = 'authorization',
     ARTICLES = 'articles',
@@ -26,6 +29,9 @@ export const getRouteArticleEdit = (id: string) => `/article/${id}/edit`;
 export const getRouteAdmin = () => '/admin';
 export const getRouteForbidden = () => '/forbidden';
 
+/**
+ * Сопостовление страниц и их путей
+ */
 export const AppRouteByPathPattern: Record<string, AppRoutes> = {
     [getRouteAuthorization()]: AppRoutes.AUTHORIZATION,
     [getRouteArticles()]: AppRoutes.ARTICLES,

@@ -4,11 +4,15 @@ import { useSelector } from 'react-redux';
 import cls from './EditableProfileCard.module.scss';
 import { Card } from '@/shared/ui/Card';
 import { HStack, VStack } from '@/shared/ui/Stack';
-import { getUserAuthData } from '@/entities/User';
+import { fetchProfile, getUsername } from '@/entities/User';
 import { Text } from '@/shared/ui/Text';
 import { EditableAvatar } from '../EditableAvatar/EditableAvatar';
 import { ReducerList, useDynamicModuleLoad } from '@/shared/lib/hooks/useDynamicModuleLoad';
 import { editableProfileReducers } from '../../testing';
+import { formatDateToLocal } from '@/shared/lib/helpers/date/formatDateToLocal';
+import { useInitialEffect } from '@/shared/lib/hooks/useInitialEffect';
+import { useAppDispatch } from '@/shared/lib/hooks/useAppDispatch';
+import { getEditableProfileData } from '../../model/selectors/editableProfileSelectors';
 
 interface EditableProfileCardProps {
    className?: string;
@@ -20,10 +24,17 @@ const reducers: ReducerList = {
 
 export const EditableProfileCard = memo((props: EditableProfileCardProps) => {
     const { className } = props;
-    const { t } = useTranslation('users');
-    const userData = useSelector(getUserAuthData);
+    const { t, i18n } = useTranslation('users');
+    const username = useSelector(getUsername);
+    const userData = useSelector(getEditableProfileData);
 
-    const date = userData?.createdAt?.split('T')[0];
+    const dispatch = useAppDispatch();
+
+    useInitialEffect(() => {
+        dispatch(fetchProfile(username || ''));
+    });
+
+    const date = formatDateToLocal(userData?.createdAt, i18n.language, false);
 
     useDynamicModuleLoad({ reducers });
 
@@ -52,7 +63,11 @@ export const EditableProfileCard = memo((props: EditableProfileCardProps) => {
                 <EditableAvatar className={cls.avatar} />
                 <VStack gap="8" max className={cls.info}>
                     <Text title={userData?.username} size="l" />
-                    <Text text={`${t('Рейтинг')}: ${userData?.rating}`} />
+                    <HStack max gap="16" wrap="wrap">
+                        <Text bold variant="accent" text={`${t('Рейтинг')}: ${userData?.rating}`} />
+                        <Text text={`${userData?.subscribers} ${t('подписчиков')}`} />
+                        <Text text={`${userData?.subscriptions} ${t('подписок')}`} />
+                    </HStack>
                     <Text text={`${t('Грибёт с')} ${date}`} />
                     {userData?.status && <Text text={userData.status} />}
                 </VStack>

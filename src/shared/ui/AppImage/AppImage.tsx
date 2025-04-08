@@ -8,6 +8,12 @@ interface AppImageProps extends ImgHTMLAttributes<HTMLImageElement> {
    errorFallback?: ReactElement;
 }
 
+/**
+ * Компонент картинки с обработкой ошибок и загрузки
+ * @typedef AppImageProps
+ * @param props.fallback - фоллбэк во время загрузки
+ * @param props.errorFallback - фоллбэк на случай ошибки
+ */
 export const AppImage = memo((props: AppImageProps) => {
     const {
         className, src, alt = 'image', errorFallback, fallback, ...otherProps

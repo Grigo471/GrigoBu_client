@@ -5,6 +5,7 @@ import {
 import { ArticleEditPageSchema } from '../types/ArticleEditPageSchema';
 import { User } from '@/entities/User';
 import { saveArticle } from '../services/saveArticle/saveArticle';
+import { deleteArticle } from '../services/deleteArticle/deleteArticle';
 
 const initialForm: Article = {
     id: '',
@@ -165,12 +166,23 @@ export const articleEditPageSlice = createSlice({
                 state.isLoading = true;
             })
             .addCase(saveArticle.fulfilled, (state) => {
+                state.createForm = initialForm;
+                state.editForm = initialForm;
                 state.isLoading = false;
                 state.validateErrors = undefined;
             })
             .addCase(saveArticle.rejected, (state, action) => {
                 state.isLoading = false;
                 state.validateErrors = action.payload;
+            })
+            .addCase(deleteArticle.pending, (state) => {
+                state.validateErrors = undefined;
+                state.isLoading = true;
+            })
+            .addCase(deleteArticle.fulfilled, (state) => {
+                state.createForm = initialForm;
+                state.editForm = initialForm;
+                state.isLoading = false;
             });
     },
 });

@@ -1,7 +1,6 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { ProfileCardSchema } from '../types/ProfileCardSchema';
-import { fetchProfile } from '../services/fetchProfile';
-import { User } from '@/entities/User';
+import { fetchProfile, User } from '@/entities/User';
 import { subscribeToUser, unsubscribeToUser } from '@/features/SubscribeToUserButton';
 
 const initialState: ProfileCardSchema = {

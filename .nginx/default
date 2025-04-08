@@ -6,7 +6,7 @@ server {
         server_name griboo.ru www.griboo.ru;
 
         location  ~ ^/api/(.*)$ {
-            proxy_pass   $scheme://82.148.30.100:5000/$1$is_args$args;
+            proxy_pass   $scheme://45.8.251.99:5000/$1$is_args$args;
             proxy_redirect     off;
             proxy_set_header   Host             $host;
             proxy_set_header   X-Real-IP        $remote_addr;
@@ -18,7 +18,7 @@ server {
         }
 
 
-    listen [::]:443 ssl ipv6only=on; # managed by Certbot
+
     listen 443 ssl; # managed by Certbot
     ssl_certificate /etc/letsencrypt/live/griboo.ru/fullchain.pem; # managed by Certbot
     ssl_certificate_key /etc/letsencrypt/live/griboo.ru/privkey.pem; # managed by Certbot
@@ -46,3 +46,16 @@ server {
     return 404; 
 
 }
+
+#server {
+    #if ($host = griboo.ru) {
+    #    return 301 https://$host$request_uri;
+   # } # managed by Certbot
+
+
+
+   #     server_name griboo.ru www.griboo.ru;
+  #  listen 80;
+ #   return 404; # managed by Certbot
+
+#}

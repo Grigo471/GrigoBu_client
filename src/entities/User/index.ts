@@ -27,3 +27,4 @@ export {
 
 export { checkAuth } from './model/services/checkAuth';
 export { logout } from './model/services/logout';
+export { fetchProfile } from './model/services/fetchProfile';

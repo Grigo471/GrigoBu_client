@@ -1,6 +1,7 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { EditableProfileSchema } from '../types/EditableProfileSchema';
 import { updateAvatar } from '../services/updateAvatar';
+import { fetchProfile, User } from '@/entities/User';
 
 const initialState: EditableProfileSchema = {
 
@@ -13,6 +14,27 @@ export const EditableProfileSlice = createSlice({
     },
     extraReducers: (builder) => {
         builder
+            .addCase(
+                fetchProfile.pending,
+                (state) => {
+                    state.isLoading = true;
+                },
+            )
+            .addCase(
+                fetchProfile.fulfilled,
+                (state, { payload }: PayloadAction<User>) => {
+                    state.isLoading = false;
+                    state.profileData = payload;
+                    state.error = undefined;
+                },
+            )
+            .addCase(
+                fetchProfile.rejected,
+                (state, action) => {
+                    state.isLoading = false;
+                    state.error = action.payload;
+                },
+            )
             .addCase(
                 updateAvatar.pending,
                 (state) => {

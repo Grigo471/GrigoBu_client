@@ -1,7 +1,6 @@
 .menu {
     background: var(--dark-bg-redesigned);
     position: absolute;
-    z-index: 10000;
     flex-direction: column;
     display: flex;
 }
@@ -12,7 +11,6 @@
     border: none;
     background: none;
     outline: none;
-    z-index: 100000;
     color: var(--text-redesigned);
     cursor: pointer;
     white-space: nowrap;
