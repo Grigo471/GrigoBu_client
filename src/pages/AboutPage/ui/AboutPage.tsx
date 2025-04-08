@@ -24,10 +24,6 @@ const AboutPage = () => {
                         bold
                         size="l"
                     />
-                    <Text
-                        text={t('Это учебный проект, выполненный на основе курса Тимура Ульби')}
-                        size="l"
-                    />
                     <RichTextOutput
                         value={
                             `
@@ -40,9 +36,20 @@ const AboutPage = () => {
                         </a></p>
                         <p>Здесь вы можете просматривать, создавать, 
                         редактировать, оценивать и комментировать статьи, 
-                        подписываться на других пользователей и влиять на их рейтинг</p>
+                        подписываться на других пользователей и влиять на их рейтинг.</p>
+                        <p>
+                        Исходный код проекта:<br>
+                        <strong>Frontend:</strong> 
+                        <a href="https://github.com/Grigo471/GrigoBu_client">
+                            https://github.com/Grigo471/GrigoBu_client
+                        </a><br>
+                        <strong>Backend:</strong> 
+                        <a href="https://github.com/Grigo471/GrigoBu_server">
+                            https://github.com/Grigo471/GrigoBu_server
+                        </a>
+                        </p>
                         <p>Подробнее об устройстве данного сайта Вы можете прочитать 
-                        <a href='/article/1'>в этой статье</a>
+                        <a href='/article/1'>в этой статье.</a>
                         </p>
                         <p>В проекте используется следующий стек технологий:</p>
                         `
