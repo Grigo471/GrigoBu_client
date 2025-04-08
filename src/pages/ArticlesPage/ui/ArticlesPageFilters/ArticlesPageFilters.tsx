@@ -96,7 +96,7 @@ export const ArticlesPageFilters = memo(() => {
                         <HStack gap="8">
                             {t('Поиск по тегам')}
                             {tagsVisible
-                            && <Icon clickable Svg={CrossIcon} width={10} height={10} />}
+                            && <Icon Svg={CrossIcon} width={10} height={10} />}
                         </HStack>
                     </Button>
                     {tagsVisible

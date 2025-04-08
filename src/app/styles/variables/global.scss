@@ -59,13 +59,38 @@
 
 @media screen and (max-width: 900px) {
     :root {
-        --article-card-width: calc(100vw - 44px);
+        --article-card-width: 100%;
         --rating-button-width: 5vw;
         --article-filters-width: 100%;
         --articles-page-width: 100%;
+    }
+}
 
-        // positions
+@media screen and (max-width: 600px) {
+    :root {
+        --article-card-width: 100%;
+        --rating-button-width: 1vw;
+        --article-filters-width: 100%;
+        --articles-page-width: 100%;
 
-        --refresh-btn-left: calc((100vw - var(--articles-page-width) - var(--scrollbar-width)) / 2 - 48px);
+        // s
+
+        --font-size-s: 8px;
+        --font-line-s: 12px;
+
+        // m
+
+        --font-size-m: 12px;
+        --font-line-m: 16px;
+
+        // l
+
+        --font-size-l: 16px;
+        --font-line-l: 20px;
+
+        // xl
+
+        --font-size-xl: 20px;
+        --font-line-xl: 24px;
     }
 }

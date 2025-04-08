@@ -26,3 +26,10 @@
         flex-direction: row;
     }
 }
+
+@media screen and (max-width: 600px) {
+    .btn {
+        padding: 0;
+        background: none;
+    }
+}

@@ -32,7 +32,17 @@ npm run start:dev или npm run start:dev:vite - запуск сервера + 
 
 Проект написан в соответствии с методологией Feature sliced design
 
-Ссылка на документацию - [feature sliced design](https://feature-sliced.design/docs/get-started/tutorial)
+Ссылка на документацию - [feature sliced design](https://feature-sliced.github.io/documentation/)
+
+```bash
+   src
+    ├───app
+    ├───entities
+    ├───features
+    ├───pages
+    ├───shared
+    └───widgets
+```
 
 ----
 
@@ -224,3 +234,28 @@ export const NoAuth: Story = {
 - [ProfileRating](/src/features/ProfileRating)
 - [ThemeSwitcher](/src/features/ThemeSwitcher)
 - [UI](/src/features/UI)
+
+```bash
+├───ArticleEditPage
+    │   │   ├───model
+    │   │   │   ├───consts
+    │   │   │   ├───selectors
+    │   │   │   ├───services
+    │   │   │   │   ├───deleteArticle
+    │   │   │   │   ├───saveArticle
+    │   │   │   │   └───validateArticleData
+    │   │   │   ├───slice
+    │   │   │   └───types
+    │   │   └───ui
+    │   │       ├───AddArticleBlockDropdown
+    │   │       ├───ArticleEditForm
+    │   │       ├───ArticleEditPage
+    │   │       ├───ArticleEditToolbar
+    │   │       ├───ArticleFilesProvider
+    │   │       ├───ArticlePreviewCard
+    │   │       └───EditableArticleBlocks
+    │   │           ├───EditableArticleBlockWrapper
+    │   │           ├───EditableArticleCodeBlock
+    │   │           ├───EditableArticleImageBlock
+    │   │           └───EditableArticleTextBlock
+```

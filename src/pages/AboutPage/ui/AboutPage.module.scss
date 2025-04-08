@@ -9,7 +9,7 @@
 .about {
     h1,
     p {
-        padding: 8px 0;
+        padding: 8px;
     }
 }
 
@@ -21,4 +21,10 @@
 .frontend {
     width: 100%;
     padding: 16px;
+}
+
+@media screen and (max-width: 900px) {
+    .myImage {
+        display: none;
+    }
 }

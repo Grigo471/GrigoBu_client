@@ -32,6 +32,7 @@ export const ArticleRatingButton = memo((props: ArticleRatingButtonProps) => {
                 color={article.myRate === 1 ? 'success' : 'normal'}
                 onClick={onLike}
                 disabled={isRateLoading}
+                className={cls.btn}
             >
                 <div className={cls.upBtn}>
                     <Icon className={cls.up} Svg={ArrowIcon} />
@@ -44,6 +45,7 @@ export const ArticleRatingButton = memo((props: ArticleRatingButtonProps) => {
                 color={article.myRate === -1 ? 'error' : 'normal'}
                 onClick={onDislike}
                 disabled={isRateLoading}
+                className={cls.btn}
             >
                 <Icon Svg={ArrowIcon} />
             </Button>

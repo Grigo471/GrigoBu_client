@@ -6,6 +6,7 @@
     overflow: auto;
     border-radius: 16px;
     overflow-x: scroll;
+    max-width: calc(100vw - 48px);
 }
 
 .copyBtn {

@@ -80,6 +80,18 @@
     }
 }
 
+@media screen and (max-width: 600px) {
+    .filled {
+        &.success {
+            background: none;
+        }
+
+        &.error {
+            background: none;
+        }
+    }
+}
+
 .square {
     border-radius: 12px;
 }
