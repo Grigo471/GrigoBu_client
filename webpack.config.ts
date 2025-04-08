@@ -23,7 +23,7 @@ export default (env: BuildEnv) => {
         locales: path.resolve(__dirname, 'public', 'locales'),
         buildLocales: path.resolve(__dirname, 'build', 'locales'),
         assets: path.resolve(__dirname, 'public', 'assets'),
-        buildAssets: path.resolve(__dirname, 'public', 'buildAssets'),
+        buildAssets: path.resolve(__dirname, 'build', 'assets'),
         favicon: path.resolve(__dirname, 'src', 'shared', 'assets', 'icons', 'igloo.svg'),
     };
 
