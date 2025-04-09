@@ -4,6 +4,12 @@
     width: 400px;
 }
 
+@media screen and (max-width: 500px) {
+    .AuthForm {
+        width: 76vw;
+    }
+}
+
 .input {
     margin-top: 10px;
 }
