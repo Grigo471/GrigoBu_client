@@ -63,7 +63,7 @@ export const EditableProfileCard = memo((props: EditableProfileCardProps) => {
                 <EditableAvatar className={cls.avatar} />
                 <VStack gap="8" max className={cls.info}>
                     <Text title={userData?.username} size="l" />
-                    <HStack max gap="16" wrap="wrap">
+                    <HStack max gap="16" mbGap="8" wrap="wrap">
                         <Text bold variant="accent" text={`${t('Рейтинг')}: ${userData?.rating}`} />
                         <Text text={`${userData?.subscribers} ${t('подписчиков')}`} />
                         <Text text={`${userData?.subscriptions} ${t('подписок')}`} />

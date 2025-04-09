@@ -6,6 +6,7 @@ import { ListBox } from '@/shared/ui/Popups';
 import { VStack } from '@/shared/ui/Stack';
 import { Text } from '@/shared/ui/Text';
 import { ListBoxItem } from '@/shared/ui/Popups/ui/ListBox/ListBox';
+import { useDevice } from '@/shared/lib/hooks/useDevice';
 
 interface ArticleSortSelectorProps {
     className?: string;
@@ -20,6 +21,7 @@ export const ArticleSortSelector = memo((props: ArticleSortSelectorProps) => {
         className, sort, order, onChangeOrder, onChangeSort,
     } = props;
     const { t } = useTranslation('articles');
+    const isMobile = useDevice();
 
     const orderOptions = useMemo<ListBoxItem<SortOrder>[]>(() => [
         {
@@ -44,7 +46,7 @@ export const ArticleSortSelector = memo((props: ArticleSortSelectorProps) => {
 
     return (
         <VStack gap="8" className={className} adaptive mbAlign="center">
-            <Text text={t('Сортировать по')} />
+            <Text text={isMobile ? t('По') : t('Сортировать по')} />
             <ListBox<ArticleSortField>
                 items={sortFieldOptions}
                 value={sort}

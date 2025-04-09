@@ -1,4 +1,5 @@
 import { memo } from 'react';
+import { useTranslation } from 'react-i18next';
 import { classNames } from '@/shared/lib/classNames/classNames';
 import { Skeleton as SkeletonRedesigned } from '@/shared/ui/Skeleton';
 import { HStack, VStack } from '@/shared/ui/Stack';
@@ -10,6 +11,8 @@ import { Avatar } from '@/shared/ui/Avatar';
 import { Text } from '@/shared/ui/Text';
 import { Card } from '@/shared/ui/Card';
 import { srcWithApi } from '@/shared/lib/url/srcWithApi/srcWithApi';
+import { useDevice } from '@/shared/lib/hooks/useDevice';
+import { formatDateToLocal } from '@/shared/lib/helpers/date/formatDateToLocal';
 
 interface CommentCardProps {
    className?: string;
@@ -19,6 +22,10 @@ interface CommentCardProps {
 
 export const CommentCard = memo((props: CommentCardProps) => {
     const { className, comment, isLoading } = props;
+
+    const { i18n } = useTranslation();
+    const isMobile = useDevice();
+    const date = formatDateToLocal(comment?.createdAt, i18n.language, !isMobile);
 
     const Skeleton = SkeletonRedesigned;
 
@@ -58,9 +65,12 @@ export const CommentCard = memo((props: CommentCardProps) => {
                     <HStack gap="8">
                         <Avatar size={30} src={avatar} />
                         <Text text={comment.user.username} bold />
+                        <Text text={date} />
                     </HStack>
                 </AppLink>
-                <Text text={comment.text} />
+                <pre className={cls.pre}>
+                    {comment.text}
+                </pre>
             </VStack>
         </Card>
 

@@ -25,7 +25,7 @@ export const UsersListItem = memo((props: UsersListItemProps) => {
 
     return (
         <Card className={className} max>
-            <HStack max gap="16">
+            <HStack max gap="16" adaptive mbAlign="start">
                 <AppLink to={`${user.username}`}>
                     <Avatar size={72} src={srcWithApi(user.avatar)} />
                 </AppLink>

@@ -4,6 +4,7 @@ import { Checkbox, CheckboxItem } from '@/shared/ui/Checkbox';
 import { Rate } from '@/entities/Article';
 import { Text } from '@/shared/ui/Text';
 import { VStack } from '@/shared/ui/Stack';
+import { useDevice } from '@/shared/lib/hooks/useDevice';
 
 interface ArticleMyRateSelectorProps {
    rate?: Rate;
@@ -14,6 +15,7 @@ interface ArticleMyRateSelectorProps {
 export const ArticleMyRateSelector = memo((props: ArticleMyRateSelectorProps) => {
     const { className, rate, onChange } = props;
     const { t } = useTranslation('articles');
+    const isMobile = useDevice();
 
     const items: CheckboxItem<Rate>[] = [
         {
@@ -28,7 +30,7 @@ export const ArticleMyRateSelector = memo((props: ArticleMyRateSelectorProps) =>
 
     return (
         <VStack gap="8" adaptive>
-            <Text text={t('Моя оценка')} bold />
+            {!isMobile && <Text text={t('Моя оценка')} bold />}
             <Checkbox<Rate>
                 items={items}
                 name="myRateCheckbox"

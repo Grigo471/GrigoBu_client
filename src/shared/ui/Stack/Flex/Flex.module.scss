@@ -68,12 +68,16 @@
 }
 
 @media screen and (max-width: 900px) {
-    .directionColumn .adaptive {
-        flex-direction: row;
+    .directionColumn {
+        &.adaptive {
+            flex-direction: row;
+        }
     }
 
-    .directionRow .adaptive {
-        flex-direction: column;
+    .directionRow {
+        &.adaptive {
+            flex-direction: column;
+        }
     }
 
     .mbAlignStart {

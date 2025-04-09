@@ -24,7 +24,6 @@ export const AdditionalInfoContainer = memo(() => {
             <ArticleAdditionalInfo
                 onEdit={onEditArticle}
                 author={article.user}
-                createdAt={article.createdAt}
             />
         </Card>
     );

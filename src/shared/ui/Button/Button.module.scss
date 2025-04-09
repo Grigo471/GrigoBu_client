@@ -84,10 +84,18 @@
     .filled {
         &.success {
             background: none;
+
+            svg {
+                color: var(--save-redesigned);
+            }
         }
 
         &.error {
             background: none;
+
+            svg {
+                color: var(--cancel-redesigned);
+            }
         }
     }
 }

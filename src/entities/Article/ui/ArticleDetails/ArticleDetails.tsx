@@ -12,6 +12,7 @@ import { AppLink } from '@/shared/ui/AppLink';
 import { srcWithApi } from '@/shared/lib/url/srcWithApi/srcWithApi';
 import { classNames } from '@/shared/lib/classNames/classNames';
 import { formatDateToLocal } from '@/shared/lib/helpers/date/formatDateToLocal';
+import { useDevice } from '@/shared/lib/hooks/useDevice';
 
 interface ArticleDetailsProps {
     article?: Article;
@@ -39,10 +40,12 @@ export const ArticleDetails = memo(
 
         const { i18n } = useTranslation();
 
+        const isMobile = useDevice();
+
         if (!article) return null;
 
         const avatar = article?.user.avatar;
-        const date = formatDateToLocal(article?.createdAt, i18n.language);
+        const date = formatDateToLocal(article?.createdAt, i18n.language, !isMobile);
 
         const title = (type === 'list' || type === 'userList') ? (
             <AppLink to={`/article/${article?.id}`}>

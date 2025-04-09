@@ -1,12 +1,14 @@
 .Code {
     border: 1px solid var(--accent-redesigned);
     padding: 20px;
-    position: relative;
     background: var(--light-redesigned);
-    overflow: auto;
-    border-radius: 16px;
     overflow-x: scroll;
-    max-width: calc(100vw - 48px);
+    border-radius: 16px;
+    display: block;
+}
+
+.codeWrapper {
+    position: relative;
 }
 
 .copyBtn {

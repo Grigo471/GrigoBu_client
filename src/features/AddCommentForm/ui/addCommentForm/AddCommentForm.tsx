@@ -13,9 +13,12 @@ import {
     getAddCommentFormText,
 } from '../../model/selectors/addCommentFormSelectors';
 import cls from './AddCommentForm.module.scss';
-import { Input } from '@/shared/ui/Input';
 import { Button } from '@/shared/ui/Button';
 import { Card } from '@/shared/ui/Card';
+import { TextArea } from '@/shared/ui/TextArea';
+import { useDevice } from '@/shared/lib/hooks/useDevice';
+import { Icon } from '@/shared/ui/Icon';
+import CircleUp from '@/shared/assets/icons/circle-up.svg';
 
 export interface addCommentFormProps {
    className?: string;
@@ -27,6 +30,7 @@ const AddCommentForm = memo((props: addCommentFormProps) => {
     const { t } = useTranslation('comments');
 
     const text = useSelector(getAddCommentFormText);
+    const isMobile = useDevice();
 
     const reducers: ReducerList = {
         addCommentForm: addCommentFormReducer,
@@ -55,19 +59,24 @@ const AddCommentForm = memo((props: addCommentFormProps) => {
                 max
                 className={classNames(cls.AddCommentFormRedesigned, {}, [className])}
             >
-                <Input
+                <TextArea
                     data-testid="AddCommentForm.input"
                     placeholder={t('Введите текст комментария')}
                     value={text}
                     onChange={onCommentTextChange}
-                    className={cls.input}
+                    className={cls.textarea}
                 />
-                <Button
-                    data-testid="AddCommentForm.button"
-                    onClick={onSendHandler}
-                >
-                    {t('Отправить')}
-                </Button>
+                {isMobile
+                    ? <Icon Svg={CircleUp} clickable onClick={onSendHandler} />
+                    : (
+                        <Button
+                            data-testid="AddCommentForm.button"
+                            onClick={onSendHandler}
+                        >
+                            { t('Отправить') }
+                        </Button>
+                    )}
+
             </HStack>
         </Card>
 
