@@ -2,6 +2,10 @@
     width: calc(var(--article-card-width) - 48px);
 }
 
+.title {
+    margin: 8px;
+}
+
 @media screen and (max-width: 1200px) {
     .ArticleCodeBlockComponent {
         max-width: 50vw;

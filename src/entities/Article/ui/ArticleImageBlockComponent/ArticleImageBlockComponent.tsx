@@ -6,6 +6,7 @@ import { Text } from '@/shared/ui/Text';
 import { srcWithApiOrBlob } from '@/shared/lib/url/srcWithApi/srcWithApi';
 import { AppImage } from '@/shared/ui/AppImage';
 import { Skeleton } from '@/shared/ui/Skeleton';
+import { VStack } from '@/shared/ui/Stack';
 
 interface ArticleImageBlockComponentProps {
    className?: string;
@@ -17,7 +18,11 @@ export const ArticleImageBlockComponent = memo(
         const { className, block } = props;
 
         return (
-            <div className={classNames(cls.ArticleImageBlockComponent, {}, [className])}>
+            <VStack
+                gap="16"
+                align="center"
+                className={classNames(cls.ArticleImageBlockComponent, {}, [className])}
+            >
                 <AppImage
                     src={srcWithApiOrBlob(block.src)}
                     className={cls.img}
@@ -25,9 +30,9 @@ export const ArticleImageBlockComponent = memo(
                     alt={block.src}
                 />
                 {block.title && (
-                    <Text text={block.title} align="center" />
+                    <Text text={block.title} size="l" align="center" />
                 )}
-            </div>
+            </VStack>
         );
     },
 );
