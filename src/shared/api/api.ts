@@ -45,6 +45,9 @@ $api.interceptors.response.use((config) => config, async (error) => {
             console.log('Не авторизован');
         }
     }
+    if (error.response.status === 401 && originalRequest && originalRequest._isRetry) {
+        localStorage.removeItem(LOCAL_STORAGE_TOKEN_KEY);
+    }
     throw error;
 });
 
