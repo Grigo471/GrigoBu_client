@@ -7,14 +7,14 @@ export const validateUsername = (username: string, login: boolean = false) => {
         nameErrors.push(ValidateUsernameError.EMPTY_USERNAME);
     }
 
+    if (!/^[\wЁёА-я]*$/u.test(username)) {
+        nameErrors.push(ValidateUsernameError.INCORRECT_USERNAME);
+    }
+
     if (login) return nameErrors;
 
     if (username.length > 15 || username.length < 5) {
         nameErrors.push(ValidateUsernameError.USERNAME_LENGTH);
-    }
-
-    if (!/^[\wЁёА-я]*$/u.test(username)) {
-        nameErrors.push(ValidateUsernameError.INCORRECT_USERNAME);
     }
 
     return nameErrors;
