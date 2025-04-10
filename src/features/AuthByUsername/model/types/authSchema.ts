@@ -1,19 +1,13 @@
-import { User } from '@/entities/User';
-
-export interface LoginProps {
-    username: string;
-    password: string;
-}
+import {
+    ValidatePasswordError, ValidateUsernameError,
+} from '../consts/validateAuthErrors';
+import { AuthApiKnownError, AuthUnknownError } from '../consts/authApiErrors';
 
 export interface AuthSchema {
     username: string;
     password: string;
     isLoading: boolean;
-    error?: string;
-}
-
-export interface AuthResponse {
-    user: User;
-    accessToken: string;
-    refreshToken: string;
+    apiError?: AuthApiKnownError | AuthUnknownError;
+    validateUsernameErrors: ValidateUsernameError[];
+    validatePasswordErrors: ValidatePasswordError[];
 }

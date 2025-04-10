@@ -40,7 +40,7 @@ export const WithError: Story = {
     },
     decorators: [
         StoreDecorator({
-            authForm: { username: '123', password: '123', error: 'Error' },
+            authForm: { username: '123', password: '123', apiError: 'Unforseen error' },
         }),
     ],
 };

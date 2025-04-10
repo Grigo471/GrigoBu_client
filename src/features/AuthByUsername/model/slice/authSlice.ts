@@ -2,11 +2,16 @@ import { PayloadAction, createSlice } from '@reduxjs/toolkit';
 import { AuthSchema } from '../types/authSchema';
 import { login } from '../services/login/login';
 import { registration } from '../services/registration/registration';
+import {
+    ValidatePasswordError, ValidateUsernameError,
+} from '../consts/validateAuthErrors';
 
 const initialState: AuthSchema = {
     isLoading: false,
     username: '',
     password: '',
+    validateUsernameErrors: [],
+    validatePasswordErrors: [],
 };
 
 export const authSlice = createSlice({
@@ -19,12 +24,18 @@ export const authSlice = createSlice({
         setPassword: (state, action: PayloadAction<string>) => {
             state.password = action.payload;
         },
+        setUsernameErrors: (state, action: PayloadAction<ValidateUsernameError[]>) => {
+            state.validateUsernameErrors = action.payload;
+        },
+        setPasswordErrors: (state, action: PayloadAction<ValidatePasswordError[]>) => {
+            state.validatePasswordErrors = action.payload;
+        },
     },
     extraReducers: (builder) => {
         builder
             // login
             .addCase(login.pending, (state) => {
-                state.error = undefined;
+                state.apiError = undefined;
                 state.isLoading = true;
             })
             .addCase(login.fulfilled, (state) => {
@@ -32,11 +43,17 @@ export const authSlice = createSlice({
             })
             .addCase(login.rejected, (state, action) => {
                 state.isLoading = false;
-                state.error = action.payload;
+                if (action.payload?.type === 'validation') {
+                    const { nameErrors, passwordErrors } = action.payload;
+                    state.validateUsernameErrors = nameErrors;
+                    state.validatePasswordErrors = passwordErrors;
+                } else {
+                    state.apiError = action.payload?.message;
+                }
             })
             // registration
             .addCase(registration.pending, (state) => {
-                state.error = undefined;
+                state.apiError = undefined;
                 state.isLoading = true;
             })
             .addCase(registration.fulfilled, (state) => {
@@ -44,7 +61,13 @@ export const authSlice = createSlice({
             })
             .addCase(registration.rejected, (state, action) => {
                 state.isLoading = false;
-                state.error = action.payload;
+                if (action.payload?.type === 'validation') {
+                    const { nameErrors, passwordErrors } = action.payload;
+                    state.validateUsernameErrors = nameErrors;
+                    state.validatePasswordErrors = passwordErrors;
+                } else {
+                    state.apiError = action.payload?.message;
+                }
             });
     },
 });

@@ -12,10 +12,22 @@ import { VStack } from '@/shared/ui/Stack';
 import { getAuthUsername } from '../../model/selectors/getAuthUsername/getAuthUsername';
 import { getAuthPassword } from '../../model/selectors/getAuthPassword/getAuthPassword';
 import { getAuthIsLoading } from '../../model/selectors/getAuthIsLoading/getAuthIsLoading';
-import { getAuthError } from '../../model/selectors/getAuthError/getAuthError';
+import { getAuthApiError } from '../../model/selectors/getAuthApiError/getAuthApiError';
 import { authActions, authReducer } from '../../model/slice/authSlice';
 import { login } from '../../model/services/login/login';
 import { registration } from '../../model/services/registration/registration';
+import {
+    getValidatePasswordErrors,
+    getValidateUsernameErrors,
+} from '../../model/selectors/getAuthValidateErrors/getAuthValidateErrors';
+import {
+    validateAuthErrorTranslations,
+} from '../../model/consts/validateAuthErrors';
+import { validatePassword } from '../../model/services/validateAuth/validatePassword';
+import { validateUsername } from '../../model/services/validateAuth/validateUsername';
+import {
+    authApiErrorTranslation,
+} from '../../model/services/translateAuthApiError/translateAuthApiError';
 
 export interface AuthFormProps {
     className?: string;
@@ -36,15 +48,25 @@ const AuthForm = memo((props: AuthFormProps) => {
     const username = useSelector(getAuthUsername);
     const password = useSelector(getAuthPassword);
     const isLoading = useSelector(getAuthIsLoading);
-    const error = useSelector(getAuthError);
+    const apiError = useSelector(getAuthApiError);
+    const validateUsernameErrors = useSelector(getValidateUsernameErrors);
+    const validatePasswordErrors = useSelector(getValidatePasswordErrors);
 
     const onChangeUserName = useCallback((value: string) => {
+        if (validateUsernameErrors.length > 0) {
+            const nameErrors = validateUsername(value, isLogin);
+            dispatch(authActions.setUsernameErrors(nameErrors));
+        }
         dispatch(authActions.setUsername(value));
-    }, [dispatch]);
+    }, [dispatch, validateUsernameErrors.length, isLogin]);
 
     const onChangePassword = useCallback((value: string) => {
+        if (validatePasswordErrors.length > 0) {
+            const passwordErrors = validatePassword(value, isLogin);
+            dispatch(authActions.setPasswordErrors(passwordErrors));
+        }
         dispatch(authActions.setPassword(value));
-    }, [dispatch]);
+    }, [dispatch, validatePasswordErrors.length, isLogin]);
 
     const onSubmit = () => {
         if (isLogin) {
@@ -62,13 +84,15 @@ const AuthForm = memo((props: AuthFormProps) => {
 
     useDynamicModuleLoad({ reducers });
 
+    const [apiErrorTranslation, apiErrorUsername] = authApiErrorTranslation(apiError);
+
     return (
 
         <VStack gap="8" className={classNames(cls.AuthForm, {}, [className])}>
             <Text title={isLogin ? t('Войти') : t('Создать аккаунт')} />
-            {error && (
+            {apiError && (
                 <Text
-                    text={error}
+                    text={t(apiErrorTranslation, { username: apiErrorUsername })}
                     variant="error"
                 />
             )}
@@ -80,6 +104,15 @@ const AuthForm = memo((props: AuthFormProps) => {
                 onChange={onChangeUserName}
                 value={username}
             />
+            {validateUsernameErrors.length > 0
+                && validateUsernameErrors.map(
+                    (error) => (
+                        <Text
+                            variant="error"
+                            text={t(validateAuthErrorTranslations[error])}
+                        />
+                    ),
+                )}
             <Input
                 type="text"
                 className={cls.input}
@@ -87,6 +120,15 @@ const AuthForm = memo((props: AuthFormProps) => {
                 onChange={onChangePassword}
                 value={password}
             />
+            {validatePasswordErrors.length > 0
+                && validatePasswordErrors.map(
+                    (error) => (
+                        <Text
+                            variant="error"
+                            text={t(validateAuthErrorTranslations[error])}
+                        />
+                    ),
+                )}
             <Button
                 className={cls.submitBtn}
                 onClick={onSubmit}
