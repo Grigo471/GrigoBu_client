@@ -12,7 +12,7 @@ type HTMLInputProps = Omit<InputHTMLAttributes<HTMLInputElement>,
 
 type InputSize = 's' | 'm' | 'l';
 
-interface InputProps extends HTMLInputProps {
+export interface InputProps extends HTMLInputProps {
     className?: string;
     value?: string | number;
     label?: string;

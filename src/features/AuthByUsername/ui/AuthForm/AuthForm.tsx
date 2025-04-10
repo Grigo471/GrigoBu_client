@@ -5,10 +5,10 @@ import { classNames } from '@/shared/lib/classNames/classNames';
 import { ReducerList, useDynamicModuleLoad } from '@/shared/lib/hooks/useDynamicModuleLoad';
 import { useAppDispatch } from '@/shared/lib/hooks/useAppDispatch';
 import cls from './AuthForm.module.scss';
-import { Input } from '@/shared/ui/Input';
+import { Input, PasswordInput } from '@/shared/ui/Input';
 import { Text } from '@/shared/ui/Text';
 import { Button } from '@/shared/ui/Button';
-import { VStack } from '@/shared/ui/Stack';
+import { HStack, VStack } from '@/shared/ui/Stack';
 import { getAuthUsername } from '../../model/selectors/getAuthUsername/getAuthUsername';
 import { getAuthPassword } from '../../model/selectors/getAuthPassword/getAuthPassword';
 import { getAuthIsLoading } from '../../model/selectors/getAuthIsLoading/getAuthIsLoading';
@@ -57,7 +57,7 @@ const AuthForm = memo((props: AuthFormProps) => {
             const nameErrors = validateUsername(value, isLogin);
             dispatch(authActions.setUsernameErrors(nameErrors));
         }
-        dispatch(authActions.setUsername(value));
+        dispatch(authActions.setUsername(value.trim()));
     }, [dispatch, validateUsernameErrors.length, isLogin]);
 
     const onChangePassword = useCallback((value: string) => {
@@ -65,7 +65,7 @@ const AuthForm = memo((props: AuthFormProps) => {
             const passwordErrors = validatePassword(value, isLogin);
             dispatch(authActions.setPasswordErrors(passwordErrors));
         }
-        dispatch(authActions.setPassword(value));
+        dispatch(authActions.setPassword(value.trim()));
     }, [dispatch, validatePasswordErrors.length, isLogin]);
 
     const onSubmit = () => {
@@ -88,8 +88,19 @@ const AuthForm = memo((props: AuthFormProps) => {
 
     return (
 
-        <VStack gap="8" className={classNames(cls.AuthForm, {}, [className])}>
-            <Text title={isLogin ? t('Войти') : t('Создать аккаунт')} />
+        <VStack gap="16" className={classNames(cls.AuthForm, {}, [className])}>
+            <HStack max justify="between" align="center">
+                <Text title={isLogin ? t('Вход') : t('Регистрация')} />
+                <Button
+                    className={cls.toggleBtn}
+                    onClick={onToggle}
+                    disabled={isLoading}
+                    variant="filled"
+                >
+                    {isLogin ? t('Нет аккаунта? Зарегистрируйтесь!') : t('У меня уже есть аккаунт')}
+                </Button>
+            </HStack>
+
             {apiError && (
                 <Text
                     text={t(apiErrorTranslation, { username: apiErrorUsername })}
@@ -113,8 +124,7 @@ const AuthForm = memo((props: AuthFormProps) => {
                         />
                     ),
                 )}
-            <Input
-                type="text"
+            <PasswordInput
                 className={cls.input}
                 placeholder={t('Введите пароль')}
                 onChange={onChangePassword}
@@ -135,13 +145,6 @@ const AuthForm = memo((props: AuthFormProps) => {
                 disabled={isLoading}
             >
                 {isLogin ? t('Войти') : t('Создать аккаунт')}
-            </Button>
-            <Button
-                className={cls.toggleBtn}
-                onClick={onToggle}
-                disabled={isLoading}
-            >
-                {isLogin ? t('Создать аккаунт') : t('У меня уже есть аккаунт')}
             </Button>
         </VStack>
 
