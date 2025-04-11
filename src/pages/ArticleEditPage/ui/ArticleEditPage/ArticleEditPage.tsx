@@ -41,7 +41,7 @@ const ArticleEditPage = () => {
     const isLoading = useSelector(getArticleEditPageIsLoading);
     const error = useSelector(getArticleEditPageError);
 
-    useDynamicModuleLoad({ reducers, removeAfterUnmount: false });
+    useDynamicModuleLoad({ reducers });
 
     useEffect(() => {
         dispatch(articleEditPageActions.setIsEdit(isEdit));

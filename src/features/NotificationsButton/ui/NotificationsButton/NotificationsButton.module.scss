@@ -4,3 +4,33 @@
     width: 500px;
     overflow-y: auto;
 }
+
+.countWrapper {
+    position: relative;
+    width: 0;
+    height: 0;
+
+    p {
+        font: var(--font-s);
+        font-weight: 800;
+        position: absolute;
+        top: -20px;
+        left: 16px;
+        background: var(--light-bg-redesigned);
+        border-radius: 50%;
+        padding: 2px;
+    }
+}
+
+// .trigger {
+//     position: relative;
+
+//     svg {
+//         position: absolute;
+//         top: 0;
+//     }
+
+//     .p {
+//         position: absolute;
+//     }
+// }

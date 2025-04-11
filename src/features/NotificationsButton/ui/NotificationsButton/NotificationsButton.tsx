@@ -2,7 +2,7 @@ import {
     type PropsWithChildren, memo, useCallback, useState,
 } from 'react';
 import { classNames } from '@/shared/lib/classNames/classNames';
-import { NotificationsList } from '@/entities/Notification';
+import { NotificationsList, useGetNotificationsCount } from '@/entities/Notification';
 import Notifications from '@/shared/assets/icons/notifications.svg';
 import { Drawer } from '@/shared/ui/Drawer';
 import { useDevice } from '@/shared/lib/hooks/useDevice';
@@ -21,6 +21,10 @@ export const NotificationsButton = memo((props: PropsWithChildren<NotificationsB
 
     const isMobile = useDevice();
 
+    const { data: notificationsCount } = useGetNotificationsCount(null, {
+        pollingInterval: 5000,
+    });
+
     const onDrawerOpen = useCallback(() => {
         setIsDrawerOpen(true);
     }, []);
@@ -30,7 +34,14 @@ export const NotificationsButton = memo((props: PropsWithChildren<NotificationsB
     }, []);
 
     const trigger = (
-        <Icon Svg={Notifications} clickable onClick={onDrawerOpen} />
+        <div className={cls.trigger}>
+            <Icon Svg={Notifications} clickable onClick={onDrawerOpen} />
+            <div className={cls.countWrapper}>
+                <p className={cls.count}>
+                    {notificationsCount && notificationsCount > 0 && notificationsCount}
+                </p>
+            </div>
+        </div>
     );
 
     return (

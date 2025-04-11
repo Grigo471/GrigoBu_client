@@ -1,4 +1,4 @@
-import { type PropsWithChildren, memo, useCallback } from 'react';
+import { memo, useCallback } from 'react';
 import { useTranslation } from 'react-i18next';
 import { classNames } from '@/shared/lib/classNames/classNames';
 import cls from './NotificationItem.module.scss';
@@ -13,10 +13,10 @@ interface NotificationItemProps {
    item: Notification;
 }
 
-export const NotificationItem = memo((props: PropsWithChildren<NotificationItemProps>) => {
+export const NotificationItem = memo((props: NotificationItemProps) => {
     const { className, item } = props;
 
-    const { t, i18n } = useTranslation('notifications');
+    const { t, i18n } = useTranslation();
 
     const notificationContent = useCallback((item: Notification) => {
         switch (item.type) {
@@ -47,7 +47,7 @@ export const NotificationItem = memo((props: PropsWithChildren<NotificationItemP
 
     return (
         <Card
-            variant="light"
+            variant={item.isSeen ? 'normal' : 'light'}
             padding="16"
             className={classNames(cls.NotificationItem, {}, [className])}
         >

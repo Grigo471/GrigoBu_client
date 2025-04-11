@@ -1,8 +1,8 @@
-import { type PropsWithChildren, memo } from 'react';
+import { type PropsWithChildren, memo, useEffect } from 'react';
 import { classNames } from '@/shared/lib/classNames/classNames';
 import { VStack } from '@/shared/ui/Stack';
-import { Skeleton as SkeletonRedesigned } from '@/shared/ui/Skeleton';
-import { useGetNotificationsList } from '../../api/notificationApi';
+import { Skeleton } from '@/shared/ui/Skeleton';
+import { useGetNotificationsList, useViewNotifications } from '../../api/notificationApi';
 import cls from './NotificationsList.module.scss';
 import { NotificationItem } from '../NotificationItem/NotificationItem';
 
@@ -13,11 +13,13 @@ interface NotificationsListProps {
 export const NotificationsList = memo((props: PropsWithChildren<NotificationsListProps>) => {
     const { className } = props;
 
-    const { data, isLoading } = useGetNotificationsList(null, {
-        pollingInterval: 3000,
-    });
+    const { data, isLoading } = useGetNotificationsList(null, { refetchOnFocus: true });
+    const [viewNotifications] = useViewNotifications();
 
-    const Skeleton = SkeletonRedesigned;
+    useEffect(() => {
+        setTimeout(async () => { await viewNotifications(); }, 1000);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    });
 
     if (isLoading) {
         return (

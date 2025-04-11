@@ -11,4 +11,5 @@ export interface Notification {
     name?: string;
     value?: number;
     createdAt: string;
+    isSeen: boolean;
 }
