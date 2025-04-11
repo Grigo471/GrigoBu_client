@@ -28,6 +28,7 @@ import { validateUsername } from '../../model/services/validateAuth/validateUser
 import {
     authApiErrorTranslation,
 } from '../../model/services/translateAuthApiError/translateAuthApiError';
+import { useDevice } from '@/shared/lib/hooks/useDevice';
 
 export interface AuthFormProps {
     className?: string;
@@ -44,6 +45,8 @@ const AuthForm = memo((props: AuthFormProps) => {
     const dispatch = useAppDispatch();
 
     const [isLogin, setIsLogin] = useState(true);
+
+    const isMobile = useDevice();
 
     const username = useSelector(getAuthUsername);
     const password = useSelector(getAuthPassword);
@@ -95,7 +98,7 @@ const AuthForm = memo((props: AuthFormProps) => {
                     className={cls.toggleBtn}
                     onClick={onToggle}
                     disabled={isLoading}
-                    variant="filled"
+                    variant={isMobile ? 'outline' : 'filled'}
                 >
                     {isLogin ? t('Нет аккаунта? Зарегистрируйтесь!') : t('У меня уже есть аккаунт')}
                 </Button>
