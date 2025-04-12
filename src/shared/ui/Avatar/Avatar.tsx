@@ -49,13 +49,16 @@ export const Avatar = (
     }
 
     return (
-        <AppImage
-            src={src}
-            style={styles}
-            className={classNames(cls.Avatar, {}, [className])}
-            alt={alt}
-            errorFallback={fallback}
-            fallback={fallback}
-        />
+        <div style={styles}>
+            <AppImage
+                src={src}
+                style={styles}
+                className={classNames(cls.Avatar, {}, [className])}
+                alt={alt}
+                errorFallback={fallback}
+                fallback={fallback}
+            />
+        </div>
+
     );
 };

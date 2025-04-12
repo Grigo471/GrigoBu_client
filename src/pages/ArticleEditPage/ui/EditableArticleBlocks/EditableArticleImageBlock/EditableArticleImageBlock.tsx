@@ -15,6 +15,7 @@ import { Icon } from '@/shared/ui/Icon';
 import CrossIcon from '@/shared/assets/icons/cross-delete.svg';
 import { Button } from '@/shared/ui/Button';
 import { srcWithApiOrBlob } from '@/shared/lib/url/srcWithApi/srcWithApi';
+import { ImageCompressor } from '@/shared/lib/files/ImageCompressor';
 
 interface EditableArticleImageBlockProps {
    block: ArticleImageBlock;
@@ -42,15 +43,29 @@ export const EditableArticleImageBlock = memo((props: EditableArticleImageBlockP
     }, [dispatch, src, deleteImage, index]);
 
     const onUpload = useCallback((file: File) => {
-        const extension = file.name.split('.').pop();
-        const url = URL.createObjectURL(file);
-        const uuid = url.split('/').pop();
-        if (!uuid) return;
-        const newFile = new File([file], `${uuid}.${extension}`, { type: file.type });
-        addImage(newFile);
-        dispatch(
-            articleEditPageActions.updateArticleBlockValue(url, index, 'image'),
-        );
+        console.log(file);
+        const compressor = new ImageCompressor(file, {
+            quality: 0.6,
+            success: (compressedFile) => {
+                console.log(compressedFile);
+                const extension = compressedFile.name.split('.').pop();
+                const url = URL.createObjectURL(file);
+                const uuid = url.split('/').pop();
+                if (!uuid) return;
+                const newFile = new File(
+                    [compressedFile],
+                    `${uuid}.${extension}`,
+                    { type: file.type },
+                );
+                addImage(newFile);
+                dispatch(
+                    articleEditPageActions.updateArticleBlockValue(url, index, 'image'),
+                );
+            },
+            error: (error) => {
+                console.log(error);
+            },
+        });
     }, [dispatch, index, addImage]);
 
     return (

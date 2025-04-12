@@ -13,6 +13,7 @@ import { Icon } from '@/shared/ui/Icon';
 import PhotoIcon from '@/shared/assets/icons/photo.svg';
 import cls from './EditableAvatar.module.scss';
 import { classNames } from '@/shared/lib/classNames/classNames';
+import { ImageCompressor } from '@/shared/lib/files/ImageCompressor';
 
 interface EditableAvatarProps {
    className?: string;
@@ -26,7 +27,15 @@ export const EditableAvatar = memo((props: EditableAvatarProps) => {
     const error = useSelector(getEditableProfileAvatarError);
 
     const onUpload = (file: File) => {
-        dispatch(updateAvatar(file));
+        const compressor = new ImageCompressor(file, {
+            quality: 0.6,
+            success: (compressedFile) => {
+                dispatch(updateAvatar(compressedFile));
+            },
+            error: (error) => {
+                console.log(error);
+            },
+        });
     };
 
     return (
