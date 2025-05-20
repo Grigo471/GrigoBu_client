@@ -1,4 +1,4 @@
-import { memo, useCallback } from 'react';
+import { memo, useCallback, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useNavigate, useParams } from 'react-router-dom';
 import { useSelector } from 'react-redux';
@@ -19,6 +19,7 @@ import { useArticleFiles } from '../ArticleFilesProvider/ArticleFilesProvider';
 import { ArticleTagsSelector } from '@/features/ArticleTagsSelector';
 import { getRouteArticleDetails, getRouteArticles } from '@/shared/const/router';
 import { deleteArticle } from '../../model/services/deleteArticle/deleteArticle';
+import { SubmitModal } from '@/features/SubmitModal';
 
 interface ArticleEditToolbarProps {
     isPreview: boolean;
@@ -28,6 +29,8 @@ interface ArticleEditToolbarProps {
 export const ArticleEditToolbar = memo(({ isPreview, setIsPreview }: ArticleEditToolbarProps) => {
     const { t } = useTranslation('article-edit');
     const dispatch = useAppDispatch();
+
+    const [isDeleteModal, setIsDeleteModal] = useState(false);
 
     const { id } = useParams<{ id: string }>();
     const { images } = useArticleFiles();
@@ -63,6 +66,28 @@ export const ArticleEditToolbar = memo(({ isPreview, setIsPreview }: ArticleEdit
         }
     }, [dispatch, navigate, id]);
 
+    const DeleteButton = memo(() => (
+        <>
+            <Button
+                color="error"
+                onClick={() => setIsDeleteModal(true)}
+            >
+                {t('Удалить статью')}
+            </Button>
+            {
+                isDeleteModal && (
+                    <SubmitModal
+                        isOpen={isDeleteModal}
+                        onClose={() => setIsDeleteModal(false)}
+                        onSubmit={onDeleteArticle}
+                    >
+                        <Text title={t('Вы уверены, что хотите удалить статью?')} />
+                    </SubmitModal>
+                )
+            }
+        </>
+    ));
+
     return (
         <Card className={cls.menu} padding="16" max>
             <VStack max gap="12">
@@ -83,12 +108,7 @@ export const ArticleEditToolbar = memo(({ isPreview, setIsPreview }: ArticleEdit
                         {t('Отправить')}
                     </Button>
                     {isEdit && (
-                        <Button
-                            color="error"
-                            onClick={onDeleteArticle}
-                        >
-                            {t('Удалить статью')}
-                        </Button>
+                        <DeleteButton />
                     )}
                 </VStack>
                 {validateErrors?.length && validateErrors?.map((err) => (

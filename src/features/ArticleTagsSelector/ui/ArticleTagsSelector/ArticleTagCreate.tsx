@@ -24,12 +24,12 @@ export const ArticleTagCreate = (props: ArticleTagCreateProps) => {
 
     return (
         <>
-            <Text text={t('Choose tags')} size="m" bold />
+            <Text text={t('Выберите теги')} size="m" bold />
             <HStack gap="4">
                 <Input
                     value={createTag}
                     onChange={(value) => setCreateTag(value)}
-                    placeholder={t('or create your own tags')}
+                    placeholder={t('Или создайте свои')}
                     size="s"
                 />
                 <Button square onClick={onClickHandler}>+</Button>

@@ -187,75 +187,28 @@ export const NoAuth: Story = {
 
 ----
 
-### Работа с feature-flags
-
-Разрешено использование feature flags только с помощью хелпера toggleFeatures
-
-в него передается объект с опциями
-
-{
-    
-    name: название флага,
-
-    on: функция, которая отработает при включенном флаге,
-
-    off: функция, которая отработает при отключенном флаге
-}
-
-Для автоматического удаления фичи использовать скрипт remove-feature, который принимает 2 аргумента:
-1. Название флага
-2. Состояние, обозначающее, какая функция останется (on/off)
-
-----
-
 ## Сущности (entities)
 
 - [Article](/src/entities/Article)
 - [Comment](/src/entities/Comment)
-- [Counter](/src/entities/Counter)
-- [Country](/src/entities/Country)
-- [Currency](/src/entities/Currency)
 - [Notification](/src/entities/Notification)
-- [Profile](/src/entities/Profile)
-- [Rating](/src/entities/Rating)
 - [User](/src/entities/User)
 
 ## Фичи (features)
 
 - [AddCommentForm](/src/features/AddCommentForm)
-- [ArticleEditForm](/src/features/ArticleEditForm)
-- [ArticleRating](/src/features/ArticleRating)
-- [ArticleRecommendationsList](/src/features/ArticleRecommendationsList)
+- [ArticleMyRateSelector](/src/features/ArticleMyRateSelector)
+- [ArticleRatingButton](/src/features/ArticleRatingButton)
+- [ArticleSortSelector](/src/features/ArticleSortSelector)
+- [ArticleTagsSelector](/src/features/ArticleTagsSelector)
 - [AuthByUsername](/src/features/AuthByUsername)
 - [AvatarDropdown](/src/features/AvatarDropdown)
-- [EditableProfileCard](/src/features/EditableProfileCard)
 - [LangSwitcher](/src/features/LangSwitcher)
-- [NotificationButton](/src/features/NotificationButton)
-- [ProfileRating](/src/features/ProfileRating)
+- [NotificationsButton](/src/features/NotificationsButton)
+- [ScrollToTopButton](/src/features/ScrollToTopButton)
+- [SubmitModal](/src/features/SubmitModal)
+- [SubscribeToUserButton](/src/features/SubscribeToUserButton)
 - [ThemeSwitcher](/src/features/ThemeSwitcher)
 - [UI](/src/features/UI)
-
-```bash
-├───ArticleEditPage
-    │   │   ├───model
-    │   │   │   ├───consts
-    │   │   │   ├───selectors
-    │   │   │   ├───services
-    │   │   │   │   ├───deleteArticle
-    │   │   │   │   ├───saveArticle
-    │   │   │   │   └───validateArticleData
-    │   │   │   ├───slice
-    │   │   │   └───types
-    │   │   └───ui
-    │   │       ├───AddArticleBlockDropdown
-    │   │       ├───ArticleEditForm
-    │   │       ├───ArticleEditPage
-    │   │       ├───ArticleEditToolbar
-    │   │       ├───ArticleFilesProvider
-    │   │       ├───ArticlePreviewCard
-    │   │       └───EditableArticleBlocks
-    │   │           ├───EditableArticleBlockWrapper
-    │   │           ├───EditableArticleCodeBlock
-    │   │           ├───EditableArticleImageBlock
-    │   │           └───EditableArticleTextBlock
-```
+- [UsersSortSelector](/src/features/UsersSortSelector)
+- [UsersSubsCheckbox](/src/features/UsersSubsCheckbox)
